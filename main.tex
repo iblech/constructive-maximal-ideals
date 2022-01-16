@@ -214,7 +214,7 @@ Classically, we have that the intersection of all prime ideals is the
 nilradical. In our setup, we have the following substitute:
 XXX cite Krull1929
 
-\begin{prop}Let~$x \in A$ be an element which is not nilpotent. Then there is a
+\begin{prop}\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
 prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
 \end{prop}
 
@@ -229,6 +229,15 @@ as negation with reference to~$A$.
 The preimage of~$\mmm$ under the localization homomorphism~$A \to A[x^{-1}]$ is
 a prime ideal of~$A$ which doesn't contain~$x$.
 \end{proof}
+
+\begin{rem}A closer inspection of the proof of
+Proposition~\ref{prop:nilp-prime} reveals that for any element~$x \in A$
+(irrespective of whether it is nilpotent), there is an ideal~$\ppp \subseteq A$
+such that~$x \in \ppp$ if and only if~$x$ is nilpotent. However, this ideal is
+prime only in the following weak sense: If~$1 \in \ppp$, then~$x$ is nilpotent;
+and if~$a \in \ppp$ implies that~$x$ is nilpotent, then~$ab \in \ppp \wedge b
+\in \ppp$ implies that~$x$ is nilpotent.
+\end{rem}
 
 
 \section{In Heyting arithmetic}
