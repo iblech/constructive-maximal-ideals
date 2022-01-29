@@ -41,6 +41,7 @@
 \newcommand{\aaa}{\mathfrak{a}}
 \newcommand{\bbb}{\mathfrak{b}}
 \newcommand{\mmm}{\mathfrak{m}}
+\newcommand{\nnn}{\mathfrak{n}}
 \newcommand{\ppp}{\mathfrak{p}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\NN}{\mathbb{N}}
@@ -161,10 +162,14 @@ Assume~$x_n \in \mmm$. In order to verify~$1 \not\in \mmm + (x_n)$,
 assume~$1 \in \mmm + (x_n)$. Since~$\mmm + (x_n) \subseteq \mmm$,
 we have~$1 \in \mmm$. Hence~$1 = 0$ by Proposition~\ref{prop:proper}.\end{proof}
 
-\begin{prop}The ideal~$\mmm$ is \emph{maximal} in the sense that it is proper and that for
+\begin{prop}\label{prop:is-maximal}The ideal~$\mmm$ is \emph{maximal} in the sense that it is proper and that for
 any element~$x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.\end{prop}
 
 \begin{proof}Immediate by Lemma~\ref{lemma:stage}.\end{proof}
+
+The first-order maximality condition of Proposition~\ref{prop:is-maximal} is
+equivalent to following higher-order version: For any ideal~$\nnn$ such that~$1
+\not\in \nnn$, if~$\mmm \subseteq \nnn$, then~$\mmm = \nnn$.
 
 \begin{cor}The ideal~$\mmm$ is \emph{prime} in the sense that it is proper and that for
 any elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
