@@ -194,10 +194,15 @@ XXX check claim for polynomial rings
 
 \begin{prop}\label{prop:with-test}
 Assume that for any finitely generated ideal~$\aaa \subseteq A$, we have~$1
-\in \aaa$ or~$1 \not\in \aaa$. Then:
+\not\in \aaa$ or~$\neg(1 \not\in \aaa)$. Then:
 \begin{enumerate}
 \item Each ideal~$\mmm_n$ is finitely generated.
 \item The ideal~$\mmm$ is detachable.
+\end{enumerate}
+Assume furthermore that or any finitely generated ideal~$\aaa \subseteq
+A$, we have~$1 \in \aaa$ or~$1 \not\in \aaa$. Then:
+\begin{enumerate}
+\addtocounter{enumi}{2}
 \item The ideal~$\mmm$ is maximal in the strong sense that for any element~$x
 \in A$,~$x \in \mmm$ or~$1 \in \mmm + (x)$, which is to say that the quotient ring~$A/\mmm$ is a
 \emph{geometric field} (any element is zero or invertible).
@@ -206,28 +211,27 @@ Assume that for any finitely generated ideal~$\aaa \subseteq A$, we have~$1
 
 \begin{proof}We verify claim~$(1)$ by induction over~$n$. The case~$n = 0$ is
 clear. Let~$n > 0$. By the induction hypothesis, the ideal~$\mmm_{n-1}$ is finitely
-generated, hence so is~$\mmm_{n-1} + (x_{n-1})$. By~(1) and assumption,~$1 \in \mmm_{n-1} +
-(x_{n-1})$ or~$1 \not\in \mmm_{n-1} + (x_{n-1})$. In the first case~$\mmm_n =
-\mmm_{n-1}$. In the second case~$\mmm_n = \mmm_{n-1} + (x_{n-1})$. In both cases
+generated, hence so is~$\mmm_{n-1} + (x_{n-1})$. By assumption,~$1 \not\in \mmm_{n-1} +
+(x_{n-1})$ or~$\neg(1 \not\in \mmm_{n-1} + (x_{n-1}))$. In the first
+case~$\mmm_n = \mmm_{n-1} + (x_{n-1})$. In the second case~$\mmm_n =
+\mmm_{n-1}$. In both cases
 the ideal~$\mmm_n$ is finitely generated.
 
-To verify claims~(2) and~(3), let an element~$x_n \in A$ be given. By
+To verify claim~(2), let an element~$x_n \in A$ be given. By assumption,~$1
+\not\in \mmm_n + (x_n)$ or~$\neg(1 \not\in \mmm_n + (x_n))$. Hence~$x_n \in
+\mmm$ or~$x_n \not\in \mmm$ by Lemma~\ref{lemma:stage}.
+
+Finally, to verify claim~(3), let an element~$x_n \in A$ be given. By
 assumption,~$1 \in \mmm_n + (x_n)$ or~$1 \not\in \mmm_n + (x_n)$. In the first
-case~$1 \in \mmm + (x_n)$, and~$x_n \not\in \mmm$ (if~$x_n \in \mmm$, then~$1
-\in \mmm$, hence~$1 = 0$ by Proposition~\ref{prop:proper}). In the second
+case~$1 \in \mmm + (x_n)$. In the second
 case~$x_n \in \mmm$ by Lemma~\ref{lemma:stage}.
 \end{proof}
 
 It is somewhat remarkable that the ideal~$\mmm$ is detachable even though in
-general it is not finitely generated. (Recall that ideals which are not
+general it is not finitely generated. Usually in constructive mathematics, ideals which are not
 finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
-if~$\varphi \vee \neg\varphi$.)
-
-\begin{rem}By inspection of the proof, the assumption of
-Proposition~\ref{prop:with-test} can be slightly weakened. It suffices that for
-any finitely generated ideal~$\aaa \subseteq A$,~$1 \not\in \aaa$ or~$\neg(1
-\not\in \aaa)$.\end{rem}
+if~$\varphi \vee \neg\varphi$.
 
 
 \section{On the intersection of all prime ideals}
