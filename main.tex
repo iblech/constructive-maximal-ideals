@@ -297,7 +297,7 @@ all coefficients of~$f$ are nilpotent in~$A$.
 \begin{proof}[XXX I currently believe this will work as well.]
 \end{proof}
 
-\begin{prop}Let~$f \in A[X]$ be a polynomial with at least one coefficient
+\begin{prop}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
 which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
 \end{prop}
 
@@ -326,6 +326,117 @@ arithmetic~\textsc{ha}.
 % ring as class
 % recursion theorem
 % remedy
+
+
+\section{For general rings}
+
+The construction in Section~\ref{sect:constr} of a maximal ideal applies to
+countable rings. In absence of the axiom of choice, some restriction on the
+rings is required, as it is well-known that the statement that any nontrivial
+ring has a maximal ideal implies (over Zermelo--Fraenkel set
+theory~\textsc{zf}) the axiom of choice~\cite{hodges:krull,banaschewski:krull,erne:krull}.
+
+However, this observation only pertains to the abstract existence of maximal
+ideals, not to concrete consequences of this assumption. Mathematical
+logic teaches us by way of diverse examples to not conflate these concerns. For
+instance, although~\textsc{zf} does not prove the axiom of choice, it does
+prove any theorem of~\textsc{zfc} pertaining only to natural numbers (by
+interpreting the given~\textsc{zfc}-proof in the constructible universe~$L$
+and exploiting that the natural numbers are absolute between~$V$ and~$L$,
+see~\cite{???}); similarly, although intuitionistic Zermelo--Fraenkel set
+theory,~\textsc{izf}, does not prove the law of excluded middle, it does prove
+any~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
+combined with Friedman's trick of the nontrivial exit continuation,
+\cite{???}).
+
+A similar phenomenon occurs with countability: Set theory teaches us that
+whether a given set is countable depends not only on the set itself, but is
+more appropriately regarded as a property of the ambient universe -- given any
+set~$X$, there is an extension of the universe in which~$X$ becomes countable.
+
+As a result, we have the following metatheorem (to be restated in precise
+language as Theorem~\ref{thm:elim-countability-assumption-formal}):
+
+\begin{thm}\label{thm:elim-countability-assumption-informal}Countability
+assumptions from intuitionistic proofs of first-order statements can be
+eliminated.\end{thm}
+
+``First-order'' means that the statement only refers to elements, not to
+subsets; for instance, Proposition~\ref{prop:nilp-coefficients} is a
+first-order statement and hence holds also without the countability assumption.
+In contrast, the statement ``there is a maximal ideal'' is a higher-order
+statement; hence we cannot eliminate countability assumptions from proofs of
+this statement.
+
+Summarizing, we can regard maximal ideals as convenient fictions. They can
+carry out their work by any of the following possibilities:
+\begin{enumerate}
+\item For countable (or well-founded) rings, no help is required.
+Section~\ref{sect:constr} presents an explicit construction of a maximal ideal.
+\item For arbitrary rings, the existence of a maximal ideal follows from the
+axiom of choice.
+\item Intuitionistic first-order consequences of the existence of a maximal
+ideal are true even if no actual maximal ideal can be constructed.
+\end{enumerate}
+
+%their existence requires special assumptions (such as countability,
+%well-foundedness or the axiom of choice), their intuitionistic first-order
+%consequences hold without any such assumptions.
+
+The remainder of this section is devoted to spelling out
+Theorem~\ref{thm:elim-countability-assumption-informal}. We choose a
+topos-theoretic presentation instead of a set-theoretic one because it is more
+amenable to a later syntactic unwinding. The main reference is Joyal and
+Tierney's 1984 monograph~\cite{joyal-tierney:grothendieck}; for surveys of the
+required background, we refer
+to~\cite{blechschmidt:generalized-spaces,johnstone:art,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless,johnstone:baby-elephant}.
+
+\begin{thm}[Joyal--Tierney~\cite{joyal-tierney:grothendieck}]\label{thm:locale-enum}
+For any inhabited set~$X$, there is a certain locale which is
+\begin{enumerate}
+\item overt,
+\item positive, and such that
+\item its constant sheaf~$\underline{X}$ is countable.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}The locale with these properties is the \emph{classifying locale
+of enumerations of~$X$}. This locale has as basic opens the finite
+nonempty lists~$[x_0,\ldots,x_n]$, pictured as ``the open of those surjections~$f : \NN \to
+X$ such that~$f(i) = x_i$ for~$i = 0,\ldots,n$'', and as generating coverings
+\begin{align*}
+  [x_0,\ldots,x_n] &= \bigvee_{y \in X} [x_0,\ldots,x_n,y]
+  && \text{(for any~$x_0,\ldots,x_n \in X$),} \\
+  [x_0,\ldots,x_n] &= \bigvee_{\substack{m \geq 0 \\ x_{n+1},\ldots,x_{n+m} \in
+  X \\ x \in \{ x_0,\ldots,x_{n+m} \}}} [x_0,\ldots,x_{n+m}]
+  && \text{(for any~$x_0,\ldots,x_n,x \in X$)}. \\
+\end{align*}
+It is overt because all of these generating coverings are inhabited, and it is
+positive (meaning that the canonical map to the one-point locale is surjective)
+because there is at least one basic open since~$X$ is inhabited. Details are
+provided by Joyal and Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}.
+\end{proof}
+
+\begin{thm}\label{thm:elim-countability-assumption-formal}Any intuitionistic
+proof of a first-order statement in the language of rings, from arbitrary
+first-order assumptions and also the assumption that the ring is countable, can
+be mechanically transformed to a proof of the same kind without the
+countability assumption.\end{thm}
+
+\begin{proof}Let~$p$ be a given such proof. The transformed proof proceeds as
+follows. Let~$A$ be an arbitrary ring. Assume that~$A$ satisfies all of the
+first-order assumptions of~$p$. By Theorem~\ref{thm:locale-enum},
+there is an open surjective geometric morphism~$f$ from a certain
+topos~$\mathcal{E}$ to the
+topos of sets such that~$f^*(A)$ is countable.
+
+Since~$f$ is open, the pullback~$f^*(A)$ inherits the given first-order
+assumptions from~$A$. Since~$f^*(A)$ is countable from the point of view
+of~$\mathcal{E}$ and since~$\mathcal{E}$ supports intuitionistic reasoning, the
+proof~$p$ is applicable to~$f^*(A)$. Hence the conclusion of~$p$ holds
+for~$f^*(A)$. Since~$f$ is open and surjective, the conclusion also holds
+for~$p$.
+\end{proof}
 
 
 \section{Generalization to the well-founded case}
@@ -380,3 +491,18 @@ cite?
 https://mileti.math.grinnell.edu/research/ideals.pdf
 https://homepages.ecs.vuw.ac.nz/~downey/ideals_talk.ps
 https://mathoverflow.net/a/229105/31233
+
+
+hodges:krull
+Wilfrid Hodges, Krull implies Zorn, J. London Math. Soc. (2) 19 (1979), no. 2,
+285--287.
+
+banaschewski:krull
+Bernhard Banaschewski, A new proof that “Krull implies Zorn”, Math. Logic
+Quart. 40 (1994), no. 4, 478--480.
+
+erne:krull
+Marcel Erné, A primrose path from Krull to Zorn, Comment. Math. Univ. Carolin.
+36 (1995), no. 1, 123–-126.
+
+joyal-tierney:grothendieck
