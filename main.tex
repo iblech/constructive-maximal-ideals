@@ -180,6 +180,13 @@ any elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 \subseteq \mmm$ by~$xy \in \mmm$, hence~$x \in \mmm$, thus~$1 = 0$ by the assumption~$x \not\in
 \mmm$.\end{proof}
 
+\begin{cor}The ideal~$\mmm$ is \emph{radical} in the sense that if~$x^k \in
+\mmm$, then~$x \in \mmm$.\end{cor}
+
+\begin{proof}Let~$x^k \in \mmm$. Then~$1 \not\in \mmm + (x)$, for if~$1 \in
+\mmm + (x)$, then also~$1 = 1^k \in (\mmm + (x))^k \subseteq \mmm + (x^k)
+\subseteq \mmm$. Hence~$x \in \mmm$ by Lemma~\ref{prop:is-maximal}.\end{proof}
+
 \begin{rem}The ideal~$\mmm$ is double negation stable in the sense that for any
 ring element~$x$, if~$\neg\neg(x \in \mmm)$, then~$x \in \mmm$. This is because
 by Lemma~\ref{lemma:stage} membership of~$\mmm$ is a negative condition
@@ -274,7 +281,7 @@ a prime ideal of~$A$ which doesn't contain~$x$.
 \begin{rem}A closer inspection of the proof of
 Proposition~\ref{prop:nilp-prime} reveals that for any element~$x \in A$
 (irrespective of whether it is nilpotent), there is an ideal~$\ppp \subseteq A$
-such that~$x \in \ppp$ if and only if~$x$ is nilpotent. However, this ideal is
+such that~$x \in \ppp$ if and only if~$x$ is nilpotent. This ideal is a radical ideal. However, it is
 prime only in the following weak sense: If~$1 \in \ppp$, then~$x$ is nilpotent;
 and if~$a \in \ppp$ implies that~$x$ is nilpotent, then~$ab \in \ppp \wedge b
 \in \ppp$ implies that~$x$ is nilpotent.
