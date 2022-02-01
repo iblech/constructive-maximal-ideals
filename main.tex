@@ -313,15 +313,50 @@ of~$A[X]$.\end{proof}
 \section{In Heyting arithmetic}
 
 The construction presented in Section~\ref{sect:constr} crucially rests on the
-flexibility of subsets of the given ring~$A$ in contrast to decidable
-predicates~$A \to 2$: Without additional hypotheses on~$A$, membership of the
+flexibility of subsets of the given ring~$A$: In the absence of additional
+assumptions as in Proposition~\ref{prop:with-test},
+we cannot make do with decidable
+predicates~$A \to 2$; without additional hypotheses on~$A$, membership of the
 resulting maximal ideal~$\mmm$ is not decidable. As such, the construction is
 naturally formalized in intuitionistic set theories such as~\textsc{czf}
-or~\textsc{izf}.
+or~\textsc{izf}, which natively support such flexible subsets.
 
 In this section, we explain how with some more care, the construction can also
 be carried out in much weaker foundations such as Heyting
-arithmetic~\textsc{ha}.
+arithmetic~\textsc{ha}. While formulation in classical Peano arithmetic~\textsc{pa}
+is routine, the development in~\textsc{ha} crucially rests on a specific
+feature of the construction, namely that the condition for membership is a
+negative condition.
+
+To set the stage, we specify what we mean by a \emph{ring} in the context of
+arithmetic. One option would be that an arithmetized ring should be a single
+natural number coding a finite set of ring elements and the graphs of the
+corresponding ring operations; however, this perspective is too narrow, as we
+also want to entertain infinite rings.
+
+Instead, an arithmetized ring should be given by a ``formulaic setoid with ring
+structure'', that is: by a formula~$A(n)$ with free
+variable~$n$, singling out which natural numbers constitute
+representants of the ring elements; by a formula~$E(n,m)$ describing which
+representants are deemed equivalent; by a formula~$Z(n)$ singling out
+representants of the zero element; by a formula~$P(n,m,s)$ singling out
+representants~$s$ of sums; and so on with the remaining data constituting
+a ring; such that axioms such as
+\begin{align*}
+  \forall n\_ & Z(n) \Rightarrow A(n) && \text{``any zero representant belongs to the ring''} \\
+  \exists n\_ & Z(n) && \text{``there is a zero representant''} \\
+  \forall n,m\_ & Z(n) \wedge Z(m) \Longrightarrow E(n,m) && \text{``any two zero representants are equivalent''} \\
+  \forall z,n\_ & Z(z) \wedge A(n) \Longrightarrow P(z,n,n) && \text{``zero is neutral with respect to addition''}
+\end{align*}
+hold. Although first-order arithmetic cannot quantify over ideals of such
+rings, specific ideals can be given by formulas~$I(n)$ such that
+\begin{align*}
+  \forall n\_ & I(n) \Rightarrow A(n) && \text{``$I \subseteq A$''} \\
+  \exists n\_ & Z(n) \Rightarrow I(n) && \text{``$0 \in I$''}
+\end{align*}
+hold. It is in this sense that we are striving to adapt the construction of
+Section~\ref{sect:constr} to describe a maximal ideal.
+
 
 % ring as class
 % recursion theorem
