@@ -282,6 +282,22 @@ intermediate stages~$G_n$ are smaller (not yet being ideals), faciliating
 arithmetization in Section~\ref{sect:arithmetization}.
 \end{rem}
 
+\newcommand{\rightrightharpoonup}{\mathrel{\mathrlap{\rightharpoonup}\mkern1mu\rightharpoonup}}
+\begin{rem}All results in this section carry over mutatis mutandi if~$A$ is
+only assumed to be subcountable instead of countable, that is, if we are only
+given a \emph{partial defined} surjection~$\NN \rightrightharpoonup A$. In
+this case, we are given an enumeration~$x_0,x_1,\ldots$ where some~$x_i$
+might not be defined; the definition of~$\mmm_{n+1}$ then has to read
+\begin{align*}
+  \mmm_{n+1} &\defeq \mmm_n + (\{ x_n \,|\, \text{$x_n$ is defined} \wedge 1 \not\in \mmm_n + (x_n) \}).
+\end{align*}
+The generalization to the subcountable case is particularly useful in the
+Russian tradition of constructive mathematics as exhibited by the ef{}fective
+topos~\cite{hyland:effective-topos,oosten:realizability,phoa:effective,bauer:c2c},
+as there many rings of interest, including uncountable ones such as the real
+numbers, are subcountable~\cite[Prop.~7.2]{hyland:effective-topos}.
+\end{rem}
+
 
 \section{On the intersection of all prime ideals}
 
