@@ -256,6 +256,28 @@ finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
 if~$\varphi \vee \neg\varphi$.
 
+\begin{rem}\label{rem:via-generators}There is an equivalent description of the
+maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
+intermediate ideals~$\mmm_n$:
+\begin{align*}
+  G_0 &\defeq \emptyset \\
+  G_{n+1} &\defeq G_n \cup \{ x_n \,|\, 1 \not\in (G_n \cup \{ x_n \}) \}
+\end{align*}
+An induction establishes the relation~$(G_n) = \mmm_n$; setting~$G \defeq
+\bigcup_{n\in\NN} G_n$, the analogue of Lemma~\ref{lemma:stage} states
+that for every number~$n \in \NN$, the following are equivalent:
+\begin{enumerate}
+\item $x_n \in G_{n+1}$.
+\item $x_n \in G$.
+\item $1 \not\in (G) + (x_n)$.
+\item $1 \not\in (G_n) + (x_n)$.
+\end{enumerate}
+In particular, not only do we have that~$(G) = \mmm$, but~$G$ itself is already
+an ideal. This description of~$\mmm$ is in a sense more ``economical'' as the
+intermediate stages~$G_n$ are smaller (not yet being ideals), faciliating
+arithmetization in Section~\ref{sect:arithmetization}.
+\end{rem}
+
 
 \section{On the intersection of all prime ideals}
 
@@ -311,6 +333,7 @@ of~$A[X]$.\end{proof}
 
 
 \section{In Heyting arithmetic}
+\label{sect:arithmetization}
 
 The construction presented in Section~\ref{sect:constr} crucially rests on the
 flexibility of subsets of the given ring~$A$: In the absence of additional
@@ -357,11 +380,45 @@ rings, specific ideals can be given by formulas~$I(n)$ such that
 hold. It is in this sense that we are striving to adapt the construction of
 Section~\ref{sect:constr} to describe a maximal ideal.
 
+In this context, we can arithmetically imitate any set-theoretic description of
+an ideal (as a subset cut out by an explicit first-order formula). However, for
+recursively defined families of ideals, we require a suitable recursion
+theorem: If we are given (individual formulas~$M_i(x)$ indexed by numerals
+representing) ideals~$\mmm_0,\mmm_1,\mmm_2,\ldots$, we cannot generally
+form~$\bigcup_{n\in\NN} \mmm_n$, as the naive formula~$\bigvee_{n\in\NN} M_n(x)$
+representing this union would have infinite length. We can take the union only
+if the family is \emph{uniformly represented} by a formula~$M(n,x)$ (denoting
+that~$x$ represents an element of~$\mmm_n$).
 
-% ring as class
-% recursion theorem
-% remedy
+It is here that we encounter a stumbling block in arithmetizing the
+construction of the ascending chain~$\mmm_0 \subseteq \mmm_1 \subseteq \cdots$
+of Section~\ref{sect:constr}. Because~$\mmm_n$ occurs in the
+definition of~$\mmm_{n+1}$ in negative position, a naive arithmetization
+results in formulas of unbounded logical complexity, suggesting that
+a uniform definition might not be possible.
 
+This issue does not arise in the context of~\textsc{pa}, where the law of
+excluded middle allows us keep the logical complexity bounded: We can define
+the joint indicator function~$g(n,i)$ for the sets~$G_n$ (such that~$G_n = \{
+x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Remark~\ref{rem:via-generators} by the recursion
+\begin{align*}
+  g(0,x) &= 0 \\
+  g(n+1,i) &= \begin{cases}
+    1, & \text{if $g(n,i) = 1 \vee (i = n \wedge 1 \not\in
+    (g(n,0)x_0,\ldots,g(n,n-1)x_{n-1},x_n))$} \\
+    0, & \text{else.}
+  \end{cases}
+\end{align*}
+This recursion can be carried out within~\textsc{pa} since the recursive step
+only references the finitely many values~$g(n,0),\ldots,g(n,n-1)$.
+
+Heyting arithmetic, however, does not support this case distinction. The
+formalization of the construction in~\textsc{ha} is unlocked by the following
+observation.
+
+\begin{lemma}(In the situation of Section~\ref{sect:constr}.) For every natural number~$n \in \NN$,
+
+\end{lemma}
 
 \section{For general rings}
 
@@ -550,3 +607,5 @@ Marcel Erné, A primrose path from Krull to Zorn, Comment. Math. Univ. Carolin.
 36 (1995), no. 1, 123–-126.
 
 joyal-tierney:grothendieck
+
+XXX: subquotient!
