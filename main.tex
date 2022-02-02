@@ -416,9 +416,42 @@ Heyting arithmetic, however, does not support this case distinction. The
 formalization of the construction in~\textsc{ha} is unlocked by the following
 observation.
 
-\begin{lemma}(In the situation of Section~\ref{sect:constr}.) For every natural number~$n \in \NN$,
-
+\begin{lemma}\label{lemma:uniform-char}(In the situation of Remark~\ref{rem:via-generators}.)
+For any finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
+\defeq (v_0x_0,\ldots,v_{n-1}x_{n-1},x_n)$. Then:
+\begin{enumerate}
+\item For any such sequence~$v = [v_0,\ldots,v_{n-1}]$, if
+\[ \bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]}), \]
+then~$\aaa_v = (G_n) + (x_n)$.
+In particular~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
+\item For every natural number~$n \in \NN$,
+\[ x_n \in G \quad\Longleftrightarrow\quad \neg
+  \exists v \in \{0,1\}^n\_
+    1 \in \aaa_v \wedge
+      \bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]}). \]
+\end{enumerate}
 \end{lemma}
+
+\begin{proof}The first part is by induction, employing the equivalences of
+Remark~\ref{rem:via-generators}. The second rests on the tautology
+\[ \neg\alpha \quad\Longleftrightarrow\quad \neg(\alpha \wedge (\varphi \vee \neg\varphi)) \]
+of minimal logic and follows by the following computation:
+\begin{align*}
+  &\mathrel{\phantom{\Longleftrightarrow}} x_n \in G \\
+  &\Longleftrightarrow \neg\bigl(1 \in (G_n) + (x_n)\bigr) \\
+  &\Longleftrightarrow \neg\bigl(1 \in (G_n) + (x_n) \ \wedge\ \bigwedge_{i=0}^{n-1} (x_i \in G \vee x_i \not\in G)\bigr) \\
+  &\Longleftrightarrow \neg\exists v \in \{0,1\}^n\_
+    \Bigl(1 \in (G_n) + (x_n) \ \wedge\ \bigwedge_{i=0}^{n-1} (v_i = 1
+    \Leftrightarrow x_i \in G)\Bigr) \\
+  &\Longleftrightarrow \neg\exists v \in \{0,1\}^n\_
+    \Bigl(1 \in \aaa_v \ \wedge\ \bigwedge_{i=0}^{n-1} (v_i = 1
+    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr) \qedhere
+\end{align*}
+\end{proof}
+
+Condition~(2) in Lemma~\ref{lemma:uniform-char} is manifestly formalizable in
+arithmetic, uniformly in~$n$.
+
 
 \section{For general rings}
 
