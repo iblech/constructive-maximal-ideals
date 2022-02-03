@@ -89,7 +89,7 @@
 
 
 Let~$A$ be a commutative ring with unit. In the spirit of Lombardi and Quitté,
-by ``not~$\varphi$'' we mean~$\varphi \Rightarrow 1 = 0 \in A$. Consequently,
+by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 = 0 \in A$''. Consequently,
 by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 = 0 \in A$, and a subset~$M
 \subseteq A$ is \emph{detachable} if and only if for any~$x \in A$, either~$x \in M$
 or~$x \not\in M$. This note is set in the context of minimal logic.
@@ -210,6 +210,16 @@ prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{ex}
 \begin{ex}If~$A$ is a local ring (in the sense that if a finite sum of ring
 elements is invertible then one of the summands is), then~$\mmm = A \setminus
 A^\times$.\end{ex}
+
+\begin{ex}\label{ex:maximal-above}We can modify the construction by using an
+arbitrary ideal~$\aaa$ as~$\mmm_0$ instead of the zero ideal. All results in
+this section remain valid, provided ``not~$\varphi$'' is redefined
+as~``$\varphi \Rightarrow 1\in\aaa$''; the resulting ideal~$\mmm$ is then a
+maximal ideal above~$\aaa$; it is proper in the sense that~$1 \in \mmm
+\Rightarrow 1 \in \aaa$. It can also be obtained by applying the original
+version of the construction in the quotient ring~$A/\aaa$ (which is again
+countable) and taking the inverse image of the resulting ideal along the
+canonical projection~$A \to A/\aaa$.\end{ex}
 
 If we can decide whether a finitely generated ideal contains the
 unit or not, we can improve on this result. (For instance this is the case for
@@ -348,6 +358,31 @@ ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
 0$, then~$y = 0$), and since~$\ppp$ is double negation stable, the quotient ring~$(A/\ppp)[X]$ is as well. Thus~$f$ is not nilpotent
 as an element of~$(A/\ppp)[X]$ and a forteriori not nilpotent as an element
 of~$A[X]$.\end{proof}
+
+Just as Proposition~\ref{prop:nilp-prime} provides a constructive substitute
+for the recognition of the intersection of all prime ideals as the nilradical,
+the following proposition provides a constructive substitute for the
+recognition of the intersection of all maximal ideals as the Jacobson radical.
+
+As is customary in constructive
+algebra~\cite[Section~IX.1]{lombardi-quitte:constructive-algebra}, we define
+the Jacobson radical~$J$ as the ideal
+\[ J \defeq \{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}. \]
+An element~$x$ is said to be \emph{apart from the Jacobson radical} if and only if
+there exists an element~$y \in A$ such that~$1-xy$ is not invertible. In
+general, this condition is stronger than~$x$ merely not being an element of~$J$.
+
+\begin{prop}Let~$x \in A$. If~$x$ is apart from the Jacobson radical, then
+there is a maximal ideal~$\mmm$ such that~$x \not\in \mmm$.
+\end{prop}
+
+\begin{proof}Since~$x$ is apart from~$J$, there is an element~$y \in A$ such that~$1-xy$
+is not invertible. By Example~\ref{ex:maximal-above}, there is an ideal~$\mmm$
+above~$\aaa \defeq (1-xy)$ which is maximal not only as an ideal of~$A/\aaa$
+(where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 \in \aaa$'') but also as an
+ideal of~$A$ (where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 = 0$''). If~$x
+\in \mmm$, then~$1 = (1-xy) + xy \in \mmm$; hence~$x \not\in \mmm$.
+\end{proof}
 
 
 \section{In Heyting arithmetic}
