@@ -252,7 +252,7 @@ case~$1 \in \mmm + (x_n)$. In the second
 case~$x_n \in \mmm$ by Lemma~\ref{lemma:stage}.
 \end{proof}
 
-It is somewhat remarkable that the ideal~$\mmm$ is detachable even though in
+It is somewhat remarkable that under the assumption of Proposition~\ref{prop:with-test} the ideal~$\mmm$ is detachable even though in
 general it is not finitely generated. Usually in constructive mathematics, ideals which are not
 finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
@@ -292,8 +292,8 @@ might not be defined; the definition of~$\mmm_{n+1}$ then has to read
 The generalization to the subcountable case is particularly useful in the
 Russian tradition of constructive mathematics as exhibited by the ef{}fective
 topos~\cite{hyland:effective-topos,oosten:realizability,phoa:effective,bauer:c2c},
-as there many rings of interest, including uncountable ones such as the real
-numbers, are subcountable~\cite[Prop.~7.2]{hyland:effective-topos}.
+as there many rings of interest are subcountable, including uncountable ones such as the real
+numbers~\cite[Prop.~7.2]{hyland:effective-topos}.
 \end{rem}
 
 
@@ -358,7 +358,7 @@ flexibility of subsets of the given ring~$A$: In the absence of additional
 assumptions as in Proposition~\ref{prop:with-test},
 we cannot make do with decidable
 predicates~$A \to 2$; without additional hypotheses on~$A$, membership of the
-resulting maximal ideal~$\mmm$ is not decidable. As such, the construction is
+ideals~$\mmm_n$ is not decidable. As such, the construction is
 naturally formalized in intuitionistic set theories such as~\textsc{czf}
 or~\textsc{izf}, which natively support such flexible subsets.
 
@@ -370,7 +370,7 @@ feature of the construction, namely that the condition for membership is a
 negative condition.
 
 To set the stage, we specify what we mean by a \emph{ring} in the context of
-arithmetic. One option would be that an arithmetized ring should be a single
+arithmetic. One option would be to decree that an arithmetized ring should be a single
 natural number coding a finite set of ring elements and the graphs of the
 corresponding ring operations; however, this perspective is too narrow, as we
 also want to entertain infinite rings.
@@ -390,7 +390,7 @@ a ring; such that axioms such as
   \forall z,n\_ & Z(z) \wedge A(n) \Longrightarrow P(z,n,n) && \text{``zero is neutral with respect to addition''}
 \end{align*}
 hold. Although first-order arithmetic cannot quantify over ideals of such
-rings, specific ideals can be given by formulas~$I(n)$ such that
+rings, specific ideals can be given by formulas~$I(n)$ such that axioms such that
 \begin{align*}
   \forall n\_ & I(n) \Rightarrow A(n) && \text{``$I \subseteq A$''} \\
   \exists n\_ & Z(n) \Rightarrow I(n) && \text{``$0 \in I$''}
@@ -399,12 +399,12 @@ hold. It is in this sense that we are striving to adapt the construction of
 Section~\ref{sect:constr} to describe a maximal ideal.
 
 In this context, we can arithmetically imitate any set-theoretic description of
-an ideal (as a subset cut out by an explicit first-order formula). However, for
+a single ideal as a subset cut out by an explicit first-order formula. However, for
 recursively defined families of ideals, we require a suitable recursion
 theorem: If we are given (individual formulas~$M_i(x)$ indexed by numerals
 representing) ideals~$\mmm_0,\mmm_1,\mmm_2,\ldots$, we cannot generally
 form~$\bigcup_{n\in\NN} \mmm_n$, as the naive formula~``$\bigvee_{n\in\NN} M_n(x)$''
-representing this union would have infinite length. We can take the union only
+representing their union would have infinite length. We can take the union only
 if the family is \emph{uniformly represented} by a formula~$M(n,x)$ (denoting
 that~$x$ represents an element of~$\mmm_n$).
 
@@ -431,8 +431,8 @@ This recursion can be carried out within~\textsc{pa} since the recursive step
 only references the finitely many values~$g(n,0),\ldots,g(n,n-1)$.
 
 Heyting arithmetic, however, does not support this case distinction. The
-formalization of the construction in~\textsc{ha} is unlocked by the following
-observation.
+formalization of the construction in~\textsc{ha} is only unlocked by the following
+direct characterization.
 
 \begin{lemma}\label{lemma:uniform-char}(In the situation of Remark~\ref{rem:via-generators}.)
 For any finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
@@ -441,7 +441,7 @@ For any finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
 \item For any such sequence~$v = [v_0,\ldots,v_{n-1}]$, if
 \[ \bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]}), \]
 then~$\aaa_v = (G_n) + (x_n)$.
-In particular~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
+In particular, in this case we have~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \item For every natural number~$n \in \NN$,
 \[ x_n \in G \quad\Longleftrightarrow\quad \neg
   \exists v \in \{0,1\}^n\_
