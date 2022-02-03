@@ -476,6 +476,53 @@ constructive content of Henkin’s proof of
 Gödel’s completeness theorem}
 
 
+\section{Generalization to the well-founded case}
+
+In this section, we relax the assumption that the ring~$A$ is countable to the
+assumption that~$A$ is the image of a well-founded set~$I$. There are several
+definitions of well-foundedness in the literature; we get by with the following
+weak requirement: There is a transitive relation~$({<})$ on~$I$ such that
+\begin{enumerate}
+\item for any class~$M \subseteq I$ which is \emph{progressive} or
+\emph{hereditary} in the sense that
+\[ \forall n \in I\_
+  (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
+we have~$M = I$, and
+\item both~$I$ and any subset of the form~$\{k \in I \,|\, k < n\}$ which is
+inhabited are directed.
+% for any elements~$a,b,c \in I$, if~$a < c$ and~$b < c$, then there is an
+% element~$w \in I$ such that~$a,b \leq w < c$.
+\end{enumerate}
+Condition~(2) is for instance satisfied if~$({<})$ is a linear order.
+
+XXX check whether we want class or set?
+
+We write~$A = \{ x_n \,|\, n \in I \}$.
+We propose the following recursive construction of ideals~$\mmm_n$, $n \in I$:
+\begin{align*}
+  \mmm_n &\defeq \mmm_{<n} + (\{ x_n \,|\, 1 \not\in \mmm_{<n} + (x_n) \}),
+\end{align*}
+where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
+\in I} \mmm_n$. As before, no choices of any kind are required.
+
+\begin{prop}\begin{enumerate}
+\item The set~$\mmm$ is an ideal.
+\item The ideal~$\mmm$ is proper.
+\item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
+\mmm_{n+1}$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_n + (x_n)$.
+\item The ideal~$\mmm$ is maximal (and hence prime).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}The proofs of the countable case carry over word for word.
+\end{proof}
+
+We also have an analogue of Proposition~\ref{prop:with-test}, requiring that
+for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$ is a map~$\{ k \in I
+\,|\, k < n \} \to A$, we have~$1 \in \aaa$ or~$1 \not\in \aaa$. However, we
+don't know how useful this analogue is.
+
+
 \section{For general rings}
 
 The construction in Section~\ref{sect:constr} of a maximal ideal applies to
@@ -534,7 +581,7 @@ this statement.
 
 The metatheorem expands the applicability of the construction of
 Section~\ref{sect:constr}, underscores the value of its intuitionistic
-analysis -- countability assumptions cannot be eliminated from classical proofs --
+analysis -- the metatheorem cannot be applied to eliminate countability assumptions from classical proofs --
 and strengthens the
 view of maximal ideals as convenient fictions. They can
 carry out their work by any of the following possibilities:
@@ -547,52 +594,6 @@ axiom of choice.
 ideal are true even if no actual maximal ideal can be constructed.
 \end{enumerate}
 
-
-\section{Generalization to the well-founded case}
-
-In this section, we relax the assumption that the ring~$A$ is countable to the
-assumption that~$A$ is the image of a well-founded set~$I$. There are several
-definitions of well-foundedness in the literature; we get by with the following
-weak requirement: There is a transitive relation~$({<})$ on~$I$ such that
-\begin{enumerate}
-\item for any class~$M \subseteq I$ which is \emph{progressive} or
-\emph{hereditary} in the sense that
-\[ \forall n \in I\_
-  (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
-we have~$M = I$, and
-\item both~$I$ and any subset of the form~$\{k \in I \,|\, k < n\}$ which is
-inhabited are directed.
-% for any elements~$a,b,c \in I$, if~$a < c$ and~$b < c$, then there is an
-% element~$w \in I$ such that~$a,b \leq w < c$.
-\end{enumerate}
-Condition~(2) is for instance satisfied if~$({<})$ is a linear order.
-
-XXX check whether we want class or set?
-
-We write~$A = \{ x_n \,|\, n \in I \}$.
-We propose the following recursive construction of ideals~$\mmm_n$, $n \in I$:
-\begin{align*}
-  \mmm_n &\defeq \mmm_{<n} + (\{ x_n \,|\, 1 \not\in \mmm_{<n} + (x_n) \}),
-\end{align*}
-where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
-\in I} \mmm_n$. As before, no choices of any kind are required.
-
-\begin{prop}\begin{enumerate}
-\item The set~$\mmm$ is an ideal.
-\item The ideal~$\mmm$ is proper.
-\item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
-\mmm_{n+1}$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_n + (x_n)$.
-\item The ideal~$\mmm$ is maximal (and hence prime).
-\end{enumerate}
-\end{prop}
-
-\begin{proof}The proofs of the countable case carry over word for word.
-\end{proof}
-
-We also have an analogue of Proposition~\ref{prop:with-test}, requiring that
-for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$ is a map~$\{ k \in I
-\,|\, k < n \} \to A$, we have~$1 \in \aaa$ or~$1 \not\in \aaa$. However, we
-don't know how useful this analogue is.
 
 \printbibliography
 
