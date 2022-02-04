@@ -512,8 +512,10 @@ definition of~$\mmm_{n+1}$ in negative position, naive arithmetization
 results in formulas of unbounded logical complexity, suggesting that
 a uniform definition might not be possible.
 
-This issue is also noted, though not resolved, in related work on a
-constructive version of Gödel's completeness
+This issue has a counterpart in type-theoretic foundations of mathematics,
+where the family~$(\mmm_n)_{n \in \NN}$ cannot be given as an inductive family
+(failing the positivity check), and is also noted, though not resolved, in
+related work on a constructive version of Gödel's completeness
 theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 The issue does not arise in the context of~\textsc{pa}, where the law of
 excluded middle allows us bound the logical complexity: We can blithely define
@@ -775,4 +777,3 @@ XXX link to Agda development
   (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
 we have~$M = I$, and
 
-XXX not inductively defined
