@@ -58,7 +58,7 @@
   Along the way we do a case study for proofs in algebra with minimal logic.
 \end{abstract}
 
-Let~$A$ be a commutative ring with unit. In the spirit of Lombardi and Quitté,
+Let~$A$ be a commutative ring with unit. In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra},
 by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 = 0 \in A$''. Consequently,
 by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 = 0 \in A$, and a subset~$M
 \subseteq A$ is \emph{detachable} if and only if for any~$x \in A$, either~$x \in M$
@@ -92,9 +92,16 @@ any form.
 The set~$M_n \defeq \{ x_n \,|\, 1 \not\in \mmm_n + (x_n) \}$ occurring in this
 construction contains the element~$x_n$ if and only if~$1 \not\in \mmm_n +
 (x_n)$; it is obtained from the singleton set~$\{x_n\}$ by bounded separation.
-This set~$M_n$ is empty, and thus~$\mmm_{n+1} = \mmm_n$, precisely when~$1 \in \mmm_n + (x_n)$.
+This set~$M_n$ is inhabited, and thus~$\mmm_{n+1} = \mmm_n + (x_n)$, precisely when~$1 \not\in \mmm_n + (x_n)$.
 However, in the generality we work in, we cannot assume that~$M_n$ is empty or
-inhabited.
+inhabited. Hence we also cannot and do not define~$\mmm_{n+1}$ by the case
+distinction
+\begin{align*}
+  \mmm_{n+1} &= \begin{cases}
+    \mmm_n + (x_n), & \text{if $1 \not\in \mmm_n + (x_n)$}, \\
+    \mmm_n, & \text{else.}
+  \end{cases}
+\end{align*}
 
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, a = 0 \vee 1 \not\in \mmm_n + (x_n) \}$.
