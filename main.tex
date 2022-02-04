@@ -129,7 +129,8 @@ construction contains the element~$x_n$ if and only if~$1 \not\in \mmm_n +
 (x_n)$; it is obtained from the singleton set~$\{x_n\}$ by bounded separation.
 This set~$M_n$ is inhabited, and thus~$\mmm_{n+1} = \mmm_n + (x_n)$, precisely when~$1 \not\in \mmm_n + (x_n)$.
 However, in the generality we work in, we cannot assume that~$M_n$ is empty or
-inhabited.
+inhabited. A similar construction is provided by Herbelin and Ilik in the
+context of Gödel's completeness theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, a = 0 \vee 1 \not\in \mmm_n + (x_n) \}$.
@@ -519,8 +520,11 @@ definition of~$\mmm_{n+1}$ in negative position, a naive arithmetization
 results in formulas of unbounded logical complexity, suggesting that
 a uniform definition might not be possible.
 
-This issue does not arise in the context of~\textsc{pa}, where the law of
-excluded middle allows us keep the logical complexity bounded: We can define
+This issue is also noted, though not resolved, in related work on the
+constructive content of Gödel's completeness
+theorem~\cite[p.~11]{herbelin-ilik:henkin}.
+The issue does not arise in the context of~\textsc{pa}, where the law of
+excluded middle allows us keep the logical complexity bounded: We can blithely define
 the joint indicator function~$g(n,i)$ for the sets~$G_n$ (such that~$G_n = \{
 x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Remark~\ref{rem:via-generators} by the recursion
 \begin{align*}
@@ -573,10 +577,6 @@ of minimal logic and follows by the following computation:
 
 Condition~(2) in Lemma~\ref{lemma:uniform-char} is manifestly formalizable in
 arithmetic, uniformly in~$n$.
-
-XXX compare with Hugo Herbelin and Danko Ilik, \emph{An analysis of the
-constructive content of Henkin’s proof of
-Gödel’s completeness theorem}
 
 
 \section{Generalization to the well-founded case}
