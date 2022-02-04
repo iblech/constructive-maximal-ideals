@@ -327,13 +327,48 @@ prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
 an ordinary prime ideal coincide. Hence the claim follows from
 Lemma~\ref{lemma:x-prime}.\end{proof}
 
-XXX ... often-used case study (cite ...) ...
+An important part of constructive algebra is to devise tools to import
+proofs from classical commutative algebra into the constructive setting.
+The following two statements are established test cases exploring the power of
+such tools:
 
-\begin{proposition}Let~$f \in A[X]$ be a polynomial which is nilpotent in~$A[X]$. Then
-all coefficients of~$f$ are nilpotent in~$A$.
+\begin{proposition}\label{prop:test-cases}Let~$f \in A[X]$ be a polynomial.
+\begin{enumerate}
+\item If~$f$ is nilpotent in~$A[X]$, then all coefficients of~$f$ are nilpotent in~$A$.
+\item If~$f$ is invertible in~$A[X]$, then all coefficients of~$f$, except for
+the constant coefficient, are
+nilpotent in~$A$.
+\end{enumerate}
 \end{proposition}
 
-\begin{proof}The claim follows from a simple induction if~$A$ is a reduced
+These facts have abstract classical proofs which run as follows.
+
+% NOTE FOR TYPESETTING: It is on purpose that we are not using the proof
+% environment here, as we are quoting these classical proofs as objects of
+% demonstration. We are not actually using these proofs in our development, we
+% are just referencing them.
+\begin{quote}\small
+  \textbf{Proof of 1.} The claim follows from a simple induction if~$A$ is
+  reduced. The general case reduces to this one: For any prime ideal~$\ppp$,
+  the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$, are hence
+  contained in the intersection of all prime ideals and therefore
+  nilpotent.\medskip
+
+  \textbf{Proof of 2.} The claim follows from a simple induction if~$A$ is an
+  integral domain. The general case reduces to this one: For any prime
+  ideal~$\ppp$, the nonconstant coefficients of~$f$ vanish over the integral
+  domain~$A/\ppp$, are hence contained in the intersection of all prime ideals
+  and therefore nilpotent.
+\end{quote}
+
+Both statements admit direct and elegant constructive proofs; the challenge is
+to imitate these two classical proofs constructively, staying as close as
+possible to the original. The construction of Section~\ref{sect:constr} meets
+these challenges as follows (continuing to assume that~$A$ is countable --
+Section~\ref{sect:wlog} indicates how this assumption can be dropped):
+
+\begin{proof}[of Proposition~\ref{prop:test-cases}]
+The first claim follows from a simple induction if~$A$ is a reduced
 ring.
 
 In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$. Let~$\ppp$
@@ -341,13 +376,8 @@ be a radical~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. Since~$A/\ppp$
 is reduced, the coefficient~$a_n$ vanishes over~$A/\ppp$. Thus~$a_n \in \ppp$,
 hence~$a_n$ is nilpotent. Since the polynomial~$f - a_n X^n$ is again
 nilpotent, we can continue by induction.
-\end{proof}
 
-\begin{proposition}Let~$f \in A[X]$ be a polynomial which is invertible in~$A[X]$.
-Then all coefficients of~$f$, except for the constant coefficient, are
-nilpotent.\end{proposition}
-
-\begin{proof}The claim follows by a simple inductive argument if~$A$ is an
+The second claim follows by a simple inductive argument if~$A$ is an
 integral domain with double negation stable equality.
 
 In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$
@@ -562,6 +592,7 @@ don't know how useful this analogue is.
 
 
 \section{For general rings}
+\label{sect:wlog}
 
 The construction in Section~\ref{sect:constr} of a maximal ideal applies to
 countable rings. In absence of the axiom of choice, some restriction on the
@@ -599,7 +630,7 @@ intuitionistic proof can then be interpreted in this topos; since the constant
 sheaf functor preserves first-order logic (by overtness) positivity, the
 sheaf~$\underline{X}$ inherits any first-order assumptions about~$X$ required
 by the proof; and since it also reflects first-order logic (by overtness and
-surjectivity), the proof's conclusion descends to~$X$. When we apply the
+surjectivity), the proof's conclusion descends to~$X$.\par When we apply the
 construction of Section~\ref{sect:constr} internally in this topos, the result
 will be a certain sheaf of ideals; it is in that sense that any ring
 constructively possesses a maximal ideal. This sheaf will not be constant,
@@ -611,8 +642,8 @@ pointfree topology and topos theory can be found
 in~\cite{blechschmidt:generalized-spaces,johnstone:art,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless,johnstone:baby-elephant}.}
 
 ``First-order'' statements are statements which only refer to elements, not to
-subsets; for instance, Proposition~\ref{prop:nilp-coefficients} is a
-first-order statement and hence holds also without the countability assumption.
+subsets; for instance, the statements of Proposition~\ref{prop:test-cases} are
+first-order and hence also hold without the countability assumption.
 In contrast, the statement ``there is a maximal ideal'' is a higher-order
 statement; hence we cannot eliminate countability assumptions from proofs of
 this statement.
