@@ -436,7 +436,7 @@ recognition of the intersection of all maximal ideals as the Jacobson radical.
 As is customary in constructive
 algebra~\cite[Section~IX.1]{lombardi-quitte:constructive-algebra}, we define
 the Jacobson radical~$J$ as the ideal
-\[ J \defeq \{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}. \]
+$J \defeq \{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}$.
 An element~$x$ is said to be \emph{apart from the Jacobson radical} if and only if
 there exists an element~$y \in A$ such that~$1-xy$ is not invertible. In
 general, this condition is stronger than~$x$ merely not being an element of~$J$.
@@ -585,7 +585,7 @@ In this section, we relax the assumption that the ring~$A$ is countable to the
 assumption that~$A$ is the image of a well-founded set~$I$. There are several
 definitions of well-foundedness in the literature [XXX cite]; we require
 transfinite recursion and induction over~$I$, and that both~$I$ and any subset
-of the form~${\downarrow(n)} \defeq \{k \in I \,|\, k < n\}$ which is inhabited is directed. The
+of the form~${{\downarrow}(n)} \defeq \{k \in I \,|\, k < n\}$ which is inhabited is directed. The
 latter condition is for instance satisfied if~$({<})$ is a linear order.
 
 Writing~$A = \{ x_n \,|\, n \in I \}$, we recursively construct
@@ -603,7 +603,7 @@ where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
 \mmm_{n+1}$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_n + (x_n)$.
 \item The ideal~$\mmm$ is maximal (and hence prime).
 \item Assuming that for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$
-is a map~${\downarrow(n)} \to A$, we have~$1 \not\in \aaa$ or~$\neg(1
+is a map~${{\downarrow}(n)} \to A$, we have~$1 \not\in \aaa$ or~$\neg(1
 \not\in \aaa)$, the ideal~$\mmm$ is detachable. If furthermore~$1 \in \aaa$
 or~$1 \not\in \aaa$ for such ideals, then~$\mmm$ is maximal in the
 strong sense.
