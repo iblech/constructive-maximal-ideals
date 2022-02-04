@@ -2,7 +2,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb,amsmath,mathtools}
+\usepackage{amssymb,amsmath,mathtools,proof}
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 \newcommand{\aaa}{\mathfrak{a}}
@@ -77,7 +77,7 @@ extracted; and not only do we recover the original construction under certain
 decidability assumptions, we can also exploit a relativity phenomenon of
 mathematical logic in order to drop, with some caveats, the assumption that~$A$ is countable.
 
-\paragraph{Conventions.} Throughout this note, we fix a ring~$A$.
+\paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
 In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra}, we employ \emph{minimal
 logic}~\cite{johansson:minimal}, where by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 = 0 \in A$'', and do \emph{not} assume any form of the axiom of choice. Consequently,
 by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 = 0 \in A$, and a subset~$M
@@ -124,6 +124,20 @@ context of Gödel's completeness theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, a = 0 \vee 1 \not\in \mmm_n + (x_n) \}$.
+Notice that, for every element~$v \in (M)$, either $v = 0$ or $M$ is inhabited, depending on whether
+$n=0$ or $n>0$ in $\sum_{i=1}^n a_i v_i$. This can also be seen from the alternative inductive
+generation of $(M)$ by the following rules:\par
+{\vspace*{-0.8em}\small\[
+\infer{v \in (M)}{v=0}
+\qquad\qquad
+\infer{v \in (M)}{v \in M}
+\qquad\qquad
+\infer{v+w \in (M)}{v \in (M)\quad w \in (M)}
+\qquad\qquad
+\infer{av \in (M)}{\quad a\in A \quad v \in (M)}
+\]}
+\noindent Here we adhere to the paradigm of generalized inductive definitions
+\cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind}.
 
 \begin{proposition}The subset~$\mmm$ is an ideal.
 \end{proposition}
@@ -170,7 +184,8 @@ The first-order maximality condition of Proposition~\ref{prop:is-maximal} is
 equivalent to the following higher-order version: For every ideal~$\nnn$ such that~$1
 \not\in \nnn$, if~$\mmm \subseteq \nnn$, then~$\mmm = \nnn$.
 
-\begin{corollary}The ideal~$\mmm$ is \emph{prime} in the sense that it is proper and that for
+\begin{corollary}\label{cor:is-prime}The ideal~$\mmm$ is \emph{prime} in the
+sense that it is proper and that for
 all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 \mmm$.\end{corollary}
 
@@ -178,6 +193,10 @@ all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 \mmm + (y)$. So assume~$1 \in \mmm + (y)$. Then~$x \in (x) \cdot \mmm + (xy)
 \subseteq \mmm$ by~$xy \in \mmm$, hence~$x \in \mmm$, thus~$1 = 0$ by the assumption~$x \not\in
 \mmm$.\end{proof}
+
+\noindent The foregoing proof in fact shows that every maximal ideal in the
+sense of Proposition~\ref{prop:is-maximal} is a prime ideal in the sense of
+Corollary~\ref{cor:is-prime}.
 
 \begin{corollary}The ideal~$\mmm$ is \emph{radical} in the sense that if~$x^k \in
 \mmm$, then~$x \in \mmm$.\end{corollary}
@@ -194,16 +213,16 @@ logic.\end{remark}
 
 The quotient ring~$A/\mmm$ is a \emph{residue field} in that its unit is not
 zero and every element which is not invertible is zero -- as with the real or
-complex numbers.
+complex numbers. Each of the latter in fact is a \emph{Heyting field}: that is,
+a residue field which also is a \emph{local ring} in the sense that if a finite
+sum of ring elements is invertible then one of the summands is.
 
 \begin{example}The resulting maximal ideal~$\mmm$ depends on the chosen enumeration
 of~$A$. For instance, if we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
 ideal~$\mmm$ will coincide with~$(2)$. If the enumeration starts with some
 prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{example}
 
-\begin{example}If~$A$ is a local ring (in the sense that if a finite sum of ring
-elements is invertible then one of the summands is), then~$\mmm = A \setminus
-A^\times$.\end{example}
+\begin{example}If~$A$ is a local ring, then~$\mmm = A \setminus A^\times$.\end{example}
 
 \begin{example}\label{ex:maximal-above}We can modify the construction by using an
 arbitrary ideal~$\aaa$ as~$\mmm_0$ instead of the zero ideal. All results in
@@ -242,7 +261,12 @@ A$, then:
 \addtocounter{enumi}{2}
 \item The ideal~$\mmm$ is maximal in the strong sense that for every element~$x
 \in A$,~$x \in \mmm$ or~$1 \in \mmm + (x)$, which is to say that the quotient ring~$A/\mmm$ is a
-\emph{geometric field} (every element is zero or invertible).
+\emph{geometric field} (every element is zero or invertible).\footnote{This
+notion of a maximal ideal, together with the corresponding one of a complete
+theory in propositional logic, has been generalized to the concept of a
+complete coalition~\cite{schuster-wessel:cie2020} for an abstract inconsistency
+predicate, which for ideals of commutative rings means nothing but comaximality, i.e., to contain~$1$.}
+% XXX schu:inc
 \end{enumerate}
 \end{proposition}
 
