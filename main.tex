@@ -371,17 +371,17 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
 % demonstration. We are not actually using these proofs in our development, we
 % are just referencing them.
 \begin{quote}\scriptsize
-  \textbf{Proof of 1.} The claim follows from a simple induction if~$A$ is
-  reduced. The general case reduces to this one: For every prime ideal~$\ppp$,
+  \textbf{Proof of 1.} Simple induction if~$A$ is
+  reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
-  contained in the intersection of all prime ideals and therefore
+  contained in the intersection of all prime ideals and are thereby
   nilpotent.\medskip
 
-  \textbf{Proof of 2.} The claim follows from a simple induction if~$A$ is an
-  integral domain. The general case reduces to this one: For every prime
+  \textbf{Proof of 2.} Simple induction if~$A$ is an
+  integral domain; the general case reduces to this one: For every prime
   ideal~$\ppp$, the nonconstant coefficients of~$f$ vanish over the integral
-  domain~$A/\ppp$. Hence they are contained in the intersection of all prime ideals
-  and therefore nilpotent.
+  domain~$A/\ppp$. Hence they are contained in all prime ideals
+  and are thereby nilpotent.
 \end{quote}
 
 Both statements admit direct computational constructive proofs which do not
@@ -634,12 +634,12 @@ theory,~\textsc{izf}, does not prove the law of excluded middle, it does prove
 every~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
 combined with Friedman's trick of the nontrivial exit continuation~\cite{friedman:double-negation-translation}).
 
-A similar phenomenon occurs with countability. Set theory teaches us that
+A similar phenomenon concerns countability. Set theory teaches us that
 whether a given set is countable depends not only on the set itself, but is
-more appropriately regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
+more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
 set~$M$, there is an extension of the universe in which~$M$ becomes countable.
 Remarkably, the passage to such an extension preserves and reflects
-intuitionistic first-order logic~\cite[pp.~36f.]{joyal-tierney:grothendieck}.
+intuitionistic first-order logic.
 Hence we have the metatheorem that \emph{countability assumptions from
 intuitionistic proofs of first-order statements can always be mechanically
 eliminated.}\footnote{For every set~$M$, there is a certain locale~$X$ (the
@@ -657,9 +657,9 @@ constructively possesses a maximal ideal. This sheaf will not be constant,
 hence not originate from an actual ideal of the given ring; but first-order
 consequences of the existence of this sheaf of ideals pass down to the ring.
 Details are provided by Joyal and
-Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck} and required background on
+Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}, and introductions to
 pointfree topology and topos theory can be found
-in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless,johnstone:baby-elephant}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
+in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
 is also possible.} Crucially, the first-order restriction is only on the form
 of the statements, not on the form of the proofs. These may freely use higher-order constructs.
 
