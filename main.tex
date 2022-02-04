@@ -91,8 +91,8 @@ order to carry out the case distinction.
 
 The purpose of this text is to study a variant of this construction which
 avoids any non-constructive principles. In this generality, the resulting
-maximal ideal is [XXX schwer greifbar/???], but useful properties can still be
-extracted, and not only do we recover the original construction under certain
+maximal ideal has an elusive quality to it, but useful properties can still be
+extracted; and not only do we recover the original construction under certain
 decidability assumptions, we can also exploit a relativity phenomenon of
 mathematical logic in order to drop, with some caveats, the assumption that~$A$ is countable.
 
@@ -133,7 +133,12 @@ construction contains the element~$x_n$ if and only if~$1 \not\in \mmm_n +
 (x_n)$; it is obtained from the singleton set~$\{x_n\}$ by bounded separation.
 This set~$M_n$ is inhabited precisely if~$1 \not\in \mmm_n + (x_n)$, in which case~$\mmm_{n+1} = \mmm_n + (x_n)$.
 However, in the generality we work in, we cannot assume that~$M_n$ is empty or
-inhabited. A similar construction is provided by Herbelin and Ilik in the
+inhabited.
+
+We can avoid the case distinction only by the flexibility of nondetachable
+subsets, rendering it somewhat curious that -- despite the conveyed flavor of a
+conjuring trick -- the construction can still be used to obtain concrete and
+positive results. A similar construction has been studied by Herbelin and Ilik in the
 context of Gödel's completeness theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 
 The ideal~$(M_n)$ is given by
@@ -409,9 +414,8 @@ Both statements admit direct computational constructive proofs which do not
 refer to prime ideals; the challenge is not to find such proofs, but rather to
 imitate these two given classical proofs constructively, staying as close as
 possible to the original. It is remarkable that the construction of
-Section~\ref{sect:constr} meets this challenge at all, even though by its
-reliance on nondetachable subsets it could perhaps be regarded more as a
-conjuring trick. We continue to assume that~$A$ is countable --
+Section~\ref{sect:constr} meets this challenge at all, outlined as follows, despite its fundamental
+reliance on nondetachable subsets. We continue to assume that~$A$ is countable --
 Section~\ref{sect:wlog} indicates how this assumption can be dropped.
 
 \begin{proof}[of Proposition~\ref{prop:test-cases}]
