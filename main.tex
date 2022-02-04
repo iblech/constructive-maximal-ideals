@@ -548,25 +548,13 @@ Gödel’s completeness theorem}
 
 In this section, we relax the assumption that the ring~$A$ is countable to the
 assumption that~$A$ is the image of a well-founded set~$I$. There are several
-definitions of well-foundedness in the literature; we get by with the following
-weak requirement: There is a transitive relation~$({<})$ on~$I$ such that
-\begin{enumerate}
-\item for any class~$M \subseteq I$ which is \emph{progressive} or
-\emph{hereditary} in the sense that
-\[ \forall n \in I\_
-  (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
-we have~$M = I$, and
-\item both~$I$ and any subset of the form~$\{k \in I \,|\, k < n\}$ which is
-inhabited are directed.
-% for any elements~$a,b,c \in I$, if~$a < c$ and~$b < c$, then there is an
-% element~$w \in I$ such that~$a,b \leq w < c$.
-\end{enumerate}
-Condition~(2) is for instance satisfied if~$({<})$ is a linear order.
+definitions of well-foundedness in the literature [XXX cite]; we require
+transfinite recursion and induction over~$I$, and that both~$I$ and any subset
+of the form~${\downarrow(n)} \defeq \{k \in I \,|\, k < n\}$ which is inhabited is directed. The
+latter condition is for instance satisfied if~$({<})$ is a linear order.
 
-XXX check whether we want class or set?
-
-We write~$A = \{ x_n \,|\, n \in I \}$.
-We propose the following recursive construction of ideals~$\mmm_n$, $n \in I$:
+Writing~$A = \{ x_n \,|\, n \in I \}$, we recursively construct
+ideals~$(\mmm_n)_{n \in I}$ by
 \begin{align*}
   \mmm_n &\defeq \mmm_{<n} + (\{ x_n \,|\, 1 \not\in \mmm_{<n} + (x_n) \}),
 \end{align*}
@@ -579,16 +567,16 @@ where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
 \item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
 \mmm_{n+1}$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_n + (x_n)$.
 \item The ideal~$\mmm$ is maximal (and hence prime).
+\item Assuming that for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$
+is a map~${\downarrow(n)} \to A$, we have~$1 \not\in \aaa$ or~$\neg(1
+\not\in \aaa)$, the ideal~$\mmm$ is detachable. If furthermore~$1 \in \aaa$
+or~$1 \not\in \aaa$ for such ideals, then~$\mmm$ is maximal in the
+strong sense.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}The proofs of the countable case carry over word for word.
 \end{proof}
-
-We also have an analogue of Proposition~\ref{prop:with-test}, requiring that
-for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$ is a map~$\{ k \in I
-\,|\, k < n \} \to A$, we have~$1 \in \aaa$ or~$1 \not\in \aaa$. However, we
-don't know how useful this analogue is.
 
 
 \section{For general rings}
@@ -742,3 +730,9 @@ ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
 0$, then~$y = 0$), and since~$\ppp$ is double negation stable, the quotient ring~$(A/\ppp)[X]$ is as well. Thus~$f$ is not nilpotent
 as an element of~$(A/\ppp)[X]$ and a fortiori not nilpotent as an element
 of~$A[X]$.\end{proof}
+
+\item for any set~$M \subseteq I$ which is \emph{progressive} or
+\emph{hereditary} in the sense that
+\[ \forall n \in I\_
+  (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
+we have~$M = I$, and
