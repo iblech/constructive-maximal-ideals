@@ -313,30 +313,42 @@ Classically, we have that the intersection of all prime ideals is the
 nilradical. In our setup, we have the following substitute:
 XXX cite Krull1929
 
-\begin{prop}\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
-prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
-\end{prop}
+\begin{lemma}\label{lemma:x-prime}
+Let~$x \in A$. Then there is an ideal~$\ppp \subseteq A$ which is
+\begin{enumerate}
+\item ``$x$-prime'' in the sense that
+\begin{itemize}
+\item $1 \in \ppp \Rightarrow x \in \sqrt{(0)}$ and
+\item $ab \in \ppp \wedge (b \in \ppp \Rightarrow x \in \sqrt{(0)}) \Longrightarrow
+   a \in \ppp$,
+\end{itemize}
+that is, prime if the negations occurring in the definition of ``prime ideal''
+are understood as~``$\varphi \Rightarrow x \in \sqrt{(0)}$'',
+\item ``$x$-stable'' in the sense that
+\[ ((a \in \ppp \Rightarrow x \in \sqrt{(0)}) \Rightarrow x \in \sqrt{(0)})
+  \quad\Longrightarrow\quad a \in \ppp, \]
+\item radical,
+\item and such that~$x \in \ppp$ if and only if~$x$ is nilpotent.
+\end{enumerate}
+\end{lemma}
 
 \begin{proof}The localization~$A[x^{-1}]$ is again countable, hence the
 construction of Section~\ref{sect:constr} can be carried out to obtain a
 maximal (and hence prime) ideal~$\mmm \subseteq A[x^{-1}]$. Any negation
 occurring in the terms ``maximal ideal'' and ``prime ideal'' refers to~$1 = 0$
-in~$A[x^{-1}]$. Because~$x$ is assumed to be not nilpotent, this is equivalent
-to~$1 = 0$ in~$A$. Hence negation with reference to~$A[x^{-1}]$ means the same
-as negation with reference to~$A$.
+in~$A[x^{-1}]$, which is equivalent to~$x$ being nilpotent.
 
 The preimage of~$\mmm$ under the localization homomorphism~$A \to A[x^{-1}]$ is
-a prime ideal of~$A$ which doesn't contain~$x$.
+the desired~$x$-prime ideal.
 \end{proof}
 
-\begin{rem}A closer inspection of the proof of
-Proposition~\ref{prop:nilp-prime} reveals that for any element~$x \in A$
-(irrespective of whether it is nilpotent), there is an ideal~$\ppp \subseteq A$
-such that~$x \in \ppp$ if and only if~$x$ is nilpotent. This ideal is a radical ideal. However, it is
-prime only in the following weak sense: If~$1 \in \ppp$, then~$x$ is nilpotent;
-and if~$a \in \ppp$ implies that~$x$ is nilpotent, then~$ab \in \ppp \wedge b
-\in \ppp$ implies that~$x$ is nilpotent.
-\end{rem}
+\begin{cor}\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
+prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
+\end{cor}
+
+\begin{proof}Because~$x$ is not nilpotent, the notion of an~$x$-prime ideal and
+an ordinary prime ideal coincide. Hence the claim follows from
+Lemma~\ref{lemma:x-prime}.\end{proof}
 
 XXX ... often-used case study (cite ...) ...
 
@@ -344,20 +356,35 @@ XXX ... often-used case study (cite ...) ...
 all coefficients of~$f$ are nilpotent in~$A$.
 \end{prop}
 
-\begin{proof}[XXX I currently believe this will work as well.]
+\begin{proof}The claim follows from a simple induction if~$A$ is a reduced
+ring.
+
+In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$. Let~$\ppp$
+be a radical~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. Since~$A/\ppp$
+is reduced, the coefficient~$a_n$ vanishes over~$A/\ppp$. Thus~$a_n \in \ppp$,
+hence~$a_n$ is nilpotent. Since the polynomial~$f - a_n X^n$ is again
+nilpotent, we can continue by induction.
 \end{proof}
 
-\begin{prop}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
-which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
-\end{prop}
+\begin{prop}Let~$f \in A[X]$ be a polynomial which is invertible in~$A[X]$.
+Then all coefficients of~$f$, except for the constant coefficient, are
+nilpotent.\end{prop}
 
-\begin{proof}By Proposition~\ref{prop:nilp-prime}, there is a prime ideal
-$\ppp \subseteq A$ not containing one of the coefficients of~$f$. Hence~$f$ is
-not zero over~$A/\ppp$. Since~$\ppp$ is a prime ideal, the quotient
-ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
-0$, then~$y = 0$), and since~$\ppp$ is double negation stable, the quotient ring~$(A/\ppp)[X]$ is as well. Thus~$f$ is not nilpotent
-as an element of~$(A/\ppp)[X]$ and a fortiori not nilpotent as an element
-of~$A[X]$.\end{proof}
+\begin{proof}The claim follows by a simple inductive argument if~$A$ is an
+integral domain with double negation stable equality.
+
+In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$
+and assume~$n \geq 1$. To reduce to the integral situation, let~$\ppp$ be
+an~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. The quotient
+ring~$A/\ppp$ is an~``$a_n$-integral domain'' with~``$a_n$-stable equality'';
+understanding negation as~``$a_n$-negation'' (so interpreting~``$\neg\varphi$''
+as~``$\varphi \Rightarrow a_n \in \sqrt{(0)}$''), we can regard~$A/\ppp$ more
+simply as an ordinary integral domain with double negation stable equality.
+Hence~$a_n = 0$ in~$A/\ppp$, so~$a_n \in \ppp$ whereby~$a_n$ is nilpotent. The
+polynomial~$f - a_n X^n$ is again invertible in~$A[X]$ (since the group of
+units is closed under adding nilpotent elements) so that we can continue by
+induction.
+\end{proof}
 
 Just as Proposition~\ref{prop:nilp-prime} provides a constructive substitute
 for the recognition of the intersection of all prime ideals as the nilradical,
@@ -695,3 +722,15 @@ of~$\mathcal{E}$ and since~$\mathcal{E}$ supports intuitionistic reasoning, the
 proof~$p$ is applicable to~$f^*(A)$. Hence the conclusion of~$p$ holds
 for~$f^*(A)$. Since~$f$ is open and surjective, the conclusion descends to~$A$.
 \end{proof}
+
+\begin{prop}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
+which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
+\end{prop}
+
+\begin{proof}By Proposition~\ref{prop:nilp-prime}, there is a prime ideal
+$\ppp \subseteq A$ not containing one of the coefficients of~$f$. Hence~$f$ is
+not zero over~$A/\ppp$. Since~$\ppp$ is a prime ideal, the quotient
+ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
+0$, then~$y = 0$), and since~$\ppp$ is double negation stable, the quotient ring~$(A/\ppp)[X]$ is as well. Thus~$f$ is not nilpotent
+as an element of~$(A/\ppp)[X]$ and a fortiori not nilpotent as an element
+of~$A[X]$.\end{proof}
