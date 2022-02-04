@@ -1,40 +1,9 @@
-\documentclass[oneside,reqno]{amsart}
+\documentclass[envcountsect,envcountsame,runningheads]{llncs}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amsthm,mathtools,stmaryrd,amssymb,graphicx}
-\usepackage{booktabs}
-\usepackage[all]{xy}
+\usepackage{amssymb,amsmath,mathtools}
 \usepackage[protrusion=true,expansion=true]{microtype}
-\usepackage{xspace}
-\usepackage{hyperref}
-
-\usepackage[natbib=true,style=numeric,maxnames=10]{biblatex}
-\usepackage[babel]{csquotes}
-\bibliography{main.bib}
-
-\title{Maximal ideals in countable rings, constructively}
-\author{}
-\email{}
-
-\theoremstyle{definition}
-\newtheorem{defn}{Definition}[section]
-\newtheorem{ex}[defn]{Example}
-\newtheorem{constr}[defn]{Construction}
-
-\theoremstyle{plain}
-\newtheorem{prop}[defn]{Proposition}
-\newtheorem{cor}[defn]{Corollary}
-\newtheorem{lemma}[defn]{Lemma}
-\newtheorem{thm}[defn]{Theorem}
-\newtheorem{scholium}[defn]{Scholium}
-
-\theoremstyle{remark}
-\newtheorem{rem}[defn]{Remark}
-\newtheorem{question}[defn]{Question}
-\newtheorem{speculation}[defn]{Speculation}
-\newtheorem{caveat}[defn]{Caveat}
-\newtheorem{conjecture}[defn]{Conjecture}
 
 \newenvironment{indentblock}{%
   \list{}{\leftmargin\leftmargin}%
@@ -68,6 +37,12 @@
 
 \begin{document}
 
+\title{Maximal ideals in countable rings, constructively}
+\author{}
+\email{}
+
+\maketitle
+
 \begin{abstract}
   While the existence of a maximal ideal in a general nontrivial commutative
   ring is tied together with the axiom of choice, for countable rings one can
@@ -82,11 +57,6 @@
   arithmetic with minimal logic, and to rings indexed by any well-founded set.
   Along the way we do a case study for proofs in algebra with minimal logic.
 \end{abstract}
-
-
-\maketitle
-\thispagestyle{empty}
-
 
 Let~$A$ be a commutative ring with unit. In the spirit of Lombardi and Quitté,
 by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 = 0 \in A$''. Consequently,
@@ -129,13 +99,13 @@ inhabited.
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, a = 0 \vee 1 \not\in \mmm_n + (x_n) \}$.
 
-\begin{prop}The subset~$\mmm$ is an ideal.
-\end{prop}
+\begin{proposition}The subset~$\mmm$ is an ideal.
+\end{proposition}
 
 \begin{proof}Directed unions of ideals are ideals.\end{proof}
 
-\begin{prop}\label{prop:proper}
-The ideal~$\mmm$ is \emph{proper} in the sense that~$1 \not\in \mmm$.\end{prop}
+\begin{proposition}\label{prop:proper}
+The ideal~$\mmm$ is \emph{proper} in the sense that~$1 \not\in \mmm$.\end{proposition}
 
 \begin{proof}Assume~$1 \in \mmm$. Then~$1 \in \mmm_n$ for some number~$n \geq 0$. We
 verify~$1 = 0$ by induction over~$n$.
@@ -167,8 +137,8 @@ Assume~$x_n \in \mmm$. In order to verify~$1 \not\in \mmm + (x_n)$,
 assume~$1 \in \mmm + (x_n)$. Since~$\mmm + (x_n) \subseteq \mmm$,
 we have~$1 \in \mmm$. Hence~$1 = 0$ by Proposition~\ref{prop:proper}.\end{proof}
 
-\begin{prop}\label{prop:is-maximal}The ideal~$\mmm$ is \emph{maximal} in the sense that it is proper and that for
-any element~$x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.\end{prop}
+\begin{proposition}\label{prop:is-maximal}The ideal~$\mmm$ is \emph{maximal} in the sense that it is proper and that for
+any element~$x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.\end{proposition}
 
 \begin{proof}Immediate by Lemma~\ref{lemma:stage}.\end{proof}
 
@@ -176,42 +146,42 @@ The first-order maximality condition of Proposition~\ref{prop:is-maximal} is
 equivalent to following higher-order version: For any ideal~$\nnn$ such that~$1
 \not\in \nnn$, if~$\mmm \subseteq \nnn$, then~$\mmm = \nnn$.
 
-\begin{cor}The ideal~$\mmm$ is \emph{prime} in the sense that it is proper and that for
+\begin{corollary}The ideal~$\mmm$ is \emph{prime} in the sense that it is proper and that for
 any elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
-\mmm$.\end{cor}
+\mmm$.\end{corollary}
 
 \begin{proof}By maximality of~$\mmm$, it suffices to verify that~$1 \not\in
 \mmm + (y)$. So assume~$1 \in \mmm + (y)$. Then~$x \in (x) \cdot \mmm + (xy)
 \subseteq \mmm$ by~$xy \in \mmm$, hence~$x \in \mmm$, thus~$1 = 0$ by the assumption~$x \not\in
 \mmm$.\end{proof}
 
-\begin{cor}The ideal~$\mmm$ is \emph{radical} in the sense that if~$x^k \in
-\mmm$, then~$x \in \mmm$.\end{cor}
+\begin{corollary}The ideal~$\mmm$ is \emph{radical} in the sense that if~$x^k \in
+\mmm$, then~$x \in \mmm$.\end{corollary}
 
 \begin{proof}Let~$x^k \in \mmm$. Then~$1 \not\in \mmm + (x)$, for if~$1 \in
 \mmm + (x)$, then also~$1 = 1^k \in (\mmm + (x))^k \subseteq \mmm + (x^k)
 \subseteq \mmm$. Hence~$x \in \mmm$ by Lemma~\ref{prop:is-maximal}.\end{proof}
 
-\begin{rem}The ideal~$\mmm$ is double negation stable in the sense that for any
+\begin{remark}The ideal~$\mmm$ is double negation stable in the sense that for any
 ring element~$x$, if~$\neg\neg(x \in \mmm)$, then~$x \in \mmm$. This is because
 by Lemma~\ref{lemma:stage} membership of~$\mmm$ is a negative condition
 and~$\neg\neg\neg\varphi \Rightarrow \neg\varphi$ is a tautology of minimal
-logic.\end{rem}
+logic.\end{remark}
 
 The quotient ring~$A/\mmm$ is a \emph{residue field} in that its unit is not
 zero, and any element which is not invertible is zero -- as with the real or
 complex numbers.
 
-\begin{ex}The resulting maximal ideal~$\mmm$ depends on the chosen enumeration
+\begin{example}The resulting maximal ideal~$\mmm$ depends on the chosen enumeration
 of~$A$. For instance, if we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
 ideal~$\mmm$ will coincide with~$(2)$. If the enumeration starts with some
-prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{ex}
+prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{example}
 
-\begin{ex}If~$A$ is a local ring (in the sense that if a finite sum of ring
+\begin{example}If~$A$ is a local ring (in the sense that if a finite sum of ring
 elements is invertible then one of the summands is), then~$\mmm = A \setminus
-A^\times$.\end{ex}
+A^\times$.\end{example}
 
-\begin{ex}\label{ex:maximal-above}We can modify the construction by using an
+\begin{example}\label{ex:maximal-above}We can modify the construction by using an
 arbitrary ideal~$\aaa$ as~$\mmm_0$ instead of the zero ideal. All results in
 this section remain valid, provided ``not~$\varphi$'' is redefined
 as~``$\varphi \Rightarrow 1\in\aaa$''; the resulting ideal~$\mmm$ is then a
@@ -219,7 +189,7 @@ maximal ideal above~$\aaa$; it is proper in the sense that~$1 \in \mmm
 \Rightarrow 1 \in \aaa$. It can also be obtained by applying the original
 version of the construction in the quotient ring~$A/\aaa$ (which is again
 countable) and taking the inverse image of the resulting ideal along the
-canonical projection~$A \to A/\aaa$.\end{ex}
+canonical projection~$A \to A/\aaa$.\end{example}
 
 If we can decide whether a finitely generated ideal contains the
 unit or not, we can improve on this result. (For instance this is the case for
@@ -227,7 +197,7 @@ strongly discrete rings such as the ring~$\ZZ$, more generally for the ring of
 integers of any number field, and for polynomial rings over discrete
 fields~\cite[Theorem~VIII.1.5]{mines-richman-ruitenburg:constructive-algebra}.)
 
-\begin{prop}\label{prop:with-test}
+\begin{proposition}\label{prop:with-test}
 Assume that for any finitely generated ideal~$\aaa \subseteq A$, we have~$1
 \not\in \aaa$ or~$\neg(1 \not\in \aaa)$. Then:
 \begin{enumerate}
@@ -242,7 +212,7 @@ A$, we have~$1 \in \aaa$ or~$1 \not\in \aaa$. Then:
 \in A$,~$x \in \mmm$ or~$1 \in \mmm + (x)$, which is to say that the quotient ring~$A/\mmm$ is a
 \emph{geometric field} (any element is zero or invertible).
 \end{enumerate}
-\end{prop}
+\end{proposition}
 
 \begin{proof}We verify claim~$(1)$ by induction over~$n$. The case~$n = 0$ is
 clear. Let~$n > 0$. By the induction hypothesis, the ideal~$\mmm_{n-1}$ is finitely
@@ -268,7 +238,7 @@ finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
 if~$\varphi \vee \neg\varphi$.
 
-\begin{rem}\label{rem:via-generators}There is an equivalent description of the
+\begin{remark}\label{rem:via-generators}There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
 intermediate ideals~$\mmm_n$:
 \begin{align*}
@@ -288,10 +258,10 @@ In particular, not only do we have that~$(G) = \mmm$, but~$G$ itself is already
 an ideal. This description of~$\mmm$ is in a sense more ``economical'' as the
 intermediate stages~$G_n$ are smaller (not yet being ideals), facilitating
 arithmetization in Section~\ref{sect:arithmetization}.
-\end{rem}
+\end{remark}
 
 \newcommand{\rightrightharpoonup}{\mathrel{\mathrlap{\rightharpoonup}\mkern1mu\rightharpoonup}}
-\begin{rem}All results in this section carry over mutatis mutandi if~$A$ is
+\begin{remark}All results in this section carry over mutatis mutandi if~$A$ is
 only assumed to be subcountable instead of countable, that is, if we are only
 given a \emph{partially defined} surjection~$\NN \rightrightharpoonup A$. In
 this case, we are given an enumeration~$x_0,x_1,\ldots$ where some~$x_i$
@@ -304,7 +274,7 @@ Russian tradition of constructive mathematics as exhibited by the ef{}fective
 topos~\cite{hyland:effective-topos,oosten:realizability,phoa:effective,bauer:c2c},
 where many rings of interest are subcountable, including uncountable ones such as the real
 numbers~\cite[Prop.~7.2]{hyland:effective-topos}.
-\end{rem}
+\end{remark}
 
 
 \section{On the intersection of all prime ideals}
@@ -342,9 +312,9 @@ The preimage of~$\mmm$ under the localization homomorphism~$A \to A[x^{-1}]$ is
 the desired~$x$-prime ideal.
 \end{proof}
 
-\begin{cor}\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
+\begin{corollary}\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
 prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
-\end{cor}
+\end{corollary}
 
 \begin{proof}Because~$x$ is not nilpotent, the notion of an~$x$-prime ideal and
 an ordinary prime ideal coincide. Hence the claim follows from
@@ -352,9 +322,9 @@ Lemma~\ref{lemma:x-prime}.\end{proof}
 
 XXX ... often-used case study (cite ...) ...
 
-\begin{prop}Let~$f \in A[X]$ be a polynomial which is nilpotent in~$A[X]$. Then
+\begin{proposition}Let~$f \in A[X]$ be a polynomial which is nilpotent in~$A[X]$. Then
 all coefficients of~$f$ are nilpotent in~$A$.
-\end{prop}
+\end{proposition}
 
 \begin{proof}The claim follows from a simple induction if~$A$ is a reduced
 ring.
@@ -366,9 +336,9 @@ hence~$a_n$ is nilpotent. Since the polynomial~$f - a_n X^n$ is again
 nilpotent, we can continue by induction.
 \end{proof}
 
-\begin{prop}Let~$f \in A[X]$ be a polynomial which is invertible in~$A[X]$.
+\begin{proposition}Let~$f \in A[X]$ be a polynomial which is invertible in~$A[X]$.
 Then all coefficients of~$f$, except for the constant coefficient, are
-nilpotent.\end{prop}
+nilpotent.\end{proposition}
 
 \begin{proof}The claim follows by a simple inductive argument if~$A$ is an
 integral domain with double negation stable equality.
@@ -399,9 +369,9 @@ An element~$x$ is said to be \emph{apart from the Jacobson radical} if and only 
 there exists an element~$y \in A$ such that~$1-xy$ is not invertible. In
 general, this condition is stronger than~$x$ merely not being an element of~$J$.
 
-\begin{prop}Let~$x \in A$. If~$x$ is apart from the Jacobson radical, then
+\begin{proposition}Let~$x \in A$. If~$x$ is apart from the Jacobson radical, then
 there is a maximal ideal~$\mmm$ such that~$x \not\in \mmm$.
-\end{prop}
+\end{proposition}
 
 \begin{proof}Since~$x$ is apart from~$J$, there is an element~$y \in A$ such that~$1-xy$
 is not invertible. By Example~\ref{ex:maximal-above}, there is an ideal~$\mmm$
@@ -525,7 +495,7 @@ of minimal logic and follows by the following computation:
     \Leftrightarrow x_i \in G)\Bigr) \\
   &\Longleftrightarrow \neg\exists v \in \{0,1\}^n\_
     \Bigl(1 \in \aaa_v \ \wedge\ \bigwedge_{i=0}^{n-1} (v_i = 1
-    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr) \qedhere
+    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr) %\qedhere
 \end{align*}
 \end{proof}
 
@@ -566,14 +536,14 @@ We propose the following recursive construction of ideals~$\mmm_n$, $n \in I$:
 where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
 \in I} \mmm_n$. As before, no choices of any kind are required.
 
-\begin{prop}\begin{enumerate}
+\begin{proposition}\begin{enumerate}
 \item The set~$\mmm$ is an ideal.
 \item The ideal~$\mmm$ is proper.
 \item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
 \mmm_{n+1}$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_n + (x_n)$.
 \item The ideal~$\mmm$ is maximal (and hence prime).
 \end{enumerate}
-\end{prop}
+\end{proposition}
 
 \begin{proof}The proofs of the countable case carry over word for word.
 \end{proof}
@@ -655,8 +625,8 @@ axiom of choice.
 ideal are true even if no actual maximal ideal can be constructed.
 \end{enumerate}
 
-
-\printbibliography
+\bibliographystyle{splncs04}
+\bibliography{main}
 
 \end{document}
 
@@ -723,9 +693,9 @@ proof~$p$ is applicable to~$f^*(A)$. Hence the conclusion of~$p$ holds
 for~$f^*(A)$. Since~$f$ is open and surjective, the conclusion descends to~$A$.
 \end{proof}
 
-\begin{prop}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
+\begin{proposition}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
 which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
-\end{prop}
+\end{proposition}
 
 \begin{proof}By Proposition~\ref{prop:nilp-prime}, there is a prime ideal
 $\ppp \subseteq A$ not containing one of the coefficients of~$f$. Hence~$f$ is
