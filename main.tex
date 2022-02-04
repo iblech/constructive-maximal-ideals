@@ -58,8 +58,8 @@ skipping those which would render it improper:
   \end{cases}
 \end{align*}
 A maximal ideal is then obtained in the limit as the union of the intermediate
-stages~$\mmm_n$. For instance, already Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and Mines, Richman and Ruitenburg in their book on constructive
-algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra} proceed in this fashion,
+stages~$\mmm_n$. For instance, already Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and Mines, Richman, Ruitenburg, Lombardi and Quitteé in their books on constructive
+algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion,
 and a similar
 construction is used to concoct Henkin models for the purpose of proving
 Gödel's completeness theorem for countable languages, successively adding
@@ -215,19 +215,19 @@ version of the construction in the quotient ring~$A/\aaa$ (which is again
 countable) and taking the inverse image of the resulting ideal along the
 canonical projection~$A \to A/\aaa$.\end{example}
 
-\begin{example}Assume that~$A$ is a field. Let~$f \in A[X]$ be a monic
-polynomial of positive degree. Since~$f$ is monic, it is not invertible; thus
+\begin{example}Assume that~$A$ is a field. Let~$f \in A[X]$ be a nonconstant monic
+polynomial. Since~$f$ is monic, it is not invertible; thus
 Example~\ref{ex:maximal-above} shows that there is a maximal ideal~$\mmm$
-above~$(f)$. Hence~$A[X]/\mmm$ is a field in which~$f$ has a zero.
-Iterating this construction, we obtain a splitting field of~$f$. No
+above~$(f)$. Hence~$A[X]/\mmm$ is a field in which~$f$ has a zero, namely the equivalence class of~$X$.
+Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$. No
 assumption regarding decidability of reducibility has to be made, but in return
 the resulting fields are only residue fields.\end{example}
 
 If we can decide whether a finitely generated ideal contains the
-unit or not, we can improve on this result. (For instance this is the case for
+unit or not, we can improve on Proposition~\ref{prop:is-maximal}. For instance this is the case for
 strongly discrete rings such as the ring~$\ZZ$, more generally for the ring of
 integers of every number field, and for polynomial rings over discrete
-fields~\cite[Theorem~VIII.1.5]{mines-richman-ruitenburg:constructive-algebra}.)
+fields~\cite[Theorem~VIII.1.5]{mines-richman-ruitenburg:constructive-algebra}.
 
 \begin{proposition}\label{prop:with-test}
 Assume that for every finitely generated ideal~$\aaa \subseteq A$ we have~$1
@@ -307,8 +307,9 @@ numbers~\cite[Prop.~7.2]{hyland:effective-topos}.
 
 \section{On the intersection of all prime ideals}
 
-Classically, the intersection of all prime ideals is the
-nilradical. In our setup, we have the following substitute concerning complements:
+Classically, Krull's lemma states that the intersection of all prime ideals is the
+\emph{nilradical}, the ideal~$\sqrt{(0)}$ of all nilpotent elements. In our
+setup, we have the following substitute concerning complements:
 \[ \sqrt{(0)}^c =
   \bigcup_{\substack{\text{$\ppp \subseteq A$}\\\text{$\ppp$ prime}\\\text{$\ppp$ $\neg\neg$-stable}}} \ppp^c =
   \bigcup_{\substack{\text{$\ppp \subseteq A$}\\\text{$\ppp$ prime}\\\text{$\ppp$ radical}}} \ppp^c. \]
@@ -340,7 +341,7 @@ The preimage of~$\mmm$ under the localization homomorphism~$A \to A[x^{-1}]$ is
 the desired~$x$-prime ideal.
 \end{proof}
 
-\begin{corollary}[Krull~\cite{krull:ohne}]\label{prop:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
+\begin{corollary}[Krull~\cite{krull:ohne}]\label{cor:nilp-prime}Let~$x \in A$ be an element which is not nilpotent. Then there is a
 (radical and $\neg\neg$-stable) prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
 \end{corollary}
 
@@ -352,6 +353,7 @@ An important part of constructive algebra is to devise tools to import
 proofs from classical commutative algebra into the constructive setting.
 The following two statements are established test cases exploring the power of
 such tools~\cite{schuster:induction,persson:constructive-spectrum,banaschweski-vermeulen:radical,coquand-lombardi:logical,coquand-lombardi-roy:dynamicalmethod}.
+% XXX Franziskus
 
 \begin{proposition}\label{prop:test-cases}Let~$f \in A[X]$ be a polynomial.
 \begin{enumerate}
@@ -362,7 +364,7 @@ nilpotent in~$A$.
 \end{enumerate}
 \end{proposition}
 
-These facts have abstract classical proofs which run as follows.
+These facts have abstract classical proofs employing Krull's lemma as follows.
 
 % NOTE FOR TYPESETTING: It is on purpose that we are not using the proof
 % environment here, as we are quoting these classical proofs as objects of
@@ -384,7 +386,7 @@ These facts have abstract classical proofs which run as follows.
 
 Both statements admit direct computational constructive proofs which do not
 refer to prime ideals; the challenge is not to find such proofs, but rather to
-imitate these two given classical proofs constructively, staying as close as
+imitate the two classical proofs above constructively, staying as close as
 possible to the original. It is remarkable that the construction of
 Section~\ref{sect:constr} meets this challenge at all, outlined as follows, despite its fundamental
 reliance on nondetachable subsets. We continue to assume that~$A$ is countable --
@@ -396,7 +398,7 @@ ring.
 
 In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$. Let~$\ppp$
 be a radical~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. Since~$A/\ppp$
-is reduced, the coefficient~$a_n$ vanishes over~$A/\ppp$. Thus~$a_n \in \ppp$,
+is reduced, the nilpotent coefficient~$a_n$ vanishes over~$A/\ppp$. Thus~$a_n \in \ppp$,
 hence~$a_n$ is nilpotent. Since the polynomial~$f - a_n X^n$ is again
 nilpotent, we can continue by induction.
 
@@ -405,35 +407,36 @@ integral domain with double negation stable equality.
 
 In the general case, write~$f = a_n X^n + \cdots + a_0$
 and assume~$n \geq 1$. To reduce to the integral situation, let~$\ppp$ be
-an~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. The quotient
-ring~$A/\ppp$ is an~``$a_n$-integral domain'' with~``$a_n$-stable equality'';
-understanding negation as~``$a_n$-negation'' (so interpreting~``$\neg\varphi$''
-as~``$\varphi \Rightarrow a_n \in \sqrt{(0)}$''), we can regard~$A/\ppp$ more
-simply as an ordinary integral domain with double negation stable equality.
+an~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}.
+With negation~``$\neg\varphi$'' understood as~``$\varphi \Rightarrow a_n \in
+\sqrt{(0)}$'', the quotient ring~$A/\ppp$ is an integral domain with double
+negation stable equality.
 Hence~$a_n = 0$ in~$A/\ppp$, so~$a_n \in \ppp$ whereby~$a_n$ is nilpotent. The
 polynomial~$f - a_n X^n$ is again invertible in~$A[X]$ (since the group of
 units is closed under adding nilpotent elements) so that we can continue by
 induction.
 \end{proof}
 
-Just as Proposition~\ref{prop:nilp-prime} provides a constructive substitute
+Just as Corollary~\ref{cor:nilp-prime} is a constructive substitute
 for the recognition of the intersection of all prime ideals as the nilradical,
-the following proposition provides a constructive substitute for the
+the following proposition is one for the
 recognition of the intersection of all maximal ideals as the Jacobson radical.
-
+%
 As is customary in constructive
-algebra~\cite[Section~IX.1]{lombardi-quitte:constructive-algebra}, we define
-the Jacobson radical~$J$ as the ideal
-$J \defeq \{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}$.
+algebra~\cite[Section~IX.1]{lombardi-quitte:constructive-algebra}, by
+\emph{Jacobson radical} we mean the ideal
+$\{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}$.
 An element~$x$ is said to be \emph{apart from the Jacobson radical} if and only if
-there exists an element~$y \in A$ such that~$1-xy$ is not invertible. In
-general, this condition is stronger than~$x$ merely not being an element of~$J$.
+there exists an element~$y \in A$ such that~$1-xy$ is not invertible.
+% In general, this condition is stronger than~$x$ merely not being an element of~$J$.
 
 \begin{proposition}Let~$x \in A$. If~$x$ is apart from the Jacobson radical, then
 there is a maximal ideal~$\mmm$ such that~$x \not\in \mmm$.
 \end{proposition}
 
-\begin{proof}Since~$x$ is apart from~$J$, there is an element~$y \in A$ such that~$1-xy$
+\begin{proof}The standard proof as
+in~\cite[Lemma~IX.1.1]{lombardi-quitte:constructive-algebra} applies: There is
+an element~$y$ such that~$1-xy$
 is not invertible. By Example~\ref{ex:maximal-above}, there is an ideal~$\mmm$
 above~$\aaa \defeq (1-xy)$ which is maximal not only as an ideal of~$A/\aaa$
 (where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 \in \aaa$'') but also as an
@@ -658,7 +661,7 @@ Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck} and required background on
 pointfree topology and topos theory can be found
 in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless,johnstone:baby-elephant}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
 is also possible.} Crucially, the first-order restriction is only on the form
-of the statements, not on the form of the proofs. These may use higher-order constructs.
+of the statements, not on the form of the proofs. These may freely use higher-order constructs.
 
 ``First-order'' statements are statements which only refer to elements, not to
 subsets; for instance, the statements of Proposition~\ref{prop:test-cases} are
@@ -762,7 +765,7 @@ for~$f^*(A)$. Since~$f$ is open and surjective, the conclusion descends to~$A$.
 which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
 \end{proposition}
 
-\begin{proof}By Proposition~\ref{prop:nilp-prime}, there is a prime ideal
+\begin{proof}By Corollary~\ref{cor:nilp-prime}, there is a prime ideal
 $\ppp \subseteq A$ not containing one of the coefficients of~$f$. Hence~$f$ is
 not zero over~$A/\ppp$. Since~$\ppp$ is a prime ideal, the quotient
 ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
