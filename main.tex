@@ -61,9 +61,9 @@ skipping those which would render it improper:
   \end{cases}
 \end{align*}
 A maximal ideal is then obtained in the limit as the union of the intermediate
-stages~$\mmm_n$. For instance, already Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and Mines, Richman, Ruitenburg, Lombardi and Quitteé in their books on constructive
-algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion,
-and a similar
+stages~$\mmm_n$. For instance, already Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and books on constructive
+algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion.
+A similar
 construction is used to concoct Henkin models for the purpose of proving
 Gödel's completeness theorem for countable languages, successively adding
 formulas which do not render the current set
@@ -152,7 +152,6 @@ The ideal~$\mmm$ is \emph{proper} in the sense that~$1 \not\in \mmm$.\end{propos
 
 \begin{proof}Assume~$1 \in \mmm$. Then~$1 \in \mmm_n$ for some number~$n \geq 0$. We
 verify~$1 = 0$ by induction over~$n$.
-
 If~$n = 0$, then~$1 \in \mmm_0 = \{0\}$. Hence~$1 = 0$.
 
 If~$n > 0$, then~$1 = u + v x_{n-1}$ for some elements~$u,v \in A$ such that~$u
@@ -217,9 +216,9 @@ logic.\end{remark}
 The quotient ring~$A/\mmm$ is a \emph{residue field} in that its unit is not
 zero and every element which is not invertible is zero -- as with the real or
 complex numbers.
-Each of the latter in fact is a \emph{Heyting field}: that is,
+Each of the latter is in fact a \emph{Heyting field}:
 a residue field which also is a \emph{local ring} in the sense that if a finite
-sum of ring elements is invertible then one of the summands is.
+sum is invertible then one of the summands is.
 
 \begin{example}If we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
 ideal~$\mmm$ will coincide with~$(2)$. If the enumeration starts with some
@@ -394,7 +393,7 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
 % environment here, as we are quoting these classical proofs as objects of
 % demonstration. We are not actually using these proofs in our development, we
 % are just referencing them.
-\begin{quote}\scriptsize
+\begin{quote}\small
   \textbf{Proof of 1.} Simple induction if~$A$ is
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
@@ -648,7 +647,7 @@ consequences of the existence of this sheaf of ideals pass down to the ring.
 Details are provided by Joyal and
 Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}, and introductions to
 pointfree topology and topos theory can be found
-in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
+in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
 is also possible.} Crucially, the first-order restriction is only on the form
 of the statements, not on the form of the proofs. These may freely use higher-order constructs.
 
