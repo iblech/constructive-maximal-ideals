@@ -182,6 +182,7 @@ all elements~$x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.\end{propos
 
 \begin{proof}Immediate by Lemma~\ref{lemma:stage}.\end{proof}
 
+\noindent
 This first-order maximality condition is  % of Proposition~\ref{prop:is-maximal} is
 equivalent to the following higher-order version: For every ideal~$\nnn$ such that~$1
 \not\in \nnn$, if~$\mmm \subseteq \nnn$, then~$\mmm = \nnn$.
@@ -516,7 +517,7 @@ Although first-order arithmetic cannot quantify over ideals of arithmetized
 rings, specific ideals can be given by formulas~$I(n)$ such that axioms such that
 {\small\begin{align*}
   \forall n\_ & I(n) \Rightarrow A(n) && \text{``$I \subseteq A$''} \\
-  \exists n\_ & Z(n) \Rightarrow I(n) && \text{``$0 \in I$''}
+  \exists n\_ & Z(n) \wedge I(n) && \text{``$0 \in I$''}
 \end{align*}}%
 hold. It is in this sense that we are striving to adapt the construction of
 Section~\ref{sect:constr} to describe a maximal ideal.
