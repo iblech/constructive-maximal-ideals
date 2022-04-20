@@ -140,7 +140,7 @@ positive results. %A similar construction has been studied by Herbelin and Ilik 
 %context of Gödel's completeness theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 
 The ideal~$(M_n)$ is given by
-$(M_n) = \{ a x_n \,|\, a = 0 \vee 1 \not\in \mmm_n + (x_n) \}$.
+$(M_n) = \{ a x_n \,|\, (a = 0) \vee (1 \not\in \mmm_n + (x_n)) \}$.
 
 \begin{proposition}The subset~$\mmm$ is an ideal.
 \end{proposition}
@@ -201,7 +201,8 @@ all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 sense of Proposition~\ref{prop:is-maximal} is a prime ideal in the sense of
 Corollary~\ref{cor:is-prime}.
 
-\begin{corollary}The ideal~$\mmm$ is \emph{radical} in the sense that if~$x^k \in
+\begin{corollary}The ideal~$\mmm$ is \emph{radical} in the sense that for every
+natural number~$k$, if~$x^k \in
 \mmm$, then~$x \in \mmm$.\end{corollary}
 
 \begin{proof}Let~$x^k \in \mmm$. Then~$1 \not\in \mmm + (x)$, for if~$1 \in
@@ -473,10 +474,10 @@ ideal of~$A$ (where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 = 0$''). If
 \label{sect:arithmetization}
 
 The construction presented in Section~\ref{sect:constr} crucially rests on the
-flexibility of nondetachable subsets: In the absence of additional
+flexibility of nondetachable subsets: In absence of additional
 assumptions as in Proposition~\ref{prop:with-test},
-we cannot make do with decidable
-predicates~$A \to \{0,1\}$; without additional hypotheses on~$A$, membership of the
+we cannot give the ideals~$\mmm_n$ by decidable
+predicates~$A \to \{0,1\}$ -- without additional hypotheses on~$A$, membership of the
 ideals~$\mmm_n$ is not decidable. As such, the construction is
 naturally formalized in intuitionistic set theories such as~\textsc{czf}
 or~\textsc{izf}, which natively support such flexible subsets.
@@ -492,7 +493,7 @@ To set the stage, we specify what we mean by a \emph{ring} in the context of
 arithmetic. One option would be to decree that an arithmetized ring should be a single
 natural number coding a finite set of ring elements and the graphs of the
 corresponding ring operations; however, this perspective is too narrow, as we
-also want to entertain infinite rings.
+also want to work with infinite rings.
 
 Instead, an arithmetized ring should be given by a ``formulaic setoid with ring
 structure'', that is: by a formula~$A(n)$ with free
@@ -525,14 +526,14 @@ Section~\ref{sect:constr} to describe a maximal ideal.
 In this context, we can arithmetically imitate any set-theoretic description of
 a single ideal as a subset cut out by an explicit first-order formula. However, for
 recursively defined families of ideals, we require a suitable recursion
-theorem: If we are given (individual formulas~$M_i(x)$ indexed by numerals
+theorem: If we are given (individual formulas~$M_n(x)$ indexed by numerals
 representing) ideals~$\mmm_0,\mmm_1,\mmm_2,\ldots$, we cannot generally
 form~$\bigcup_{n\in\NN} \mmm_n$, as the naive formula~``$\bigvee_{n\in\NN} M_n(x)$''
 representing their union would have infinite length. We can take the union only
-if the family is \emph{uniformly represented} by a formula~$M(n,x)$ (denoting
+if the family is \emph{uniformly represented} by a single formula~$M(n,x)$ (expressing
 that~$x$ represents an element of~$\mmm_n$).
 
-Here we encounter a stumbling block in arithmetizing the
+This restriction is a blocking issue for arithmetizing the
 construction of the chain~$\mmm_0 \subseteq \mmm_1 \subseteq \cdots$
 of Section~\ref{sect:constr}. Because~$\mmm_n$ occurs in the
 definition of~$\mmm_{n+1}$ in negative position, naive arithmetization
@@ -545,7 +546,7 @@ where the family~$(\mmm_n)_{n \in \NN}$ cannot be given as an inductive family
 related work on a constructive version of Gödel's completeness
 theorem~\cite[p.~11]{herbelin-ilik:henkin}.
 The issue does not arise in the context of~\textsc{pa}, where the law of
-excluded middle allows us bound the logical complexity: We can define
+excluded middle allows us to bound the logical complexity: We can define
 the joint indicator function~$g(n,i)$ for the sets~$G_n$ (such that~$G_n = \{
 x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Remark~\ref{rem:via-generators} by the recursion
 \begin{align*}
@@ -705,7 +706,7 @@ where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
 \in I} \mmm_n$. As before, no choices of any kind are required.
 
 \begin{proposition}\begin{enumerate}
-\item The set~$\mmm$ is an ideal.
+\item The subset~$\mmm$ is an ideal.
 \item The ideal~$\mmm$ is proper.
 \item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
 \mmm_n$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_{<n} + (x_n)$.
@@ -846,22 +847,12 @@ Section 1: some formulas with a sequence of predicates and logical connectives
 will be more readable and easier to parse if more parentheses are used
 
 Page 3, Proposition 1.1: replace “subset” by “substructure”
-
-Page 3, Corollary 1.6: say what k is
+WONTFIX
 
 Page 4: re-write the footnote to make it more readable
 
-Page 7, line -9: fix the sentence with “we cannot make do” 
-
-Page 8, line 5: replace “want to entertain infinite rings” with a better sentence
-
-Page 8, line -9: replace “encounter a stumbling block” with a better sentence
-
-Page 8, line -1: add “to” after “allows us”
-
 Page 10: incorporate the long footnote into the main text
-
-Page 13: 1. in Proposition A.1: replace “set” by “structure”
+WONTFIX
 
 
 
