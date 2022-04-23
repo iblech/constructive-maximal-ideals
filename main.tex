@@ -82,8 +82,8 @@ mathematical logic in order to drop, with some caveats, the assumption that~$A$ 
 
 \paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
 In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra}, we employ \emph{minimal
-logic}~\cite{johansson:minimal}, where by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 = 0 \in A$'', and do \emph{not} assume any form of the axiom of choice. Consequently,
-by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 = 0 \in A$, and a subset~$M
+logic}~\cite{johansson:minimal}, where by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 =_A 0$'', and do \emph{not} assume any form of the axiom of choice. Consequently,
+by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 =_A 0$, and a subset~$M
 \subseteq A$ is \emph{detachable} if and only if for all~$x \in A$, either~$x \in M$
 or~$x \not\in M$. For general background on constructive mathematics, we refer
 to~\cite{bauer:five-stages,bauer:int-mathematics,sep:constructive-mathematics}.
@@ -154,12 +154,12 @@ The ideal~$\mmm$ is \emph{proper} in the sense that~$1 \not\in \mmm$.\end{propos
 verify~$1 = 0$ by induction over~$n$.
 If~$n = 0$, then~$1 \in \mmm_0 = \{0\}$. Hence~$1 = 0$.
 
-If~$n > 0$, then~$1 = u + v x_{n-1}$ for some elements~$u,v \in A$ such that~$u
-\in \mmm_{n-1}$ and such that~$v = 0$ or~$1 \not\in \mmm_{n-1} + (x_{n-1})$.
-In the first case, we have~$1 = u \in \mmm_{n-1}$, hence~$1 = 0$ by the induction
+If~$n > 0$, then~$1 = y + a x_{n-1}$ for some elements~$a,y \in A$ such that~$y
+\in \mmm_{n-1}$ and such that~$a = 0$ or~$1 \not\in \mmm_{n-1} + (x_{n-1})$.
+In the first case, we have~$1 = y \in \mmm_{n-1}$, hence~$1 = 0$ by the induction
 hypothesis. In the second case we have~$1 = 0$ by modus ponens applied to the
 implication~$1 \not\in \mmm_{n-1} + (x_{n-1})$ and the fact~$1 \in \mmm_{n-1} +
-(x_{n-1})$ (which follows directly from the equation~$1 = u + v x_{n-1}$).
+(x_{n-1})$ (which follows directly from the equation~$1 = y + a x_{n-1}$).
 \end{proof}
 
 \begin{lemma}\label{lemma:stage}
@@ -193,7 +193,7 @@ all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 \mmm$.\end{corollary}
 
 \begin{proof}By maximality of~$\mmm$, it suffices to verify that~$1 \not\in
-\mmm + (y)$. If~$1 \in \mmm + (y)$, then~$x \in (x) \cdot \mmm + (xy)
+\mmm + (y)$. If~$1 \in \mmm + (y)$, then~$x = x\cdot1 \in (x) \cdot \mmm + (xy)
 \subseteq \mmm$ by~$xy \in \mmm$, hence~$x \in \mmm$, thus~$1 = 0$ by~$x \not\in
 \mmm$.\end{proof}
 
@@ -207,7 +207,7 @@ natural number~$k$, if~$x^k \in
 
 \begin{proof}Let~$x^k \in \mmm$. Then~$1 \not\in \mmm + (x)$, for if~$1 \in
 \mmm + (x)$, then also~$1 = 1^k \in (\mmm + (x))^k \subseteq \mmm + (x^k)
-\subseteq \mmm$. Hence~$x \in \mmm$ by Lemma~\ref{prop:is-maximal}.\end{proof}
+\subseteq \mmm$. Hence~$x \in \mmm$ by Proposition~\ref{prop:is-maximal}.\end{proof}
 
 \begin{remark}The ideal~$\mmm$ is double negation stable in the sense that for every
 ring element~$x$, if~$\neg\neg(x \in \mmm)$, then~$x \in \mmm$. This is because
@@ -226,7 +226,7 @@ sum is invertible then one of the summands is.
 ideal~$\mmm$ will coincide with~$(2)$. If the enumeration starts with some
 prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{example}
 
-\begin{example}If~$A$ is a local ring, then~$\mmm = A \setminus A^\times$.\end{example}
+\begin{example}If~$A$ is a local ring with group of units~$A^\times$, then~$\mmm = A \setminus A^\times$.\end{example}
 
 \begin{example}\label{ex:maximal-above}We can modify the construction by using an
 arbitrary ideal~$\aaa$ as~$\mmm_0$ instead of the zero ideal. All results in
@@ -900,22 +900,6 @@ construction very beautiful. For this reason, I strongly recommend the
 publication of this paper.
 
 Next follow some minor remarks:
-
-p.2: The notation "1 = 0 in A" is standard in Martin-Loef Type Theory, but in
-(Bishop-style) informal constructive mathematics is better to use 0 =_A
-1.
-
-p.3: For the elements of A you use symbols like x, y, a, u, v. A single,
-uniform notation seems to me better.
-
-p.3: In the proof of Corollary 1.5, second line: just write x in m + (xy)
-
-p.3: In the proof of Corollary 1.6, second line, write: by Lemma 1.3
-
-p.4 Example 1.9: explain the term A^x
-
-p.5 Are there interesting examples of subcountable rings that are not
-countable?
 
 The discussion in section 3 of currying out the main construction in Heyting
 Arithmetic is interesting, and needs to be completed in future work. I
