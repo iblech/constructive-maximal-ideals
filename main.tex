@@ -674,7 +674,7 @@ more aptly regarded as a property of the ambient universe~\cite{hamkins:multiver
 set~$M$, there is an extension of the universe in which~$M$ becomes countable.
 Remarkably, the passage to such an extension preserves and reflects
 intuitionistic first-order logic.
-Hence we have the metatheorem that \emph{countability assumptions from
+Hence we have the metatheorem, due to Joyal and Tierney, that \emph{countability assumptions from
 intuitionistic proofs of first-order statements can always be mechanically
 eliminated.}\footnote{For every set~$M$, there is a certain locale~$X$ (the
 \emph{classifying locale of enumerations of~$M$}) which is overt, positive and such
@@ -718,8 +718,30 @@ axiom of choice.
 (3)~Intuitionistic first-order consequences of the existence of a maximal
 ideal are true even if no actual maximal ideal can be constructed.
 
-XXX add here somewhere brief discussion of relationship to approach by Lombardi
-and Quitté; full details will have to wait for a standalone paper.
+\begin{remark}The dynamic approach as presented in the textbook by Lombardi and
+Quitté~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra}
+is another technique for constructively reinterpreting,
+without countability assumptions, classical proofs involving maximal ideals.
+This approach is intimately connected with the technique of this section, even
+though it is cast in entirely different language.
+We briefly indicate the relationship here and report
+details in future work.
+
+If a given classical proof appeals to the maximality condition ``$x \in \mmm$
+or~$1 \in \mmm + (x)$'' (``$x$ is zero modulo~$\mmm$ or invertible
+modulo~$\mmm$'') only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
+fixed beforehand, we can apply the construction in Section~\ref{sect:constr} to
+this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
+substitute for the elusive maximal ideal. The tools from pointfree topology
+driving Joyal and Tierney's metatheorem widen the applicability of this partial
+substitute to cases where the selection of which ring elements to inspect is
+not fixed beforehand, by dynamically growing the partial enumeration as the
+proof runs its course. If required, a continuation-passing style transform can
+be applied to upgrade the partial and dynamic maximal ideal from one only
+satisfying the weaker condition~``$1 \not\in \mmm + (x)$ implies~$x \in
+\mmm$'' to one satisfying the stronger condition~``$x \in \mmm$ or~$1 \in \mmm
++ (x)$''.
+\end{remark}
 
 \subsubsection{Acknowledgments}
 The present study was carried out within the project ``Reducing complexity in
@@ -916,14 +938,6 @@ I believe (this should be checked) that the origin of this kind of arguments is
 the paper of Krivine 1996 “Une preuve formelle et intuitioniste du théorème de
 complétude”. The construction of the ideal in Section 1 is really interesting
 from a logical point of view, and so is the discussion in Section 3.
-
-There are general methods, presented in the book of Lombardi and Quitte, to
-interpret proofs using maximal (e.g. Suslin’s Lemma) and minimal prime ideals,
-so it is not completely clear what are the applications of what is presented
-here. The
-application Proposition 2.3 is a little misleading since it only uses the
-notion of -prime- and not -maximal- ideal. Can one analyse Suslin’s Lemma
-instead?
 
 I am also not sure of what is the point of giving the inductive generation of
 (M) with rules (is this used later)?
