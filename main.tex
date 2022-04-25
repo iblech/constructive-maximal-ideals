@@ -68,7 +68,7 @@ A similar
 construction is used to concoct Henkin models for the purpose of proving
 Gödel's completeness theorem for countable languages, successively adding
 formulas which do not render the current set
-inconsistent~\cite[Satz~I.56]{tarski:fundamental},~\cite[Lemma~1.5.7]{dalen:logic},~\cite[Lemma~III.5.4]{simpson:subsystems}.
+inconsistent~\cite[Satz~I.56]{tarski:fundamental},~\cite[Lemma~1.5.7]{dalen:logic},~\cite[Lemma~III.5.4]{simpson:subsystems},~\cite[Lemma~2.1]{ishihara-khoussainov-nerode:decidable-kripke-models}.
 
 This procedure avoids any form of choice by virtue of being a
 functional recursive definition, but still requires some form of omniscience in
@@ -220,13 +220,15 @@ and~$\neg\neg\neg\varphi \Rightarrow \neg\varphi$ is a tautology of minimal
 logic.\end{remark}
 
 The quotient ring~$A/\mmm$ is a \emph{residue field} in that its unit is not
-zero and every element which is not invertible is zero -- as with the real or
+zero and every element which is not invertible is zero---as with the real or
 complex numbers in intuitionistic mathematics.\footnote{Residue fields have
 many of the basic properties of the fields from classical mathematics. For
 instance, minimal generating families of vector spaces over residue fields are
 linearly independent, finitely generated vector spaces do (up to~$\neg\neg$) have
 a finite basis, monic polynomials possess splitting fields and Noether
-normalization is available. The constructively rarer \emph{geometric fields}---those kinds of
+normalization is available (the proofs
+in~\cite{mines-richman-ruitenburg:constructive-algebra} can be suitably
+adapted). The constructively rarer \emph{geometric fields}---those kinds of
 fields for which every element is either invertible or zero---are required to
 ensure, for instance, that kernels of matrices are finite dimensional and that bilinear forms
 are diagonalizable.}
@@ -744,7 +746,7 @@ modulo~$\mmm$'') only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
 fixed beforehand. In this case we can, even if no enumeration of all elements
 of~$A$ exists or is available, apply the construction in Section~\ref{sect:constr} to
 this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
-substitute for the elusive maximal ideal. The tools from pointfree topology
+substitute for an intangible maximal ideal. The tools from pointfree topology
 driving Joyal and Tierney's metatheorem widen the applicability of this partial
 substitute to cases where the ring elements to inspect are
 not fixed beforehand, by dynamically growing the partial enumeration as the
@@ -762,8 +764,10 @@ Scientifica di Eccellenza 2018'' of the Fondazione Cariverona and GNSAGA of the 
 \footnote{The opinions expressed in this paper are solely those of the
 authors.} Important steps towards this paper were made
 during the Dagstuhl Seminar 21472 ``Geometric Logic, Constructivisation, and
-Automated Theorem Proving'' in November 2021. This paper would not have come to existence
-without the authors' discussions with Daniel Wessel.
+Automated Theorem Proving'' in November 2021. This paper would not have come to
+existence without the authors' numerous discussions with Daniel Wessel, and
+greatly benefited from astute comments of Kathrin Gimmi, Matthias Hutzler,
+Lukas Stoll and the three anonymous reviewers.
 
 \bibliographystyle{splncs04}
 \bibliography{main}
@@ -957,23 +961,9 @@ TITLE: Maximal ideals in countable rings, constructively
 AUTHORS: Peter Schuster and Ingo Blechschmidt
 
 ----------- Overall evaluation -----------
-In this paper the authors construct a maximal ideal in a countable ring with
-unit A avoiding choice and decidability assumptions. The notions crucial
-to the construction are negativistic i.e., defined through negation in A. The
-aforementioned negativistic standpoint together with an ingenious use of
-the countability of A are behind this, at first sight unexpected, construction.
-Although my personal view of constructivity includes strong, positively
-defined notions, rather than weak, negatively defined ones, I consider the main
-construction very beautiful. For this reason, I strongly recommend the
-publication of this paper.
 
 Next follow some minor remarks:
 
 The discussion in section 3 of currying out the main construction in Heyting
 Arithmetic is interesting, and needs to be completed in future work. I
 find the discussion in section 4 more ambitious.
-
-
-
-
-cite Lemma 2.1 of ishihara-khoussainov-nerode:decidable-kripke-models?
