@@ -479,10 +479,39 @@ ideal of~$A$ (where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 = 0$''). If
 \in \mmm$, then~$1 = (1-xy) + xy \in \mmm$; hence~$x \not\in \mmm$.
 \end{proof}
 
-XXX add here:
-surjective matrix with more rows than columns can exist only over trivial ring
-(this test case really needs the maximal ideal property, not merely the prime
-ideal property). Also briefly comment on Suslin's lemma.
+The two test cases presented in Proposition~\ref{prop:test-cases} only concern
+prime ideals. In contrast, the following test case crucially rests on the
+maximality of the ideal~$\mmm$ constructed in Section~\ref{sect:constr}.
+
+\begin{proposition}Let~$M \in A^{n \times m}$ be a matrix with more rows than
+columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
+Then~$1 = 0$.
+\end{proposition}
+
+\begin{proof}By passing to the quotient~$A/\mmm$, we may assume that~$A$ is a
+residue field. In this case the claim is standard linear algebra:
+
+If any of the matrix entries
+is invertible, the matrix could be transformed by elementary row and
+column operations to a matrix of the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
+M'\end{smallmatrix}\right)$, where the induced linear map of the submatrix~$M'$ is again
+surjective. Hence~$1 = 0$ by induction.
+
+By the residue field property, thus all matrix entries are zero. Hence~$1 = 0$.
+\end{proof}
+
+A more significant case study is Suslin's lemma, the fundamental and originally
+unconstructive ingredient in his second solution of Serre's
+problem~\cite{suslin:structure}. The classical proof, concisely recalled in
+Yengui's constructive account~\cite{yengui:maximal}, proceeds by quotienting by
+all maximal ideals. The construction of Section~\ref{sect:constr} offers a
+constructive substitute. However, since greatest common divisor computations
+are required in the quotients, it is not enough that the quotients are residue
+fields; they need to be geometric fields. Hence our approach has to be combined
+with the technique variously known as \emph{Friedman's trick}, \emph{nontrivial
+exit continuation} or \emph{baby version of Barr's theorem} in order to yield a
+constructive
+proof~\cite{friedman:trick,murthy:classical-proofs,barr:without-points,blechschmidt:generalized-spaces}.
 
 
 \section{In Heyting arithmetic}
