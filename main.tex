@@ -43,7 +43,7 @@
   We further show how a metatheorem of Joyal and Tierney can be used to expand our
   treatment to arbitrary rings. Along the way we do a case study for proofs in
   algebra with minimal logic. An Agda formalization is available at an
-  accompanying repository.\footnote{\url{https://github.com/iblech/constructive-maximal-ideals/}}
+  accompanying repository.\footnote{\url{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}}
 \end{abstract}
 
 Let~$A$ be a commutative ring with unit. The standard way of constructing a
@@ -62,10 +62,10 @@ skipping those which would render it improper:
   \end{cases}
 \end{align*}
 A maximal ideal is then obtained in the limit as the union of the intermediate
-stages~$\mmm_n$. For instance, already Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and books on constructive
+stages~$\mmm_n$. For instance, Krull in his 1929 Annals contribution~\cite[Hilfssatz]{krull:ohne} and books on constructive
 algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion.
 A similar
-construction is used to concoct Henkin models for the purpose of proving
+construction concocts Henkin models for the purpose of proving
 Gödel's completeness theorem for countable languages, successively adding
 formulas which do not render the current set
 inconsistent~\cite[Satz~I.56]{tarski:fundamental},~\cite[Lemma~1.5.7]{dalen:logic},~\cite[Lemma~III.5.4]{simpson:subsystems},~\cite[Lemma~2.1]{ishihara-khoussainov-nerode:decidable-kripke-models}.
@@ -106,7 +106,7 @@ generation of $(M)$ by the following rules:\par
 \infer{v+w \in (M)}{v \in (M)\quad w \in (M)}
 \qquad\qquad
 \infer{av \in (M)}{\quad a\in A \quad v \in (M)}
-\]}
+\]}%
 \noindent Here we adhere to the paradigm of generalized inductive definitions
 \cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind}.
 
@@ -140,8 +140,7 @@ inhabited.
 We can avoid the case distinction only by the flexibility of nondetachable
 subsets, rendering it somewhat curious that -- despite the conveyed flavor of a
 conjuring trick -- the construction can still be used to obtain concrete and
-positive results. %A similar construction has been studied by Herbelin and Ilik in the
-%context of Gödel's completeness theorem~\cite[p.~11]{herbelin-ilik:henkin}.
+positive results.
 
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, (a = 0) \vee (1 \not\in \mmm_n + (x_n)) \}$.
@@ -237,8 +236,8 @@ a residue field which also is a \emph{local ring} in the sense that if a finite
 sum is invertible then one of the summands is.
 
 \begin{example}If we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
-ideal~$\mmm$ will coincide with~$(2)$. If the enumeration starts with some
-prime number~$p$, the ideal~$\mmm$ will coincide with~$(p)$.\end{example}
+ideal~$\mmm$ coincides with~$(2)$. If the enumeration starts with a
+prime~$p$, the ideal~$\mmm$ coincides with~$(p)$.\end{example}
 
 \begin{example}If~$A$ is a local ring with group of units~$A^\times$, then~$\mmm = A \setminus A^\times$.\end{example}
 
@@ -282,9 +281,8 @@ A$, then:
 \emph{geometric field} (every element is zero or invertible).\footnote{This
 notion of a maximal ideal, together with the corresponding one of a complete
 theory in propositional logic, has been generalized to the concept of a
-complete coalition~\cite{schuster-wessel:cie2020} for an abstract inconsistency
-predicate, which for ideals of commutative rings means nothing but comaximality, i.e., to contain~$1$.}
-% XXX schu:inc
+complete coalition~\cite{schuster-wessel:cie2020,schuster-wessel:jacincpred} for an abstract inconsistency
+predicate.}
 \end{enumerate}
 \end{proposition}
 
@@ -489,8 +487,8 @@ ideal of~$A$ (where~``$\neg\varphi$'' means~``$\varphi \Rightarrow 1 = 0$''). If
 \end{proof}
 
 The two test cases presented in Proposition~\ref{prop:test-cases} only concern
-prime ideals. In contrast, the following test case crucially rests on the
-maximality of the ideal~$\mmm$ constructed in Section~\ref{sect:constr}.
+prime ideals. In contrast, the following example crucially rests on the
+maximality of the ideal~$\mmm$.
 
 \begin{proposition}Let~$M \in A^{n \times m}$ be a matrix with more rows than
 columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
@@ -735,10 +733,9 @@ ideal are true even if no actual maximal ideal can be constructed.
 Quitté~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra}
 is another technique for constructively reinterpreting,
 without countability assumptions, classical proofs involving maximal ideals.
-This approach is intimately connected with the technique of this section, even
-though it is cast in entirely different language.
-We briefly indicate the relationship here and report
-details in future work.
+We indicate here how the dynamic approach is intimately connected with the
+technique of this section, even though it is cast in entirely different
+language.
 
 Suppose that a given classical proof appeals to the maximality condition ``$x \in \mmm$
 or~$1 \in \mmm + (x)$'' (``$x$ is zero modulo~$\mmm$ or invertible
@@ -746,15 +743,20 @@ modulo~$\mmm$'') only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
 fixed beforehand. In this case we can, even if no enumeration of all elements
 of~$A$ exists or is available, apply the construction in Section~\ref{sect:constr} to
 this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
-substitute for an intangible maximal ideal. The tools from pointfree topology
+substitute for an intangible maximal ideal.
+
+The tools from pointfree topology
 driving Joyal and Tierney's metatheorem widen the applicability of this partial
 substitute to cases where the ring elements to inspect are
 not fixed beforehand, by dynamically growing the partial enumeration as the
 proof runs its course. If required, a continuation-passing style transform as
-in Remark~\ref{rem:suslin} can upgrade the partial dynamic maximal ideal from one only
+in Remark~\ref{rem:suslin} can upgrade the maximal ideal from one only
 satisfying the weaker condition~``$1 \not\in \mmm + (x)$ implies~$x \in
 \mmm$'' to one satisfying the stronger condition~``$x \in \mmm$ or~$1 \in \mmm
 + (x)$''.
+
+Unfolding the construction of Section~\ref{sect:constr} and the proof of Joyal
+and Tierney's metatheorem, we arrive at the dynamical method.
 \end{remark}
 
 \subsubsection{Acknowledgments}
@@ -931,13 +933,8 @@ Here are some editorial suggestions.
 Page 1: Rewrite the sentence in the abstract with the phrase “how for countable
 rings one can do without”
 
-Section 1: some formulas with a sequence of predicates and logical connectives
-will be more readable and easier to parse if more parentheses are used
-
 Page 3, Proposition 1.1: replace “subset” by “substructure”
 WONTFIX
-
-Page 4: re-write the footnote to make it more readable
 
 Page 10: incorporate the long footnote into the main text
 WONTFIX
@@ -953,17 +950,4 @@ AUTHORS: Peter Schuster and Ingo Blechschmidt
 
 I am also not sure of what is the point of giving the inductive generation of
 (M) with rules (is this used later)?
-
-
------------------------ REVIEW 3 ---------------------
-SUBMISSION: 40
-TITLE: Maximal ideals in countable rings, constructively
-AUTHORS: Peter Schuster and Ingo Blechschmidt
-
------------ Overall evaluation -----------
-
-Next follow some minor remarks:
-
-The discussion in section 3 of currying out the main construction in Heyting
-Arithmetic is interesting, and needs to be completed in future work. I
-find the discussion in section 4 more ambitious.
+WONTFIX
