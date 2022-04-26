@@ -137,7 +137,7 @@ This set~$M_n$ is inhabited precisely if~$1 \not\in \mmm_n + (x_n)$, in which ca
 However, in the generality we work in, we cannot assume that~$M_n$ is empty or
 inhabited.
 
-We can avoid the case distinction only by the flexibility of nondetachable
+We can avoid the case distinction by the flexibility of nondetachable
 subsets, rendering it somewhat curious that---despite the conveyed flavor of a
 conjuring trick---the construction can still be used to obtain concrete
 positive results.
@@ -390,9 +390,16 @@ an ordinary prime ideal coincide. Hence the claim follows from
 Lemma~\ref{lemma:x-prime}.\end{proof}
 
 An important part of constructive algebra is to devise tools to import
-proofs from classical commutative algebra into the constructive setting.
+proofs from classical commutative algebra into the constructive
+setting.\footnote{Forms of Zorn's Lemma similar to Krull's Lemma generally
+feature prominently in algebra; to wit, in ordered algebra there are the
+Artin--Schreier theorem for fields, Levi's theorem for Abelian groups and
+Ribenboim's extension to modules. Dynamical algebra aside, to which we will
+come back later, these statements have recently gained attention from the angle
+of proof theory at large; see, for example,
+\cite{rin:edde:full,wessel:ordering,schuster-wessel:ext,wessel:conred,bon:rib,pow:occ}.}
 The following two statements are established test cases exploring the power of
-such tools~\cite{schuster:induction,persson:constructive-spectrum,powell-schuster-wiesnet:krull,banaschweski-vermeulen:radical,richman:trivial-rings,coquand-lombardi:logical,coquand-lombardi-roy:dynamicalmethod}.
+such tools~\cite{schuster:induction,persson:constructive-spectrum,powell-schuster-wiesnet:krull,swy:dynprime,schuster-wessel:indeterminacy,banaschweski-vermeulen:radical,richman:trivial-rings,coquand-lombardi:logical,coquand-lombardi-roy:dynamicalmethod}.
 
 \begin{proposition}\label{prop:test-cases}Let~$f \in A[X]$ be a polynomial.
 \begin{enumerate}
@@ -678,8 +685,12 @@ and~$L$~\cite{goedel:ac-gch,schoenfield:predicativity}); similarly, although int
 theory,~\textsc{izf}, does not prove the law of excluded middle, it does prove
 every~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
 combined with Friedman's trick of the nontrivial exit continuation~\cite{friedman:double-negation-translation}).
+A similar phenomenon concerns countability, as follows.
 
-A similar phenomenon concerns countability. Set theory teaches us that
+
+\subsubsection{A metatheorem by Joyal and Tierney}
+
+Set theory teaches us that
 whether a given set is countable depends not only on the set itself, but is
 more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
 set~$M$, there is a (non-Boolean) extension of the universe in which~$M$ becomes countable.
@@ -722,18 +733,22 @@ analysis---the metatheorem cannot be applied to eliminate countability assumptio
 Taken together, they strengthen the
 view of maximal ideals as convenient fictions~\cite[Section~1]{schuster-wessel:krull}. Maximal ideals can
 carry out their work by any of the following possibilities:
-(1)~For countable (or well-founded) rings, no help is required.
+\begin{enumerate}
+\item[(1)] For countable (or well-founded) rings, no help is required.
 Section~\ref{sect:constr} presents an explicit construction of a maximal ideal.
-(2)~For arbitrary rings, the existence of a maximal ideal follows from the
+\item[(2)] For arbitrary rings, the existence of a maximal ideal follows from the
 axiom of choice.
-(3)~Intuitionistic first-order consequences of the existence of a maximal
+\item[(3)] Intuitionistic first-order consequences of the existence of a maximal
 ideal are true even if no actual maximal ideal can be constructed.
+\end{enumerate}
 
-\begin{remark}The dynamic approach as presented in the textbook by Lombardi and
-Quitté~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra}
+
+\subsubsection{Comparison with dynamical algebra}
+
+The dynamical approach~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about}
 is another technique for constructively reinterpreting,
 without countability assumptions, classical proofs involving maximal ideals.
-We sketch here how the dynamic approach is intimately connected with the
+We sketch here how the dynamical approach is intimately connected with the
 technique of this section, even though it is cast in entirely different
 language.
 
@@ -754,10 +769,10 @@ in Remark~\ref{rem:suslin} can upgrade the maximal ideal from one only
 satisfying the weaker condition~``$1 \not\in \mmm + (x)$ implies~$x \in
 \mmm$'' to one satisfying the stronger condition~``$x \in \mmm$ or~$1 \in \mmm
 + (x)$''.
-
+%
 Unfolding the construction of~$\mmm$ and the proof of Joyal
 and Tierney's metatheorem, we arrive at the dynamical method.
-\end{remark}
+
 
 \subsubsection{Acknowledgments}
 The present study was carried out within the project ``Reducing complexity in
@@ -776,7 +791,6 @@ Lukas Stoll and the three anonymous reviewers.
 
 
 \appendix
-\newpage
 
 \section{Generalization to the well-founded case}
 
