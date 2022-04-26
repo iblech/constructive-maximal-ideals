@@ -138,8 +138,8 @@ However, in the generality we work in, we cannot assume that~$M_n$ is empty or
 inhabited.
 
 We can avoid the case distinction only by the flexibility of nondetachable
-subsets, rendering it somewhat curious that -- despite the conveyed flavor of a
-conjuring trick -- the construction can still be used to obtain concrete and
+subsets, rendering it somewhat curious that---despite the conveyed flavor of a
+conjuring trick---the construction can still be used to obtain concrete
 positive results.
 
 The ideal~$(M_n)$ is given by
@@ -625,7 +625,7 @@ For every finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
 \item For every such sequence~$v = [v_0,\ldots,v_{n-1}]$, if
 $\bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})$,
 then~$\aaa_v = (G_n) + (x_n)$.
-In particular, in this case we have~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
+In particular, in this case~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \item For every natural number~$n \in \NN$,
 \vspace*{-1.2em}
 \[ x_n \in G \quad\Longleftrightarrow\quad \neg
@@ -682,9 +682,9 @@ combined with Friedman's trick of the nontrivial exit continuation~\cite{friedma
 A similar phenomenon concerns countability. Set theory teaches us that
 whether a given set is countable depends not only on the set itself, but is
 more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
-set~$M$, there is an extension of the universe in which~$M$ becomes countable.
+set~$M$, there is a (non-Boolean) extension of the universe in which~$M$ becomes countable.
 Remarkably, the passage to such an extension preserves and reflects
-intuitionistic first-order logic.
+first-order logic.
 Hence we have the metatheorem, due to Joyal and Tierney, that \emph{countability assumptions from
 intuitionistic proofs of first-order statements can always be mechanically
 eliminated.}\footnote{For every set~$M$, there is a certain locale~$X$ (the
@@ -706,8 +706,8 @@ Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}, and introductions to
 pointfree topology and topos theory can be found
 in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
 is also possible. The phenomenon that size is relative also emerges in the
-Löwenheim--Skolem theorem of model theory.} Crucially, the first-order restriction is only on the form
-of the statements, not on the form of the proofs. These may freely use higher-order constructs.
+Löwenheim--Skolem theorem.} Crucially, the first-order restriction is only on the form
+of the statements, not on the form of the proofs. These may freely employ higher-order constructs.
 
 ``First-order'' statements are statements which only refer to elements, not to
 subsets; for instance, the statements of Proposition~\ref{prop:test-cases} are
@@ -733,7 +733,7 @@ ideal are true even if no actual maximal ideal can be constructed.
 Quitté~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra}
 is another technique for constructively reinterpreting,
 without countability assumptions, classical proofs involving maximal ideals.
-We indicate here how the dynamic approach is intimately connected with the
+We sketch here how the dynamic approach is intimately connected with the
 technique of this section, even though it is cast in entirely different
 language.
 
@@ -747,7 +747,7 @@ substitute for an intangible maximal ideal.
 
 The tools from pointfree topology
 driving Joyal and Tierney's metatheorem widen the applicability of this partial
-substitute to cases where the ring elements to inspect are
+substitute to cases where the inspected ring elements are
 not fixed beforehand, by dynamically growing the partial enumeration as the
 proof runs its course. If required, a continuation-passing style transform as
 in Remark~\ref{rem:suslin} can upgrade the maximal ideal from one only
@@ -755,7 +755,7 @@ satisfying the weaker condition~``$1 \not\in \mmm + (x)$ implies~$x \in
 \mmm$'' to one satisfying the stronger condition~``$x \in \mmm$ or~$1 \in \mmm
 + (x)$''.
 
-Unfolding the construction of Section~\ref{sect:constr} and the proof of Joyal
+Unfolding the construction of~$\mmm$ and the proof of Joyal
 and Tierney's metatheorem, we arrive at the dynamical method.
 \end{remark}
 
@@ -768,7 +768,7 @@ authors.} Important steps towards this paper were made
 during the Dagstuhl Seminar 21472 ``Geometric Logic, Constructivisation, and
 Automated Theorem Proving'' in November 2021. This paper would not have come to
 existence without the authors' numerous discussions with Daniel Wessel, and
-greatly benefited from astute comments of Kathrin Gimmi, Matthias Hutzler,
+greatly benefited from astute comments of Karim Becher, Nicolas Daans, Kathrin Gimmi, Matthias Hutzler,
 Lukas Stoll and the three anonymous reviewers.
 
 \bibliographystyle{splncs04}
@@ -776,6 +776,7 @@ Lukas Stoll and the three anonymous reviewers.
 
 
 \appendix
+\newpage
 
 \section{Generalization to the well-founded case}
 
@@ -889,8 +890,6 @@ ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
 as an element of~$(A/\ppp)[X]$ and a fortiori not nilpotent as an element
 of~$A[X]$.\end{proof}
 
-% FUTURE link to Agda development
-
 \item for every set~$M \subseteq I$ which is \emph{progressive} or
 \emph{hereditary} in the sense that
 \[ \forall n \in I\_
@@ -901,11 +900,6 @@ FUTURE:
 * compare Noetherian (Banaschweski, Erné, Johnstone, Mulvey, ...)
 * check van der Waerden's book (where he sticks to countable rings)
 * cite prime, maximal, ...
-* remark, for Prop. 2.3, that we could pass to the countable subring
-  generated by all coefficients (of f (and its inverse)).
-* explain that the metatheorem can be regarded/is less surprising
-  as a constructive version of downward Löwenheim–Skolen (came up in discussion
-  with Nicolas Daans and Karim Becher)
 
 
 ----------------------- REVIEW 1 ---------------------
