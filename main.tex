@@ -391,7 +391,7 @@ Lemma~\ref{lemma:x-prime}.\end{proof}
 
 An important part of constructive algebra is to devise tools to import
 proofs from classical commutative algebra into the constructive
-setting.\footnote{Forms of Zorn's Lemma similar to Krull's Lemma generally
+setting.\footnote{Forms of Zorn's Lemma similar to Krull's Lemma
 feature prominently in algebra; to wit, in ordered algebra there are the
 Artin--Schreier theorem for fields, Levi's theorem for Abelian groups and
 Ribenboim's extension to modules. Dynamical algebra aside, to which we will
@@ -418,7 +418,7 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
   \textbf{Proof of 1.} Simple induction if~$A$ is
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
-  contained in the intersection of all prime ideals and thereby
+  contained in all prime ideals and are thereby
   nilpotent.\medskip
 
   \textbf{Proof of 2.} Simple induction if~$A$ is an
@@ -428,7 +428,7 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
   and are thereby nilpotent.
 \end{quote}
 
-Both statements admit direct computational constructive proofs which do not
+Both statements admit direct computational proofs which do not
 refer to prime ideals; the challenge is not to find such proofs, but rather to
 imitate the two classical proofs above constructively, staying as close as
 possible to the original. It is remarkable that the construction of
@@ -444,7 +444,7 @@ or employ the method of indeterminate coefficients.
 \begin{proof}[of Proposition~\ref{prop:test-cases}]
 The first claim follows from a simple induction if~$A$ is a reduced
 ring.
-
+%
 In the general case, write~$f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_0$. Let~$\ppp$
 be a radical~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}. Since~$A/\ppp$
 is reduced, the nilpotent coefficient~$a_n$ vanishes over~$A/\ppp$. Thus~$a_n \in \ppp$,
@@ -453,7 +453,7 @@ nilpotent, we can continue by induction.
 
 The second claim follows by a simple inductive argument if~$A$ is an
 integral domain with double negation stable equality.
-
+%
 In the general case, write~$f = a_n X^n + \cdots + a_0$
 and assume~$n \geq 1$. To reduce to the integral situation, let~$\ppp$ be
 an~$a_n$-prime ideal as in Lemma~\ref{lemma:x-prime}.
@@ -511,19 +511,19 @@ column operations to a matrix of the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
 M'\end{smallmatrix}\right)$, where the induced linear map of the submatrix~$M'$ is again
 surjective. Thus~$1 = 0$ by induction.
 
-Hence by the residue field property all matrix entries are zero. Hence~$1 = 0$.
-In fact, since $n>m$, we have $n>0$; and the vector $(1,0,\ldots,0)\in A^n$ by
-hypothesis belongs to the range of $M=0$.
+Hence by the residue field property all matrix entries are zero.
+But the vector $(1,0,\ldots,0)\in A^n$ still
+belongs to the range of $M=0$, hence~$1=0$ by~$n > 0$.
 \end{proof}
 
 \begin{remark}\label{rem:suslin}
 A more significant case study is Suslin's lemma, the fundamental and originally
 non-constructive ingredient in his second solution of Serre's
 problem~\cite{suslin:structure}. The classical proof, concisely recalled in
-Yengui's constructive account~\cite{yengui:maximal}, proceeds by working modulo
+Yengui's constructive account~\cite{yengui:maximal}, reduces modulo
 maximal ideals. The construction of Section~\ref{sect:constr} offers a
-constructive substitute. However, since greatest common divisor computations
-are required in the quotient rings, it is not enough that the quotients are residue
+constructive substitute. However, since gcd computations
+are required in the quotient rings, it is not enough that they are residue
 fields; they need to be geometric fields. Hence our approach has to be combined
 with the technique variously known as \emph{Friedman's trick}, \emph{nontrivial
 exit continuation} or \emph{baby version of Barr's theorem} in order to yield a
@@ -679,12 +679,12 @@ ideals, not to concrete consequences of their existence. Mathematical
 logic teaches us by way of diverse examples to not conflate these two concerns. For
 instance, although~\textsc{zf} does not prove the axiom of choice, it does
 prove every theorem of~\textsc{zfc} pertaining only to natural numbers (by
-interpreting the given~\textsc{zfc}-proof in the constructible universe~$L$
+interpreting a given~\textsc{zfc}-proof in the constructible universe~$L$
 and exploiting that the natural numbers are absolute between~$V$
 and~$L$~\cite{goedel:ac-gch,schoenfield:predicativity}); similarly, although intuitionistic Zermelo--Fraenkel set
-theory,~\textsc{izf}, does not prove the law of excluded middle, it does prove
+theory~\textsc{izf} does not prove the law of excluded middle, it does prove
 every~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
-combined with Friedman's trick of the nontrivial exit continuation~\cite{friedman:double-negation-translation}).
+combined with Friedman's continuation trick~\cite{friedman:double-negation-translation}).
 A similar phenomenon concerns countability, as follows.
 
 
