@@ -299,7 +299,7 @@ then also~$1 \in \mmm + (x_n)$. If~$1 \not\in \mmm_n + (x_n)$, then~$x_n \in
 \mmm$ by Lemma~\ref{lemma:omnibus}(c).
 \end{proof}
 
-It is remarkable that under the assumption of Proposition~\ref{prop:with-test}, the ideal~$\mmm$ is detachable even though in
+Remarkably, under the assumption of Proposition~\ref{prop:with-test}, the ideal~$\mmm$ is detachable even though in
 general it fails to be finitely generated. Usually in constructive mathematics, ideals which are not
 finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
@@ -349,6 +349,7 @@ setup, we have the following substitute concerning complements:
 \[ \sqrt{(0)}^c =
   \bigcup_{\substack{\text{$\ppp \subseteq A$}\\\text{$\ppp$ prime}\\\text{$\ppp$ $\neg\neg$-stable}}} \ppp^c =
   \bigcup_{\substack{\text{$\ppp \subseteq A$}\\\text{$\ppp$ prime}\\\text{$\ppp$ radical}}} \ppp^c. \]
+\newpage
 
 \begin{lemma}\label{lemma:x-prime}
 Let~$x \in A$. Then there is an ideal~$\ppp \subseteq A$ which is
@@ -464,18 +465,18 @@ induction.
 
 Just as Corollary~\ref{cor:nilp-prime} is a constructive substitute
 for the recognition of the intersection of all prime ideals as the nilradical,
-the following proposition is one for the
-recognition of the intersection of all maximal ideals as the Jacobson radical.
+the following proposition is a substitute for the classical fact that
+the intersection of all maximal ideals is the Jacobson radical.
 %
 As is customary in constructive
 algebra~\cite[Section~IX.1]{lombardi-quitte:constructive-algebra}, by
 \emph{Jacobson radical} we mean the ideal
 $\{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}$.
-An element~$x$ is said to be \emph{apart from the Jacobson radical} if and only if
-there exists an element~$y \in A$ such that~$1-xy$ is not invertible.
+%An element~$x$ is said to be \emph{apart} from it iff
+%there is an element~$y \in A$ such that~$1-xy$ is not invertible.
 % In general, this condition is stronger than~$x$ merely not being an element of~$J$.
 
-\begin{proposition}Let~$x \in A$. If~$x$ is apart from the Jacobson radical, then
+\begin{proposition}Let~$x \in A$. If~$x$ is \emph{apart} from the Jacobson radical (that is, $1-xy \not\in A^\times$ for some element~$y$), then
 there is a maximal ideal~$\mmm$ such that~$x \not\in \mmm$.
 \end{proposition}
 
@@ -569,7 +570,7 @@ a ring; such that axioms such as\par
 \end{align*}}%
 hold. This conception of arithmetized rings deviates from the usual definition
 in reverse mathematics~\cite[Definition~III.5.1]{simpson:subsystems} to support
-quotients even when Heyting arithmetic cannot verify the existence of
+quotients even when~\textsc{ha} cannot verify the existence of
 canonical representatives of equivalence classes.
 
 Although first-order arithmetic cannot quantify over ideals of arithmetized
