@@ -382,15 +382,17 @@ stage. Constructively, we can reproduce a small fragment of this
 finiteness property.
 
 More precisely, in constructive mathematics, the notion of Noetherian ring
-splinters into several inequivalent notions~\cite{XXX}. Common to most of them
+splinters into several inequivalent notions~\cite{richman:noetherian,mines-richman-ruitenburg:constructive-algebra,perdry:noetherian,perdry:lazy,perdry-schuster:noetherian,coquand-lombardi:krull,coquand:invariant,tennenbaum:hilbert,seidenberg:noether,jacobsson-lofwall:standard}. Common to most of them
 is that firstly they refer only to finitely generated ideals and that secondly
-stabilization is weakened to \emph{stalling}: For instance, the
-Richman--Seidenberg condition~\cite{XXX} is that every infinite ascending chain
+stabilization is weakened to \emph{stalling}: For instance, the Richman--Seidenberg
+condition~\cite[Section~III.2]{mines-richman-ruitenburg:constructive-algebra}
+is that every infinite ascending chain
 $\aaa_0 \subseteq \aaa_1 \subseteq \cdots$ of finitely generated ideals
 \emph{stalls} in that there is an index~$n$ such that~$\aaa_n = \aaa_{n+1}$.
 Related conditions allow for different kinds of collections of ideals, for
-instance trees~\cite{XXX}, processes~\cite[Section~3.9]{blechschmidt:phd} or
-sheaves of sequences, but keep these two restrictions, for without them not
+instance trees~\cite{richman:noetherian}, processes~\cite[Section~3.9]{blechschmidt:phd} or
+sheaves of sequences~\cite{coquand-lombardi:krull,coquand:invariant,blechschmidt:multiverse}
+but keep these two restrictions, for without them not
 even the ring of integers would be provably Noetherian.
 
 Since the approximations~$\mmm_n$ can fail to be finitely generated, these
@@ -415,7 +417,7 @@ when it stabilizes. However, even with a properness test, by speeding up we lose
 finite generation of the approximations as we cannot. Hence the classical
 finiteness property is not reproduced in a strong sense.
 
-For the exceptional \emph{anonymous} Noetherian condition, stating that every
+For the peculiar \emph{anonymous} Noetherian condition~\cite[Definition~3.27]{blechschmidt:phd}, stating that every
 ideal is \emph{not~not} finitely generated, there is the following result.
 
 \begin{proposition}\label{prop:fin-anon}If the ring~$A$ is anonymously
@@ -842,7 +844,7 @@ For monotone predicates~$P$ of finite lists of elements of~$X$, we introduce a
 predicate~$P \mid \sigma$
 expressing that no matter how~$\sigma$ evolves to a
 better approximation~$\tau$, eventually~$P(\tau)$ will hold. Similar to Coquand
-and Lombardi's approach to Noetherian rings~\cite{coquand-lombardi:krull}, we
+and Lombardi's approach to Noetherian rings~\cite{coquand-lombardi:krull,coquand:invariant}, we
 define this predicate in a direct inductive fashion, by the following
 generating clauses:
 \[
@@ -1107,11 +1109,14 @@ FUTURE:
 * cite prime, maximal, ...
 * compare with situation in reverse mathematics
 * compare with other forcing models of the maximal ideal
+* include results of discussion with Henry
 
 CITE
-https://onlinelibrary.wiley.com/doi/epdf/10.1002/malq.200710042
-Section 2.1
-"A similar notion has been explored by Perdry~\cite[Section~2]{perdry:...}."
+- https://onlinelibrary.wiley.com/doi/epdf/10.1002/malq.200710042
+  Section 2.1
+  "A similar notion has been explored by Perdry~\cite[Section~2]{perdry:...}."
+- Do Noetherian Modules Have Noetherian Basis Functions?
+  Peter Schuster & Júlia Zappe
 
 THANKS
 audiences where work has been presented:
