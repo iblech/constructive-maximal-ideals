@@ -362,6 +362,68 @@ is the localization of (the constant sheaf associated to) a given ring at its
 \emph{generic filter}~\cite[Section~3.3]{blechschmidt:generalized-spaces}.
 
 
+\subsubsection{Interaction with Noetherian hypotheses}
+
+In classical mathematics, a ring is \emph{Noetherian} if and only if every
+infinite ascending sequence
+\[ \aaa_0 \subseteq \aaa_1 \subseteq \aaa_2 \subseteq \cdots \]
+of ideals \emph{stabilizes} in that there is an index~$n$ such that~$\aaa_n =
+\aaa_{n+1} = \cdots$. In particular, the construction of a maximal ideal as the
+ascending union of the approximations~$\mmm_n$ already levels off at a finite
+stage. Constructively, we can reproduce a small fragment of this
+finiteness property.
+
+More precisely, in constructive mathematics, the notion of Noetherian ring
+splinters into several inequivalent notions~\cite{XXX}. Common to most of them
+is that firstly they refer only to finitely generated ideals and that secondly
+stabilization is weakened to \emph{stalling}: For instance, the
+Richman--Seidenberg condition~\cite{XXX} is that every infinite ascending chain
+$\aaa_0 \subseteq \aaa_1 \subseteq \cdots$ of finitely generated ideals
+\emph{stalls} in that there is an index~$n$ such that~$\aaa_n = \aaa_{n+1}$.
+Related conditions allow for different kinds of collections of ideals, for
+instance trees~\cite{XXX}, processes~\cite[Section~3.9]{blechschmidt:phd} or
+sheaves of sequences, but keep these two restrictions, for without them not
+even the ring of integers would be provably Noetherian.
+
+Since the approximations~$\mmm_n$ can fail to be finitely generated, these
+Noetherian conditions do not apply to the construction of a maximal ideal.
+However, even with a properness test as in Proposition~\ref{prop:with-test}
+which ensures that they are, their effect of guaranteeing stalling is not of
+much use: In typical situations, it is common that~$\mmm_n = \mmm_{n+1}$
+without~$\mmm_n$ coinciding with the limit~$\bigcup_k \mmm_k$.
+
+We could ``speed up'' the construction, skipping steps which do not add a new
+generator. It is somewhat remarkable that we can do so constructively, even
+without a properness test, by setting
+\begin{align*}
+  \mmm'_0 &\defeq \{ 0 \} \\
+  \mmm'_{n+1} &\defeq \mmm'_n + (\{ x_k \,|\,
+    k \in I_n \wedge (\forall \ell \in I_n\_ k \leq \ell) \}), \\
+  &\qquad\qquad\text{where $I_n \defeq \{ k \in \NN \,|\, 1 \not\in \mmm'_n +
+  (x_k) \wedge x_k \not\in \mmm'_n \}$.}
+\end{align*}
+The modified sequence~$\mmm'_0 \subseteq \mmm'_1 \subseteq \cdots$ stalls only
+when it stabilizes. However, even with a properness test, by speeding up we lose
+finite generation of the approximations as we cannot. Hence the classical
+finiteness property is not reproduced in a strong sense.
+
+For the exceptional \emph{anonymous} Noetherian condition, stating that every
+ideal is \emph{not~not} finitely generated, there is the following result.
+
+\begin{proposition}\label{prop:fin-anon}If the ring~$A$ is anonymously
+Noetherian, it is \emph{not~not} the case that there exists a number~$n \in
+\NN$ such that~$\mmm = \mmm_n$.\end{proposition}
+
+\begin{proof}If the ideal~$\mmm$ is finitely generated, then clearly such a
+number~$n$ exists. The claim follows from the double contrapositive of this
+implication.
+\end{proof}
+
+The scope of Proposition~\ref{prop:fin-anon} includes the structure sheaf of
+the spectrum of reduced
+rings~\cite[Proposition~34]{blechschmidt:generalized-spaces}.
+
+
 \section{On the intersection of all prime ideals}
 
 Classically, Krull's lemma states that the intersection of all prime ideals is the
