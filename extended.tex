@@ -257,6 +257,9 @@ Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$
 assumption regarding decidability of reducibility has to be made, but in return
 the resulting fields are only residue fields.\end{example}
 
+
+\subsubsection{Recovering the original construction}
+
 If we can decide whether a finitely generated ideal contains the
 unit or not, we can improve on Corollary~\ref{cor:is-prime-max}(a). For instance this is the case for
 strongly discrete rings such as the ring~$\ZZ$, more generally for the ring of
@@ -307,7 +310,10 @@ finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
 if~$\varphi \vee \neg\varphi$.
 
-\begin{remark}\label{rem:via-generators}There is an equivalent description of the
+
+\subsubsection{A more economical description using generators}
+
+There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
 intermediate ideals~$\mmm_n$:
 \begin{align*}
@@ -315,26 +321,36 @@ intermediate ideals~$\mmm_n$:
   G_{n+1} &\defeq G_n \cup \{ x_n \,|\, 1 \not\in (G_n \cup \{ x_n \}) \}
 \end{align*}
 An induction establishes the relation~$(G_n) = \mmm_n$; setting~$G \defeq
-\bigcup_{n\in\NN} G_n$, the analogue of Lemma~\ref{lemma:omnibus}(c) states
-that for every number~$n \in \NN$, the following are equivalent:
-(1)~$x_n \in G_{n+1}$.
-(2)~$x_n \in G$.
-(3)~$1 \not\in (G) + (x_n)$.
-(4)~$1 \not\in (G_n) + (x_n)$.
+\bigcup_{n\in\NN} G_n$, there is the following analogue of
+Lemma~\ref{lemma:omnibus}(c).
+
+\begin{lemma}\label{lemma:via-generators}For for every number~$n \in \NN$, the following are equivalent:
+\begin{enumerate}
+\item[(1)] $x_n \in G_{n+1}$.
+\item[(2)] $x_n \in G$.
+\item[(3)] $1 \not\in (G) + (x_n)$.
+\item[(4)] $1 \not\in (G_n) + (x_n)$.
+\end{enumerate}
+\end{lemma}
 
 In particular, not only do we have that~$(G) = \mmm$, but~$G$ itself is already
 an ideal. This description of~$\mmm$ is in a sense more ``economical'' as the
 intermediate stages~$G_n$ are smaller (not yet being ideals), enabling
 arithmetization in Section~\ref{sect:arithmetization}.
-\end{remark}
+
+
+\subsubsection{Generalization to the subcountable case}
 
 \newcommand{\rightrightharpoonup}{\mathrel{\mathrlap{\rightharpoonup}\mkern1mu\rightharpoonup}}
-\begin{remark}All results in this section carry over mutatis mutandis if~$A$ is
+All results in Section~\ref{sect:constr} carry over mutatis mutandis if~$A$ is
 only assumed to be subcountable, that is, if we are only
-given a \emph{partially defined} surjection~$\NN \rightrightharpoonup A$. In
+given a \emph{partially defined} surjection~$\NN \rightrightharpoonup A$.
+
+In
 this case, we are given an enumeration~$x_0,x_1,\ldots$ where some~$x_i$
 might not be defined; we then define~$\mmm_{n+1} \defeq
 \mmm_n + (\{ x_n \,|\, \text{$x_n$ is defined} \wedge 1 \not\in \mmm_n + (x_n) \})$.
+
 The generalization to the subcountable case is particularly useful in the
 Russian tradition of constructive mathematics as exhibited by the ef{}fective
 topos~\cite{hyland:effective-topos,oosten:realizability,phoa:effective,bauer:c2c},
