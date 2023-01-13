@@ -620,7 +620,7 @@ proof~\cite{friedman:trick,murthy:classical-proofs,barr:without-points,blechschm
 \end{remark}
 
 
-\section{In Heyting arithmetic}
+\section{Formalization in weaker foundations}
 \label{sect:arithmetization}
 
 The construction presented in Section~\ref{sect:constr} crucially rests on the
@@ -697,7 +697,7 @@ related work~\cite[p.~11]{herbelin-ilik:henkin}.
 The issue does not arise in the context of~\textsc{pa}, where the law of
 excluded middle allows us to bound the logical complexity: We can blithely define
 the joint indicator function~$g(n,i)$ for the sets~$G_n$ (such that~$G_n = \{
-x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Remark~\ref{rem:via-generators} by the recursion
+x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Lemma~\ref{lemma:via-generators} by the recursion
 \begin{align*}
   g(0,i) &= 0 \\
   g(n+1,i) &= \begin{cases}
@@ -712,7 +712,7 @@ Heyting arithmetic, however, does not support this case distinction. The
 formalization of the construction in~\textsc{ha} is only unlocked by the following
 direct characterization.
 
-\begin{lemma}\label{lemma:uniform-char}(In the situation of Remark~\ref{rem:via-generators}.)
+\begin{lemma}\label{lemma:uniform-char}(In the situation of Lemma~\ref{lemma:via-generators}.)
 For every finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
 \defeq (v_0x_0,\ldots,v_{n-1}x_{n-1},x_n)$. Then:
 \begin{enumerate}
@@ -730,7 +730,7 @@ In particular, in this case~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \end{lemma}
 
 \begin{proof}The first part is by induction, employing the equivalences of
-Remark~\ref{rem:via-generators}. The second rests on the tautology
+Lemma~\ref{lemma:via-generators}. The second rests on the tautology
 $\neg\alpha \Longleftrightarrow \neg(\alpha \wedge (\varphi \vee \neg\varphi))$:
 
 \vspace*{-1.2em}\small
