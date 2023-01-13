@@ -17,7 +17,7 @@
 
 \begin{document}
 
-\title{Maximal ideals in countable rings, constructively}
+\title{Reifying dynamical algebra: \\ maximal ideals in countable rings, constructively}
 \author{Ingo Blechschmidt\inst{1} \and Peter Schuster\inst{2}}
 \institute{Universität Augsburg, Universitätsstr. 14, 86159 Augsburg, Germany
 \email{ingo.blechschmidt@math.uni-augsburg.de}
@@ -72,20 +72,25 @@ Gödel's completeness theorem for countable languages, successively adding
 formulas which do not render the current set
 inconsistent~\cite[Satz~I.56]{tarski:fundamental},~\cite[Lemma~1.5.7]{dalen:logic},~\cite[Lemma~III.5.4]{simpson:subsystems},~\cite[Lemma~2.1]{ishihara-khoussainov-nerode:decidable-kripke-models}.
 
-This procedure avoids any form of choice by virtue of being a
+This procedure avoids all forms of choice by virtue of being a
 functional recursive definition, but still requires some form of omniscience in
 order to carry out the case distinction.
 In the present text we study a variant of this construction, due to Berardi and
 Valentini~\cite{berardi-valentini:krivine}, which
-avoids any non-constructive principles and decidability assumptions, similar to
+avoids non-constructive principles and decidability assumptions, similar to
 a construction which has been studied by
 Krivine~\cite[p.~410]{krivine:completeness} and later Herbelin and
 Ilik~\cite[p.~11]{herbelin-ilik:henkin} in the
-context of Gödel's completeness theorem. In this generality, the resulting
-maximal ideal has an elusive quality to it, but useful properties can still be
+context of Gödel's completeness theorem.
+
+In this generality, the resulting
+maximal ideal has an elusive quality to it, but useful properties and positive information can still be
 extracted; and not only do we recover the original construction under certain
 decidability assumptions, we can also exploit a relativity phenomenon of
 mathematical logic in order to drop, with some caveats, the assumption that~$A$ is countable.
+
+We apply ... XXX
+
 
 \paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
 In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra}, we employ \emph{minimal
@@ -234,7 +239,7 @@ a residue field which also is a \emph{local ring}: if a finite
 sum is invertible then one of the summands is.
 
 \begin{example}If we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
-ideal~$\mmm$ coincides with~$(2)$. If the enumeration starts with a
+ideal~$\mmm$ coincides with the ideal~$(2)$. If the enumeration starts with a
 prime~$p$, the ideal~$\mmm$ coincides with~$(p)$.\end{example}
 
 \begin{example}If~$A$ is a local ring with group of units~$A^\times$, then~$\mmm = A \setminus A^\times$.\end{example}
@@ -244,7 +249,9 @@ arbitrary ideal~$\aaa$ as~$\mmm_0$ instead of the zero ideal. All results in
 this section remain valid once ``not~$\varphi$'' is redefined
 as~``$\varphi \Rightarrow 1\in\aaa$''; the resulting ideal~$\mmm$ is then a
 maximal ideal above~$\aaa$; it is proper in the sense that~$1 \in \mmm
-\Rightarrow 1 \in \aaa$. It can also be obtained by applying the original
+\Rightarrow 1 \in \aaa$, so ``equiconsistent with~$\aaa$''.
+
+The resulting ideal~$\mmm$ can also be obtained by applying the original
 version of the construction in the quotient ring~$A/\aaa$ (which is again
 countable) and taking the inverse image of the resulting ideal along the
 canonical projection~$A \to A/\aaa$.\end{example}
@@ -253,9 +260,10 @@ canonical projection~$A \to A/\aaa$.\end{example}
 polynomial. Since~$f$ is monic, it is not invertible; thus
 Example~\ref{ex:maximal-above} shows that there is a maximal ideal~$\mmm$
 above~$(f)$. Hence~$A[X]/\mmm$ is a field in which~$f$ has a zero, namely the equivalence class of~$X$.
+
 Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$. No
 assumption regarding decidability of reducibility has to be made, but in return
-the resulting fields are only residue fields.\end{example}
+the resulting field is only a residue field.\end{example}
 
 
 \subsubsection{Recovering the original construction}
@@ -324,7 +332,7 @@ An induction establishes the relation~$(G_n) = \mmm_n$; setting~$G \defeq
 \bigcup_{n\in\NN} G_n$, there is the following analogue of
 Lemma~\ref{lemma:omnibus}(c).
 
-\begin{lemma}\label{lemma:via-generators}For for every number~$n \in \NN$, the following are equivalent:
+\begin{lemma}\label{lemma:via-generators}For every number~$n \in \NN$, the following are equivalent:
 \begin{enumerate}
 \item[(1)] $x_n \in G_{n+1}$.
 \item[(2)] $x_n \in G$.
