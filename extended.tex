@@ -414,10 +414,11 @@ without a properness test, by setting
 \end{align*}
 The modified sequence~$\mmm'_0 \subseteq \mmm'_1 \subseteq \cdots$ stalls only
 when it stabilizes. However, even with a properness test, by speeding up we lose
-finite generation of the approximations as we cannot. Hence the classical
+finite generation of the approximations as we cannot determine whether~$I_n$ is
+empty or inhabited. Hence the classical
 finiteness property is not reproduced in a strong sense.
 
-For the peculiar \emph{anonymous} Noetherian condition~\cite[Definition~3.27]{blechschmidt:phd}, stating that every
+For the peculiar \emph{anonymous} Noetherian condition~\cite[Definition~3.27]{blechschmidt:phd}, postulating that every
 ideal is \emph{not~not} finitely generated, there is the following result.
 
 \begin{proposition}\label{prop:fin-anon}If the ring~$A$ is anonymously
@@ -712,7 +713,7 @@ x_i \,|\, i \in \NN, g(n,i) = 1 \}$) of Lemma~\ref{lemma:via-generators} by the 
   g(0,i) &= 0 \\
   g(n+1,i) &= \begin{cases}
     1, & \text{if $g(n,i) = 1 \vee (i = n \wedge 1 \not\in
-    (g(n,0)x_0,\ldots,g(n,n-1)x_{n-1},x_n))$} \\
+    (g(n,0)x_0,\ldots,g(n,n{-}1)x_{n-1},x_n))$} \\
     0, & \text{else.}
   \end{cases}
 \end{align*}
