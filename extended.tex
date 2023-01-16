@@ -1000,8 +1000,13 @@ Lukas Stoll and the three anonymous reviewers.
 
 This section generalizes the construction of Section~\ref{sect:constr} from
 countable rings to arbitrary countable sets equipped with an abstract
-\emph{inconsistency predicate} on their powerset. In a second step, we relax
-the countability assumption to a more general well-foundedness requirement.
+\emph{inconsistency predicate} on their powerset. Abstract inconsistency
+predicates are a common generalization of predicates such as ``the given ideal is
+improper'', ``the given set of vectors is linearly dependent'' and ``the given
+set of first-order formulas is inconsistent''; they help to present the
+central aspects of the construction of Section~\ref{sect:constr} more tidily.
+In a second step, we relax the countability assumption to a more general
+well-foundedness requirement.
 
 
 \subsubsection{Abstract inconsistency predicates}
@@ -1065,12 +1070,12 @@ Construction~\ref{constr:inc}.)
 \item[(b)] For every number~$n$, the following are equivalent: \\
 (1) $x_n \in A_{n+1}$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg O(A{\cup}\{x_n\})$. \quad
+(3) $\neg O(A\cup\{x_n\})$. \quad
 (4) $\neg O(A_n \cup \{x_n\})$.
 \end{enumerate}\end{lemma}
 
 \begin{proof}For claim~(a), we verify by induction on~$n \in \NN$ that~$\neg
-O(A_n)$. The result then follows because~$O$ splits directed joins.
+O(A_n)$. The result then follows because~$O$ splits the directed join~$\bigcup_n A_n$.
 
 The case~$n = 0$ is trivial. For the induction step~$n \to n+1$,
 assume~$O(A_{n+1})$. Since~$A_{n+1} \subseteq A_n \cup \{x_n\}$, we have~$O(A_n
@@ -1122,12 +1127,18 @@ span. In this sense countable vector spaces ``almost'' have a basis.
 
 \subsubsection{The well-founded case}
 
-Fundamental to Construction~\ref{constr:inc} is its step-by-step nature, the
-elements are inspected one-by-one. If an infinite sequence of elements does not
-suffice to exhaust the set, it is conceivable to take a limit step and continue
+Fundamental to Construction~\ref{constr:inc} is its step-by-step nature,
+requiring that the elements are presented in a single infinite sequence.
+If a single such sequence does not
+suffice to exhaust all elements, it is conceivable to take a limit step and continue
 sequentially from then on.
 
-Let~$(I,{<})$ be a well-ordering, that is a set~$I$ equipped with a XXX
+Let~$I$ be a well-ordering, that is a set equipped with a relation~$({<})$ such
+that constructions by transfinite recursion and proofs by induction are
+possible~\cite{XXX}. Further assume that~$I$ itself and that for every~$n \in
+I$ the set~$\{ k \in I \,|\, k < n \}$ is conditionally directed: For every two
+elements of the set, an upper bound is also contained in the set. This
+requirement is for instance met in case that~$({<})$ is a linear order.
 
 \begin{construction}\label{constr:inc-wf}Let~$X$ be a set equipped with
 an inconsistency predicate~$O$. Let~$X$ be an image of~$I$, writing~$X = \{ x_n
@@ -1141,12 +1152,11 @@ where~$A_{<n} \defeq \bigcup_{k < n} A_k$, and set~$A \defeq \bigcup_{n \in I} A
 \begin{lemma}\label{lemma:omnibus-inc-wf}(In the situation of
 Construction~\ref{constr:inc-wf}.)
 \begin{enumerate}
-\item[(a)] The set~$A$ is consistent: If~$O(A)$, then
-also~$O(\emptyset)$.
+\item[(a)] The set~$A$ is consistent: $\neg O(A)$.
 \item[(b)] For every index~$n \in I$, the following are equivalent: \\
 (1) $x_n \in A_n$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg O(A{\cup}\{x_n\})$. \quad
+(3) $\neg O(A\cup\{x_n\})$. \quad
 (4) $\neg O(A_{<n} \cup \{x_n\})$.
 \end{enumerate}\end{lemma}
 
@@ -1165,6 +1175,12 @@ are done); or~$O(A_k)$ for some~$k < n$ (in which case we are done by the
 inductive hypothesis); or~$O(X)$ together with the information
 that~$O(\emptyset)$ (so we are done as well).
 \end{proof}
+
+\begin{theorem}\label{thm:max-inc-wf}Let~$X$ be a set equipped
+with an inconsistency predicate. Assume that~$X$ is an image of~$I$.
+Then~$X$ contains a maximal consistent subset.\end{theorem}
+
+\begin{proof}As the proof of Theorem~\ref{thm:max-inc-countable}.\end{proof}
 
 \bibliographystyle{splncs04}
 \bibliography{extended}
