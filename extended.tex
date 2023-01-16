@@ -1120,7 +1120,51 @@ span. In this sense countable vector spaces ``almost'' have a basis.
 \end{enumerate}
 
 
+\subsubsection{The well-founded case}
 
+Fundamental to Construction~\ref{constr:inc} is its step-by-step nature, the
+elements are inspected one-by-one. If an infinite sequence of elements does not
+suffice to exhaust the set, it is conceivable to take a limit step and continue
+sequentially from then on.
+
+Let~$(I,{<})$ be a well-ordering, that is a set~$I$ equipped with a XXX
+
+\begin{construction}\label{constr:inc-wf}Let~$X$ be a set equipped with
+an inconsistency predicate~$O$. Let~$X$ be an image of~$I$, writing~$X = \{ x_n
+\,|\, n \in I \}$. Let~``$\neg\varphi$'' mean~``$\varphi \Rightarrow
+O(\emptyset)$''. Without appealing to any form of choice, we define by
+transfinite recursion
+\[ A_n \defeq A_{<n} \cup \bigl\{ x_n \,|\, \neg O(A_{<n}\cup\{x_n\}) \bigr\}, \]
+where~$A_{<n} \defeq \bigcup_{k < n} A_k$, and set~$A \defeq \bigcup_{n \in I} A_n$.
+\end{construction}
+
+\begin{lemma}\label{lemma:omnibus-inc-wf}(In the situation of
+Construction~\ref{constr:inc-wf}.)
+\begin{enumerate}
+\item[(a)] The set~$A$ is consistent: If~$O(A)$, then
+also~$O(\emptyset)$.
+\item[(b)] For every index~$n \in I$, the following are equivalent: \\
+(1) $x_n \in A_n$. \quad
+(2) $x_n \in A$. \quad
+(3) $\neg O(A{\cup}\{x_n\})$. \quad
+(4) $\neg O(A_{<n} \cup \{x_n\})$.
+\end{enumerate}\end{lemma}
+
+\begin{proof}The proof of Lemma~\ref{lemma:omnibus-inc} carries over almost
+verbatim. The argument that~$\neg O(A_n)$ for every index~$n \in I$ is now by
+transfinite induction and requires some adaptation.
+
+Assuming that~$\neg O(A_k)$ for all~$k < n$, we verify that~$\neg O(A_n)$. So
+assume~$O(A_n)$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$O(A_{<n}
+\cup \{x_n\})$ by monotonicity. Thus~$A_n = A_{<n} \cup
+\{x_n\,|\,O(\emptyset)\}$ and hence
+\[ A_n \subseteq \bigcup\,\bigl(\{ \emptyset \} \cup \{ A_k \,|\, k < n \} \cup
+\{ X \,|\, O(\emptyset) \}\bigr). \]
+Because~$O$ splits directed joins, we obtain~$O(\emptyset)$ (in which case we
+are done); or~$O(A_k)$ for some~$k < n$ (in which case we are done by the
+inductive hypothesis); or~$O(X)$ together with the information
+that~$O(\emptyset)$ (so we are done as well).
+\end{proof}
 
 \bibliographystyle{splncs04}
 \bibliography{extended}
