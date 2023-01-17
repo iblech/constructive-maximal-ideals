@@ -107,7 +107,7 @@ exploring, in Section~\ref{sect:krull}, several established test cases for
 Hilbert's program in commutative algebra. Among them is the following
 (Proposition~\ref{prop:surj-matrix}):
 \begin{quote}\small
-\textbf{Proposition.} Let~$M \in A^{n \times m}$ be a matrix with more rows
+\textbf{Proposition.} Let~$A$ be a ring. Let~$M \in A^{n \times m}$ be a matrix with more rows
 than columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
 Then~$1 = 0$ in~$A$.
 \smallskip
@@ -122,9 +122,9 @@ technique in commutative algebra---and wholly unconstructive. Is there also a
 direct computational argument?
 
 Since the statement of the proposition is, for fixed matrix dimensions, a
-coherent sequent (over the signature of commutative rings), the completeness
+coherent sequent (in the language of rings), the completeness
 theorem for coherent logic implies a priori that there exists a proof in
-coherent logic, so in particular a constructive proof. The completeness
+coherent logic, hence in particular a constructive proof. The completeness
 theorem, however, rests on the Boolean Prime Ideal Theorem, a version of the
 axiom of choice. Do we actually know a direct computational argument?
 
@@ -134,18 +134,20 @@ Yes:
 \emph{Proof.} (case~$n = 2$, $m = 1$ only) Write~$M =
 \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)$. By surjectivity,
 there are ring elements~$u, v$ with
-\[
+$
   u \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)
-  \quad\text{and}\quad
-  v \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}0\\1\end{smallmatrix}\right).
-\]
+$
+and
+$
+  v \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)
+$.
 Hence $1 = (vy) (ux) = (uy) (vx) = 0$.
 \end{quote}
 
 The challenge in mathematical logic is to extract a direct computational
 argument from the given classical proof, and for this particular example
-several techniques meet this challenge. Section~\ref{sect:krull} shows that
-also the explicit maximal ideal construction can be used to this end---assuming
+there are several techniques which meet this challenge. Section~\ref{sect:krull} shows that
+also the explicit maximal ideal construction of Section~\ref{sect:constr} can be used to this end---assuming
 that the ring is countable.
 
 
@@ -185,15 +187,15 @@ it is an element of. Any element~$x$ can become invertible by passing from the
 base ring~$A$ to the localization~$A[x^{-1}]$.}
 The process of traveling to this extension is called \emph{Lévy collapse}. Set
 theorists have used this technique and other forcing models with great success
-in order to explore the range of set-theoretic possibility. However, they work
-in a classical setting without issues of constructivity in mind.
+in order to explore the range of set-theoretic possibility. However, they can
+also be used to deduce results about the base universe.
 
-To apply the iterative step-by-step construction of a maximal ideal to a
+More precisely, to apply the iterative step-by-step construction of a maximal ideal to a
 ring~$A$ which might not be countable in a constructive setting, we employ a
 constructive variant of Lévy collapse due to Joyal and
 Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}: Given the ring~$A$, there
 is an extension of the universe---a certain sheaf topos with a concrete
-computational interpretation---in which~$A$ appears countable; this extended
+computational interpretation---in which the ring~$A$ appears countable; this extended
 universe contains what is called the \emph{generic surjection} from~$\NN$
 to~$A$. We can then apply the iterative construction in this extended universe
 to obtain a maximal ideal of~$A$ there; from the point of view of the base
@@ -201,9 +203,19 @@ universe, we will not actually have constructed an ideal of~$A$ but rather a
 ``sheaf of ideals of the constant sheaf associated to~$A$''.
 
 Crucially, the passage to such an extension preserves and reflects
-first-order logic. Hence we have the metatheorem that \emph{countability
+first-order logic.\footnote{This property is well-known for classical
+set-theoretic forcing. Constructively, it is a property enjoyed only by some
+particular forcing notions. In topos-theoretic language, the canonical
+geometric morphism from any Grothendieck topos to the base topos is open
+if the base satisfies the law of excluded middle, so any Grothendieck topos is
+ouvert. In contrast, ouvertness is a nontrivial property if the law of excluded
+middle is not available. We are grateful to Robert Lubarsky for pointing out
+this difference to classical forcing to us.}
+Hence we have the metatheorem that
+\begin{quote}\emph{countability
 assumptions from intuitionistic proofs of first-order statements can always be
-mechanically eliminated:} If our aim is to verify some first-order
+mechanically eliminated:}\end{quote}
+If our aim is to verify some first-order
 statement~$P$ about a perhaps uncountable ring~$A$, such as the statement about
 surjective matrices above, we may just as well assume that~$A$ is countable,
 because it actually will be in the extended universe and because every
@@ -230,7 +242,7 @@ ideal are true even if no actual maximal ideal can be constructed.
 
 \subsubsection{Connection with dynamical algebra}
 
-In Section~\ref{sect:wlog} we also turn to the general toolbox of dynamical
+In Section~\ref{sect:dynalg} we turn to the general toolbox of dynamical
 algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its
 independent inventions by Dominique Duval and Paul
 Lorenzen, this toolbox has been widely
@@ -250,18 +262,18 @@ axiom of choice, there exists a maximal ideal~$\mmm$. By (\ldots computation
 and arguments\ldots\!), we obtain that~$1 \in \mmm$. This is a contradiction.
 Hence~$1 = 0$.\end{quote}
 
-The aim is to extract a direct computational argument that~$1 = 0$ from such a
-classical proof. To this end, the toolbox of dynamical algebra suggests a
+The aim is to extract from such a classical proof a direct computational argument that~$1 = 0$.
+To this end, the toolbox of dynamical algebra suggests a
 \emph{dynamical rereading} of the given proof. Instead of appealing to the
 transfinite in order to concoct a completed maximal ideal~$\mmm$, we make do
 with finitely generated approximations to a maximal ideal, starting out with
 the zero ideal~$\aaa = (0)$ and repeatedly refining this approximation over the
 course of the proof.
 
-The fundamental property of a maximal ideal~$\mmm$ is that for every ring
+Classically, the fundamental property of a maximal ideal~$\mmm$ is that for every ring
 element~$x$, either~$x \in \mmm$ or~$1 \in \mmm + (x)$. When the given classical
 proof appeals to this property, we tentatively refine the current
-approximation from~$\aaa$ to~$\aaa + (x)$, pretend that the first alternative
+approximation from~$\aaa$ to~$\aaa + (x)$, pretending that the first alternative
 holds, and resume the proof. When the proof reaches the conclusion~$1 \in
 \mmm$, we have learnt the positive information that~$1 \in \aaa + (x)$.
 Armed with this information, we reset the current approximation back to~$\aaa$
@@ -285,7 +297,8 @@ combination of
 \begin{enumerate}
 \item[(1)] the iterative construction of a maximal ideal, applied to the
 generic enumeration, and
-\item[(2)] Friedman's continuation trick as in Barr's theorem.
+\item[(2)] the double-negation translation followed by Friedman's continuation
+trick as in Barr's theorem.
 \end{enumerate}
 \end{quote}
 In this way we \emph{reify dynamical algebra}.
@@ -416,7 +429,7 @@ by Lemma~\ref{lemma:omnibus}(c) membership of~$\mmm$ is a negative condition
 and~$\neg\neg\neg\varphi \Rightarrow \neg\varphi$ is a tautology of minimal
 logic.\end{remark}
 
-This first-order maximality condition is  % of Proposition~\ref{prop:is-maximal} is
+This first-order maximality condition of Corollary~\ref{cor:is-prime-max}(a) is
 equivalent~\cite{berardi-valentini:krivine} to the following higher-order version: For every ideal~$\nnn$ such that~$1
 \not\in \nnn$, if~$\mmm \subseteq \nnn$, then~$\mmm = \nnn$.
 
@@ -805,7 +818,7 @@ Then~$1 = 0$.
 
 \begin{proof}By passing to the quotient~$A/\mmm$, we may assume that~$A$ is a
 residue field. In this case the claim is standard linear algebra:
-%
+
 If any of the matrix entries
 is invertible, the matrix could be transformed by elementary row and
 column operations to a matrix of the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
