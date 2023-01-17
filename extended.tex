@@ -85,7 +85,7 @@ inconsistent~\cite[Satz~I.56]{tarski:fundamental},~\cite[Lemma~1.5.7]{dalen:logi
 This procedure avoids all forms of choice by virtue of being a
 functional recursive definition, but still requires some form of omniscience in
 order to carry out the case distinction.
-In the present text we study a variant of this construction, due to Berardi and
+In Section~\ref{sect:constr} we study a variant of this construction, due to Berardi and
 Valentini~\cite{berardi-valentini:krivine}, which
 avoids non-constructive principles and decidability assumptions, similar to
 a construction which has been studied by
@@ -101,11 +101,89 @@ decidability assumptions.
 %EXAMPLE
 %
 %well-founded, abstract inconsistency predicate
-%
-%what about uncountable? expl. of Sect. 4
-%we can also exploit a relativity phenomenon of
-%mathematical logic in order to drop, with some caveats, the assumption that the ring~$A$ is countable.
-%
+
+
+\subsubsection{Generalization to the uncountable case}
+
+What if the ring~$A$ is not countable, or if the ring~$A$ is countable but
+an enumeration~$\NN \twoheadrightarrow A$ is computationally expensive to
+evaluate?
+
+In absence of the axiom of choice, some restriction on the
+rings is required, as it is well-known that the statement that any nontrivial
+ring has a maximal ideal implies (over Zermelo--Fraenkel set
+theory~\textsc{zf}) the axiom of choice~\cite{scott:prime-ideals,hodges:krull,banaschewski:krull,erne:krull,howard-rubin:ac}.
+However, this limitation only pertains to the abstract existence of maximal
+ideals, not to concrete consequences of their existence. Mathematical
+logic teaches us by way of diverse examples to not conflate these two concerns.
+
+For
+instance, although~\textsc{zf} does not prove the axiom of choice, it does
+prove every theorem of~\textsc{zfc} pertaining only to natural numbers (by
+interpreting a given~\textsc{zfc}-proof in the constructible universe~$L$
+and exploiting that the natural numbers are absolute between~$V$
+and~$L$~\cite{goedel:ac-gch,schoenfield:predicativity}); similarly, although intuitionistic Zermelo--Fraenkel set
+theory~\textsc{izf} does not prove the law of excluded middle, it does prove
+every~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
+combined with Friedman's continuation trick~\cite{friedman:double-negation-translation}).
+
+A similar phenomenon concerns countability.
+Set theory teaches us that
+whether a given set is countable depends not only on the set itself, but is
+more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
+set~$M$, there is a forcing extension of the universe in which~$M$ becomes
+countable.\footnote{An analogous situation in commutative algebra is the
+following. Whether a ring element~$x$ is invertible not only depends
+on the element itself, but is more aptly regarded as a property of the ring~$A$
+it is an element of. Any element~$x$ can become invertible by passing from the
+base ring~$A$ to the localization~$A[x^{-1}]$.}
+The process of traveling to this extension is called \emph{Lévy collapse}. Set
+theorists have used this technique and other forcing models with great success
+in order to explore the range of set-theoretic possibility. However, they work
+in a classical setting without issues of constructivity in mind.
+
+To apply the iterative step-by-step construction of a maximal ideal to a
+ring~$A$ which might not be countable in a constructive setting, we employ a
+constructive variant of Lévy collapse due to Joyal and
+Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}: Given the ring~$A$, there
+is an extension of the universe---a certain sheaf topos with a concrete
+computational interpretation---in which~$A$ appears countable; this extended
+universe contains what is called the \emph{generic surjection} from~$\NN$
+to~$A$. We can then apply the iterative construction in this extended universe
+to obtain a maximal ideal of~$A$ there; from the point of view of the base
+universe, we will not actually have constructed an ideal of~$A$ but rather a
+``sheaf of ideals of the constant sheaf associated to~$A$''.
+
+Crucially, the passage to such an extension preserves and reflects
+first-order logic. Hence we have the metatheorem that \emph{countability
+assumptions from intuitionistic proofs of first-order statements can always be
+mechanically eliminated:} If our aim is to verify some first-order
+statement~$P$ about a perhaps uncountable ring~$A$, such as the statement about
+surjective matrices above, we may just as well assume that~$A$ is countable,
+because it actually will be in the extended universe and because every
+first-order property which holds there will also hold for~$A$ in the base
+universe.
+
+We present details of this technique in Section~\ref{sect:wlog}. Unlike
+Joyal and Tierney, who pursued a semantic approach employing the language of
+toposes, our presentation is purely syntactical and explicitly computational in
+nature. No familiarity with categories, sheaves or toposes is required.
+
+Summarizing, our approach strengthens the view of maximal ideals as convenient
+fictions~\cite[Section~1]{schuster-wessel:krull}. Maximal ideals can carry out
+their work by any of the following possibilities:
+\begin{enumerate}
+\item[(1)] For countable (or well-founded) rings, no help is required.
+Section~\ref{sect:constr} presents an explicit construction of a maximal ideal.
+\item[(2)] For arbitrary rings, the existence of a maximal ideal follows from the
+axiom of choice.
+\item[(3)] Intuitionistic first-order consequences of the existence of a maximal
+ideal are true even if no actual maximal ideal can be constructed.
+\end{enumerate}
+
+
+\subsubsection{Connection with dynamical algebra}
+
 %The second topic of this paper is the general toolbox of dynamical
 %algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its multiple
 %independent inventions by Dominique Duval and Paul
@@ -809,24 +887,6 @@ arithmetic, uniformly in~$n$.
 
 % other forcing
 
-The construction in Section~\ref{sect:constr} of a maximal ideal applies to
-countable rings. In absence of the axiom of choice, some restriction on the
-rings is required, as it is well-known that the statement that any nontrivial
-ring has a maximal ideal implies (over Zermelo--Fraenkel set
-theory~\textsc{zf}) the axiom of choice~\cite{scott:prime-ideals,hodges:krull,banaschewski:krull,erne:krull,howard-rubin:ac}.
-
-However, this limitation only pertains to the abstract existence of maximal
-ideals, not to concrete consequences of their existence. Mathematical
-logic teaches us by way of diverse examples to not conflate these two concerns. For
-instance, although~\textsc{zf} does not prove the axiom of choice, it does
-prove every theorem of~\textsc{zfc} pertaining only to natural numbers (by
-interpreting a given~\textsc{zfc}-proof in the constructible universe~$L$
-and exploiting that the natural numbers are absolute between~$V$
-and~$L$~\cite{goedel:ac-gch,schoenfield:predicativity}); similarly, although intuitionistic Zermelo--Fraenkel set
-theory~\textsc{izf} does not prove the law of excluded middle, it does prove
-every~$\Pi^0_2$-theorem of~\textsc{zf} (by the double negation translation
-combined with Friedman's continuation trick~\cite{friedman:double-negation-translation}).
-A similar phenomenon concerns countability, as follows.
 
 
 \subsubsection{A metatheorem by Joyal and Tierney}
@@ -871,15 +931,6 @@ this statement.
 The metatheorem expands the applicability of the construction of
 Section~\ref{sect:constr} and underscores the value of its intuitionistic
 analysis---the metatheorem cannot be applied to eliminate countability assumptions from classical proofs.
-Taken together, they strengthen the
-view of maximal ideals as convenient fictions~\cite[Section~1]{schuster-wessel:krull}. Maximal ideals can
-carry out their work by any of the following possibilities:
-(1)~For countable (or well-founded) rings, no help is required.
-Section~\ref{sect:constr} presents an explicit construction of a maximal ideal.
-(2)~For arbitrary rings, the existence of a maximal ideal follows from the
-axiom of choice.
-(3)~Intuitionistic first-order consequences of the existence of a maximal
-ideal are true even if no actual maximal ideal can be constructed.
 
 
 \subsubsection{Unsorted}
