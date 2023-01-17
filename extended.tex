@@ -204,12 +204,13 @@ axiom of choice, there exists a maximal ideal~$\mmm$. By (\ldots computation
 and arguments\ldots\!), we obtain that~$1 \in \mmm$. This is a contradiction.
 Hence~$1 = 0$.\end{quote}
 
-The aim is to extract a direct computational argument that~$1 = 0$ from such a classical
-proof. To this end, the toolbox of dynamical algebra suggests a \emph{dynamical rereading} of
-the given proof. Instead of appealing to the transfinite in order to concoct
-a completed maximal ideal~$\mmm$, we make do with finitely generated
-approximations to a maximal ideal, starting out with the zero ideal~$\aaa =
-(0)$ and repeatedly refining this approximation over the course of the proof.
+The aim is to extract a direct computational argument that~$1 = 0$ from such a
+classical proof. To this end, the toolbox of dynamical algebra suggests a
+\emph{dynamical rereading} of the given proof. Instead of appealing to the
+transfinite in order to concoct a completed maximal ideal~$\mmm$, we make do
+with finitely generated approximations to a maximal ideal, starting out with
+the zero ideal~$\aaa = (0)$ and repeatedly refining this approximation over the
+course of the proof.
 
 The fundamental property of a maximal ideal~$\mmm$ is that for every ring
 element~$x$, either~$x \in \mmm$ or~$1 \in \mmm + (x)$. When the given classical
@@ -1284,8 +1285,9 @@ Construction~\ref{constr:inc-wf}.)
 \end{enumerate}\end{lemma}
 
 \begin{proof}The proof of Lemma~\ref{lemma:omnibus-inc} carries over almost
-verbatim. The argument that~$\neg O(A_n)$ for every index~$n \in I$ is now by
-transfinite induction and requires some adaptation.
+verbatim. The only part which requires some adaptation is the verification
+that~$\neg O(A_n)$ for every index~$n \in I$. This verification now proceeds by
+transfinite induction.
 
 Assuming that~$\neg O(A_k)$ for all~$k < n$, we verify that~$\neg O(A_n)$. So
 assume~$O(A_n)$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$O(A_{<n}
@@ -1295,7 +1297,7 @@ assume~$O(A_n)$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$O(A_{<n}
 \{ X \,|\, O(\emptyset) \}\bigr). \]
 Because~$O$ splits directed joins, we obtain~$O(\emptyset)$ (in which case we
 are done); or~$O(A_k)$ for some~$k < n$ (in which case we are done by the
-inductive hypothesis); or~$O(X)$ together with the information
+induction hypothesis); or~$O(X)$ together with the information
 that~$O(\emptyset)$ (so we are done as well).
 \end{proof}
 
