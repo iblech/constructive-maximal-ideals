@@ -184,20 +184,64 @@ ideal are true even if no actual maximal ideal can be constructed.
 
 \subsubsection{Connection with dynamical algebra}
 
-%The second topic of this paper is the general toolbox of dynamical
-%algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its multiple
-%independent inventions by Dominique Duval and Paul
-%Lorenzen, this toolbox has been widely
-%successful in extracting computational content from classical proofs
-%appealing to the transfinite, including proofs of prominent theorems such as
-%Suslin's lemma~\cite{suslin:structure,yengui:maximal} or a theorem by
-%Becher~\cite{becher:csa}, a consequence of a theorem by Merkurjev.
-%
-%General idea of dyn. alg.
-%
-%Why only $1 = 0$?
-%
-%Reification of dyn. alg.: apply constr. to gen. surj.
+In Section~\ref{sect:wlog} we also turn to the general toolbox of dynamical
+algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its
+independent inventions by Dominique Duval and Paul
+Lorenzen, this toolbox has been widely
+successful in extracting computational content from classical proofs
+appealing to the transfinite, including proofs of prominent theorems such as
+Suslin's lemma~\cite{suslin:structure,yengui:maximal} or a theorem by
+Becher~\cite{becher:csa}, a consequence of a theorem by Merkurjev.
+
+The specific use case we are interested in concerns the wide class of classical
+commutative algebra proofs pursuing the following general outline:
+% NOTE FOR TYPESETTING: It is on purpose that we are not using the proof
+% environment here, as we are quoting these classical proofs as objects of
+% demonstration. We are not actually using these proofs in our development, we
+% are just referencing them.
+\begin{quote}\small Assume for the sake of contradiction that~$1 \neq 0$. Then, by the
+axiom of choice, there exists a maximal ideal~$\mmm$. By (\ldots computation
+and arguments\ldots\!), we obtain that~$1 \in \mmm$. This is a contradiction.
+Hence~$1 = 0$.\end{quote}
+
+The aim is to extract a direct computational argument that~$1 = 0$ from such a classical
+proof. To this end, the toolbox of dynamical algebra suggests a \emph{dynamical rereading} of
+the given proof. Instead of appealing to the transfinite in order to concoct
+a completed maximal ideal~$\mmm$, we make do with finitely generated
+approximations to a maximal ideal, starting out with the zero ideal~$\aaa =
+(0)$ and repeatedly refining this approximation over the course of the proof.
+
+The fundamental property of a maximal ideal~$\mmm$ is that for every ring
+element~$x$, either~$x \in \mmm$ or~$1 \in \mmm + (x)$. When the given classical
+proof appeals to this property, we tentatively refine the current
+approximation from~$\aaa$ to~$\aaa + (x)$, pretend that the first alternative
+holds, and resume the proof. When the proof reaches the conclusion~$1 \in
+\mmm$, we have learnt the positive information that~$1 \in \aaa + (x)$.
+Armed with this information, we reset the current approximation back to~$\aaa$
+and again follow the classical proof, now pretending that the second
+alternative holds. When the proof reaches the conclusion~$1 \in \mmm$ a second
+time, we have learnt that~$1 \in \aaa$. In this way we fold up branches of the
+proof until, in the end, we obtain~$1 \in (0)$, so~$1 = 0$.
+
+In good circumstances, this approach allows us to constructivize the given
+classical proof. However, from the point of view of a metamathematical
+analysis, several questions remain: What are the precise conditions on the
+given classical proof for this method to succeed? Can we extend this method in
+case the desired conclusion is of a more general form than the simple
+identity~$1 = 0$?
+
+We answer these questions in Section~\ref{sect:dynalg} by connecting the
+dynamical method with the iterative construction of an actual maximal ideal of
+Section~\ref{sect:constr}. More precisely:
+\begin{quote}\it The dynamical method is equivalent to the
+combination of
+\begin{enumerate}
+\item[(1)] the iterative construction of a maximal ideal, applied to the
+generic enumeration, and
+\item[(2)] Friedman's continuation trick as in Barr's theorem.
+\end{enumerate}
+\end{quote}
+In this way we \emph{reify dynamical algebra}.
 
 
 \paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
