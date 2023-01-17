@@ -49,6 +49,12 @@
   treatment to arbitrary rings. Along the way we do a case study for proofs in
   algebra with minimal logic. An Agda formalization is available at an
   accompanying repository.\footnote{\url{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}}
+  XXX
+  By connecting dynamical algebra with
+  constructive variants of set-theoretic forcing, we recover the dynamical
+  method as a parametrized version of the celebrated double-negation
+  translation and give formal a priori criteria elucidating the scope of
+  the dynamical method.
 \end{abstract}
 
 \noindent
@@ -89,25 +95,31 @@ context of Gödel's completeness theorem.
 
 In this generality, the resulting
 maximal ideal has an elusive quality to it, but useful properties and positive information can still be
-extracted; and not only do we recover the original construction under certain
-decidability assumptions, we can also exploit a relativity phenomenon of
-mathematical logic in order to drop, with some caveats, the assumption that the ring~$A$ is countable.
+extracted. We recover the original construction under certain
+decidability assumptions.
 
-The second topic of this paper is the general toolbox of dynamical
-algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its multiple
-independent inventions by Dominique Duval and Paul
-Lorenzen, this toolbox has been widely
-successful in extracting computational content from classical proofs
-appealing to the transfinite, including proofs of prominent theorems such as
-Suslin's lemma~\cite{suslin:structure,yengui:maximal} or a theorem by
-Becher~\cite{becher:csa}, a consequence of a theorem by Merkurjev.
-By connecting dynamical algebra with
-constructive variants of set-theoretic forcing, we recover the dynamical
-method as a parametrized version of the celebrated double-negation
-translation and give formal a priori criteria elucidating the scope of
-the dynamical method.
-
-We apply ... XXX
+%EXAMPLE
+%
+%well-founded, abstract inconsistency predicate
+%
+%what about uncountable? expl. of Sect. 4
+%we can also exploit a relativity phenomenon of
+%mathematical logic in order to drop, with some caveats, the assumption that the ring~$A$ is countable.
+%
+%The second topic of this paper is the general toolbox of dynamical
+%algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its multiple
+%independent inventions by Dominique Duval and Paul
+%Lorenzen, this toolbox has been widely
+%successful in extracting computational content from classical proofs
+%appealing to the transfinite, including proofs of prominent theorems such as
+%Suslin's lemma~\cite{suslin:structure,yengui:maximal} or a theorem by
+%Becher~\cite{becher:csa}, a consequence of a theorem by Merkurjev.
+%
+%General idea of dyn. alg.
+%
+%Why only $1 = 0$?
+%
+%Reification of dyn. alg.: apply constr. to gen. surj.
 
 
 \paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
@@ -785,6 +797,17 @@ arithmetic, uniformly in~$n$.
 
 \section{For general rings}
 \label{sect:wlog}
+
+% fixed beforehand, part. substitute
+% grow dynamically
+% aim
+
+% P|σ, translation
+% (Rem.: additional nongeom. seq.)
+
+% comp. content
+
+% other forcing
 
 The construction in Section~\ref{sect:constr} of a maximal ideal applies to
 countable rings. In absence of the axiom of choice, some restriction on the
