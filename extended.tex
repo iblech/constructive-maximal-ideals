@@ -50,11 +50,10 @@
   algebra with minimal logic. An Agda formalization is available at an
   accompanying repository.\footnote{\url{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}}
   XXX
-  By connecting dynamical algebra with
-  constructive variants of set-theoretic forcing, we recover the dynamical
-  method as a parametrized version of the celebrated double-negation
-  translation and give formal a priori criteria elucidating the scope of
-  the dynamical method.
+  By connecting dynamical algebra with constructive variants of set-theoretic
+  forcing, we recover the dynamical method as a parametrized version of the
+  celebrated double-negation translation and give formal a priori criteria
+  elucidating the scope of the dynamical method.
 \end{abstract}
 
 \noindent
@@ -96,14 +95,61 @@ context of Gödel's completeness theorem.
 In this generality, the resulting
 maximal ideal has an elusive quality to it, but useful properties and positive information can still be
 extracted. We recover the original construction under certain
-decidability assumptions.
+decidability assumptions (Proposition~\ref{prop:with-test}). To further
+elucidate the essential aspects of the construction, Appendix~\ref{sect:inc-wf}
+contains a streamlined account in the setting of \emph{abstract inconsistency
+predicates}.
 
-%EXAMPLE
-%
-%well-founded, abstract inconsistency predicate
+
+\subsubsection{Extraction of computational content} We illustrate the scope of
+applications of the maximal ideal construction of Section~\ref{sect:constr} by
+exploring, in Section~\ref{sect:krull}, several established test cases for
+Hilbert's program in commutative algebra. Among them is the following
+(Proposition~\ref{prop:surj-matrix}):
+\begin{quote}\small
+\textbf{Proposition.} Let~$M \in A^{n \times m}$ be a matrix with more rows
+than columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
+Then~$1 = 0$ in~$A$.
+\smallskip
+
+\emph{Proof.} Assume for the sake of a contradiction that~$1 \neq 0$ in~$A$.
+Then, by the axiom of choice, there exists a maximal ideal~$\mmm$. The quotient
+ring~$k \defeq A/\mmm$ is a field and the induced linear map~$k^m \to k^n$ is
+still surjective. Hence we have a contradiction to basic linear algebra over fields.
+\end{quote}
+This proof is short, elegant, a prototypical examplar of a common reduction
+technique in commutative algebra---and wholly unconstructive. Is there also a
+direct computational argument?
+
+Since the statement of the proposition is, for fixed matrix dimensions, a
+coherent sequent (over the signature of commutative rings), the completeness
+theorem for coherent logic implies a priori that there exists a proof in
+coherent logic, so in particular a constructive proof. The completeness
+theorem, however, rests on the Boolean Prime Ideal Theorem, a version of the
+axiom of choice. Do we actually know a direct computational argument?
+
+Yes:
+
+\begin{quote}\small
+\emph{Proof.} (case~$n = 2$, $m = 1$ only) Write~$M =
+\left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)$. By surjectivity,
+there are ring elements~$u, v$ with
+\[
+  u \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)
+  \quad\text{and}\quad
+  v \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}0\\1\end{smallmatrix}\right).
+\]
+Hence $1 = (vy) (ux) = (uy) (vx) = 0$.
+\end{quote}
+
+The challenge in mathematical logic is to extract a direct computational
+argument from the given classical proof, and for this particular example
+several techniques meet this challenge. Section~\ref{sect:krull} shows that
+also the explicit maximal ideal construction can be used to this end---assuming
+that the ring is countable.
 
 
-\subsubsection{Generalization to the uncountable case}
+\subsubsection{Extension to the uncountable case}
 
 What if the ring~$A$ is not countable, or if the ring~$A$ is countable but
 an enumeration~$\NN \twoheadrightarrow A$ is computationally expensive to
@@ -600,6 +646,7 @@ adding generators as advised by the oracle.~\cite{XXX}
 
 
 \section{On the intersection of all prime ideals}
+\label{sect:krull}
 
 Classically, Krull's lemma states that the intersection of all prime ideals is the
 \emph{nilradical}, the ideal~$\sqrt{(0)}$ of all nilpotent elements. In our
@@ -751,7 +798,7 @@ The two test cases presented in Proposition~\ref{prop:test-cases} only concern
 prime ideals. In contrast, the following example crucially rests on the
 maximality of the ideal~$\mmm$.
 
-\begin{proposition}Let~$M \in A^{n \times m}$ be a matrix with more rows than
+\begin{proposition}\label{prop:surj-matrix}Let~$M \in A^{n \times m}$ be a matrix with more rows than
 columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
 Then~$1 = 0$.
 \end{proposition}
@@ -1121,6 +1168,7 @@ Lukas Stoll and the three anonymous reviewers.
 \appendix
 
 \section{Generalization to abstract inconsistency predicates on well-orders}
+\label{sect:inc-wf}
 
 This section generalizes the construction of Section~\ref{sect:constr} from
 countable rings to arbitrary countable sets equipped with an abstract
