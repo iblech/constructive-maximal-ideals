@@ -17,6 +17,8 @@
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\defeq}{\vcentcolon=}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\concat}{\mathbin{{+}\mspace{-8mu}{+}}}
 \renewcommand{\_}{\mathpunct{.}\,}
 
 \begin{document}
@@ -978,6 +980,164 @@ arithmetic, uniformly in~$n$.
 
 \section{For general rings}
 \label{sect:wlog}
+
+The iterative construction presented in Section~\ref{sect:constr} yields a
+maximal ideal which can be employed to constructively recast suitable classical proofs in
+commutative algebra. However, it requires an enumeration~$\NN
+\twoheadrightarrow A$ of the ring elements. This section deals with the case
+that no such enumeration exists or is available.
+
+Without much difficulty, the same technique can be used in situations where the
+maximality condition~``$1 \not\in \mmm + (x)$ implies~$x \in \mmm$''
+is required only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
+fixed beforehand. In this case we can apply the construction in Section~\ref{sect:constr} to
+this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
+substitute for an intangible maximal ideal.
+
+We propose to employ tools from pointfree topology to
+widen the applicability of this partial
+substitute to cases where the inspected ring elements are
+not fixed beforehand. The idea is to dynamically grow a partial enumeration as
+needed: When following a given proof, we initially approximate the unavailable
+complete enumeration~$\NN \twoheadrightarrow A$ by the nowhere-defined partial
+function~$f : \NN \rightharpoonup A$. When the proof requires
+that some particular element~$x_0 \in A$ is in the image of~$f$, we grow~$f$ to
+the more-defined partial function~$f'$ mapping~$0$ to~$x_0$. When the proof
+requires some further element~$x_1 \in A$ to be enumerated, we refine~$f'$
+again to the partial function~$f''$ with~$f''(0) = x_0$, $f''(1) = x_1$.
+As the proof runs its course, we pass to better and better approximations on an
+on-demand basis.
+
+To make this informal idea precise, we employ \emph{constructive forcing} to
+pass from the base universe~$V$ to a suitably enlarged universe~$V^\nabla$. In
+this larger universe, the multitude of better and better finite approximations to a
+hypothetical enumeration of~$A$ is reified as a single coherent entity, the
+\emph{generic enumeration} of~$A$. While the existence of this enumeration
+renders~$V^\nabla$ a better (more well-adapted) universe to work in than the
+base~$V$, it is still close to~$V$ in that the two universes
+validate the same first-order statements. We can hence work in~$V^\nabla$ to
+deduce results about~$V$. Even in case that~$V$ validates classical logic---an
+assumption we do not make---the enlarged universe typically only validates
+intuitionistic logic.
+
+Constructive forcing is usually described in the language of sheaves and
+toposes~\cite{xxx}. The objective of this section is to give a purely
+syntactical account. We circumvent the actual construction of~$V^\nabla$ by
+instead directly giving a translation~$\varphi \mapsto \varphi^\nabla$ of
+formulas in such a way that a sentence~$\varphi$ holds in~$V^\nabla$
+iff~$\varphi^\nabla$ holds in~$V$. This translation is a parametric
+generalization of the venerable double-negation translation. In fact, depending
+on the \emph{forcing notion} used, we recover
+\begin{enumerate}
+\item[(1)] the standard double-negation translation, where
+existential quantification is translated to impossibility of a counterexample
+(``$\exists \mapsto \neg\forall\neg$'');
+\item[(2)] the refined translation sometimes known as Friedman's nontrivial
+continuation trick, as used in one of the proofs of Barr's theorem; and
+\item[(3)] the topological translation, where existential quantification is
+translated to local existence.\footnote{For more on the topological
+translation, see~\cite[Section~4.3]{blechschmidt:filmat}
+or~\cite[Section~2.4]{blechschmidt:generalized-spaces}. For instance, the
+translation of the (not constructively provable) claim ``every real symmetric
+matrix has an eigenvector'' is the (refutable) statement ``in every continuous
+family of real symmetric matrices, eigenvectors can locally picked in a
+continuous fashion'', while the translation of the (constructively provable)
+claim ``every real symmetric matrix does \emph{not~not} have an eigenvector''
+is the (constructively provable) statement ``in every continuous family of real
+symmetric matrices, on an open dense set of parameter values, eigenvectors can
+locally picked in a continuous fashion''. In one direction, the topological
+translation enables quick nonprovability results, while in the other it enables
+continuous globalizations.}
+\end{enumerate}
+
+The translation of formulas is accompanied by a translation of proofs (with
+just a polynomial increase in length), ensuring that if a set of axioms
+entails a certain conclusion, the set of translated axioms entails the
+translated conclusion. Translated proofs admit a direct computational
+interpretation, as programs running in the \emph{eventually monad} described
+below.
+
+
+\subsubsection{Forcing notions} The particular flavor of forcing is determined
+by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
+\emph{covering system}. We picture the elements of~$L$ as partial
+approximations, while the covering system specifies which kinds of refinements
+we are prepared to take: A covering system specifies for each \emph{forcing condition}~$\sigma$
+a set~$\Cov(\sigma) \subseteq P({\downarrow}(\sigma))$
+of \emph{covers} of~$\sigma$. These covers should be subject only to the
+following stability condition:
+\begin{quote}If~$\tau \leq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
+covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}(R)$.
+\end{quote}
+
+\begin{example}\label{ex:notion-enum}To force the existence of an enumeration
+of the elements of a set~$X$, let~$L \defeq X^*$ be the set of all finite lists
+of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
+partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
+for~$i=0,\ldots,n-1$, and declare~$\tau \leq \sigma$ iff~$\sigma$ is a prefix
+of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
+one coded by~$\sigma$.
+
+For each list~$\sigma \in L$, we decree that its covers are the set
+$\{ \sigma ::^r y \,|\, y \in X \}$
+and, for each element~$a \in X$, the set
+$\{ \sigma \concat \tau \,|\, \tau \in L, a \in \sigma \concat \tau \}$.
+The first kind of cover expresses that we are prepared to grow a partial
+enumeration in order to make it more defined, and the second in order to ensure
+that a given element~$a$ is enumerated.
+\end{example}
+
+\begin{example}We can also directly force the existence of a maximal ideal,
+instead of first forcing the existence of an enumeration and then applying the
+Krivine construction in the enlarged universe. To this end, let~$L$ be the
+poset of finitely generated ideals of~$A$ ordered by reverse inclusion.
+
+For each ideal~$\aaa \in L$, its collection of covers is
+\begin{align*}&\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \} \\ {} \cup {}&
+  \{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \}.
+  \end{align*}
+\end{example}
+
+\begin{example}To recover the double-negation translation, let~$L$ be the
+trivial poset containing just a single element~$\star$ and decree
+\[ \Cov(\star) \defeq \{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,|\, \varphi \in \Omega \}. \]
+\end{example}
+
+% remark why no topology is required in classical forcing
+
+
+\subsubsection{The eventually monad} Let~$L$ be a forcing notion. A
+predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \leq \sigma$
+implies~$P(\sigma) \Rightarrow P(\tau)$. Such predicates express positive
+observations which are stable when an approximation is refined.
+
+For a monotone predicate~$P$, we introduce a derived predicate denoted~``$P
+\mid \sigma$'' expressing that no matter how an approximation~$\sigma$ evolves
+to a better approximation~$\tau$, eventually~$P(\tau)$ will hold. Similar to
+Coquand and Lombardi's approach to Noetherian
+rings~\cite{coquand-lombardi:krull,coquand:invariant}, we define this predicate
+in a direct inductive fashion, by the following generating clauses:
+\begin{enumerate}
+\item If~$P(\sigma)$, then~$P \mid \sigma$.
+\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
+of~$\sigma$, then~$P \mid \sigma$.
+\end{enumerate}
+
+This new predicate is again monotone---the stability condition on the covers is
+crucial for this fact---and the functor mapping a predicate~$P$ to its induced
+relaxation is a monad on the category of monotone predicates, dubbed the
+\emph{eventually monad}.
+
+It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
+P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
+for~$P \mid \sigma$. For instance, in the situation of
+Example~\ref{ex:notion-enum}, we have
+\[ \forall x \in X\_ \nabla \sigma\_ x \in \sigma, \]
+expressing that for every element~$x \in X$ it will eventually be the case that
+it is enumerated, but typically not
+\[ \nabla \sigma\_ \forall x \in X\_ x \in \sigma, \]
+expressing that eventually it will be the case that all elements are
+enumerated.
 
 % fixed beforehand, part. substitute
 % grow dynamically
