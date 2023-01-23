@@ -128,10 +128,7 @@ coherent logic, hence in particular a constructive proof. The completeness
 theorem, however, rests on the Boolean Prime Ideal Theorem, a version of the
 axiom of choice. Do we actually know a direct computational argument?
 
-Yes:
-
-\begin{quote}\small
-\emph{Proof.} (case~$n = 2$, $m = 1$ only) Write~$M =
+Yes (case~$n = 2$, $m = 1$ only): Write~$M =
 \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right)$. By surjectivity,
 there are ring elements~$u, v$ with
 $
@@ -142,7 +139,6 @@ $
   v \left(\begin{smallmatrix}x\\y\end{smallmatrix}\right) = \left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)
 $.
 Hence $1 = (vy) (ux) = (uy) (vx) = 0$.
-\end{quote}
 
 The challenge in mathematical logic is to extract a direct computational
 argument from the given classical proof, and for this particular example
@@ -153,8 +149,8 @@ that the ring is countable.
 
 \subsubsection{Extension to the uncountable case}
 
-What if the ring~$A$ is not countable, or if the ring~$A$ is countable but
-an enumeration~$\NN \twoheadrightarrow A$ is computationally expensive to
+What if the ring~$A$ is not countable, or if it is countable but
+an enumeration~$\NN \twoheadrightarrow A$ is expensive to
 evaluate?
 
 In absence of the axiom of choice, some restriction on the
@@ -186,9 +182,9 @@ on the element itself, but is more aptly regarded as a property of the ring~$A$
 it is an element of. Any element~$x$ can become invertible by passing from the
 base ring~$A$ to the localization~$A[x^{-1}]$.}
 The process of traveling to this extension is called \emph{Lévy collapse}. Set
-theorists have used this technique and other forcing models with great success
-in order to explore the range of set-theoretic possibility. However, they can
-also be used to deduce results about the base universe.
+theorists have used this technique and other forcing models with great success,
+mostly in order to explore the range of set-theoretic possibility. However, they can
+also be used as tools to deduce results about the base universe.
 
 More precisely, to apply the iterative step-by-step construction of a maximal ideal to a
 ring~$A$ which might not be countable in a constructive setting, we employ a
@@ -214,8 +210,8 @@ this difference to classical forcing to us.}
 Hence we have the metatheorem that
 \begin{quote}\emph{countability
 assumptions from intuitionistic proofs of first-order statements can always be
-mechanically eliminated:}\end{quote}
-If our aim is to verify some first-order
+mechanically eliminated.}\end{quote}
+To wit: If our aim is to verify some first-order
 statement~$P$ about a perhaps uncountable ring~$A$, such as the statement about
 surjective matrices above, we may just as well assume that~$A$ is countable,
 because it actually will be in the extended universe and because every
@@ -285,7 +281,9 @@ proof until, in the end, we obtain~$1 \in (0)$, so~$1 = 0$.
 In good circumstances, this approach allows us to constructivize the given
 classical proof. However, from the point of view of a metamathematical
 analysis, several questions remain: What are the precise conditions on the
-given classical proof for this method to succeed? Can we extend this method in
+given classical proof for this method to succeed? Which restriction on its
+means is required?
+Can we extend this method in
 case the desired conclusion is of a more general form than the simple
 identity~$1 = 0$?
 
@@ -1215,7 +1213,7 @@ of subsets: For an inconsistency predicate~$O$, if~$O(\bigcup_{n \in \NN}
 U_n)$, then there is a number~$n$ such that~$O(U_n)$. However, we will also
 employ directed subsets of the form~$\{ U \} \cup \{ X \,|\, \varphi \}$
 where~$\varphi$ is a proposition which might not be
-decidable.\footnote{Directed subsets of these kind, classically trivial but
+decidable.\footnote{Directed subsets of this kind, classically trivial but
 constructively relevant, have also played a role
 in~\cite[Lemma~1]{schuster-wessel:jacincpred}
 and~\cite[Example~I.1.7(2)]{moerdijk-vermeulen:proper-maps}.}
@@ -1304,7 +1302,7 @@ this result is a central ingredient in constructive proofs of
 Gödel's completeness theorem~\cite{krivine:completeness,herbelin-ilik:henkin,forster-kirst-wehr:completeness}.
 \item[(4)] Every countable vector space over a residue field has a maximal linearly
 independent set (using the inconsistency predicate and the notion of linear
-independence of~\cite[Section~6]{wessel-schuster:radical}). Those sets are
+independence of~\cite[Section~6]{wessel-schuster:radical}). Such a set is
 anonymously spanning in that every vector is \emph{not~not} contained in its
 span. In this sense countable vector spaces ``almost'' have a basis.
 \end{enumerate}
