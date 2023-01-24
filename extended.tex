@@ -3,7 +3,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb,amsmath,mathtools,proof}
+\usepackage{amssymb,amsmath,mathtools,proof,xcolor}
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 \makeatletter
@@ -983,11 +983,11 @@ arithmetic, uniformly in~$n$.
 
 The iterative construction presented in Section~\ref{sect:constr} yields a
 maximal ideal which can be employed to constructively recast suitable classical proofs in
-commutative algebra. However, it requires an enumeration~$\NN
+commutative algebra. However, the construction requires an enumeration~$\NN
 \twoheadrightarrow A$ of the ring elements. This section deals with the case
 that no such enumeration exists or is available.
 
-Without much difficulty, the same technique can be used in situations where the
+As a first observation, we notice that without much difficulty, the same technique can be used in situations where the
 maximality condition~``$1 \not\in \mmm + (x)$ implies~$x \in \mmm$''
 is required only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
 fixed beforehand. In this case we can apply the construction in Section~\ref{sect:constr} to
@@ -1013,7 +1013,7 @@ pass from the base universe~$V$ to a suitably enlarged universe~$V^\nabla$. In
 this larger universe, the multitude of better and better finite approximations to a
 hypothetical enumeration of~$A$ is reified as a single coherent entity, the
 \emph{generic enumeration} of~$A$. While the existence of this enumeration
-renders~$V^\nabla$ a better (more well-adapted) universe to work in than the
+exhibits~$V^\nabla$ as a better (more well-adapted) universe to work in than the
 base~$V$, it is still close to~$V$ in that the two universes
 validate the same first-order statements. We can hence work in~$V^\nabla$ to
 deduce results about~$V$. Even in case that~$V$ validates classical logic---an
@@ -1021,8 +1021,11 @@ assumption we do not make---the enlarged universe typically only validates
 intuitionistic logic.
 
 Constructive forcing is usually described in the language of sheaves and
-toposes~\cite{xxx}. The objective of this section is to give a purely
-syntactical account. We circumvent the actual construction of~$V^\nabla$ by
+toposes~\cite{palmgren:css,grayson:forcing,streicher:forcing,yamamoto:forcing}.
+The objective of this section is to give a purely syntactical account focusing
+on computational content. Related work
+includes~\cite[Section~2.4]{avigad:forcing},~\cite{coquand:goodman} and~\cite[Section~2.3]{renardel-de-lavalette:bi}.
+We circumvent the actual construction of~$V^\nabla$ by
 instead directly giving a translation~$\varphi \mapsto \varphi^\nabla$ of
 formulas in such a way that a sentence~$\varphi$ holds in~$V^\nabla$
 iff~$\varphi^\nabla$ holds in~$V$. This translation is a parametric
@@ -1062,11 +1065,11 @@ below.
 by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
 \emph{covering system}. We picture the elements of~$L$ as partial
 approximations, while the covering system specifies which kinds of refinements
-we are prepared to take: A covering system specifies for each \emph{forcing condition}~$\sigma$
+we are prepared to make: A covering system specifies for each \emph{forcing condition}~$\sigma \in L$
 a set~$\Cov(\sigma) \subseteq P({\downarrow}(\sigma))$
 of \emph{covers} of~$\sigma$. These covers should be subject only to the
 following stability condition:
-\begin{quote}If~$\tau \leq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
+\begin{quote}If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
 covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}(R)$.
 \end{quote}
 
@@ -1074,7 +1077,7 @@ covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}(R)$.
 of the elements of a set~$X$, let~$L \defeq X^*$ be the set of all finite lists
 of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
-for~$i=0,\ldots,n-1$, and declare~$\tau \leq \sigma$ iff~$\sigma$ is a prefix
+for~$i=0,\ldots,n-1$, and declare~$\tau \preceq \sigma$ iff~$\sigma$ is a prefix
 of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
 one coded by~$\sigma$.
 
@@ -1087,12 +1090,11 @@ enumeration in order to make it more defined, and the second in order to ensure
 that a given element~$a$ is enumerated.
 \end{example}
 
-\begin{example}We can also directly force the existence of a maximal ideal,
+\begin{example}\label{ex:notion-max}We can also directly force the existence of a maximal ideal,
 instead of first forcing the existence of an enumeration and then applying the
 Krivine construction in the enlarged universe. To this end, let~$L$ be the
-poset of finitely generated ideals of~$A$ ordered by reverse inclusion.
-
-For each ideal~$\aaa \in L$, its collection of covers is
+poset of finitely generated ideals of~$A$ ordered by reverse inclusion,
+and for each element~$\aaa \in L$, let its collection of covers be
 \begin{align*}&\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \} \\ {} \cup {}&
   \{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \}.
   \end{align*}
@@ -1103,13 +1105,54 @@ trivial poset containing just a single element~$\star$ and decree
 \[ \Cov(\star) \defeq \{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,|\, \varphi \in \Omega \}. \]
 \end{example}
 
-% remark why no topology is required in classical forcing
+\begin{remark}Classical set-theoretic forcing
+does without an explicit specification of coverings because implicitly the
+\emph{double negation topology} is used:
+\[ \Cov(\sigma) \defeq \{ M \in P({\downarrow}(\sigma)) \,|\,
+  \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
+  \}. \]
+\end{remark}
+
+\begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
+is a subset~$F \subseteq L$ such that
+\begin{enumerate}
+\item $F$ is upwards-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
+then~$\sigma \in F$;
+\item $F$ is downwards-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
+then there is an element~$\sigma \in F$ such that~$\sigma \preceq
+\alpha,\beta$; and
+\item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
+\Cov(\sigma)$, then~$\tau \in F$ for some~$\tau \in R$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}The filters of the forcing notion of
+Example~\ref{ex:notion-enum} are in canonical one-to-one correspondence with
+surjections~$\NN \twoheadrightarrow X$, by mapping a filter~$F$ to the gluing
+of the partial enumerations coded by the lists in~$F$. These partial
+enumerations indeed agree on their common domain of definition by the
+directedness condition. Conversely, a surjection correponds to the filter of
+its finite prefixes.
+\end{example}
+
+\begin{example}The filters of the forcing notion of
+Example~\ref{ex:notion-max} are in canonical one-to-one correspondence with
+those ideals~$\mmm$ of~$A$ which are maximal in the strong sense that
+\[
+  1 \in \mmm \Longrightarrow 1 = 0
+    \quad\text{and}\quad
+  x \in \mmm \vee 1 \in \mmm + (x).
+\]
+The correspondence is by mapping a filter~$F$ to the ideal~$\bigcup F$
+and conversely mapping a maximal ideal~$\mmm$ to the filter of finitely
+generated ideals contained in~$\mmm$.
+\end{example}
 
 
 \subsubsection{The eventually monad} Let~$L$ be a forcing notion. A
-predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \leq \sigma$
+predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preceq \sigma$
 implies~$P(\sigma) \Rightarrow P(\tau)$. Such predicates express positive
-observations which are stable when an approximation is refined.
+observations which are stable under refinement of approximations.
 
 For a monotone predicate~$P$, we introduce a derived predicate denoted~``$P
 \mid \sigma$'' expressing that no matter how an approximation~$\sigma$ evolves
@@ -1122,11 +1165,67 @@ in a direct inductive fashion, by the following generating clauses:
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
 of~$\sigma$, then~$P \mid \sigma$.
 \end{enumerate}
+Hence, to witness~$P \mid \sigma$, we may directly witness~$P(\sigma)$ or first
+ask for a refinement of~$\sigma$ as envisaged by the covering system.
 
 This new predicate is again monotone---the stability condition on the covers is
 crucial for this fact---and the functor mapping a predicate~$P$ to its induced
 relaxation is a monad on the category of monotone predicates, dubbed the
-\emph{eventually monad}.
+\emph{eventually monad}. In computer science parlance, this monad is
+the (parametrized) freer monad~\cite{kiselyov-ishii:freer,apfelmus:operational}
+on~$\Cov$, that is the free monad~\cite[Section~6]{swierstra:carte}
+on the free functor on~$\Cov$.
+
+The following two basic results on ``escaping the monad'' shed light on the
+meaning of~$P \mid \sigma$ and are crucial for the forcing extension and the
+base universe to satisfy the same first-order statements.
+
+\begin{proposition}\label{prop:ev-points}Let~$L$ be a forcing notion. Let~$P$
+be a monotone predicate on~$L$. If~$P \mid \sigma$, then every filter~$F$ which
+contains~$\sigma$ also contains a refinement~$\tau \preceq \sigma$
+with~$P(\tau)$.
+\end{proposition}
+
+\begin{proof}By induction on the given witness of~$P \mid \sigma$, as guided by
+a given filter~$F$:
+\begin{enumerate}
+\item If~$P(\sigma)$, we conclude with setting~$\tau \defeq \sigma$.
+\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
+of~$\sigma$, then by the splitting property the filter~$F$ contains a refinement~$\tau_0
+\preceq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
+further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.
+\end{enumerate}
+\end{proof}
+
+The converse of Proposition~\ref{prop:ev-points} only holds in the case that
+the formal space presented by the forcing notion has \emph{enough points}
+(xxx). A case in which the converse fails completely is in the situation of
+Example~\ref{ex:notion-enum} when the set~$X$ is uncountable, for in this case
+there are no filters at all. Illuminating is also the case of forcing a
+\emph{generic sequence}~$\NN \to \NN$ (which is just
+Example~\ref{ex:notion-enum} in the special case~$X \defeq \NN$, but without
+the second kind of covering): In this case the converse of
+Proposition~\ref{prop:ev-points} is equivalent to the principle of monotonic
+bar induction.
+
+\begin{lemma}[{\cite[Proposition~V.3.2]{joyal-tierney:grothendieck}}]\label{prop:cov-open}
+Let~$L$ be a forcing notion such that every covering is inhabited. Let~$P$ be a
+constant predicate on~$L$. Then~$P \mid \sigma$ implies~$P(\sigma)$.
+\end{lemma}
+
+\begin{proof}By induction. In computational terms, we inspect a given witness
+of~$P \mid \sigma$ and descend into it, using the assumption that every
+covering is inhabited in order to pick out branches.
+\end{proof}
+
+\begin{example}In the situation of Example~\ref{ex:notion-enum}, let the
+set~$X$ be inhabited by an element~$x_0$. Then the criterion of
+Proposition~\ref{prop:cov-open} is satisfied: Coverings of the first kind are
+inhabited by~$\sigma ::^r x_0$ and coverings of the second kind are inhabited
+by $\sigma ::^r a$. In computational terms, if a program in the eventually
+monad asks for the current approximation~$\sigma$ to be more defined or to include a
+specific element~$a$, we just append~$x_0$ respectively~$a$ to~$\sigma$.
+\end{example}
 
 It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
 P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
@@ -1151,72 +1250,29 @@ enumerated.
 % other forcing
 
 
+\subsubsection{The translation}
 
-\subsubsection{A metatheorem by Joyal and Tierney}
+- give rules
 
-Set theory teaches us that
-whether a given set is countable depends not only on the set itself, but is
-more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
-set~$M$, there is a (non-Boolean) extension of the universe in which~$M$ becomes countable.
-Remarkably, the passage to such an extension preserves and reflects
-first-order logic.
-Hence we have the metatheorem that \emph{countability assumptions from
-intuitionistic proofs of first-order statements can always be mechanically
-eliminated.}\footnote{For every set~$M$, there is a certain locale~$X$ (the
-\emph{classifying locale of enumerations of~$M$}) which is overt, positive and such
-that its constant sheaf~$\underline{M}$ is countable in the sense of the
-internal language of the topos of sheaves over~$X$. A given
-intuitionistic proof can then be interpreted in this topos~\cite{caramello:preliminaries,maietti:modular,shulman:categorical-logic}; since the constant
-sheaf functor preserves first-order logic (by overtness), the
-sheaf~$\underline{M}$ inherits any first-order assumptions about~$M$ required
-by the proof; and since it also reflects first-order logic (by overtness and
-positivity), the proof's conclusion descends to~$M$.\par When we apply the
-construction of Section~\ref{sect:constr} internally in this topos, the result
-will be a certain sheaf of ideals; it is in that sense that every ring
-constructively possesses a maximal ideal. This sheaf will not be constant,
-hence not originate from an actual ideal of the given ring; but first-order
-consequences of the existence of this sheaf of ideals pass down to the ring.
-Details are provided by Joyal and
-Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}, and introductions to
-pointfree topology and topos theory can be found
-in~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes}. A predicative account on the basis of~\cite{maietti:au,vickers:sketches,crosilla:predicativity}
-is also possible. The phenomenon that size is relative also emerges in the
-Löwenheim--Skolem theorem.} Crucially, the first-order restriction is only on the form
+- state first-order preservation and reflection theorem
+
+- cite:
+  \cite[pp.~36f.]{joyal-tierney:grothendieck};~\cite{blechschmidt:generalized-spaces,johnstone:point,vickers:continuity,vickers:locales-toposes};~\cite{maietti:au,vickers:sketches,crosilla:predicativity}. Mention
+  Löwenheim--Skolem.
+
+- explain earlier: ``Crucially, the first-order restriction is only on the form
 of the statements, not on the form of the proofs. These may freely employ higher-order constructs.
-
-``First-order'' statements are statements which only refer to elements, not to
+`First-order' statements are statements which only refer to elements, not to
 subsets; for instance, the statements of Proposition~\ref{prop:test-cases} are
 first-order and hence also hold without the countability assumption.
-In contrast, the statement ``there is a maximal ideal'' is a higher-order
+In contrast, the statement `there is a maximal ideal' is a higher-order
 statement; hence we cannot eliminate countability assumptions from proofs of
-this statement.
+this statement.''
 
-The metatheorem expands the applicability of the construction of
-Section~\ref{sect:constr} and underscores the value of its intuitionistic
-analysis---the metatheorem cannot be applied to eliminate countability assumptions from classical proofs.
+- establish connection to dynamical algebra and also comment on
+  forcing a maximal ideal directly
 
-
-\subsubsection{Unsorted}
-
-For monotone predicates~$P$ of finite lists of elements of~$X$, we introduce a
-predicate~$P \mid \sigma$
-expressing that no matter how~$\sigma$ evolves to a
-better approximation~$\tau$, eventually~$P(\tau)$ will hold. Similar to Coquand
-and Lombardi's approach to Noetherian rings~\cite{coquand-lombardi:krull,coquand:invariant}, we
-define this predicate in a direct inductive fashion, by the following
-generating clauses:
-\[
-  \infer[{\text{\scriptsize$(\sigma \in X^*)$}}]{P \mid \sigma}{P(\sigma)}
-  \qquad
-  \infer[{\text{\scriptsize$(\sigma \in X^*)$}}]{P \mid \sigma}
-  {\forall(x \in X)\_\ P \mid
-  (\sigma ::^r x)}
-\]
-\[
-  \infer[{\text{\scriptsize$(\sigma \in X^*, a \in X)$}}]{P \mid \sigma}
-  {\forall(\tau \preceq \sigma)\_\
-  a \in \tau \Rightarrow P \mid \tau}
-\]
+\color{gray}
 
 \begin{proposition}Let~$P$ be a monotone predicate on~$X^\star$. Let~$\sigma
 \in X^\star$.
@@ -1322,6 +1378,8 @@ satisfying~``$1 \not\in \mmm + (x)$ implies~$x \in
 Unfolding the construction of~$\mmm$ and the proof of Joyal
 and Tierney's metatheorem, we arrive at the dynamical method.
 
+
+\color{black}
 
 \subsubsection{Acknowledgments}
 The present study was carried out within the project ``Reducing complexity in
