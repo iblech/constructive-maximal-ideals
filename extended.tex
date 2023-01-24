@@ -14,6 +14,7 @@
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
 \newcommand{\ppp}{\mathfrak{p}}
+\newcommand{\qqq}{\mathfrak{q}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\defeq}{\vcentcolon=}
@@ -1270,6 +1271,36 @@ enumerated.
 
 - establish connection to dynamical algebra and also comment on
   forcing a maximal ideal directly
+
+\begin{remark}In addition to maximal ideals, minimal prime ideals are important
+ingredients for some reduction techniques in classical commutative algebra. For
+instance, the stalk of a reduced ring at a minimal prime ideal enjoys the good
+property of being a field. Can the techniques of this paper be used to
+construct a minimal prime ideal, or classically equivalently a maximal prime
+filter (a saturated multiplicative subsets such that~$x + y \in \ppp$
+implies~$x \in \ppp \vee y \in \ppp$ and such that~$0 \in \ppp \Rightarrow 1 = 0$)?
+
+Given any sequence~$\ppp_0,\ppp_1,\ldots$ of prime filters of~$A$, we can
+explicitly construct a prime filter~$\qqq$ which is maximal among the given
+prime filters, that is which satisfies~$\qqq \subseteq \ppp_n \Rightarrow \qqq
+= \ppp_n$, as follows:
+\begin{align*}
+  \qqq &\defeq \bigcup\,\Bigl(\bigcup_n S_n\Bigr), \\
+  &\quad\text{where}\quad S_{0\phantom{{}+n}} \defeq \emptyset, \\
+  &\quad\phantom{\text{where}\quad} S_{n+1} \defeq S_n \cup \{ \ppp_n \,|\,
+  \text{$S_n \cup \{\ppp_n\}$ is a chain} \}
+\end{align*}
+(A \emph{chain} is a subset such that for any two members~$\ppp$ and~$\ppp'$,
+$\ppp \subseteq \ppp'$ or~$\ppp' \subseteq \ppp$.) As the set~$P$ of all prime
+filters of~$A$ might not be countable, it is tempting to apply this
+construction to the \emph{generic enumeration} of all prime filters of~$A$,
+in the forcing extension where~$P$ was forced to be countable. However,
+while the passage from the base universe to the forcing extension preserves and
+reflects first-order logic, the two universes typically differ in their stock
+of subsets: In the forcing extension, the ring~$A$ can catch new prime filters
+which did not exist in the base universe. The prime filter~$\qqq$ will only be
+maximal with respect to the old prime filters.
+\end{remark}
 
 \color{gray}
 
