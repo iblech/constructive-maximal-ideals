@@ -1115,7 +1115,7 @@ and for each element~$\aaa \in L$, let its collection of covers be
   \end{align*}
 \end{example}
 
-\begin{example}To recover the double-negation translation, let~$L$ be the
+\begin{example}\label{ex:notion-negneg}To recover the double-negation translation, let~$L$ be the
 trivial poset containing just a single element~$\star$ and decree
 \[ \Cov(\star) \defeq \{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,|\, \varphi \in \Omega \}. \]
 \end{example}
@@ -1241,6 +1241,12 @@ by $\sigma ::^r a$. In computational terms, if a program in the eventually
 monad asks for the current approximation~$\sigma$ to be more defined or to include a
 specific element~$a$, we just append~$x_0$ respectively~$a$ to~$\sigma$.
 \end{example}
+
+\begin{example}In the situation of Example~\ref{ex:notion-negneg}, for any
+monotone predicate~$P$ we have~$P \mid \star$ if and only if~$\neg\neg
+P(\star)$. That is, the eventually monad coincides with the double negation or
+continuation monad. In particular, we can generally escape from the monad only
+in presence of the law of excluded middle.\end{example}
 
 It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
 P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
