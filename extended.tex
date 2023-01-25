@@ -1259,6 +1259,16 @@ it is enumerated, but typically not
 expressing that eventually it will be the case that all elements are
 enumerated.
 
+\begin{remark}The ``localization''~$P \mid \cdot$ of a monotone predicate~$P$
+can be regarded as a sheafification process as in sheaf theory: A monotone
+predicate~$P$ gives rise to a presheaf on the thin category induced from~$L$,
+more precisely a subpresheaf of the terminal presheaf, by mapping an
+element~$\sigma \in L$ to the truth value of~$P(\sigma)$. The presheaf
+mapping~$\sigma$ to the truth value of~$P \mid \sigma$ is then its
+sheafification with respect to the Grothendieck coverage induced from the
+covering system attached to~$L$.\end{remark}
+
+
 % fixed beforehand, part. substitute
 % grow dynamically
 % aim
@@ -1301,7 +1311,7 @@ prime filters, that is which satisfies~$\qqq \subseteq \ppp_n \Rightarrow \qqq
   &\quad\phantom{\text{where}\quad} S_{n+1} \defeq S_n \cup \{ \ppp_n \,|\,
   \text{$S_n \cup \{\ppp_n\}$ is a chain} \}
 \end{align*}
-(A \emph{chain} is a subset such that for any two members~$\ppp$ and~$\ppp'$,
+(A \emph{chain} is a subset such that for any two elements~$\ppp$ and~$\ppp'$,
 $\ppp \subseteq \ppp'$ or~$\ppp' \subseteq \ppp$.) As the set~$P$ of all prime
 filters of~$A$ might not be countable, it is tempting to apply this
 construction to the \emph{generic enumeration} of all prime filters of~$A$,
@@ -1379,14 +1389,6 @@ extensions~$\tau \preceq \sigma$ such that some specified element~$a$ appears
 in~$\tau$, then we descend to~$P \mid (\sigma ::^r a)$.
 \end{enumerate}
 \end{proof}
-
-\begin{remark}The ``localization''~$(\sigma \mapsto P \mid \sigma)$ of a
-monotone predicate~$P$ can be regarded as a sheafification process as in sheaf
-theory: A monotone predicate~$P$ gives rise to
-a presheaf on~$X^\star$, more precisely a subpresheaf of the terminal presheaf,
-by mapping a finite list~$\sigma$ to the truth value of~$P(\sigma)$. The
-presheaf mapping~$\sigma$ to the truth value of~$P \mid \sigma$ is then its
-sheafification.\end{remark}
 
 
 \subsubsection{Comparison with dynamical algebra}
