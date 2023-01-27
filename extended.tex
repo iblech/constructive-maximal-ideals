@@ -802,7 +802,7 @@ $\{ x \in A \,|\, \forall y \in A\_ 1 - xy \in A^\times \}$.
 %there is an element~$y \in A$ such that~$1-xy$ is not invertible.
 % In general, this condition is stronger than~$x$ merely not being an element of~$J$.
 
-\begin{proposition}Let~$x \in A$. If~$x$ is \emph{apart} from the Jacobson radical (that is, $1-xy \not\in A^\times$ for some element~$y$), then
+\begin{proposition}\label{prop:jac}Let~$x \in A$. If~$x$ is \emph{apart} from the Jacobson radical (that is, $1-xy \not\in A^\times$ for some element~$y$), then
 there is a maximal ideal~$\mmm$ such that~$x \not\in \mmm$.
 \end{proposition}
 
@@ -1323,6 +1323,40 @@ of subsets: In the forcing extension, the ring~$A$ can catch new prime filters
 which did not exist in the base universe; the prime filter~$\qqq$ will only be
 maximal with respect to the old prime filters.
 \end{remark}
+
+
+\subsubsection{The connection to dynamical algebra}
+
+The ideal~$\mmm$ obtained by applying the construction of Section~\ref{sect:constr} to
+the generic enumeration of~$A$ and the ideal~$\nnn$ obtained by directly forcing a
+maximal ideal serve similar purposes. Because they live in different universes,
+it is not meaningful to ask whether they are equal. However, we may ask whether
+they satisfy the same first-order statements. They do not:
+
+\begin{proposition}With the terminology of Proposition~\ref{prop:jac}, for
+every element~$x \in A$, \ldots \begin{enumerate}
+\item $(x \in \nnn)^\nabla$ if and only if~$x$ is contained in the Jacobson
+radical.
+\item $(x \in \mmm)^\nabla$ if and only if~$x$ is not apart from the Jacobson
+radical.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}The first statement has been analyzed before, in the language of
+entailment relations~\cite[Corollary~2]{schuster-wessel:krull}. One proves by
+induction that if~$\nabla\aaa\_ x \in \aaa$, then~$x \in \mathrm{Jac}(\aaa)$.
+
+For the ``if'' direction of the second claim, arguing in the forcing extension,
+we assume (as we may) for the sake of contradiction that~$1 \in \mmm + (x)$.
+Then there is some element~$y$ such that~$1 - ay$ is an element of~$\mmm$ and
+hence is not invertible. This is a contradiction to~$x$ not being apart from
+the Jacobson radical.
+
+For the ``only if'' direction, let~$u \in A$ be arbitrary and assume that~$1 -
+ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[]
+\models x \in \mmm$ and hence also~$[1-ux] \models x \in \mmm$. Thus~$[1-ux]
+\models 1 \in \mmm$, a contradiction.
+\end{proof}
 
 \color{gray}
 
