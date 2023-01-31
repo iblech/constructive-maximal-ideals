@@ -217,7 +217,7 @@ mechanically eliminated.}\end{quote}
 To wit: If our aim is to verify some first-order
 statement~$P$ about a perhaps uncountable ring~$A$, such as the statement about
 surjective matrices above, we may just as well assume that~$A$ is countable,
-because it actually will be in the extended universe and because every
+because it actually will be so in the extended universe and because every
 first-order property which holds there will also hold for~$A$ in the base
 universe.
 
@@ -614,7 +614,7 @@ Related conditions allow for different kinds of collections of ideals, for
 instance trees~\cite{richman:noetherian}, processes~\cite[Section~3.9]{blechschmidt:phd} or
 sheaves of sequences~\cite{coquand-lombardi:krull,coquand:invariant,blechschmidt:multiverse}
 but keep these two restrictions, for without them not
-even the ring of integers would be provably Noetherian.
+even the field with two elements would be provably Noetherian.
 
 Since the approximations~$\mmm_n$ can fail to be finitely generated, these
 Noetherian conditions do not apply to the construction of a maximal ideal.
@@ -661,10 +661,12 @@ That said, for appropriately Noetherian rings, there is an alternative
 construction of a maximal ideal which sidesteps all of these issues and does
 not even require countability if instead an oracle for maximality is available.
 Given a finitely generated ideal~$\aaa$, such an oracle advises whether there is a
-element~$x \not\in \aaa$ such that the extension~$\aaa + (x)$ is still property
+element~$x \not\in \aaa$ such that the extension~$\aaa + (x)$ is still proper
 or whether all elements~$x$ such that~$\aaa + (x)$ is proper are already
 contained in~$\aaa$. A maximal ideal can then be constructed by iteratively
 adding generators as advised by the oracle.~\cite{XXX}
+% xxx: oracle tells
+% xxx: which kind of Noetherian?
 
 
 \section{On the intersection of all prime ideals}
@@ -1474,6 +1476,8 @@ Lukas Stoll and the three anonymous reviewers.
 
 \appendix
 
+% xxx put as proper section, not in appendix
+
 \section{Generalization to abstract inconsistency predicates on well-orders}
 \label{sect:inc-wf}
 
@@ -1522,10 +1526,15 @@ inconsistency predicate.\end{example}
 let~$O(U)$ denote that~$U = M$. Then~$O$ is an inconsistency predicate if and
 only if~$M$ is finitely generated.\end{example}
 
-\begin{example}\label{ex:inc-formulas}Let~$X$ be the set of sentences over a fixed first-order
+\begin{example}\label{ex:inc-formulas}Let~$X$ be the set of sentences over some first-order
 signature. Let~$\alpha \in X$ be a fixed sentence. Let~$O(M)$ state that~$M$
-entails~$\alpha$ in first-order logic. Then~$O$ is an inconsistency
+entails~$\alpha$ in (minimal, intuitionistic or classical) first-order logic. Then~$O$ is an inconsistency
 predicate.\end{example}
+
+\begin{remark}The inconsistency predicates of
+Examples~\ref{ex:inc-ring},~\ref{ex:inc-module} and~\ref{ex:inc-formulas} are
+all induced by \emph{algebraic closure operators} as reviewed
+in~\cite[Example~1]{wessel-schuster:radical}.\end{remark}
 
 
 \subsubsection{Maximal consistent extensions}
