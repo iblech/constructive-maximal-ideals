@@ -1,14 +1,29 @@
-\documentclass[envcountsect,envcountsame,runningheads]{llncs}
+\documentclass[com,11pt,crcready]{iosart2x}
 \pdfoutput=1
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb,amsmath,mathtools,proof,xcolor}
+\usepackage{amssymb,amsmath,mathtools,proof,xcolor,amsthm}
 \usepackage[protrusion=true,expansion=true]{microtype}
 
-\makeatletter
-\spn@wtheorem{construction}{Construction}{\bfseries}{\itshape}
-\makeatother
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{construction}{Construction}[section]
+\newtheorem{example}[definition]{Example}
+
+\theoremstyle{plain}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{scholium}[definition]{Scholium}
+
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{question}[definition]{Question}
+\newtheorem{speculation}[definition]{Speculation}
+\newtheorem{caveat}[definition]{Caveat}
+\newtheorem{conjecture}[definition]{Conjecture}
 
 \newcommand{\aaa}{\mathfrak{a}}
 \newcommand{\mmm}{\mathfrak{m}}
@@ -22,16 +37,28 @@
 \newcommand{\concat}{\mathbin{{+}\mspace{-8mu}{+}}}
 \renewcommand{\_}{\mathpunct{.}\,}
 
+\pubyear{0000}
+\volume{0}
+\firstpage{1}
+\lastpage{1}
+
 \begin{document}
 
-\title{Reifying dynamical algebra: \\ maximal ideals in countable rings, constructively}
-\author{Ingo Blechschmidt\inst{1} \and Peter Schuster\inst{2}}
-\institute{Universität Augsburg, Universitätsstr. 14, 86159 Augsburg, Germany
-\email{ingo.blechschmidt@math.uni-augsburg.de}
-\and Università di Verona, Strada le Grazie 15, 37134 Verona, Italy
-\email{petermichael.schuster@univr.it}}
+\begin{frontmatter}
 
-\maketitle
+\title{Reifying dynamical algebra: \\ maximal ideals in countable rings, constructively}
+\runtitle{Reifying dynamical algebra: maximal ideals in countable rings, constructively}
+
+\begin{aug}
+\author[A]{\inits{I.}\fnms{Ingo}
+\snm{Blechschmidt}\ead[label=e1]{iblech@speicherleck.de}}
+\author[B]{\inits{P.}\fnms{Peter}
+\snm{Schuster}\ead[label=e2]{petermichael.schuster@univr.it}}
+\address[A]{Institut für Mathematik, \orgname{Universität Augsburg},
+\cny{Germany}\printead[presep={\\}]{e1}}
+\address[B]{Dipartimento di Informatico, \orgname{Università di Verona},
+\cny{Italy}\printead[presep={\\}]{e2}}
+\end{aug}
 
 \begin{abstract}
   The existence of a maximal ideal in a general nontrivial commutative
@@ -51,13 +78,21 @@
   We further show how a metatheorem of Joyal and Tierney can be used to expand our
   treatment to arbitrary rings. Along the way we do a case study for proofs in
   algebra with minimal logic. An Agda formalization is available at an
-  accompanying repository.\footnote{\url{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}}
+  accompanying
+  repository.\footnote{\href{https://github.com/iblech/constructive-maximal-ideals/}{\texttt{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}}}
   XXX
   By connecting dynamical algebra with constructive variants of set-theoretic
   forcing, we recover the dynamical method as a parametrized version of the
   celebrated double-negation translation and give formal a priori criteria
   elucidating the scope of the dynamical method.
 \end{abstract}
+
+\begin{keyword}
+\kwd{xxx}
+\kwd{xxx}
+\end{keyword}
+
+\end{frontmatter}
 
 \noindent
 Let~$A$ be a commutative ring with unit. The standard way of constructing a
@@ -104,7 +139,7 @@ contains a streamlined account in the setting of \emph{abstract inconsistency
 predicates}.
 
 
-\subsubsection{Extraction of computational content} We illustrate the scope of
+\subsection*{Extraction of computational content} We illustrate the scope of
 applications of the maximal ideal construction of Section~\ref{sect:constr} by
 exploring, in Section~\ref{sect:krull}, several established test cases for
 Hilbert's program in commutative algebra. Among them is the following
@@ -150,7 +185,7 @@ also the explicit maximal ideal construction of Section~\ref{sect:constr} can be
 that the ring is countable.
 
 
-\subsubsection{Extension to the uncountable case}
+\subsection*{Extension to the uncountable case}
 
 What if the ring~$A$ is not countable, or if it is countable but
 an enumeration~$\NN \twoheadrightarrow A$ is expensive to
@@ -247,7 +282,7 @@ ideal are true even if no actual maximal ideal can be constructed.
 \end{enumerate}
 
 
-\subsubsection{Connection with dynamical algebra}
+\subsection*{Connection with dynamical algebra}
 
 In Section~\ref{sect:dynalg} we turn to the general toolbox of dynamical
 algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its
@@ -313,7 +348,7 @@ trick as in Barr's theorem.
 In this way we \emph{reify dynamical algebra}.
 
 
-\paragraph{Conventions.} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
+\paragraph{Conventions} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
 In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra}, we employ \emph{minimal
 logic}~\cite{johansson:minimal}, where by ``not~$\varphi$'' we mean~``$\varphi \Rightarrow 1 =_A 0$'', and do \emph{not} assume any form of the axiom of choice. Consequently,
 by~``$x \not\in M$'' we mean~$x \in M \Rightarrow 1 =_A 0$, and a subset~$M
@@ -404,7 +439,7 @@ implication~$1 \not\in \mmm_{n-1} + (x_{n-1})$ and the fact~$1 \in \mmm_{n-1} +
 
 Assume~$x_n \in \mmm$. In order to verify~$1 \not\in \mmm + (x_n)$,
 assume~$1 \in \mmm + (x_n)$. Since~$\mmm + (x_n) \subseteq \mmm$,
-we have~$1 \in \mmm$. Hence~$1 = 0$ by properness of~$\mmm$.
+we have~$1 \in \mmm$. Hence~$1 = 0$ by properness of~$\mmm$.\qedhere
 \end{enumerate}\end{proof}
 
 \begin{corollary}\label{cor:is-prime-max}
@@ -428,7 +463,7 @@ all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
 \mmm$.
 \item[(c)] Let~$x^k \in \mmm$. Then~$1 \not\in \mmm + (x)$, for if~$1 \in
 \mmm + (x)$, then also~$1 = 1^k \in (\mmm + (x))^k \subseteq \mmm + (x^k)
-\subseteq \mmm$. Hence~$x \in \mmm$ by maximality.
+\subseteq \mmm$. Hence~$x \in \mmm$ by maximality.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -487,7 +522,7 @@ assumption regarding decidability of reducibility has to be made, but in return
 the resulting field is only a residue field.\end{example}
 
 
-\subsubsection{Recovering the original construction}
+\subsection*{Recovering the original construction}
 
 If we can decide whether a finitely generated ideal contains the
 unit or not, we can improve on Corollary~\ref{cor:is-prime-max}(a). For instance this is the case for
@@ -540,7 +575,7 @@ finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 if~$\varphi \vee \neg\varphi$.
 
 
-\subsubsection{A more economical description using generators}
+\subsection*{A more economical description using generators}
 
 There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
@@ -568,7 +603,7 @@ intermediate stages~$G_n$ are smaller (not yet being ideals), enabling
 arithmetization in Section~\ref{sect:arithmetization}.
 
 
-\subsubsection{Generalization to the subcountable case}
+\subsection*{Generalization to the subcountable case}
 
 \newcommand{\rightrightharpoonup}{\mathrel{\mathrlap{\rightharpoonup}\mkern1mu\rightharpoonup}}
 All results in Section~\ref{sect:constr} carry over mutatis mutandis if~$A$ is
@@ -591,7 +626,7 @@ is the localization of (the constant sheaf associated to) a given ring at its
 \emph{generic filter}~\cite[Section~3.3]{blechschmidt:generalized-spaces}.
 
 
-\subsubsection{Interaction with Noetherian hypotheses}
+\subsection*{Interaction with Noetherian hypotheses}
 
 In classical mathematics, a ring is \emph{Noetherian} if and only if every
 infinite ascending sequence
@@ -740,13 +775,13 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
 % demonstration. We are not actually using these proofs in our development, we
 % are just referencing them.
 \begin{quote}\small
-  \textbf{Proof of 1.} Simple induction if~$A$ is
+  \textbf{Proof of (1).} Simple induction if~$A$ is
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
   contained in all prime ideals and are thereby
   nilpotent.\medskip
 
-  \textbf{Proof of 2.} Simple induction if~$A$ is an
+  \textbf{Proof of (2).} Simple induction if~$A$ is an
   integral domain; the general case reduces to this one: For every prime
   ideal~$\ppp$, the nonconstant coefficients of~$f$ vanish over the integral
   domain~$A/\ppp$. Hence they are contained in all prime ideals
@@ -766,7 +801,7 @@ general situations, while for the purposes of specific challenges such as Propos
 simply pass to the countable subring generated by the polynomial coefficients
 or employ the method of indeterminate coefficients.
 
-\begin{proof}[of Proposition~\ref{prop:test-cases}]
+\begin{proof}[Proof of Proposition~\ref{prop:test-cases}]
 The first claim follows from a simple induction if~$A$ is a reduced
 ring.
 %
@@ -966,11 +1001,9 @@ In particular, in this case~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \end{enumerate}
 \end{lemma}
 
-\begin{proof}The first part is by induction, employing the equivalences of
+\begin{proof}\belowdisplayskip=-18pt The first part is by induction, employing the equivalences of
 Lemma~\ref{lemma:via-generators}. The second rests on the tautology
 $\neg\alpha \Longleftrightarrow \neg(\alpha \wedge (\varphi \vee \neg\varphi))$:
-
-\vspace*{-1.2em}\small
 \begin{align*}
   x_n \in G &
   \Longleftrightarrow \neg\bigl(1 \in (G_n) + (x_n)\bigr)
@@ -980,7 +1013,7 @@ $\neg\alpha \Longleftrightarrow \neg(\alpha \wedge (\varphi \vee \neg\varphi))$:
     \Leftrightarrow x_i \in G)\Bigr) \\
   & \Longleftrightarrow \neg\exists v \in \{0,1\}^n\_
     \Bigl(1 \in \aaa_v \ \wedge\ \bigwedge_{i=0}^{n-1} (v_i = 1
-    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr) %\qedhere
+    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr)
 \end{align*}
 \end{proof}
 
@@ -1078,7 +1111,7 @@ interpretation, as programs running in the \emph{eventually monad} described
 below.
 
 
-\subsubsection{Forcing notions} The particular flavor of forcing is determined
+\subsection{Forcing notions} The particular flavor of forcing is determined
 by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
 \emph{covering system}. We picture the elements of~$L$ as partial
 approximations, while the covering system specifies which kinds of refinements
@@ -1103,8 +1136,8 @@ $\{ \sigma ::^r y \,|\, y \in X \}$
 and, for each element~$a \in X$, the set
 $\{ \sigma \concat \tau \,|\, \tau \in L, a \in \sigma \concat \tau \}$.
 The first kind of cover expresses that we are prepared to grow a partial
-enumeration in order to make it more defined, and the second in order to ensure
-that a given element~$a$ is enumerated.
+enumeration in order to make it more defined. The second kind is in order to ensure
+that any given element~$a$ is enumerated.
 \end{example}
 
 \begin{example}\label{ex:notion-max}We can also directly force the existence of a maximal ideal,
@@ -1115,6 +1148,8 @@ and for each element~$\aaa \in L$, let its collection of covers be
 \begin{align*}&\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \} \\ {} \cup {}&
   \{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \}.
   \end{align*}
+The relation of these two ways of acquiring a maximal ideal is explored in
+Proposition~\ref{prop:mmm-nnn}.
 \end{example}
 
 \begin{example}\label{ex:notion-negneg}To recover the double-negation translation, let~$L$ be the
@@ -1188,7 +1223,7 @@ a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow(\sigma)$.
 \end{example}
 
 
-\subsubsection{The eventually monad} Let~$L$ be a forcing notion. A
+\subsection{The eventually monad} Let~$L$ be a forcing notion. A
 predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preceq \sigma$
 implies~$P(\sigma) \Rightarrow P(\tau)$. Such predicates express positive
 observations which are stable under refinement of approximations.
@@ -1233,7 +1268,7 @@ a given filter~$F$:
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
 of~$\sigma$, then by the splitting property the filter~$F$ contains a refinement~$\tau_0
 \preceq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
-further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.
+further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -1312,7 +1347,7 @@ covering system attached to~$L$.\end{remark}
 % other forcing
 
 
-\subsubsection{The translation}
+\subsection{The translation}
 
 - give rules
 
@@ -1355,7 +1390,7 @@ maximal with respect to the old prime filters.
 \end{remark}
 
 
-\subsubsection{The connection to dynamical algebra}
+\subsection{The connection to dynamical algebra}
 
 The ideal~$\mmm$ obtained by applying the construction of Section~\ref{sect:constr} to
 the generic enumeration of~$A$ and the ideal~$\nnn$ obtained by directly forcing a
@@ -1363,7 +1398,7 @@ maximal ideal serve similar purposes. Because they live in different universes,
 it is not meaningful to ask whether they are equal. However, we may ask whether
 they satisfy the same first-order statements. They do not:
 
-\begin{proposition}With the terminology of Proposition~\ref{prop:jac}, for
+\begin{proposition}\label{prop:mmm-nnn}With the terminology of Proposition~\ref{prop:jac}, for
 every element~$x \in A$, \ldots \begin{enumerate}
 \item $(x \in \nnn)^\nabla$ if and only if~$x$ is contained in the Jacobson
 radical.
@@ -1489,7 +1524,7 @@ and Tierney's metatheorem, we arrive at the dynamical method.
 
 \color{black}
 
-\subsubsection{Acknowledgments}
+\subsection{Acknowledgments}
 The present study was carried out within the project ``Reducing complexity in
 algebra, logic, combinatorics -- REDCOM'' belonging to the program ``Ricerca
 Scientifica di Eccellenza 2018'' of the Fondazione Cariverona and GNSAGA of the INdAM.%
@@ -1521,7 +1556,7 @@ In a second step, we relax the countability assumption to a more general
 well-foundedness requirement.
 
 
-\subsubsection{Abstract inconsistency predicates}
+\subsection{Abstract inconsistency predicates}
 
 The notion of inconsistency predicates can be defined in the quite general
 context of directed-complete lattices as monotone predicates which split
@@ -1566,7 +1601,7 @@ all induced by \emph{algebraic closure operators} as reviewed
 in~\cite[Example~1]{wessel-schuster:radical}.\end{remark}
 
 
-\subsubsection{Maximal consistent extensions}
+\subsection{Maximal consistent extensions}
 
 For countable sets equipped with an inconsistency predicate, we have the
 following generalization of the construction in Section~\ref{sect:constr}.
@@ -1642,7 +1677,7 @@ span. In this sense countable vector spaces ``almost'' have a basis.
 \end{enumerate}
 
 
-\subsubsection{The well-founded case}
+\subsection{The well-founded case}
 
 Fundamental to Construction~\ref{constr:inc} is its step-by-step nature,
 requiring that the elements are presented in a single infinite sequence.
@@ -1700,7 +1735,7 @@ Then~$X$ contains a maximal consistent subset.\end{theorem}
 
 \begin{proof}As the proof of Theorem~\ref{thm:max-inc-countable}.\end{proof}
 
-\bibliographystyle{splncs04}
+\bibliographystyle{ios1}
 \bibliography{extended}
 
 \end{document}
