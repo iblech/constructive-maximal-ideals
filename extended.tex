@@ -1122,6 +1122,18 @@ trivial poset containing just a single element~$\star$ and decree
 \[ \Cov(\star) \defeq \{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,|\, \varphi \in \Omega \}. \]
 \end{example}
 
+\begin{example}\label{ex:notion-scott}Let~$P$ be a complete lattice and let~$O$
+be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
+opposite lattice of~$P$ becomes a forcing notion with coverings given by
+\[
+  \Cov(\sigma) \defeq \{ \emptyset \,|\, O(\sigma) \} \cup
+    \{ \{ \sigma \vee \tau \} \cup \{ \sigma \vee \tau' \,|\, \tau' \in
+    \overline{\tau} \} \,|\, \tau \in P \},
+\]
+where the joins are computed in~$P$ and~$\overline{\tau}$ denotes the pseudo-complement as
+in~\cite[Equation~(6)]{wessel-schuster:radical}.
+\end{example}
+
 \begin{remark}Classical set-theoretic forcing
 does without an explicit specification of coverings because implicitly the
 \emph{double negation topology} is used:
@@ -1161,8 +1173,18 @@ those ideals~$\mmm$ of~$A$ which are maximal in the strong sense that
   x \in \mmm \vee 1 \in \mmm + (x).
 \]
 The correspondence is by mapping a filter~$F$ to the ideal~$\bigcup F$
-and conversely mapping a maximal ideal~$\mmm$ to the filter of finitely
+and conversely by mapping a maximal ideal~$\mmm$ to the filter of finitely
 generated ideals contained in~$\mmm$.
+\end{example}
+
+\begin{example}The filters of the forcing notion of
+Example~\ref{ex:notion-scott} are in canonical one-to-one correspondence with
+the proper~$O$-complete elements of~$P$, that is those elements~$\sigma \not\in O$ for
+which the disjunction
+\[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
+holds for all elements~$\tau \in P$. The correspondence is by mapping
+filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
+a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow(\sigma)$.
 \end{example}
 
 
@@ -1250,6 +1272,12 @@ monotone predicate~$P$ we have~$P \mid \star$ if and only if~$\neg\neg
 P(\star)$. That is, the eventually monad coincides with the double negation or
 continuation monad. In particular, we can generally escape from the monad only
 in presence of the law of excluded middle.\end{example}
+
+\begin{example}In the situation of Example~\ref{ex:notion-scott},
+let~$\sigma_0 \in L$ be a fixed element. Let~$P(\sigma)
+\vcentcolon\Leftrightarrow (\sigma \preceq \sigma_0)$. Then~$P \mid \sigma$ if
+and only if~$\sigma_0 \sqsubseteq \sigma$ in the sense of the inductively
+generated relation of~\cite[Definition~18]{wessel-schuster:radical}.\end{example}
 
 It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
 P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
