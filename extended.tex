@@ -530,7 +530,7 @@ assumption regarding decidability of reducibility has to be made, but in return
 the resulting field is only a residue field.\end{example}
 
 
-\subsection*{Recovering the original construction}
+\subsection{Recovering the original construction}
 
 If we can decide whether a finitely generated ideal contains the
 unit or not, we can improve on Corollary~\ref{cor:is-prime-max}(a). For instance this is the case for
@@ -583,7 +583,7 @@ finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 if~$\varphi \vee \neg\varphi$.
 
 
-\subsection*{A more economical description using generators}
+\subsection{A more economical description using generators}
 
 There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
@@ -611,7 +611,8 @@ intermediate stages~$G_n$ are smaller (not yet being ideals), enabling
 arithmetization in Section~\ref{sect:arithmetization}.
 
 
-\subsection*{Generalization to the subcountable case}
+\subsection{Generalization to the subcountable case}
+\label{sect:subcountable}
 
 \newcommand{\rightrightharpoonup}{\mathrel{\mathrlap{\rightharpoonup}\mkern1mu\rightharpoonup}}
 All results in Section~\ref{sect:constr} carry over mutatis mutandis if~$A$ is
@@ -627,14 +628,16 @@ The generalization to the subcountable case is particularly useful in the
 Russian tradition of constructive mathematics as exhibited by the ef{}fective
 topos~\cite{hyland:effective-topos,oosten:realizability,phoa:effective,bauer:c2c},
 where many rings of interest are subcountable, including uncountable ones such as the real
-numbers~\cite[Prop.~7.2]{hyland:effective-topos}. The generalization is also useful for
+numbers~\cite[Prop.~7.2]{hyland:effective-topos}.
+
+The generalization is also useful for
 localizations of rings at multiplicative subsets which might not be detachable,
 such as, in algebraic geometry, the structure sheaf of a spectrum. This sheaf
 is the localization of (the constant sheaf associated to) a given ring at its
 \emph{generic filter}~\cite[Section~3.3]{blechschmidt:generalized-spaces}.
 
 
-\subsection*{Interaction with Noetherian hypotheses}
+\subsection{Interaction with Noetherian hypotheses}
 
 In classical mathematics, a ring is \emph{Noetherian} if and only if every
 infinite ascending sequence
@@ -756,6 +759,20 @@ the desired~$x$-prime ideal.
 \begin{proof}Because~$x$ is not nilpotent, the notion of an~$x$-prime ideal and
 an ordinary prime ideal coincide. Hence the claim follows from
 Lemma~\ref{lemma:x-prime}.\end{proof}
+
+\begin{theorem}[Krull's separation lemma]Let~$S \subseteq A$ be a multiplicatively closed subset which
+does not contain zero. Then there is a
+(radical and $\neg\neg$-stable) prime ideal~$\ppp \subseteq A$ such that~$S
+\cap \ppp = \emptyset$.
+\end{theorem}
+
+\begin{proof}As in the proof of Corollary~\ref{cor:nilp-prime}, the desired
+prime ideal is the preimage under the localization morphism~$A \to A[S^{-1}]$
+of a maximal ideal constructed in~$A[S^{-1}]$. If~$S$ is not a detachable
+subset of~$A$, the localization~$A[S^{-1}]$ can fail to be countable; however,
+in any case, it is subcountable so that the iterative maximal ideal
+construction can still be carried out (Section~\ref{sect:subcountable}).
+\end{proof}
 
 An important part of constructive algebra is to devise tools to import
 proofs from classical commutative algebra into the constructive
