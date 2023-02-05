@@ -1056,16 +1056,16 @@ arithmetic, uniformly in~$n$.
 \section{For general rings}
 \label{sect:wlog}
 
-The iterative construction presented in Section~\ref{sect:constr} yields a
-maximal ideal which can be employed to constructively recast suitable classical proofs in
-commutative algebra. However, the construction requires an enumeration~$\NN
+The iterative construction presented in Section~\ref{sect:constr}
+can be employed to constructively recast suitable classical proofs in
+commutative algebra which rely on maximal ideals. However, the construction requires an enumeration~$\NN
 \twoheadrightarrow A$ of the ring elements. This section deals with the case
 that no such enumeration exists or is available.
 
 As a first observation, we notice that without much difficulty, the same technique can be used in situations where the
 maximality condition~``$1 \not\in \mmm + (x)$ implies~$x \in \mmm$''
 is required only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
-fixed beforehand. In this case we can apply the construction in Section~\ref{sect:constr} to
+fixed beforehand. In this case we can apply the construction of Section~\ref{sect:constr} to
 this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
 substitute for an intangible maximal ideal.
 
@@ -1076,10 +1076,10 @@ not fixed beforehand. The idea is to dynamically grow a partial enumeration as
 needed: When following a given proof, we initially approximate the unavailable
 complete enumeration~$\NN \twoheadrightarrow A$ by the nowhere-defined partial
 function~$f : \NN \rightharpoonup A$. When the proof requires
-that some particular element~$x_0 \in A$ is in the image of~$f$, we grow~$f$ to
+that some particular element~$x_0 \in A$ is contained in the image of~$f$, we grow~$f$ to
 the more-defined partial function~$f'$ mapping~$0$ to~$x_0$. When the proof
-requires some further element~$x_1 \in A$ to be enumerated, we refine~$f'$
-again to the partial function~$f''$ with~$f''(0) = x_0$, $f''(1) = x_1$.
+requires some further element~$x_1 \in A$ to be part of the enumeration, we further refine~$f'$
+to the partial function~$f''$ with~$f''(0) = x_0$, $f''(1) = x_1$.
 As the proof runs its course, we pass to better and better approximations on an
 on-demand basis.
 
@@ -1087,10 +1087,10 @@ To make this informal idea precise, we employ \emph{constructive forcing} to
 pass from the base universe~$V$ to a suitably enlarged universe~$V^\nabla$. In
 this larger universe, the multitude of better and better finite approximations to a
 hypothetical enumeration of~$A$ is reified as a single coherent entity, the
-\emph{generic enumeration} of~$A$. While the existence of this enumeration
+\emph{generic enumeration} of~$A$. On the one hand, the existence of this enumeration
 exhibits~$V^\nabla$ as a better (more well-adapted) universe to work in than the
-base~$V$, it is still close to~$V$ in that the two universes
-validate the same first-order statements. We can hence work in~$V^\nabla$ to
+base~$V$. On the other hand, the extended universe is still close to~$V$ in that the two universes
+validate the same bounded first-order statements. We can hence work in~$V^\nabla$ to
 deduce results about~$V$. Even in case that~$V$ validates classical logic---an
 assumption we do not make---the enlarged universe typically only validates
 intuitionistic logic.
@@ -1176,26 +1176,48 @@ that any given element~$a$ is enumerated.
 instead of first forcing the existence of an enumeration and then applying the
 Krivine construction in the enlarged universe. To this end, let~$L$ be the
 poset of finitely generated ideals of~$A$ ordered by reverse inclusion,
-and for each element~$\aaa \in L$, let its collection of covers be
-\begin{align*}&\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \} \\ {} \cup {}&
-  \{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \}.
-  \end{align*}
+and for each element~$\aaa \in L$, let its collection of coverings be
+\[\Bigl\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \Bigr\} \cup 
+  \Bigl\{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \Bigr\}.
+\]
 The relation of these two ways of acquiring a maximal ideal is explored in
 Proposition~\ref{prop:mmm-nnn}.
 \end{example}
 
 \begin{example}\label{ex:notion-negneg}To recover the double-negation translation, let~$L$ be the
 trivial poset containing just a single element~$\star$ and decree
-\[ \Cov(\star) \defeq \{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,|\, \varphi \in \Omega \}. \]
+\[ \Cov(\star) \defeq \bigl\{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,\big|\, \varphi \in \Omega \bigr\}
+\quad\text{(where~$\Omega$ is the set of truth values).} \]
+\end{example}
+
+\begin{example}\label{ex:notion-lindenbaum}Let~$\TT$ be a coherent (or
+geometric) propositional theory~\cite[Definition~D1.1.3]{johnstone:elephant},
+such as the theory of prime ideals of a given ring, and let~$L$ be its
+\emph{Lindenbaum algebra}, the set of formulas in the language of~$\TT$ modulo
+provable equivalence, endowed with the ordering where~$[\varphi] \preceq
+[\psi]$ if and only if~$\varphi \vdash \psi$ modulo~$\TT$. In the coherent
+case, we decree
+\[ \Cov([\varphi]) \defeq \{ \{ \psi_1,\ldots,\psi_n \} \,|\,
+  n \geq 0,\,\text{$\varphi \vdash (\psi_1 \vee \cdots \vee \psi_n)$ modulo~$\TT$}
+  \}; \]
+in the geometric case, we decree
+\[ \Cov([\varphi]) \defeq \bigl\{ M \in P({\downarrow}([\varphi])) \,\big|\,
+  \text{$\varphi \vdash \bigl(\bigvee_{K \in M} \bigvee_{\psi \in K} \psi\bigr)$ modulo~$\TT$}
+  \bigr\}. \]
+To accommodate non-propositional theories with sorts, such as the theory of
+rings or of local rings, the concept of forcing notion is not
+sufficiently flexible. To handle this case, we need to generalize from posets
+equipped with covering systems to \emph{sites}, categories equipped with
+Grothendieck coverages.
 \end{example}
 
 \begin{example}\label{ex:notion-scott}Let~$P$ be a complete lattice and let~$O$
 be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
 opposite lattice of~$P$ becomes a forcing notion with coverings given by
 \[
-  \Cov(\sigma) \defeq \{ \emptyset \,|\, O(\sigma) \} \cup
-    \{ \{ \sigma \vee \tau \} \cup \{ \sigma \vee \tau' \,|\, \tau' \in
-    \overline{\tau} \} \,|\, \tau \in P \},
+  \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \} \cup
+    \bigl\{ \{ \sigma \vee \tau \} \cup \{ \sigma \vee \tau' \,|\, \tau' \in
+    \overline{\tau} \} \,\big|\, \tau \in P \bigr\},
 \]
 where the joins are computed in~$P$ and~$\overline{\tau}$ denotes the pseudo-complement as
 in~\cite[Equation~(6)]{wessel-schuster:radical}.
@@ -1212,9 +1234,9 @@ does without an explicit specification of coverings because implicitly the
 \begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
 is a subset~$F \subseteq L$ such that
 \begin{enumerate}
-\item $F$ is upwards-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
+\item $F$ is upward-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
 then~$\sigma \in F$;
-\item $F$ is downwards-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
+\item $F$ is downward-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
 then there is an element~$\sigma \in F$ such that~$\sigma \preceq
 \alpha,\beta$; and
 \item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
@@ -1269,13 +1291,13 @@ rings~\cite{coquand-lombardi:krull,coquand:invariant}, we define this predicate
 in a direct inductive fashion, by the following generating clauses:
 \begin{enumerate}
 \item If~$P(\sigma)$, then~$P \mid \sigma$.
-\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
+\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
 of~$\sigma$, then~$P \mid \sigma$.
 \end{enumerate}
 Hence, to witness~$P \mid \sigma$, we may directly witness~$P(\sigma)$ or first
 ask for a refinement of~$\sigma$ as envisaged by the covering system.
 
-This new predicate is again monotone---the stability condition on the covers is
+This new predicate is again monotone---the stability condition on the coverings is
 crucial for this fact---and the functor mapping a predicate~$P$ to its induced
 relaxation is a monad on the category of monotone predicates, dubbed the
 \emph{eventually monad}. In computer science parlance, this monad is
@@ -1297,7 +1319,7 @@ with~$P(\tau)$.
 a given filter~$F$:
 \begin{enumerate}
 \item If~$P(\sigma)$, we conclude with setting~$\tau \defeq \sigma$.
-\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some cover
+\item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
 of~$\sigma$, then by the splitting property the filter~$F$ contains a refinement~$\tau_0
 \preceq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
 further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.\qedhere
