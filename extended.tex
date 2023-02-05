@@ -1146,15 +1146,30 @@ below.
 
 \subsection{Forcing notions} The particular flavor of forcing is determined
 by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
-\emph{covering system}. We picture the elements of~$L$ as partial
-approximations, while the covering system specifies which kinds of refinements
-we are prepared to make: A covering system specifies for each \emph{forcing condition}~$\sigma \in L$
-a set~$\Cov(\sigma) \subseteq P({\downarrow}(\sigma))$
-of \emph{covers} of~$\sigma$. These covers should be subject only to the
+\emph{covering system} (Definition~\ref{defn:covering-system} below). The
+elements of~$L$ are called \emph{forcing conditions} and are regarded
+as partial approximations to (perhaps fictious) ideal objects. The
+relation~$\tau \preceq \sigma$ expresses that~$\tau$ is a
+refinement of~$\sigma$, that is that~$\tau$ contains more information
+than~$\sigma$ and hence restricts the fictious ideal objects
+approximated by~$\tau$ more strongly, just as~$[3.14, 3.15]$ is a smaller
+interval than~$[3.1, 3.2]$.
+
+The associated covering system specifies which kinds of refinements
+we are prepared to make. In the following definition, the
+expression~${\downarrow}(\sigma)$ denotes the set~$\{ \tau \in L \,|\, \tau
+\preceq \sigma \}$ of all refinements of~$\sigma$ and the
+expression~${\downarrow}(R)$ denotes the downward closure of~$R$, that is the
+set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preceq \sigma \} =
+\bigcup_{\sigma \in R} {\downarrow}(\sigma)$.
+
+\begin{definition}\label{defn:covering-system}A \emph{covering system} on a
+poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}(\sigma))$
+of \emph{coverings} for each element~$\sigma \in L$ subject only to the
 following stability condition:
-\begin{quote}If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
+If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
 covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}(R)$.
-\end{quote}
+\end{definition}
 
 \begin{example}\label{ex:notion-enum}To force the existence of an enumeration
 of the elements of a set~$X$, let~$L \defeq X^*$ be the set of all finite lists
@@ -1164,12 +1179,16 @@ for~$i=0,\ldots,n-1$, and declare~$\tau \preceq \sigma$ iff~$\sigma$ is a prefix
 of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
 one coded by~$\sigma$.
 
-For each list~$\sigma \in L$, we decree that its covers are the set
+For each list~$\sigma \in L$, we decree that its coverings are the set
 $\{ \sigma ::^r y \,|\, y \in X \}$
 and, for each element~$a \in X$, the set
-$\{ \sigma \concat \tau \,|\, \tau \in L, a \in \sigma \concat \tau \}$.
-The first kind of cover expresses that we are prepared to grow a partial
-enumeration in order to make it more defined. The second kind is in order to ensure
+$\{ \sigma \concat \tau \,|\, \tau \in L, a \in \sigma \concat \tau
+\}$. (By~$\sigma ::^r y$, we mean the enlarged list with~$r$ as an
+added element at the end. By~$\sigma \concat \tau$, we mean the concatenation
+of the lists~$\sigma$ and~$\tau$. We write~$a \in \nu$ if and only if the
+list~$\nu$ has~$a$ among its terms.)
+The first kind of covering expresses that we are prepared to grow a partial
+enumeration in order to make it more defined, the second to ensure
 that any given element~$a$ is enumerated.
 \end{example}
 
@@ -1245,13 +1264,20 @@ then there is an element~$\sigma \in F$ such that~$\sigma \preceq
 \end{enumerate}
 \end{definition}
 
+It can well happen that a forcing notion does not admit any filters; the
+purpose of a forcing notion is to give rise to a forcing extension of the
+universe in which a filter can always be found. The canonical filter living in
+the extended universe is called the \emph{generic filter}.
+
 \begin{example}The filters of the forcing notion of
 Example~\ref{ex:notion-enum} are in canonical one-to-one correspondence with
 surjections~$\NN \twoheadrightarrow X$, by mapping a filter~$F$ to the gluing
 of the partial enumerations coded by the lists in~$F$. These partial
 enumerations indeed agree on their common domain of definition by the
 directedness condition. Conversely, a surjection corresponds to the filter of
-its finite prefixes.
+its finite prefixes. In case that~$X$ is uncountable, there are no filters, and
+this direct correspondence degenerates to the unique bijection between
+empty sets.
 \end{example}
 
 \begin{example}The filters of the forcing notion of
@@ -1281,6 +1307,18 @@ holds for all elements~$\tau \in P$. The correspondence is by mapping
 filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
 a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow(\sigma)$.
 \end{example}
+
+A forcing notion is not only a template for a forcing extension of the universe and
+for a suitable formula translation, but also for a space in the sense of
+pointfree topology. The forcing conditions constitute the basic opens of the
+induced space while the covering system specifies generating coverings of
+those opens. The points of this space are in canonical bijection with the
+filters of the forcing notion.
+
+For the purposes of forcing, the most important use case is when the forcing
+notion is nontrivial but no filters exist in the base universe. In this case
+the induced space is nontrivial and without points, highlighting that a
+pointfree approach to topology is required to make sense of them.
 
 
 \subsection{The eventually monad} Let~$L$ be a forcing notion. A
