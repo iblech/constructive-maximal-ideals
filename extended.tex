@@ -1309,7 +1309,7 @@ The filters of this forcing notion are in canonical one-to-one correspondence wi
 the proper~$O$-complete elements of~$P$, that is those elements~$\sigma$
 with~$\neg O(\sigma)$ for which the disjunction
 \[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
-holds for all elements~$\tau \in P$. The correspondence is by mapping
+holds for all elements~$\tau \in P$. The correspondence is by mapping a
 filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
 a proper~$O$-maximal element~$\sigma$ to the filter~${\downarrow}\sigma$.
 \end{example}
@@ -1320,6 +1320,12 @@ does without an explicit specification of coverings because implicitly the
 \[ \Cov(\sigma) \defeq \{ M \in P({\downarrow}\sigma) \,|\,
   \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
   \}. \]
+% xxx: not quite correct(?), need atomless(?)
+% Up to the double negation which disappears in a classical metatheory, sets~$M$ as displayed are called
+% \emph{dense} in the literature on classical set-theoretic forcing, and
+% upward-closed downward-directed subsets of~$F$ which meet all dense sets are
+% called \emph{generic filters}, in line (but more restrictive) than our
+% terminology.
 \end{remark}
 
 A forcing notion is not only a template for a forcing extension of the universe and
