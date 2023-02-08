@@ -35,7 +35,6 @@
 \newcommand{\TT}{\mathbb{T}}
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\Cov}{\mathrm{Cov}}
-\newcommand{\concat}{\mathbin{{+}\mspace{-8mu}{+}}}
 \renewcommand{\_}{\mathpunct{.}\,}
 
 \pubyear{0000}
@@ -1180,11 +1179,11 @@ of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
 one coded by~$\sigma$.
 
 For each list~$\sigma \in L$, we decree that its coverings are the set
-$\{ \sigma ::^r y \,|\, y \in X \}$
+$\{ \sigma y \,|\, y \in X \}$
 and, for each element~$a \in X$, the set
-$\{ \sigma \concat \tau \,|\, \tau \in L, a \in \sigma \concat \tau
-\}$. (By~$\sigma ::^r y$, we mean the enlarged list with~$r$ as an
-added element at the end. By~$\sigma \concat \tau$, we mean the concatenation
+$\{ \sigma \tau \,|\, \tau \in L, a \in \sigma \tau
+\}$. (By~$\sigma y$, we mean the enlarged list with~$r$ as an
+added element at the end. By~$\sigma \tau$, we mean the concatenation
 of the lists~$\sigma$ and~$\tau$. We write~$a \in \nu$ if and only if the
 list~$\nu$ has~$a$ among its terms.)
 The first kind of covering expresses that we are prepared to grow a partial
@@ -1395,8 +1394,8 @@ covering is inhabited in order to pick out branches.
 \begin{example}In the situation of Example~\ref{ex:notion-enum}, let the
 set~$X$ be inhabited by an element~$x_0$. Then the criterion of
 Proposition~\ref{prop:cov-open} is satisfied: Coverings of the first kind are
-inhabited by~$\sigma ::^r x_0$ and coverings of the second kind are inhabited
-by $\sigma ::^r a$. In computational terms, if a program in the eventually
+inhabited by~$\sigma x_0$ and coverings of the second kind are inhabited
+by $\sigma a$. In computational terms, if a program in the eventually
 monad asks for the current approximation~$\sigma$ to be more defined or to include a
 specific element~$a$, we just append~$x_0$ respectively~$a$ to~$\sigma$.
 \end{example}
@@ -1544,7 +1543,7 @@ surjection~$f : \NN \twoheadrightarrow X$.
 
 For the converse direction, let~$x_0,x_1,\ldots$ be an enumeration of~$X$ and
 assume that~$\neg(P \mid \sigma)$. Hence firstly~$\neg(P(\sigma))$; secondly there is an
-element~$x$ such that~$\neg(P \mid \sigma ::^r x)$; and lastly for every element~$a
+element~$x$ such that~$\neg(P \mid \sigma x)$; and lastly for every element~$a
 \in X$ there is an extension~$\tau \preceq \sigma$ with~$a \in \tau$
 and~$\neg(P \mid \tau)$. By the third property,
 there is an extension~$\tau_0 \preceq
@@ -1582,12 +1581,12 @@ it according to the three generating cases:
 \begin{enumerate}
 \item If~$P(\sigma)$, then we conclude.
 \item
-If~$P \mid (\sigma ::^r x)$ for all~$x \in X$, then we descend to~$P \mid
-(\sigma ::^r x_0)$ where~$x_0$ is some fixed element of~$X$ (which exists by
+If~$P \mid (\sigma x)$ for all~$x \in X$, then we descend to~$P \mid
+(\sigma x_0)$ where~$x_0$ is some fixed element of~$X$ (which exists by
 the assumption that~$X$ is inhabited).
 \item If~$P \mid \tau$ for all
 extensions~$\tau \preceq \sigma$ such that some specified element~$a$ appears
-in~$\tau$, then we descend to~$P \mid (\sigma ::^r a)$.
+in~$\tau$, then we descend to~$P \mid (\sigma a)$.
 \end{enumerate}
 \end{proof}
 
