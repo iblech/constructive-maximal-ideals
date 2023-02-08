@@ -1157,18 +1157,18 @@ interval than~$[3.1, 3.2]$.
 
 The associated covering system specifies which kinds of refinements
 we are prepared to make. In the following definition, the
-expression~${\downarrow}(\sigma)$ denotes the set~$\{ \tau \in L \,|\, \tau
+expression~${\downarrow}\sigma$ denotes the set~$\{ \tau \in L \,|\, \tau
 \preceq \sigma \}$ of all refinements of~$\sigma$ and the
-expression~${\downarrow}(R)$ denotes the downward closure of~$R$, that is the
+expression~${\downarrow}R$ denotes the downward closure of a subset~$R \subseteq L$, that is the
 set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preceq \sigma \} =
-\bigcup_{\sigma \in R} {\downarrow}(\sigma)$.
+\bigcup_{\sigma \in R} {\downarrow}\sigma$.
 
 \begin{definition}\label{defn:covering-system}A \emph{covering system} on a
-poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}(\sigma))$
+poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}\sigma)$
 of \emph{coverings} for each element~$\sigma \in L$ subject only to the
 following stability condition:
 If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
-covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}(R)$.
+covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}R$.
 \end{definition}
 
 \begin{example}\label{ex:notion-enum}To force the existence of an enumeration
@@ -1221,7 +1221,7 @@ case, we decree
   n \geq 0,\,\text{$\varphi \vdash (\psi_1 \vee \cdots \vee \psi_n)$ modulo~$\TT$}
   \}; \]
 in the geometric case, we decree
-\[ \Cov([\varphi]) \defeq \bigl\{ M \in P({\downarrow}([\varphi])) \,\big|\,
+\[ \Cov([\varphi]) \defeq \bigl\{ M \in P({\downarrow}[\varphi]) \,\big|\,
   \text{$\varphi \vdash \bigl(\bigvee_{K \in M} \bigvee_{\psi \in K} \psi\bigr)$ modulo~$\TT$}
   \bigr\}. \]
 To accommodate non-propositional theories with sorts, such as the theory of
@@ -1246,7 +1246,7 @@ in~\cite[Equation~(6)]{wessel-schuster:radical}.
 \begin{remark}Classical set-theoretic forcing
 does without an explicit specification of coverings because implicitly the
 \emph{double negation topology} is used:
-\[ \Cov(\sigma) \defeq \{ M \in P({\downarrow}(\sigma)) \,|\,
+\[ \Cov(\sigma) \defeq \{ M \in P({\downarrow}\sigma) \,|\,
   \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
   \}. \]
 \end{remark}
@@ -1305,7 +1305,7 @@ which the disjunction
 \[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
 holds for all elements~$\tau \in P$. The correspondence is by mapping
 filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
-a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow(\sigma)$.
+a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow\sigma$.
 \end{example}
 
 A forcing notion is not only a template for a forcing extension of the universe and
