@@ -1170,6 +1170,24 @@ If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
 covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}R$.
 \end{definition}
 
+\begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
+is a subset~$F \subseteq L$ such that
+\begin{enumerate}
+\item $F$ is upward-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
+then~$\sigma \in F$;
+\item $F$ is downward-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
+then there is an element~$\sigma \in F$ such that~$\sigma \preceq
+\alpha,\beta$; and
+\item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
+\Cov(\sigma)$, then~$\tau \in F$ for some~$\tau \in R$.
+\end{enumerate}
+\end{definition}
+
+It can well happen that a forcing notion does not admit any filters; the
+purpose of a forcing notion is to give rise to a forcing extension of the
+universe in which a filter can always be found. The canonical filter living in
+the extended universe is called the \emph{generic filter}.
+
 \begin{example}\label{ex:notion-enum}To force the existence of an enumeration
 of the elements of a set~$X$, let~$L \defeq X^*$ be the set of all finite lists
 of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
@@ -1189,6 +1207,16 @@ list~$\nu$ has~$a$ among its terms.)
 The first kind of covering expresses that we are prepared to grow a partial
 enumeration in order to make it more defined, the second to ensure
 that any given element~$a$ is enumerated.
+
+The filters of this forcing notion
+are in canonical one-to-one correspondence with
+surjections~$\NN \twoheadrightarrow X$, by mapping a filter~$F$ to the gluing
+of the partial enumerations coded by the lists in~$F$. These partial
+enumerations indeed agree on their common domain of definition by the
+directedness condition. Conversely, a surjection corresponds to the filter of
+its finite prefixes. In case that~$X$ is uncountable, there are no filters, and
+this direct correspondence degenerates to the unique bijection between
+empty sets.
 \end{example}
 
 \begin{example}\label{ex:notion-max}We can also directly force the existence of a maximal ideal,
@@ -1211,6 +1239,18 @@ to~$\aaa' = \aaa+(x)$ (ensuring~$x \in \aaa'$), or to~$\aaa' = \aaa+(u)$
 where~$u \in A$ is such that~$u + vx = 1$ for some~$v \in A$ (ensuring~$1 \in
 \aaa' + (x)$). The second kind of covering implements the objective~``$1 \in \mmm
 \Rightarrow 1 = 0$''.
+
+The filters of this forcing notion
+are in canonical one-to-one correspondence with
+those ideals~$\mmm$ of~$A$ which are maximal in the strong sense that
+\[
+  1 \in \mmm \Longrightarrow 1 = 0
+    \quad\text{and}\quad
+  x \in \mmm \,\vee\, 1 \in \mmm + (x).
+\]
+The correspondence is by mapping a filter~$F$ to the ideal~$\bigcup F$
+and conversely by mapping a maximal ideal~$\mmm$ to the filter of finitely
+generated ideals contained in~$\mmm$.
 \end{example}
 
 \begin{example}\label{ex:notion-negneg}To recover the double-negation translation, let~$L$ be the
@@ -1219,6 +1259,9 @@ trivial poset containing just a single element~$\star$ and decree
 \quad\text{(where~$\Omega$ is the set of truth values).} \]
 This definition expresses that we are prepared, for every truth value~$\varphi
 \in \Omega$, to assume~$\varphi$ or to assume~$\neg\varphi$.
+
+This forcing notion has at most one filter, the set~$L$ itself. This set is a
+filter if and only if the law of excluded middle holds.
 \end{example}
 
 \begin{example}\label{ex:notion-lindenbaum}Let~$\TT$ be a coherent (or
@@ -1228,15 +1271,17 @@ such as the theory of prime ideals of a given ring, and let~$L$ be its
 provable equivalence, endowed with the ordering where~$[\varphi] \preceq
 [\psi]$ if and only if~$\varphi \vdash \psi$ modulo~$\TT$. In the coherent
 case, we decree
-\[ \Cov([\varphi]) \defeq \bigl\{ \{ [\psi_1],\ldots,[\psi_n] \} \,|\,
+\[ \Cov([\varphi]) \defeq \bigl\{ \{ [\psi_1],\ldots,[\psi_n] \} \,\big|\,
   n \geq 0,\,\text{$\varphi \dashv\vdash (\psi_1 \vee \cdots \vee \psi_n)$ modulo~$\TT$}
   \bigr\}; \]
 in the geometric case, we decree
 \[ \Cov([\varphi]) \defeq \bigl\{ M \in P({\downarrow}[\varphi]) \,\big|\,
   \text{$\varphi \vdash \bigl(\bigvee_{K \in M} \bigvee_{\psi \in K} \psi\bigr)$ modulo~$\TT$}
   \bigr\}. \]
-An element~$[\varphi] \in L$ is read as partial knowledge about a (perhaps
-fictitious) model of~$\TT$. For instance, if~$\TT$ is the theory of strong
+The filters of this forcing notion are in canonical one-to-one correspondence
+with models of the theory~$\TT$; an element~$[\varphi] \in L$ is read as
+partial knowledge about a (perhaps fictitious) model of~$\TT$.
+For instance, if~$\TT$ is the theory of strong
 prime ideals of a given ring~$A$, with propositional symbols~$P_x$
 (interpreted as~``$x$ is contained in the prime ideal''), we are prepared to
 refine~$[P_{xy}]$ to~$[P_x]$ and to~$[P_y]$ (expressing the objective~``$xy \in
@@ -1259,6 +1304,14 @@ opposite lattice of~$P$ becomes a forcing notion with coverings given by
 \]
 where the joins are computed in~$P$ and~$\overline{\tau}$ denotes the pseudo-complement as
 in~\cite[Equation~(6)]{wessel-schuster:radical}.
+
+The filters of this forcing notion are in canonical one-to-one correspondence with
+the proper~$O$-complete elements of~$P$, that is those elements~$\sigma$
+with~$\neg O(\sigma)$ for which the disjunction
+\[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
+holds for all elements~$\tau \in P$. The correspondence is by mapping
+filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
+a proper~$O$-maximal element~$\sigma$ to the filter~${\downarrow}\sigma$.
 \end{example}
 
 \begin{remark}Classical set-theoretic forcing
@@ -1268,63 +1321,6 @@ does without an explicit specification of coverings because implicitly the
   \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
   \}. \]
 \end{remark}
-
-\begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
-is a subset~$F \subseteq L$ such that
-\begin{enumerate}
-\item $F$ is upward-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
-then~$\sigma \in F$;
-\item $F$ is downward-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
-then there is an element~$\sigma \in F$ such that~$\sigma \preceq
-\alpha,\beta$; and
-\item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
-\Cov(\sigma)$, then~$\tau \in F$ for some~$\tau \in R$.
-\end{enumerate}
-\end{definition}
-
-It can well happen that a forcing notion does not admit any filters; the
-purpose of a forcing notion is to give rise to a forcing extension of the
-universe in which a filter can always be found. The canonical filter living in
-the extended universe is called the \emph{generic filter}.
-
-\begin{example}The filters of the forcing notion of
-Example~\ref{ex:notion-enum} are in canonical one-to-one correspondence with
-surjections~$\NN \twoheadrightarrow X$, by mapping a filter~$F$ to the gluing
-of the partial enumerations coded by the lists in~$F$. These partial
-enumerations indeed agree on their common domain of definition by the
-directedness condition. Conversely, a surjection corresponds to the filter of
-its finite prefixes. In case that~$X$ is uncountable, there are no filters, and
-this direct correspondence degenerates to the unique bijection between
-empty sets.
-\end{example}
-
-\begin{example}The filters of the forcing notion of
-Example~\ref{ex:notion-max} are in canonical one-to-one correspondence with
-those ideals~$\mmm$ of~$A$ which are maximal in the strong sense that
-\[
-  1 \in \mmm \Longrightarrow 1 = 0
-    \quad\text{and}\quad
-  x \in \mmm \,\vee\, 1 \in \mmm + (x).
-\]
-The correspondence is by mapping a filter~$F$ to the ideal~$\bigcup F$
-and conversely by mapping a maximal ideal~$\mmm$ to the filter of finitely
-generated ideals contained in~$\mmm$.
-\end{example}
-
-\begin{example}The filters of the forcing notion of
-Example~\ref{ex:notion-lindenbaum} are in canonical one-to-one correspondence with
-models of the theory~$\TT$.
-\end{example}
-
-\begin{example}The filters of the forcing notion of
-Example~\ref{ex:notion-scott} are in canonical one-to-one correspondence with
-the proper~$O$-complete elements of~$P$, that is those elements~$\sigma \not\in O$ for
-which the disjunction
-\[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
-holds for all elements~$\tau \in P$. The correspondence is by mapping
-filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
-a proper~$O$-maximal element~$\sigma$ to the filter~$\downarrow\sigma$.
-\end{example}
 
 A forcing notion is not only a template for a forcing extension of the universe and
 for a suitable formula translation, but also for a space in the sense of
