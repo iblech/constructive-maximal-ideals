@@ -1294,24 +1294,40 @@ equipped with covering systems to \emph{sites}, categories equipped with
 Grothendieck coverages.
 \end{example}
 
-\begin{example}\label{ex:notion-scott}Let~$P$ be a complete lattice and let~$O$
+\begin{example}\label{ex:notion-scott}Let~$(P,{\leq})$ be a complete lattice and let~$O$
 be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
 opposite lattice of~$P$ becomes a forcing notion with coverings given by
 \[
   \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \} \cup
-    \bigl\{ \{ \sigma \vee \tau \} \cup \{ \sigma \vee \tau' \,|\, \tau' \in
-    \overline{\tau} \} \,\big|\, \tau \in P \bigr\},
+    \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
+    \overline{\nu} \} \,\big|\, \nu \in P \bigr\},
 \]
-where the joins are computed in~$P$ and~$\overline{\tau}$ denotes the pseudo-complement as
+where the joins are computed in~$P$ and~$\overline{\nu}$ denotes the pseudo-complement as
 in~\cite[Equation~(6)]{wessel-schuster:radical}.
 
 The filters of this forcing notion are in canonical one-to-one correspondence with
-the proper~$O$-complete elements of~$P$, that is those elements~$\sigma$
-with~$\neg O(\sigma)$ for which the disjunction
-\[ \sigma \preceq \tau \quad\text{or}\quad O(\sigma \vee \tau) \]
-holds for all elements~$\tau \in P$. The correspondence is by mapping a
+the proper~$O$-complete elements of~$P$, that is those elements~$\alpha$
+with~$\neg O(\alpha)$ for which the disjunction
+\[ \nu \leq \alpha \quad\text{or}\quad O(\alpha \vee \nu) \]
+holds for all elements~$\nu \in P$. The correspondence is by mapping a
 filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
-a proper~$O$-maximal element~$\sigma$ to the filter~${\downarrow}\sigma$.
+a proper~$O$-maximal element~$\alpha$ to the filter~${\downarrow}\alpha$.
+
+If~$P$ is algebraic, that is if every element is the join of the compact
+elements below it, we can restrict this covering system to the poset~$KP$ of
+compact elements of~$P$:
+\[
+  \Cov_{KP}(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \} \cup
+    \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
+    \overline{\nu} \cap KP \} \,\big|\, \nu \in KP \bigr\}.
+\]
+The one-to-one correspondence from above then restricts to a correspondence
+between the filters of~$((KP)^\mathrm{op},\mathrm{Cov}_{KP})$ and those proper
+elements~$\alpha$ of~$P$ for which the disjunction~``$\nu \leq \alpha \vee
+O(\alpha \vee \nu)$'' holds for all elements~$\nu \in KP$. In this way we can
+recover several other examples for forcing notions. For instance,
+Example~\ref{ex:notion-max} is the special case where~$P$ is the complete lattice
+of all ideals of~$A$ and~$O(\aaa)$ denotes~$1 \in \aaa$.
 \end{example}
 
 \begin{remark}Classical set-theoretic forcing
