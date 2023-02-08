@@ -1173,11 +1173,11 @@ covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}R$.
 \begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
 is a subset~$F \subseteq L$ such that
 \begin{enumerate}
-\item $F$ is upward-closed: if~$\tau \preceq \sigma$ and if~$\tau \in F$,
+\item $F$ is upward-closed (``closed under coarser elements''): if~$\tau \preceq \sigma$ and if~$\tau \in F$,
 then~$\sigma \in F$;
 \item $F$ is downward-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
-then there is an element~$\sigma \in F$ such that~$\sigma \preceq
-\alpha,\beta$; and
+then there is a common refinement~$\sigma \preceq \alpha,\beta$ such
+that~$\sigma \in F$; and
 \item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
 \Cov(\sigma)$, then~$\tau \in F$ for some~$\tau \in R$.
 \end{enumerate}
@@ -1199,10 +1199,10 @@ one coded by~$\sigma$.
 For each list~$\sigma \in L$, we decree that its coverings are the set
 $\{ \sigma y \,|\, y \in X \}$
 and, for each element~$a \in X$, the set
-$\{ \sigma \tau \,|\, \tau \in L, a \in \sigma \tau
+$\{ \sigma \sigma' \,|\, \sigma' \in L, a \in \sigma \sigma'
 \}$. (By~$\sigma y$, we mean the enlarged list with~$r$ as an
-added element at the end. By~$\sigma \tau$, we mean the concatenation
-of the lists~$\sigma$ and~$\tau$. We write~$a \in \nu$ if and only if the
+added element at the end. By~$\sigma \sigma'$, we mean the concatenation
+of the lists~$\sigma$ and~$\sigma'$. We write~$a \in \nu$ if and only if the
 list~$\nu$ has~$a$ among its terms.)
 The first kind of covering expresses that we are prepared to grow a partial
 enumeration in order to make it more defined, the second to ensure
