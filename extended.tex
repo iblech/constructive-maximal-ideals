@@ -1386,7 +1386,7 @@ ask for a refinement of~$\sigma$ as envisaged by the covering system.
 This new predicate is again monotone---the stability condition of
 Definition~\ref{defn:covering-system} on the coverings is
 crucial for this fact---and the functor mapping a predicate~$P$ to its induced
-relaxation is a monad on the category of monotone predicates, dubbed the
+relaxation~$P\mid\cdot$ is a monad on the category of monotone predicates, dubbed the
 \emph{eventually monad}. In computer science parlance, this monad is
 the (parametrized) freer monad~\cite{kiselyov-ishii:freer,apfelmus:operational}
 on~$\Cov$, that is the free monad~\cite[Section~6]{swierstra:carte}
@@ -1459,10 +1459,12 @@ It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
 P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
 for~$P \mid \sigma$. For instance, in the situation of
 Example~\ref{ex:notion-enum}, we have
-\[ \forall x \in X\_ \nabla \sigma\_ x \in \sigma, \]
+\[ \forall x \in X\_ \nabla \sigma\_ x \in \sigma
+\qquad\text{(meaning $\forall x \in X\_ ((x \in \cdot) \mid \sigma)$),} \]
 expressing that for every element~$x \in X$ it will eventually be the case that
 it is enumerated, but typically not
-\[ \nabla \sigma\_ \forall x \in X\_ x \in \sigma, \]
+\[ \nabla \sigma\_ \forall x \in X\_ x \in \sigma
+\qquad\text{(meaning $(\forall x \in X\_ x \in \cdot) \mid \sigma$),} \]
 expressing that eventually it will be the case that all elements are
 enumerated.
 
