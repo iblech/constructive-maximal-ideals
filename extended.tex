@@ -1843,43 +1843,6 @@ Then~$X$ contains a maximal consistent subset.\end{theorem}
 
 \appendix
 
-\section{Generalization to the well-founded case}
-
-% FUTURE: cite literature
-In this section, we relax the assumption that the ring~$A$ is countable to the
-assumption that~$A$ is the image of a well-founded set~$I$. There are several
-definitions of well-foundedness in the literature; we require
-transfinite recursion and induction over~$I$, and that both~$I$ and every subset
-of the form~${{\downarrow}(n)} \defeq \{k \in I \,|\, k < n\}$ which is inhabited is directed. The
-latter condition is for instance satisfied if~$({<})$ is a linear order.
-
-Writing~$A = \{ x_n \,|\, n \in I \}$, we recursively construct
-ideals~$(\mmm_n)_{n \in I}$ by
-\begin{align*}
-  \mmm_n &\defeq \mmm_{<n} + (\{ x_n \,|\, 1 \not\in \mmm_{<n} + (x_n) \}),
-\end{align*}
-where~$\mmm_{<n} \defeq \sum_{k < n} \mmm_k$. We set~$\mmm \defeq \bigcup_{n
-\in I} \mmm_n$. As before, no choices of any kind are required.
-\enlargethispage{2em}
-
-\begin{proposition}\begin{enumerate}
-\item The subset~$\mmm$ is an ideal.
-\item The ideal~$\mmm$ is proper.
-\item For an element~$x_n \in A$, the following are equivalent: (a) $x_n \in
-\mmm_n$; (b) $x_n \in \mmm$; (c) $1 \not\in \mmm + (x_n)$; (d) $1 \not \in \mmm_{<n} + (x_n)$.
-\item The ideal~$\mmm$ is maximal (and hence prime).
-\item Assume that for ideals of the form~$\aaa = (f(k))_{k < n}$, where~$f$
-is a map~${{\downarrow}(n)} \to A$, we have~$1 \not\in \aaa$ or~$\neg(1
-\not\in \aaa)$. Then the ideal~$\mmm$ is detachable. If furthermore~$1 \in \aaa$
-or~$1 \not\in \aaa$ for such ideals, then~$\mmm$ is maximal in the
-strong sense.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}The proofs of the countable case carry over verbatim.
-\end{proof}
-
-\end{document}
 
 cite?
 https://mileti.math.grinnell.edu/research/ideals.pdf
