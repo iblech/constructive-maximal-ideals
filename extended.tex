@@ -1147,10 +1147,10 @@ below.
 by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
 \emph{covering system} (Definition~\ref{defn:covering-system} below). The
 elements of~$L$ are called \emph{forcing conditions} and are regarded
-as partial approximations to (perhaps fictious) ideal objects. The
+as partial approximations to (perhaps fictitious) ideal objects. The
 relation~$\tau \preceq \sigma$ expresses that~$\tau$ is a
 refinement of~$\sigma$, that is that~$\tau$ contains more information
-than~$\sigma$ and hence restricts the fictious ideal objects
+than~$\sigma$ and hence restricts the fictitious ideal objects
 approximated by~$\tau$ more strongly, just as~$[3.14, 3.15]$ is a smaller
 interval than~$[3.1, 3.2]$.
 
@@ -1193,20 +1193,32 @@ that any given element~$a$ is enumerated.
 
 \begin{example}\label{ex:notion-max}We can also directly force the existence of a maximal ideal,
 instead of first forcing the existence of an enumeration and then applying the
-Krivine construction in the enlarged universe. To this end, let~$L$ be the
+Krivine construction in the enlarged universe. (The relation of these two ways
+of acquiring a maximal ideal is explored in
+Proposition~\ref{prop:mmm-nnn}.) To this end, let~$L$ be the
 poset of finitely generated ideals of~$A$ ordered by reverse inclusion,
 and for each element~$\aaa \in L$, let its collection of coverings be
-\[\Bigl\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \Bigr\} \cup 
-  \Bigl\{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \} \Bigr\}.
+\[\Cov(\aaa) \defeq
+  \Bigl\{ \{ \aaa + (x) \} \cup \{ \aaa + (u) \,|\, u,v \in A, u + vx = 1 \}
+  \,\Big|\, x \in A \Bigr\}
+  \cup
+  \Bigl\{ \{ \aaa \,|\, 1 = 0 \} \,|\, 1 \in \aaa \Bigr\}.
 \]
-The relation of these two ways of acquiring a maximal ideal is explored in
-Proposition~\ref{prop:mmm-nnn}.
+The first kind of covering expresses that we are prepared to grow partial
+approximations exactly as the strong maximality condition ``$x \in \mmm$ or~$1
+\in \mmm + (x)$'' would suggest: An approximation~$\aaa$ can grow
+to~$\aaa' = \aaa+(x)$ (ensuring~$x \in \aaa'$), or to~$\aaa' = \aaa+(u)$
+where~$u \in A$ is such that~$u + vx = 1$ for some~$v \in A$ (ensuring~$1 \in
+\aaa' + (x)$). The second kind of covering implements the objective~``$1 \in \mmm
+\Rightarrow 1 = 0$''.
 \end{example}
 
 \begin{example}\label{ex:notion-negneg}To recover the double-negation translation, let~$L$ be the
 trivial poset containing just a single element~$\star$ and decree
-\[ \Cov(\star) \defeq \bigl\{ \{ \star \,|\, \varphi \vee \neg\varphi \} \,\big|\, \varphi \in \Omega \bigr\}
+\[ \Cov(\star) \defeq \bigl\{ \{ \star \,|\, \varphi \} \cup \{ \star \,|\, \neg\varphi \} \,\big|\, \varphi \in \Omega \bigr\}
 \quad\text{(where~$\Omega$ is the set of truth values).} \]
+This definition expresses that we are prepared, for every truth value~$\varphi
+\in \Omega$, to assume~$\varphi$ or to assume~$\neg\varphi$.
 \end{example}
 
 \begin{example}\label{ex:notion-lindenbaum}Let~$\TT$ be a coherent (or
@@ -1216,13 +1228,20 @@ such as the theory of prime ideals of a given ring, and let~$L$ be its
 provable equivalence, endowed with the ordering where~$[\varphi] \preceq
 [\psi]$ if and only if~$\varphi \vdash \psi$ modulo~$\TT$. In the coherent
 case, we decree
-\[ \Cov([\varphi]) \defeq \{ \{ \psi_1,\ldots,\psi_n \} \,|\,
+\[ \Cov([\varphi]) \defeq \bigl\{ \{ \psi_1,\ldots,\psi_n \} \,|\,
   n \geq 0,\,\text{$\varphi \vdash (\psi_1 \vee \cdots \vee \psi_n)$ modulo~$\TT$}
-  \}; \]
+  \bigr\}; \]
 in the geometric case, we decree
 \[ \Cov([\varphi]) \defeq \bigl\{ M \in P({\downarrow}[\varphi]) \,\big|\,
   \text{$\varphi \vdash \bigl(\bigvee_{K \in M} \bigvee_{\psi \in K} \psi\bigr)$ modulo~$\TT$}
   \bigr\}. \]
+An element~$[\varphi] \in L$ is read as partial knowledge about a (perhaps
+fictitious) model of~$\TT$. For instance, if~$\TT$ is the theory of strong
+prime ideals of a given ring~$A$, with propositional symbols~$P_x$
+(interpreted as~``$x$ is contained in the prime ideal''), we are prepared to
+refine~$[P_{xy}]$ to~$[P_x]$ and to~$[P_y]$ (expressing the objective~``$xy \in
+\ppp \Rightarrow x \in \ppp \vee y \in \ppp$'').
+
 To accommodate non-propositional theories with sorts, such as the theory of
 rings or of local rings, the concept of forcing notion is not
 sufficiently flexible. To handle this case, we need to generalize from posets
