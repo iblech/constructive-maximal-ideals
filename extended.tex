@@ -218,7 +218,7 @@ A similar phenomenon concerns countability.
 Set theory teaches us that
 whether a given set is countable depends not only on the set itself, but is
 more aptly regarded as a property of the ambient universe~\cite{hamkins:multiverse}: Given any
-set~$M$, there is a forcing extension~\cite{moore:forcing,weaver:forcing,geschke:models} of the universe in which~$M$ becomes
+set~$M$, there is a forcing extension~\cite{moore:forcing,weaver:forcing,geschke:models,geschke-quickert:forcing} of the universe in which~$M$ becomes
 countable.\footnote{An analogous situation in commutative algebra is the
 following. Whether a ring element~$x$ is invertible not only depends
 on the element itself, but is more aptly regarded as a property of the ring~$A$
@@ -1298,7 +1298,7 @@ Grothendieck coverages.
 be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
 opposite lattice of~$P$ becomes a forcing notion with coverings given by
 \[
-  \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \} \cup
+  \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \bigr\} \cup
     \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
     \overline{\nu} \} \,\big|\, \nu \in P \bigr\},
 \]
@@ -1317,7 +1317,7 @@ If~$P$ is algebraic, that is if every element is the join of the compact
 elements below it, we can restrict this covering system to the poset~$KP$ of
 compact elements of~$P$:
 \[
-  \Cov_{KP}(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \} \cup
+  \Cov_{KP}(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \bigr\} \cup
     \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
     \overline{\nu} \cap KP \} \,\big|\, \nu \in KP \bigr\}.
 \]
@@ -1337,10 +1337,17 @@ does without an explicit specification of coverings because implicitly the
   \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
   \}. \]
 Up to the double negation which disappears in a classical metatheory, sets~$M$ as displayed are called
-\emph{dense} in the literature on classical set-theoretic forcing, and
+\emph{dense} (in~${\downarrow}\sigma$) in the literature on classical set-theoretic forcing, and
 upward-closed downward-directed subsets of~$F$ which meet all dense sets are
 called \emph{generic filters}, in line (but more restrictive) than our
-terminology.
+terminology for arbitrary forcing notions.
+
+If the poset~$L$ of forcing conditions is \emph{atomless} (that is, for every
+condition~$\sigma \in L$ there are conditions~$\alpha,\beta \preceq \sigma$
+without a common refinement), as in commonly the case in classical
+set-theoretic forcing~\cite[Lemma~1.33]{schilhan:bsc}, then no such generic filter exists in~$V$.
+In contrast, coarser covering systems on atomless posets may allow
+filters to exist already in~$V$, as the examples above demonstrate.
 \end{remark}
 
 A forcing notion is not only a template for a forcing extension of the universe and
@@ -1977,6 +1984,11 @@ FUTURE:
 * include results of discussion with Henry
 
 xxx ordering in the forcing relation
+
+xxx cite roitman:uses
+"mainstream mathematics (defined as: the mathematics most mathematicians think
+doesn't use set theory) is beginning to see results using modern set theoretic
+techniques."
 
 THANKS
 audiences where work has been presented:
