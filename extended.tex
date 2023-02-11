@@ -78,7 +78,7 @@
   Tierney, we expand our treatment to arbitrary rings and establish a
   connection with dynamical algebra: We
   recover the dynamical approach to maximal ideals as a parametrized version of the
-  celebrated double-negation translation. This allows us to give formal a priori criteria
+  celebrated double-negation translation. This connection allows us to give formal a priori criteria
   elucidating the scope of the dynamical method.
   Along the way we do a case study for proofs in algebra with minimal logic,
   and generalize the construction to arbitrary inconsistency predicates. An Agda
@@ -87,7 +87,7 @@
   This text is a revised and extended version
   of the conference paper~\cite{blechschmidt-schuster:constructive-maximal-ideals}. The conference paper only
   briefly sketched the connection with dynamical algebra; did not compare this
-  connection with other flavors of set-theoretic forcing; sticked to the case
+  connection with other flavors of set-theoretic forcing; and sticked to the case
   of commutative algebra only, passing on the generalization to inconsistency predicates
   and well-orders.}
 \end{abstract}
@@ -396,7 +396,7 @@ we follow~\cite{berardi-valentini:krivine}.
 We study the following recursive construction of ideals~$\mmm_0, \mmm_1,
 \ldots$ of~$A$:
 \begin{align*}
-  \mmm_0 &\defeq \{0\}, &
+  \mmm_0 &\defeq \{0\}, \\
   \mmm_{n+1} &\defeq \mmm_n + (\{ x_n \,|\, 1 \not\in \mmm_n + (x_n) \}).
 \end{align*}
 Finally, we set~$\mmm \defeq \bigcup_n \mmm_n$. The construction
@@ -589,7 +589,7 @@ There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
 intermediate ideals~$\mmm_n$:
 \begin{align*}
-  G_0 &\defeq \emptyset &
+  G_0 &\defeq \emptyset \\
   G_{n+1} &\defeq G_n \cup \{ x_n \,|\, 1 \not\in (G_n \cup \{ x_n \}) \}
 \end{align*}
 An induction establishes the relation~$(G_n) = \mmm_n$; setting~$G \defeq
@@ -1151,7 +1151,7 @@ as partial approximations to (perhaps fictitious) ideal objects. The
 relation~$\tau \preceq \sigma$ expresses that~$\tau$ is a
 refinement of~$\sigma$, that is that~$\tau$ contains more information
 than~$\sigma$ and hence restricts the fictitious ideal objects
-approximated by~$\tau$ more strongly, just as~$[3.14, 3.15]$ is a smaller
+approximated by~$\tau$ more strongly than~$\sigma$ does, just as~$[3.14, 3.15]$ is a smaller
 interval than~$[3.1, 3.2]$.
 
 The associated covering system specifies which kinds of refinements
@@ -1457,7 +1457,7 @@ in presence of the law of excluded middle.\end{example}
 
 \begin{example}In the situation of Example~\ref{ex:notion-scott},
 let~$\sigma_0 \in L$ be a fixed element. Let~$P(\sigma)
-\vcentcolon\Leftrightarrow (\sigma \preceq \sigma_0)$. Then~$P \mid \sigma$ if
+\vcentcolon\Leftrightarrow (\sigma_0 \leq \sigma)$. Then~$P \mid \sigma$ if
 and only if~$\sigma_0 \sqsubseteq \sigma$ in the sense of the inductively
 generated relation of~\cite[Definition~18]{wessel-schuster:radical}.\end{example}
 
