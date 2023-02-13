@@ -393,7 +393,7 @@ generation of $(M)$ by the following rules:\par
 \cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind}.
 
 
-\section{A construction}
+\section{An iterative construction of maximal ideals}
 \label{sect:constr}
 
 We assume that the ring~$A$ is countable, with~$x_0, x_1, \ldots$ an
@@ -720,7 +720,7 @@ rings~\cite[Proposition~34]{blechschmidt:generalized-spaces}.
 
 That said, for processly Noetherian rings, there is an alternative
 construction of a maximal ideal which sidesteps all of these issues and does
-not even require countability if instead an oracle for maximality is available.
+not even require countability, if instead an oracle for maximality is available.
 Given a finitely generated ideal~$\aaa$, such an oracle advises us whether there is a
 element~$x \not\in \aaa$ such that the extension~$\aaa + (x)$ is still proper
 or whether all elements~$x$ such that~$\aaa + (x)$ is proper are already
@@ -807,8 +807,8 @@ such tools~\cite{schuster:induction,schuster:inductionjournal,persson:constructi
 
 \begin{proposition}\label{prop:test-cases}Let~$f \in A[X]$ be a polynomial.
 \begin{enumerate}
-\item If~$f$ is nilpotent in~$A[X]$, then all coefficients of~$f$ are nilpotent in~$A$.
-\item If~$f$ is invertible in~$A[X]$, then all nonconstant coefficients of~$f$ are nilpotent.
+\item[(a)] If~$f$ is nilpotent in~$A[X]$, then all coefficients of~$f$ are nilpotent in~$A$.
+\item[(b)] If~$f$ is invertible in~$A[X]$, then all nonconstant coefficients of~$f$ are nilpotent.
 \end{enumerate}
 \end{proposition}
 
@@ -819,13 +819,13 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
 % demonstration. We are not actually using these proofs in our development, we
 % are just referencing them.
 \begin{quote}\small
-  \textbf{Proof of (1).} Simple induction if~$A$ is
+  \textbf{Proof of (a).} Simple induction if~$A$ is
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
   contained in all prime ideals and are thereby
   nilpotent.\medskip
 
-  \textbf{Proof of (2).} Simple induction if~$A$ is an
+  \textbf{Proof of (b).} Simple induction if~$A$ is an
   integral domain; the general case reduces to this one: For every prime
   ideal~$\ppp$, the nonconstant coefficients of~$f$ vanish over the integral
   domain~$A/\ppp$. Hence they are contained in all prime ideals
@@ -1068,7 +1068,7 @@ Condition~(2) is manifestly formalizable in
 arithmetic, uniformly in~$n$.
 
 
-\section{For general rings}
+\section{Expanding the scope to general rings}
 \label{sect:wlog}
 
 The iterative construction presented in Section~\ref{sect:constr}
