@@ -108,13 +108,14 @@ the transfinite.
 If~$A$ is countable with enumeration~$x_0,x_1,\ldots$, we can hope to provide a
 more explicit construction by successively adding generators to the zero ideal,
 skipping those which would render it improper:
-\begin{align*}
+\begin{equation}\label{eq:orig-construction}
+  \tag{$\star$}\begin{aligned}
   \mmm_0 &= \{ 0 \}, \\
   \mmm_{n+1} &= \begin{cases}
     \mmm_n + (x_n), & \text{if $1 \not\in \mmm_n + (x_n)$}, \\
     \mmm_n, & \text{else.}
   \end{cases}
-\end{align*}
+\end{aligned}\end{equation}
 A maximal ideal is then obtained in the limit as the union of the intermediate
 stages~$\mmm_n$. For instance, Krull in his 1929 Annals contribution~\cite[Hilfs\-satz]{krull:ohne} and books on constructive
 algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion.
@@ -590,6 +591,11 @@ general it fails to be finitely generated. Usually in constructive mathematics, 
 finitely generated are seldom detachable. For instance the ideal~$\{ x \in
 \ZZ \,|\, x = 0 \vee \varphi \} \subseteq \ZZ$ is detachable if and only
 if~$\varphi \vee \neg\varphi$.
+
+A consequence of Proposition~\ref{prop:with-test}(a) is that the original
+procedure displayed as Equation~(\ref{eq:orig-construction}) on
+page~\pageref{eq:orig-construction} is constructively feasible, and that it
+coincides with the construction of the maximal ideal~$\mmm$.
 
 
 \subsection{A more economical description using generators}
