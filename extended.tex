@@ -390,7 +390,7 @@ generation of $(M)$ by the following rules:\par
 \infer{av \in (M)}{\quad a\in A \quad v \in (M)}
 \]}%
 \noindent Here we adhere to the paradigm of generalized inductive definitions
-\cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind}.
+\cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind,aczel:ind}.
 
 
 \section{An iterative construction of maximal ideals}
@@ -1412,7 +1412,17 @@ in a direct inductive fashion, by the following generating clauses:
 of~$\sigma$, then~$P \mid \sigma$.
 \end{enumerate}
 Hence, to witness~$P \mid \sigma$, we may directly witness~$P(\sigma)$ or first
-ask for a refinement of~$\sigma$ as envisaged by the covering system.
+ask for a refinement of~$\sigma$ as envisaged by the covering
+system.\footnote{The induction
+principle~\cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind,aczel:ind} corresponding to the definition of the
+bar predicate is this: For every predicate~$Q$ on~$L$, if
+\begin{enumerate}
+\item for every element~$\sigma \in L$, $P(\sigma) \Rightarrow Q(\sigma)$, and if
+\item for every element~$\sigma \in L$ and every covering~$R \in \Cov(\sigma)$,
+$(\forall \tau \in R\_ Q(\tau)) \Rightarrow Q(\sigma)$,
+\end{enumerate}
+then~$P(\sigma) \Rightarrow Q(\sigma)$ for every element~$\sigma \in L$.}
+
 
 This new predicate is again monotone---the stability condition of
 Definition~\ref{defn:covering-system} on the coverings is
