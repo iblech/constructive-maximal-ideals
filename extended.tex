@@ -1211,7 +1211,7 @@ universe in which a filter can always be found. The canonical filter living in
 the extended universe is called the \emph{generic filter}.
 
 \begin{example}\label{ex:notion-enum}To force the existence of an enumeration
-of the elements of a set~$X$, let~$L \defeq X^*$ be the set of all finite lists
+of the elements of a set~$X$, let~$L \defeq X^*$ be the set of finite lists
 of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
 for~$i=0,\ldots,n-1$, and declare~$\tau \preceq \sigma$ iff~$\sigma$ is a prefix
@@ -1382,11 +1382,11 @@ filters of the forcing notion.
 For the purposes of forcing, the most important use case is when the forcing
 notion is nontrivial but no filters exist in the base universe. In this case
 the induced space is nontrivial and without points, highlighting that a
-pointfree approach to topology is required to make sense of them.
+pointfree approach to topology is required to make sense of this space.
 
-Conversely, every pointfree space gives rise to a forcing notion such that its
+Conversely, every space in pointfree topology gives rise to a forcing notion such that its
 filters are in canonical one-to-one correspondence with the points of the space.
-For instance, let a pointfree space be given by a frame~$L$ as in locale
+For instance, let a space be given by a frame~$L$ as in locale
 theory~\cite{picado-pultr:frames-and-locales}. Then a covering system is
 defined by~$\Cov(\sigma) \defeq \{ M \in P(L) \,|\, \sigma = \bigvee M \}$.
 
@@ -1394,10 +1394,13 @@ defined by~$\Cov(\sigma) \defeq \{ M \in P(L) \,|\, \sigma = \bigvee M \}$.
 \subsection{The eventually monad} Let~$L$ be a forcing notion. A
 predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preceq \sigma$
 implies~$P(\sigma) \Rightarrow P(\tau)$. Such predicates express positive
-observations which are stable under refinement of approximations.
+observations which are stable under refinement of approximations. For
+instance, in the case of the forcing notion of Example~\ref{ex:notion-enum},
+the proposition~$P(\sigma)$ could express that a particular element~$x_0 \in X$
+is among the terms of~$\sigma$.
 
 For a monotone predicate~$P$, we introduce a derived predicate denoted~``$P
-\mid \sigma$'' expressing that no matter how an approximation~$\sigma$ evolves
+\mid \sigma$'' (pronounced~``$P$ bars~$\sigma$'') expressing that no matter how an approximation~$\sigma$ evolves
 to a better approximation~$\tau$, eventually~$P(\tau)$ will hold. Similar to
 Coquand and Persson's approach to well-quasi-orders~\cite[Definition~6]{coquand-persson:groebner} and
 Coquand and Lombardi's approach to Noetherian
@@ -1419,7 +1422,7 @@ relaxation~$P\mid\cdot$ is a monad on the category of monotone predicates, dubbe
 the (parametrized) freer monad~\cite{kiselyov-ishii:freer,apfelmus:operational}
 on~$\Cov$, that is the free monad~\cite[Section~6]{swierstra:carte}
 on the free functor on~$\Cov$.
-
+%
 The following two basic results on ``escaping the monad'' shed light on the
 meaning of~$P \mid \sigma$ and are crucial for the forcing extension and the
 base universe to satisfy the same first-order statements.
@@ -1471,7 +1474,7 @@ monad asks for the current approximation~$\sigma$ to be more defined or to inclu
 specific element~$a$, we just append~$x_0$ respectively~$a$ to~$\sigma$.
 \end{example}
 
-\begin{example}In the situation of Example~\ref{ex:notion-negneg}, for any
+\begin{example}In the situation of Example~\ref{ex:notion-negneg}, for every
 monotone predicate~$P$ we have~$P \mid \star$ if and only if~$\neg\neg
 P(\star)$. That is, the eventually monad coincides with the double negation or
 continuation monad. In particular, we can generally escape from the monad only
@@ -1490,18 +1493,18 @@ Example~\ref{ex:notion-enum}, we have
 \[ \forall x \in X\_ \nabla \sigma\_ x \in \sigma
 \qquad\text{(meaning $\forall x \in X\_ ((x \in \cdot) \mid \sigma)$),} \]
 expressing that for every element~$x \in X$ it will eventually be the case that
-it is enumerated, but typically not
+it is enumerated; but typically we do not have
 \[ \nabla \sigma\_ \forall x \in X\_ x \in \sigma
 \qquad\text{(meaning $(\forall x \in X\_ x \in \cdot) \mid \sigma$),} \]
 expressing that eventually it will be the case that all elements are
 enumerated.
 
 \begin{remark}The ``localization''~$P \mid \cdot$ of a monotone predicate~$P$
-can be regarded as a sheafification process as in sheaf theory: A monotone
+has a close connection to sheaf theory. A monotone
 predicate~$P$ gives rise to a presheaf on the thin category induced from~$L$,
 more precisely a subpresheaf of the terminal presheaf, by mapping an
 element~$\sigma \in L$ to the truth value of~$P(\sigma)$. The presheaf
-mapping~$\sigma$ to the truth value of~$P \mid \sigma$ is then its
+mapping~$\sigma$ to the truth value of~$P \mid \sigma$ is then the
 sheafification with respect to the Grothendieck coverage induced from the
 covering system attached to~$L$.\end{remark}
 
