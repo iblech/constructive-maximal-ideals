@@ -1423,10 +1423,24 @@ $(\forall \tau \in R\_ Q(\tau)) \Rightarrow Q(\sigma)$,
 \end{enumerate}
 then~$P(\sigma) \Rightarrow Q(\sigma)$ for every element~$\sigma \in L$.}
 
+\begin{lemma}The relaxation of~$P$ is again monotone, that is~$P \mid \sigma
+\Rightarrow P \mid \tau$ if~$\tau \preceq \sigma$.\end{lemma}
 
-This new predicate is again monotone---the stability condition of
-Definition~\ref{defn:covering-system} on the coverings is
-crucial for this fact---and the functor mapping a predicate~$P$ to its induced
+\begin{proof}By induction on the given witness of~$P \mid \sigma$:
+\begin{enumerate}
+\item If~$P(\sigma)$, then also~$P(\tau)$ and hence~$P \mid \tau$ by
+monotonicity of~$P$.
+\item If~$P \mid \sigma'$ for all~$\sigma' \in R$, where~$R$ is a covering
+of~$\sigma$, then by the stability condition
+ofDefinition~\ref{defn:covering-system} there is a covering~$S \in \Cov(\tau)$
+such that~$S \subseteq {\downarrow}R$. Hence for every element~$\tau' \in S$,
+there is an element~$\sigma' \in R$ such that~$\tau' \preceq \sigma'$. By the
+induction hypothesis, we have~$P \mid \tau'$ for all such elements~$\tau'$, and
+hence~$P \mid \tau$. \qedhere
+\end{enumerate}
+\end{proof}
+
+The functor mapping a predicate~$P$ to its induced
 relaxation~$P\mid\cdot$ is a monad on the category of monotone predicates, dubbed the
 \emph{eventually monad}. In computer science parlance, this monad is
 the (parametrized) freer monad~\cite{kiselyov-ishii:freer,apfelmus:operational}
