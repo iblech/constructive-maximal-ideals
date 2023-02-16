@@ -250,8 +250,8 @@ set-theoretic forcing, for the plain reason that the base model~$V$ is a
 transitive subset of the forcing extension~$V[G]$. Constructively, it is a property enjoyed only by some
 particular forcing notions. In topos-theoretic language, the canonical
 geometric morphism from any Grothendieck topos to the base topos is open
-if the base satisfies the law of excluded middle~\cite[p.~57]{joyal-tierney:grothendieck}, so any Grothendieck topos is
-ouvert. In contrast, ouvertness is a nontrivial property if the law of excluded
+if the base satisfies the law of excluded middle~\cite[p.~57]{joyal-tierney:grothendieck}, so every Grothendieck topos is
+overt. In contrast, overtness is a nontrivial property if the law of excluded
 middle is not available. We are grateful to Robert Lubarsky for pointing out
 this difference to classical forcing to us.}
 Hence we have the metatheorem that
@@ -275,8 +275,10 @@ first-order consequences of the existence of a maximal ideal.
 
 We present details of this technique in Section~\ref{sect:wlog}. Unlike
 Joyal and Tierney, who pursued a semantic approach employing the language of
-toposes, our presentation is purely syntactical and explicitly computational in
-nature. No familiarity with categories, sheaves or toposes is required.
+toposes, our presentation leans on the syntactical side and is explicitly computational in
+nature. Owing to the central role played by a certain generalized inductive definition, we connect forcing
+with established notions in theoretical computer science.
+No familiarity with categories, sheaves or toposes is required.
 
 In classical set theory, the feature that forcing preserves and reflects
 bounded first-order formulas is sometimes regarded as a deficiency of the
@@ -285,7 +287,7 @@ construct. We turn this view upside down: This feature is the central property
 enabling the applications we desire. We hence bolster Judith Roitman's thesis
 that ``mainstream mathematics [\ldots\!] is beginning to see results using modern
 set theoretic techniques''~\cite{roitman:uses} by providing an instance in
-constructive algebra.
+constructive algebra, and hope to make forcing more accessible.
 
 Summarizing, our approach strengthens the view of maximal ideals as convenient
 fictions~\cite[Section~1]{schuster-wessel:krull}. Maximal ideals can carry out
@@ -365,6 +367,21 @@ trick as in Barr's theorem.
 \end{quote}
 In this way we \emph{reify dynamical algebra}.
 
+
+\paragraph{Acknowledgments}
+The present study was carried out within the project ``Reducing complexity in
+algebra, logic, combinatorics -- REDCOM'' belonging to the program ``Ricerca
+Scientifica di Eccellenza 2018'' of the Fondazione Cariverona and GNSAGA of the INdAM.%
+\footnote{The opinions expressed in this paper are solely those of the
+authors.} Important steps towards this paper were made
+during the Dagstuhl Seminar 21472 ``Geometric Logic, Constructivisation, and
+Automated Theorem Proving'' in November 2021. This paper would not have come to
+existence without the authors' numerous discussions with Daniel Misseleck-Wessel, and
+greatly benefited from astute comments of Karim Becher, Nicolas Daans, Kathrin Gimmi, Matthias Hutzler,
+Tadeusz Litak,
+Noah Schweber, Lukas Stoll and the three anonymous reviewers of the abridged
+precursor text to this
+article~\cite{blechschmidt-schuster:constructive-maximal-ideals}.
 
 \paragraph{Conventions} Throughout this note, we fix a ring~$A$, and work in a constructive metatheory.
 In the spirit of Lombardi and Quitté~\cite{lombardi-quitte:constructive-algebra}, we employ \emph{minimal
@@ -668,7 +685,7 @@ splinters into several inequivalent notions~\cite{richman:noetherian,mines-richm
 is that firstly they refer only to finitely generated ideals and that secondly
 stabilization is weakened to \emph{stalling}: For instance, the Richman--Seidenberg
 condition~\cite[Section~III.2]{mines-richman-ruitenburg:constructive-algebra}
-is that every infinite ascending chain
+states that every infinite ascending chain
 $\aaa_0 \subseteq \aaa_1 \subseteq \cdots$ of finitely generated ideals
 \emph{stalls} in that there is an index~$n$ such that~$\aaa_n = \aaa_{n+1}$.
 Related conditions allow for different kinds of collections of ideals, for
@@ -1480,7 +1497,7 @@ Proposition~\ref{prop:ev-points} is equivalent to the principle of monotonic
 bar induction.
 
 We think of~``$P \mid \sigma$'' as an inductive paraphrasing, not directly referring to
-filters and indeed also being nontrivial in case there are no filters at all in the base
+filters and indeed even being nontrivial in case there are no filters at all in the base
 universe, of the statement that every filter containing~$\sigma$ also contains
 a refinement~$\tau \preceq \sigma$ with~$P(\tau)$. While the latter statement
 refers to filters---ideal, completed objects---the former has a more finitary
@@ -1733,22 +1750,6 @@ and Tierney's metatheorem, we arrive at the dynamical method.
 
 \color{black}
 
-\subsection{Acknowledgments}
-The present study was carried out within the project ``Reducing complexity in
-algebra, logic, combinatorics -- REDCOM'' belonging to the program ``Ricerca
-Scientifica di Eccellenza 2018'' of the Fondazione Cariverona and GNSAGA of the INdAM.%
-\footnote{The opinions expressed in this paper are solely those of the
-authors.} Important steps towards this paper were made
-during the Dagstuhl Seminar 21472 ``Geometric Logic, Constructivisation, and
-Automated Theorem Proving'' in November 2021. This paper would not have come to
-existence without the authors' numerous discussions with Daniel Wessel, and
-greatly benefited from astute comments of Karim Becher, Nicolas Daans, Kathrin Gimmi, Matthias Hutzler,
-Noah Schweber, Lukas Stoll and the three anonymous reviewers.
-
-
-\appendix
-
-% xxx put as proper section, not in appendix
 
 \section{Generalization to abstract inconsistency predicates on well-orders}
 \label{sect:inc-wf}
