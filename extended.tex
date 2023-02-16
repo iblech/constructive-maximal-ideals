@@ -3,7 +3,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb,amsmath,mathtools,proof,xcolor,amsthm}
+\usepackage{amssymb,amsmath,mathtools,proof,xcolor,amsthm,stmaryrd}
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 \theoremstyle{definition}
@@ -25,6 +25,7 @@
 \newtheorem{caveat}[definition]{Caveat}
 \newtheorem{conjecture}[definition]{Conjecture}
 
+\newcommand{\?}{\,{:}\,}
 \newcommand{\aaa}{\mathfrak{a}}
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
@@ -35,6 +36,7 @@
 \newcommand{\TT}{\mathbb{T}}
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\forces}{\vDash}
 \renewcommand{\_}{\mathpunct{.}\,}
 
 \pubyear{0000}
@@ -1569,13 +1571,171 @@ covering system attached to~$L$.\end{remark}
 % other forcing
 
 
+% \begin{document}
+
 \subsection{The translation}
 
-- \cite[Theorem~2]{hamkins:multiverse},
-  \cite[Section~4]{maddy-meadows:reconstruction},
-  \cite{barton:forcing}
+Let~$L$ be a forcing notion. The purpose of this section is to describe, purely
+in terms of the base universe~$V$, when a bounded first-order statement holds
+in the forcing extension~$V^\nabla$ described by~$L$. We consider statements
+over the (large) first-order signature which has
+\begin{enumerate}
+\item one sort~$\underline{X}$ for each set~$X$ in the base universe,
+\item one~$n$-ary function symbol~$\underline{f} : \underline{X_1} \times
+\cdots \times \underline{X_n} \to \underline{Y}$ for each map~$f : X_1 \times
+\cdots \times X_n \to Y$,
+\item one~$n$-ary relation symbol~$\underline{R} \hookrightarrow
+\underline{X_1} \times \cdots \times \underline{X_n}$ for each relation~$R
+\subseteq X_1 \times \cdots \times X_n$, and
+\item an additional unary relation symbol~$G \hookrightarrow \underline{L}$ (to
+be interpreted as the \emph{generic filter} of~$L$).
+\end{enumerate}
+As usual, substitution~$\varphi[\underline{x_0}/x]$ of a constant (nullary
+function symbol) for a free variable and interpretation
+brackets~$\llbracket\ldots\rrbracket$ are defined; for
+instance~$\llbracket\underline{f}(\underline{x})\rrbracket = f(x)$.
+Recursively in the structure of a formula~$\varphi$ over this signature, and
+similar to Kripke or Beth semantics, we define what it means that~``$\varphi$
+is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
+\forces \varphi$'':
+\newcommand{\defeqv}{\quad\text{iff}\quad}
+\begin{tabbing}
+  \qquad \= $\sigma \forces \underline{R}(\underline{s_1},\ldots,\underline{s_n})$ \= \defeqv $s = t$. \= \kill
 
-- give rules
+  \> $\sigma \forces s = t$
+  \> \defeqv $\nabla \sigma\_ \llbracket s \rrbracket = \llbracket t \rrbracket$. \\[0.3em]
+
+  \> $\sigma \forces \underline{R}(s_1,\ldots,s_n)$
+  \> \defeqv $\nabla\sigma\_ R(\llbracket s_1 \rrbracket,\ldots,\llbracket s_n \rrbracket)$. \\[0.3em]
+
+  \> $\sigma \forces G(\tau)$
+  \> \defeqv $\nabla\sigma\_ \sigma \preceq \llbracket\tau\rrbracket$. \\[0.3em]
+
+  \> $\sigma \forces \varphi \Rightarrow \psi$
+  \> \defeqv $\forall \tau \preceq \sigma\_ (\tau \forces \varphi) \Rightarrow
+  (\tau \forces \psi)$. \\[0.3em]
+
+  \> $\sigma \forces \top$ \> \defeqv $\top$. \\[0.3em]
+
+  \> $\sigma \forces \varphi \wedge \psi$
+  \> \defeqv $(\sigma \forces \varphi) \wedge (\sigma \forces \psi)$. \\[0.3em]
+
+  \> $\sigma \forces \forall x\?\underline{X}\_ \varphi$
+  \> \defeqv $\forall \tau \preceq \sigma\_ \forall x_0 \in X\_ \tau \forces
+  \varphi[\underline{x_0}/x]$. \\[0.3em]
+
+  \> $\sigma \forces \bot$ \> \defeqv $\nabla\sigma\_ \bot$ \\[0.3em]
+
+  \> $\sigma \forces \varphi \vee \psi$
+  \> \defeqv $\nabla\sigma\_ (\sigma \forces \varphi) \vee (\sigma \forces \psi)$. \\[0.3em]
+
+  \> $\sigma \forces \exists x\?\underline{X}\_ \varphi$
+  \> \defeqv $\nabla\sigma\_ \exists x_0 \in X\_ \sigma \forces \varphi[\underline{x_0}/x]$.
+\end{tabbing}
+Finally, when we say that some first-order statement~$\varphi$ ``holds in the
+forcing extension~$V^\nabla$'', we mean
+\[ \forall \sigma\_ \sigma \forces \varphi,
+\quad\text{symbolically also written as: $\varphi^\nabla$.} \]
+In this way, every statement about the forcing extension is actually a
+statement about the base universe~$V$. Because of the well-established nature
+of the eventually monad, these statements have clear computational content;
+which content exactly, depends on the forcing condition.
+
+In effect, these definitions describe a formula translation~$\varphi \mapsto
+\varphi^\nabla$ akin to the double negation translation---more precisely, the
+variant called \emph{Gödel--Gentzen translation} in~\cite{ferreira-oliva:translation}.
+There are two differences to this revered translation: Firstly, in place
+of~$\neg\neg$, a different \emph{modality} (\emph{local operator},
+see~\cite[Section~14.5]{goldblatt:topoi},~\cite{goldblatt:modality},~\cite{pfenning-davies:reconstruction})
+is used, namely the eventually monad~$\nabla$ induced from the forcing
+notion~$L$, as in the~``$J$-'' or~``$T$-translation''~\cite{aczel:russell-prawitz,escardo-oliva:peirce-shift}.
+Secondly, this modality depends on a parameter, the current forcing
+condition~$\sigma$. In the case of the forcing notion of
+Example~\ref{ex:notion-negneg}, the translation described here indeed
+specializes to precisely the double negation translation.
+
+\begin{lemma}\label{lemma:kj-basics}For every first-order formula~$\varphi$,
+the interpretation is \ldots
+\begin{enumerate}
+\item[(a)] monotone: If~$\sigma \forces \varphi$ and if~$\tau \preceq \varphi$,
+then also~$\tau \forces \varphi$.
+\item[(b)] local: If~$\nabla\sigma\_ \sigma \forces \varphi$,
+then~$\sigma \forces \varphi$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}Routine induction on the structure of the formula~$\varphi$; see,
+for instance,~\cite{xxx}. The fundamental properties of the eventually
+monad~$\nabla$ required for the verification are: xxx.\end{proof}
+
+\begin{theorem}\label{thm:kj-sound}The interpretation is sound with respect to
+intuitionistic first-order logic: If a formula~$\varphi$ is intuitionistically
+provable, then~$\varphi$ holds in~$V^\nabla$.\end{theorem}
+
+\begin{proof}Routine induction on the structure of intuitionistic derivations,
+see~\cite{xxx}.\end{proof}
+
+It is by Theorem~\ref{thm:kj-sound} that we may ``reason in the forcing
+extension'': If we have established that some statement~$\alpha$ holds
+in~$V^\nabla$ (for instance, by direct verification of the translated
+statement~$\alpha^\nabla$) and if we have an intuitionistic proof that~$\alpha$
+entails some further statement~$\beta$, then we may conclude that~$\beta$ holds
+in~$V^\nabla$. Just as proofs give rise to programs, translated proofs give
+rise to programs ``with side effects in the eventually monad''.
+
+As an actual construction of~$V^\nabla$ (as the category of sheaves over the
+Grothendieck site induced from the forcing notion) is avoided and it is only
+explained what it means for a statement to hold in~$V^\nabla$, our approach is
+related to the naturalist account of forcing in classical set
+theory~\cite[Theorem~2]{hamkins:multiverse},~\cite[Section~4]{maddy-meadows:reconstruction},~\cite{barton:forcing}.
+Both the translation itself as well as Lemma~\ref{lemma:kj-basics} and
+Theorem~\ref{thm:kj-sound} can be extended to the higher-order
+setting~\cite{xxx}, making it possible to work in the forcing extension much in
+the same way as in the base universe.
+
+\begin{proposition}The forcing extension~$V^\nabla$ contains a filter
+of~$\underline{L}$, namely~$G$, in the precise sense that the following
+statements hold in~$V^\nabla$:
+\begin{enumerate}
+\item[(1)] $\forall \sigma \? \underline{L}\_ \forall \tau \? \underline{L}\_
+\bigl(\tau \mathrel{\underline{\preceq}} \sigma \wedge G(\sigma)\bigr)
+\Rightarrow G(\tau)$.
+\item[(2a)] $\exists \sigma \? \underline{L}\_ G(\sigma)$.
+\item[(2b)] $\forall \alpha \? \underline{L}\_
+\forall \beta \? \underline{L}\_
+\exists \sigma \? \underline{L}\_
+\sigma \mathrel{\underline{\preceq}} \alpha \wedge
+\sigma \mathrel{\underline{\preceq}} \beta \wedge
+G(\sigma)$.
+\item[(3)] $\forall \sigma \? \underline{L}\_
+\forall R \? \underline{P(L)}\_
+\bigl(R \mathrel{\underline{\in}} \underline{\Cov}(\sigma) \wedge
+G(\sigma)\bigr) \Rightarrow
+\exists \tau \? \underline{L}\_
+G(\tau) \wedge \tau \mathrel{\underline{\in}} R$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}Straightforward verification.
+\end{proof}
+
+\begin{example}For the forcing notion of Example~\ref{ex:notion-enum}, the
+forcing extension contains an enumeration~$f$ of~$\underline{X}$ in the following
+sense: Defining~``$f(n) = x$'' to be an abbreviation for~``$\exists
+\sigma\?\underline{L}\_ G(\sigma) \wedge \sigma\underline{[}n\underline{]} =
+x$'', in the forcing extension we have that
+\begin{enumerate}
+\item ``$f$ is everywhere-defined'': $\forall n\?\underline{\NN}\_ \exists
+x\?\underline{X}\_ f(n) = x$,
+\item ``$f$ is single-valued'': $\forall n\?\underline{\NN}\_ \forall
+x\?\underline{\NN}\_ \forall y\?\underline{\NN}\_
+(f(n) = x \wedge f(n) = y) \Rightarrow x = y$, and
+\item ``$f$ is surjective'': $\forall x\?\underline{\NN}\_ \exists n\?\underline{\NN}\_
+f(n) = x$.
+\end{enumerate}
+\end{example}
+
+\color{gray}
 
 - state first-order preservation and reflection theorem
 
@@ -1584,6 +1744,8 @@ covering system attached to~$L$.\end{remark}
 
 - establish connection to dynamical algebra and also comment on
   forcing a maximal ideal directly
+
+\subsection{The connection to dynamical algebra}
 
 \begin{remark}In addition to maximal ideals, minimal prime ideals are important
 ingredients for some reduction techniques in classical commutative algebra. For
@@ -1616,8 +1778,6 @@ maximal with respect to the old prime filters.
 \end{remark}
 
 
-\subsection{The connection to dynamical algebra}
-
 The ideal~$\mmm$ obtained by applying the construction of Section~\ref{sect:constr} to
 the generic enumeration of~$A$ and the ideal~$\nnn$ obtained by directly forcing a
 maximal ideal serve similar purposes. Because they live in different universes,
@@ -1648,8 +1808,6 @@ ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[]
 \models x \in \mmm$ and hence also~$[1-ux] \models x \in \mmm$. Thus~$[1-ux]
 \models 1 \in \mmm$, a contradiction.
 \end{proof}
-
-\color{gray}
 
 \begin{proposition}Let~$P$ be a monotone predicate on~$X^\star$. Let~$\sigma
 \in X^\star$.
