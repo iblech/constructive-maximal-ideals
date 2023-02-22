@@ -25,7 +25,10 @@
 \newtheorem{caveat}[definition]{Caveat}
 \newtheorem{conjecture}[definition]{Conjecture}
 
+\newcommand{\Incbare}{\mathsf{Inc}}
+\newcommand{\Inc}[1]{\operatorname{\Incbare}#1}
 \newcommand{\?}{\,{:}\,}
+\newcommand{\seq}[1]{\mathrel{\vdash\!\!\!_{#1}}}
 \newcommand{\aaa}{\mathfrak{a}}
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
@@ -1336,22 +1339,22 @@ equipped with covering systems to \emph{sites}, categories equipped with
 Grothendieck coverages.
 \end{example}
 
-\begin{example}\label{ex:notion-scott}Let~$(P,{\leq})$ be a complete lattice and let~$O$
+\begin{example}\label{ex:notion-scott}Let~$(P,{\leq})$ be a complete lattice and let~$\Incbare$
 be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
 opposite lattice of~$P$ becomes a forcing notion with coverings given by
 \[
-  \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \bigr\} \cup
+  \Cov(\sigma) \defeq \bigl\{ \emptyset \,\big|\, \Inc{\sigma} \bigr\} \cup
     \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
     \overline{\nu} \} \,\big|\, \nu \in P \bigr\},
 \]
 where the joins are computed in~$P$ and~$\overline{\nu}$ denotes the pseudo-complement of~$\nu$ as
 in~\cite[Equation~(6)]{wessel-schuster:radical}, that is the set of those
-elements~$\nu' \in L$ such that~$O(\nu \vee \nu')$.
+elements~$\nu' \in L$ such that~$\Inc{\nu \vee \nu'}$.
 
 The filters of this forcing notion are in canonical one-to-one correspondence with
 the proper~$O$-complete elements of~$P$, that is those elements~$\alpha$
-with~$\neg O(\alpha)$ for which the disjunction
-\[ \nu \leq \alpha \quad\text{or}\quad O(\alpha \vee \nu) \]
+with~$\neg \Inc{\alpha}$ for which the disjunction
+\[ \nu \leq \alpha \quad\text{or}\quad \Inc{\alpha \vee \nu} \]
 holds for all elements~$\nu \in P$. The correspondence is by mapping a
 filter~$F$ to its join~$\bigvee F \in P$ and conversely by mapping
 a proper~$O$-maximal element~$\alpha$ to the filter~${\downarrow}\alpha$.
@@ -1360,17 +1363,17 @@ If~$P$ is algebraic, that is if every element is the join of the compact
 elements below it, we can restrict this covering system to the poset~$KP$ of
 compact elements of~$P$:
 \[
-  \Cov_{KP}(\sigma) \defeq \bigl\{ \emptyset \,\big|\, O(\sigma) \bigr\} \cup
+  \Cov_{KP}(\sigma) \defeq \bigl\{ \emptyset \,\big|\, \Inc{\sigma} \bigr\} \cup
     \bigl\{ \{ \sigma \vee \nu \} \cup \{ \sigma \vee \nu' \,|\, \nu' \in
     \overline{\nu} \cap KP \} \,\big|\, \nu \in KP \bigr\}.
 \]
 The one-to-one correspondence from above then restricts to a correspondence
 between the filters of~$((KP)^\mathrm{op},\mathrm{Cov}_{KP})$ and those proper
 elements~$\alpha$ of~$P$ for which the disjunction~``$\nu \leq \alpha \vee
-O(\alpha \vee \nu)$'' holds for all elements~$\nu \in KP$. In this way we can
+\Inc{\alpha \vee \nu}$'' holds for all elements~$\nu \in KP$. In this way we can
 recover several other examples for forcing notions. For instance,
 Example~\ref{ex:notion-max} is the special case where~$P$ is the complete lattice
-of all ideals of~$A$ and~$O(\aaa)$ denotes~$1 \in \aaa$.
+of all ideals of~$A$ and~$\Inc{\aaa}$ denotes~$1 \in \aaa$.
 \end{example}
 
 \begin{remark}Classical set-theoretic forcing
@@ -1685,7 +1688,22 @@ intuitionistic first-order logic: If a formula~$\varphi$ is intuitionistically
 provable, then~$\varphi$ holds in~$V^\nabla$.\end{theorem}
 
 \begin{proof}Routine induction on the structure of intuitionistic derivations,
-see~\cite[Sections~6.7,~6.8]{borceux:handbook3}.\end{proof}
+see~\cite[Sections~6.7,~6.8]{borceux:handbook3}. For instance, in view of the
+rule
+\[
+  \infer{\varphi \vee \psi \seq{\vec x} \chi}{\varphi \seq{\vec x} \chi \quad
+  \psi \seq{\vec x} \chi}
+\]
+of intuitionistic sequent calculus we need to verify that
+\[
+  \text{if
+  $\sigma \forces \forall \vec x\?\vec X\_ (\varphi \Rightarrow \chi)$ and if
+  $\sigma \forces \forall \vec x\?\vec X\_ (\psi \Rightarrow \chi)$, then
+  $\sigma \forces \forall \vec x\?\vec X\_ (\varphi \vee \psi \Rightarrow \chi)$;
+  }
+\]
+this particular verification rests on Lemma~\ref{lemma:kj-basics}(b).
+\end{proof}
 
 It is by Theorem~\ref{thm:kj-sound} that we may ``reason in the forcing
 extension'': If we have established that some statement~$\alpha$ holds
@@ -1702,7 +1720,7 @@ related to the naturalist account of forcing in classical set
 theory~\cite[Theorem~2]{hamkins:multiverse},~\cite[Section~4]{maddy-meadows:reconstruction},~\cite{barton:forcing}.
 Both the translation itself as well as Lemma~\ref{lemma:kj-basics} and
 Theorem~\ref{thm:kj-sound} can be extended to the higher-order
-setting~\cite{xxx}, making it possible to work in the forcing extension much in
+setting~\cite[Section~D4.1]{johnstone:elephant}, making it possible to work in the forcing extension much in
 the same way as in the base universe.
 
 \begin{proposition}The forcing extension~$V^\nabla$ contains a filter
@@ -1888,11 +1906,11 @@ sequences can be rare---for a particularly sequence-poor ring,
 see~\cite[Example~2]{blass:induction}.
 %
 The ascending tree condition~\cite{richman:noetherian} is an attempt to fix
-this deficiency. Knowing that a ring satisfies this stronger condition gives much more
+this deficiency; knowing that a ring satisfies this stronger condition gives much more
 information than the ascending chain condition, and a version of Hilbert's
 basis theorem shows that there is still an ample supply of important rings
-which satisfy this condition. There is a further condition which in many cases
-of interest is even strong, a wellfoundedness attributed to
+satisfying this condition. There is a further condition which in many cases
+of interest is even stronger, a wellfoundedness condition attributed to
 Martin-Löf~\cite{jacobsson-lofwall:standard}.
 
 Common to all these conditions is that for their corresponding version of
@@ -1903,8 +1921,8 @@ which does not require either of these assumptions?
 There is; the inductive condition used by Coquand, Lombardi and
 Persson~\cite{coquand-persson:groebner,coquand-lombardi:krull} fits the bill.
 Appreciating the obstacles which the proofs of Hilbert's basis theorem for the
-earlier flavors of Noetherianity had to overcome, the clean proof for the
-inductive condition~\cite[Corollary~16]{coquand-persson:groebner} has an almost magical
+earlier flavors of Noetherianity had to overcome, the clean proof~\cite[Corollary~16]{coquand-persson:groebner} for the
+inductive condition has an almost magical
 quality to it.
 
 Forcing technology allows us to recognize that with this condition, we have
@@ -1979,17 +1997,17 @@ directed joins~\cite{schuster-wessel:jacincpred}. For our purposes, the level of
 following definition is sufficient.
 
 \begin{definition}Let~$X$ be a set. An \emph{inconsistency predicate} on the
-powerset~$P(X)$ is a predicate~$O$ on~$P(X)$ which is
+powerset~$P(X)$ is a predicate~$\Incbare$ on~$P(X)$ which
 \begin{enumerate}
-\item monotone: if~$U \subseteq V$ and~$O(U)$, then~$O(V)$, and which
-\item splits directed joins: if~$\mathcal{U}$ is a directed subset of~$P(X)$
-and~$O(\bigcup \mathcal{U})$, then~$O(V)$ for some~$V \in \mathcal{U}$.
+\item is monotone: if~$U \subseteq V$ and~$\Inc{U}$, then~$\Inc{V}$, and
+\item splits directed joins: if~$\mathcal{U} \subseteq P(X)$ is a directed subset
+and~$\Inc{\bigl(\bigcup \mathcal{U}\bigr)}$, then~$\Inc{V}$ for some~$V \in \mathcal{U}$.
 \end{enumerate}
 \end{definition}
 
 An important example of a directed join is the union of an ascending sequence
-of subsets: For an inconsistency predicate~$O$, if~$O(\bigcup_{n \in \NN}
-U_n)$, then there is a number~$n$ such that~$O(U_n)$. However, we will also
+of subsets: For an inconsistency predicate~$O$, if~$\mathrm{Inc}{\bigl(\bigcup_{n \in \NN}
+U_n\bigr)}$, then there is a number~$n$ such that~$\Inc{U_n}$. However, we will also
 employ directed subsets of the form~$\{ U \} \cup \{ X \,|\, \varphi \}$
 where~$\varphi$ is a proposition which might not be
 decidable.\footnote{Directed subsets of this kind, classically trivial but
@@ -1997,16 +2015,16 @@ constructively relevant, have also played a role
 in~\cite[Lemma~1]{schuster-wessel:jacincpred}
 and~\cite[Example~I.1.7(2)]{moerdijk-vermeulen:proper-maps}.}
 
-\begin{example}\label{ex:inc-ring}Let~$A$ be a ring. For any subset~$M \subseteq A$, let~$O(M)$
+\begin{example}\label{ex:inc-ring}Let~$A$ be a ring. For any subset~$M \subseteq A$, let~$\Inc{M}$
 state that~$1 \in (M)$, where~$(M)$ is the ideal generated by~$M$. Then~$O$ is an
 inconsistency predicate.\end{example}
 
 \begin{example}\label{ex:inc-module}Let~$M$ be a module over a ring. For any subset~$U \subseteq M$,
-let~$O(U)$ denote that~$U = M$. Then~$O$ is an inconsistency predicate if and
+let~$\Inc{U}$ denote that~$U = M$. Then~$O$ is an inconsistency predicate if and
 only if~$M$ is finitely generated.\end{example}
 
 \begin{example}\label{ex:inc-formulas}Let~$X$ be the set of sentences over some first-order
-signature. Let~$\alpha \in X$ be a fixed sentence. Let~$O(M)$ state that~$M$
+signature. Let~$\alpha \in X$ be a fixed sentence. Let~$\Inc{M}$ state that~$M$
 entails~$\alpha$ in (minimal, intuitionistic or classical) first-order logic. Then~$O$ is an inconsistency
 predicate.\end{example}
 
@@ -2024,40 +2042,40 @@ following generalization of the construction in Section~\ref{sect:constr}.
 \begin{construction}\label{constr:inc}Let~$X$ be a countable set equipped with
 an inconsistency predicate~$O$. Let~$x_0,x_1,\ldots$ be an enumeration of~$X$.
 Let~$A_0 \subseteq X$ be an arbitrary subset. Let~``$\neg\varphi$''
-mean~``$\varphi \Rightarrow O(A_0)$''. Without appealing to any form of choice,
+mean~``$\varphi \Rightarrow \Inc{A_0}$''. Without appealing to any form of choice,
 we recursively define
-\[ A_{n+1} \defeq A_n \cup \bigl\{ x_n \,|\, \neg O(A_n\cup\{x_n\}) \bigr\} \]
+\[ A_{n+1} \defeq A_n \cup \bigl\{ x_n \,|\, \neg \Inc{A_n\cup\{x_n\}} \bigr\} \]
 and set~$A \defeq \bigcup_{n \in \NN} A_n$.
 \end{construction}
 
 \begin{lemma}\label{lemma:omnibus-inc}(In the situation of
 Construction~\ref{constr:inc}.)
 \begin{enumerate}
-\item[(a)] The set~$A$ is equiconsistent with~$A_0$: If~$O(A)$, then also~$O(A_0)$.
+\item[(a)] The set~$A$ is equiconsistent with~$A_0$: If~$\Inc{A}$, then also~$\Inc{A_0}$.
 \item[(b)] For every number~$n$, the following are equivalent: \\
 (1) $x_n \in A_{n+1}$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg O(A\cup\{x_n\})$. \quad
-(4) $\neg O(A_n \cup \{x_n\})$.
+(3) $\neg \Inc{A\cup\{x_n\}}$. \quad
+(4) $\neg \Inc{A_n \cup \{x_n\}}$.
 \end{enumerate}\end{lemma}
 
 \begin{proof}For claim~(a), we verify by induction on~$n \in \NN$ that~$\neg
-O(A_n)$. The result then follows because~$O$ splits the directed join~$\bigcup_n A_n$.
+\Inc{A_n}$. The result then follows because~$O$ splits the directed join~$\bigcup_n A_n$.
 
 The case~$n = 0$ is trivial. For the induction step~$n \to n+1$,
-assume~$O(A_{n+1})$. Since~$A_{n+1} \subseteq A_n \cup \{x_n\}$, we have~$O(A_n
-\cup \{ x_n \})$ by monotonicity. Hence~$A_{n+1} = A_n \cup \{ x_n \,|\, O(A_0)
-\}$.\footnote{If the principle of explosion for~$O(A_0)$ was available, then
+assume~$\Inc{A_{n+1}}$. Since~$A_{n+1} \subseteq A_n \cup \{x_n\}$, we have~$\Inc{A_n
+\cup \{ x_n \}}$ by monotonicity. Hence~$A_{n+1} = A_n \cup \{ x_n \,|\, \Inc{A_0}
+\}$.\footnote{If the principle of explosion for~$\Inc{A_0}$ was available, then
 this identity would entail~$A_{n+1} = A_n$ and thus enable a quick conclusion
 of the proof.} This identity can be rewritten to render its directed nature
 more apparent:
-\[ A_{n+1} \subseteq \bigcup \bigl(\{A_n\} \cup \{X \,|\, O(A_0)\}\bigr). \]
-As~$O$ split direct joins, we obtain~$O(A_n)$ (and hence~$O(A_0)$ by the
-induction hypothesis~$\neg O(A_n)$) or we obtain~$O(A_0)$ directly.
+\[ A_{n+1} \subseteq \bigcup \bigl(\{A_n\} \cup \{X \,|\, \Inc{A_0}\}\bigr). \]
+As~$O$ split direct joins, we obtain~$\Inc{A_n}$ (and hence~$\Inc{A_0}$ by the
+induction hypothesis~$\neg \Inc{A_n}$) or we obtain~$\Inc{A_0}$ directly.
 
 For claim~(b), it is clear that~$(3) \Rightarrow (4) \Rightarrow (1) \Rightarrow
 (2)$. For~$(2) \Rightarrow (3)$, let~$x_n \in A$.
-If~$O(A\cup\{x_n\})$, then~$O(A)$ because~$A\cup\{x_n\}=A$ and hence~$O(A_0)$
+If~$\Inc{A\cup\{x_n\}}$, then~$\Inc{A}$ because~$A\cup\{x_n\}=A$ and hence~$\Inc{A_0}$
 by part~(a).
 \end{proof}
 
@@ -2068,9 +2086,9 @@ equiconsistent extension.\end{theorem}
 \begin{proof}We verify that for every subset~$A_0 \subseteq X$, the set~$A$ of
 Construction~\ref{constr:inc} is an extension of the desired kind. More
 precisely, we verify that~$A$ is maximal in that for every subset~$B \subseteq X$,
-\[ A \subseteq B \quad\wedge\quad \neg O(B) \quad\Longrightarrow\quad A = B. \]
-Let~$x \in B$. Then~$\neg O(A \cup \{ x \})$, as~$O(A \cup \{x\})$
-would imply~$O(B)$ by monotonicity. Hence~$x \in A$ by
+\[ A \subseteq B \quad\wedge\quad \neg \Inc{B} \quad\Longrightarrow\quad A = B. \]
+Let~$x \in B$. Then~$\neg \Inc{A \cup \{ x \}}$, as~$\Inc{A \cup \{x\}}$
+would imply~$\Inc{B}$ by monotonicity. Hence~$x \in A$ by
 Lemma~\ref{lemma:omnibus-inc}(b).
 \end{proof}
 
@@ -2110,38 +2128,38 @@ requirement is for instance met in case that~$({<})$ is a linear order.
 \begin{construction}\label{constr:inc-wf}Let~$X$ be a set equipped with
 an inconsistency predicate~$O$. Let~$X$ be an image of~$I$, writing~$X = \{ x_n
 \,|\, n \in I \}$. Let~``$\neg\varphi$'' mean~``$\varphi \Rightarrow
-O(\emptyset)$''. Without appealing to any form of choice, we define by
+\Inc{\emptyset}$''. Without appealing to any form of choice, we define by
 transfinite recursion
-\[ A_n \defeq A_{<n} \cup \bigl\{ x_n \,|\, \neg O(A_{<n}\cup\{x_n\}) \bigr\}, \]
+\[ A_n \defeq A_{<n} \cup \bigl\{ x_n \,|\, \neg \Inc{A_{<n}\cup\{x_n\}} \bigr\}, \]
 where~$A_{<n} \defeq \bigcup_{k < n} A_k$, and set~$A \defeq \bigcup_{n \in I} A_n$.
 \end{construction}
 
 \begin{lemma}\label{lemma:omnibus-inc-wf}(In the situation of
 Construction~\ref{constr:inc-wf}.)
 \begin{enumerate}
-\item[(a)] The set~$A$ is consistent: $\neg O(A)$.
+\item[(a)] The set~$A$ is consistent: $\neg \Inc{A}$.
 \item[(b)] For every index~$n \in I$, the following are equivalent: \\
 (1) $x_n \in A_n$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg O(A\cup\{x_n\})$. \quad
-(4) $\neg O(A_{<n} \cup \{x_n\})$.
+(3) $\neg \Inc{A\cup\{x_n\}}$. \quad
+(4) $\neg \Inc{A_{<n} \cup \{x_n\}}$.
 \end{enumerate}\end{lemma}
 
 \begin{proof}The proof of Lemma~\ref{lemma:omnibus-inc} carries over almost
 verbatim. The only part which requires some adaptation is the verification
-that~$\neg O(A_n)$ for every index~$n \in I$. This verification now proceeds by
+that~$\neg \Inc{A_n}$ for every index~$n \in I$. This verification now proceeds by
 transfinite induction.
 
-Assuming that~$\neg O(A_k)$ for all~$k < n$, we verify that~$\neg O(A_n)$. So
-assume~$O(A_n)$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$O(A_{<n}
-\cup \{x_n\})$ by monotonicity. Thus~$A_n = A_{<n} \cup
-\{x_n\,|\,O(\emptyset)\}$ and hence
+Assuming that~$\neg \Inc{A_k}$ for all~$k < n$, we verify that~$\neg \Inc{A_n}$. So
+assume~$\Inc{A_n}$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$\Inc{A_{<n}
+\cup \{x_n\}}$ by monotonicity. Thus~$A_n = A_{<n} \cup
+\{x_n\,|\,\Inc{\emptyset}\}$ and hence
 \[ A_n \subseteq \bigcup\,\bigl(\{ \emptyset \} \cup \{ A_k \,|\, k < n \} \cup
-\{ X \,|\, O(\emptyset) \}\bigr). \]
-Because~$O$ splits directed joins, we obtain~$O(\emptyset)$ (in which case we
-are done); or~$O(A_k)$ for some~$k < n$ (in which case we are done by the
-induction hypothesis); or~$O(X)$ together with the information
-that~$O(\emptyset)$ (so we are done as well).
+\{ X \,|\, \Inc{\emptyset} \}\bigr). \]
+Because~$O$ splits directed joins, we obtain~$\Inc{\emptyset}$ (in which case we
+are done); or~$\Inc{A_k}$ for some~$k < n$ (in which case we are done by the
+induction hypothesis); or~$\Inc{X}$ together with the information
+that~$\Inc{\emptyset}$ (so we are done as well).
 \end{proof}
 
 \begin{theorem}\label{thm:max-inc-wf}Let~$X$ be a set equipped
