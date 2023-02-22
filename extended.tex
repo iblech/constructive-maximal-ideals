@@ -1414,42 +1414,42 @@ defined by~$\Cov(\sigma) \defeq \{ M \in P(L) \,|\, \sigma = \bigvee M \}$.
 
 \subsection{The eventually monad} Let~$L$ be a forcing notion. A
 predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preceq \sigma$
-implies~$P(\sigma) \Rightarrow P(\tau)$. Such predicates express positive
+implies~$P\sigma \Rightarrow P\tau$. Such predicates express positive
 observations which are stable under refinement of approximations. For
 instance, in the case of the forcing notion of Example~\ref{ex:notion-enum},
-the proposition~$P(\sigma)$ could express that a particular element~$x_0 \in X$
+the proposition~$P\sigma$ could express that a particular element~$x_0 \in X$
 is among the terms of~$\sigma$.
 
 For a monotone predicate~$P$, we introduce a derived predicate denoted~``$P
 \mid \sigma$'' (pronounced~``$P$ bars~$\sigma$'') expressing that no matter how an approximation~$\sigma$ evolves
-to a better approximation~$\tau$, eventually~$P(\tau)$ will hold. Similar to
+to a better approximation~$\tau$, eventually~$P\tau$ will hold. Similar to
 Coquand and Persson's approach to well-quasi-orders~\cite[Definition~6]{coquand-persson:groebner} and
 Coquand and Lombardi's approach to Noetherian
 rings~\cite{coquand-lombardi:krull,coquand:invariant}, we define this predicate
 in a direct inductive fashion, by the following generating clauses:
 \begin{enumerate}
-\item If~$P(\sigma)$, then~$P \mid \sigma$.
+\item If~$P\sigma$, then~$P \mid \sigma$.
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
 of~$\sigma$, then~$P \mid \sigma$.
 \end{enumerate}
-Hence, to witness~$P \mid \sigma$, we may directly witness~$P(\sigma)$ or first
+Hence, to witness~$P \mid \sigma$, we may directly witness~$P\sigma$ or first
 ask for a refinement of~$\sigma$ as envisaged by the covering
 system.\footnote{The induction
 principle~\cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind,aczel:ind} corresponding to the definition of the
 bar predicate is this: For every predicate~$Q$ on~$L$, if
 \begin{enumerate}
-\item for every element~$\sigma \in L$, $P(\sigma) \Rightarrow Q(\sigma)$, and if
+\item for every element~$\sigma \in L$, $P\sigma \Rightarrow Q\sigma$, and if
 \item for every element~$\sigma \in L$ and every covering~$R \in \Cov(\sigma)$,
-$(\forall \tau \in R\_ Q(\tau)) \Rightarrow Q(\sigma)$,
+$(\forall \tau \in R\_ Q\tau) \Rightarrow Q\sigma$,
 \end{enumerate}
-then~$P(\sigma) \Rightarrow Q(\sigma)$ for every element~$\sigma \in L$.}
+then~$P\sigma \Rightarrow Q\sigma$ for every element~$\sigma \in L$.}
 
 \begin{lemma}The relaxation of~$P$ is again monotone, that is~$P \mid \sigma
 \Rightarrow P \mid \tau$ if~$\tau \preceq \sigma$.\end{lemma}
 
 \begin{proof}By induction on the given witness of~$P \mid \sigma$:
 \begin{enumerate}
-\item If~$P(\sigma)$, then also~$P(\tau)$ and hence~$P \mid \tau$ by
+\item If~$P\sigma$, then also~$P\tau$ and hence~$P \mid \tau$ by
 monotonicity of~$P$.
 \item If~$P \mid \sigma'$ for all~$\sigma' \in R$, where~$R$ is a covering
 of~$\sigma$, then by the stability condition
@@ -1475,17 +1475,17 @@ base universe to satisfy the same first-order statements.
 \begin{proposition}\label{prop:ev-points}Let~$L$ be a forcing notion. Let~$P$
 be a monotone predicate on~$L$. If~$P \mid \sigma$, then every filter~$F$ which
 contains~$\sigma$ also contains a refinement~$\tau \preceq \sigma$
-with~$P(\tau)$.
+with~$P\tau$.
 \end{proposition}
 
 \begin{proof}By induction on the given witness of~$P \mid \sigma$, as guided by
 a given filter~$F$:
 \begin{enumerate}
-\item If~$P(\sigma)$, we conclude with setting~$\tau \defeq \sigma$.
+\item If~$P\sigma$, we conclude with setting~$\tau \defeq \sigma$.
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
 of~$\sigma$, then by the splitting property the filter~$F$ contains a refinement~$\tau_0
 \preceq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
-further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.\qedhere
+further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P\tau$.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -1503,13 +1503,13 @@ bar induction.
 We think of~``$P \mid \sigma$'' as an inductive paraphrasing, not directly referring to
 filters and indeed even being nontrivial in case there are no filters at all in the base
 universe, of the statement that every filter containing~$\sigma$ also contains
-a refinement~$\tau \preceq \sigma$ with~$P(\tau)$. While the latter statement
+a refinement~$\tau \preceq \sigma$ with~$P\tau$. While the latter statement
 refers to filters---ideal, completed objects---the former has a more finitary
 character.
 
 \begin{lemma}[{\cite[Proposition~V.3.2]{joyal-tierney:grothendieck}}]\label{prop:cov-open}
 Let~$L$ be a forcing notion such that every covering is inhabited. Let~$P$ be a
-constant predicate on~$L$. Then~$P \mid \sigma$ implies~$P(\sigma)$.
+constant predicate on~$L$. Then~$P \mid \sigma$ implies~$P\sigma$.
 \end{lemma}
 
 \begin{proof}By induction. In computational terms, we inspect a given witness
@@ -1528,18 +1528,18 @@ specific element~$a$, we just append~$x_0$ respectively~$a$ to~$\sigma$.
 
 \begin{example}In the situation of Example~\ref{ex:notion-negneg}, for every
 monotone predicate~$P$ we have~$P \mid \star$ if and only if~$\neg\neg
-P(\star)$. That is, the eventually monad coincides with the double negation or
+(P\star)$. That is, the eventually monad coincides with the double negation or
 continuation monad. In particular, we can generally escape from the monad only
 in presence of the law of excluded middle.\end{example}
 
 \begin{example}In the situation of Example~\ref{ex:notion-scott},
-let~$\sigma_0 \in L$ be a fixed element. Let~$P(\sigma)
+let~$\sigma_0 \in L$ be a fixed element. Let~$P\sigma
 \vcentcolon\Leftrightarrow (\sigma_0 \leq \sigma)$. Then~$P \mid \sigma$ if
 and only if~$\sigma_0 \sqsubseteq \sigma$ in the sense of the inductively
 generated relation of~\cite[Definition~18]{wessel-schuster:radical}.\end{example}
 
 It is prudent to introduce the quantifier-like notation~``$\nabla \sigma\_
-P(\sigma)$'', pronounced ``eventually it is the case that~$P(\sigma)$ holds'',
+P\sigma$'', pronounced ``eventually it is the case that~$P\sigma$ holds'',
 for~$P \mid \sigma$. For instance, in the situation of
 Example~\ref{ex:notion-enum}, we have
 \[ \forall x \in X\_ \nabla \sigma\_ x \in \sigma
@@ -1555,7 +1555,7 @@ enumerated.
 has a close connection to sheaf theory. A monotone
 predicate~$P$ gives rise to a presheaf on the thin category induced from~$L$,
 more precisely a subpresheaf of the terminal presheaf, by mapping an
-element~$\sigma \in L$ to the truth value of~$P(\sigma)$. The presheaf
+element~$\sigma \in L$ to the truth value of~$P\sigma$. The presheaf
 mapping~$\sigma$ to the truth value of~$P \mid \sigma$ is then the
 sheafification with respect to the Grothendieck coverage induced from the
 covering system attached to~$L$.\end{remark}
@@ -1610,7 +1610,7 @@ is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
   \> $\sigma \forces \underline{R}(s_1,\ldots,s_n)$
   \> \defeqv $\nabla\sigma\_ R(\llbracket s_1 \rrbracket,\ldots,\llbracket s_n \rrbracket)$. \\[0.3em]
 
-  \> $\sigma \forces G(\tau)$
+  \> $\sigma \forces G\tau$
   \> \defeqv $\nabla\sigma\_ \sigma \preceq \llbracket\tau\rrbracket$. \\[0.3em]
 
   \> $\sigma \forces \varphi \Rightarrow \psi$
@@ -1672,11 +1672,11 @@ monad~$\nabla$ required for the verification are the ``nucleus
 axioms'' (``local operator
 axioms''~\cite[Section~14.5]{goldblatt:topoi},~\cite{goldblatt:modality}):
 \begin{enumerate}
-\item $P(\sigma) \Rightarrow (\nabla\sigma\_P(\sigma))$
-\item $(\nabla\sigma\_\nabla\sigma\_P(\sigma)) \Rightarrow
-(\nabla\sigma\_P(\sigma))$
-\item $(\nabla\sigma\_P(\sigma)\wedge Q(\sigma)) \Leftrightarrow
-(\nabla\sigma\_P(\sigma)) \wedge (\nabla\sigma\_Q(\sigma))$ \qedhere
+\item $P\sigma \Rightarrow (\nabla\sigma\_P\sigma)$
+\item $(\nabla\sigma\_\nabla\sigma\_P\sigma) \Rightarrow
+(\nabla\sigma\_P\sigma)$
+\item $(\nabla\sigma\_P\sigma\wedge Q\sigma) \Leftrightarrow
+(\nabla\sigma\_P\sigma) \wedge (\nabla\sigma\_Q\sigma)$ \qedhere
 \end{enumerate}
 \end{proof}
 
@@ -1710,21 +1710,21 @@ of~$\underline{L}$, namely~$G$, in the precise sense that the following
 statements hold in~$V^\nabla$:
 \begin{enumerate}
 \item[(1)] $\forall \sigma \? \underline{L}\_ \forall \tau \? \underline{L}\_
-\bigl(\tau \mathrel{\underline{\preceq}} \sigma \wedge G(\sigma)\bigr)
-\Rightarrow G(\tau)$.
-\item[(2a)] $\exists \sigma \? \underline{L}\_ G(\sigma)$.
+\bigl(\tau \mathrel{\underline{\preceq}} \sigma \wedge G\sigma\bigr)
+\Rightarrow G\tau$.
+\item[(2a)] $\exists \sigma \? \underline{L}\_ G\sigma$.
 \item[(2b)] $\forall \alpha \? \underline{L}\_
 \forall \beta \? \underline{L}\_
 \exists \sigma \? \underline{L}\_
 \sigma \mathrel{\underline{\preceq}} \alpha \wedge
 \sigma \mathrel{\underline{\preceq}} \beta \wedge
-G(\sigma)$.
+G\sigma$.
 \item[(3)] $\forall \sigma \? \underline{L}\_
 \forall R \? \underline{P(L)}\_
 \bigl(R \mathrel{\underline{\in}} \underline{\Cov}(\sigma) \wedge
-G(\sigma)\bigr) \Rightarrow
+G\sigma\bigr) \Rightarrow
 \exists \tau \? \underline{L}\_
-G(\tau) \wedge \tau \mathrel{\underline{\in}} R$.
+G\tau \wedge \tau \mathrel{\underline{\in}} R$.
 \end{enumerate}
 \end{proposition}
 
@@ -1734,7 +1734,7 @@ G(\tau) \wedge \tau \mathrel{\underline{\in}} R$.
 \begin{example}For the forcing notion of Example~\ref{ex:notion-enum}, the
 forcing extension contains an enumeration~$f$ of~$\underline{X}$ in the following
 sense: Defining~``$f(n) = x$'' to be an abbreviation for~``$\exists
-\sigma\?\underline{L}\_ G(\sigma) \wedge \sigma\underline{[}n\underline{]} =
+\sigma\?\underline{L}\_ G\sigma \wedge \sigma\underline{[}n\underline{]} =
 x$'', in the forcing extension we have that
 \begin{enumerate}
 \item ``$f$ is everywhere-defined'': $\forall n\?\underline{\NN}\_ \exists
@@ -1750,7 +1750,7 @@ f(n) = x$.
 \begin{example}For the forcing notion of Example~\ref{ex:notion-max}, the
 forcing extension contains a strong maximal ideal~$\nnn$ of~$\underline{A}$ in the following
 sense: Defining~``$x \in \nnn$'' to be an abbreviation for~``$\exists
-\aaa\?\underline{L}\_ G(\aaa) \wedge x \mathrel{\underline{\in}} \aaa$'',
+\aaa\?\underline{L}\_ G\aaa \wedge x \mathrel{\underline{\in}} \aaa$'',
 in the forcing extension we have that
 \begin{enumerate}
 \item ``$\nnn$ is an ideal'':
