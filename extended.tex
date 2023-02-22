@@ -1184,7 +1184,7 @@ reactive programing
 community~\cite{paykin-krishnaswami-zdancewic:event,cave-ferreira-panangaden-pientka:frp}.
 
 
-\subsection{Forcing notions} The particular flavor of forcing is determined
+\subsection{Forcing notions}\label{sect:forcing-notions} The particular flavor of forcing is determined
 by its \emph{notion of forcing}. This is a poset~$L$ equipped with a
 \emph{covering system} (Definition~\ref{defn:covering-system} below). The
 elements of~$L$ are called \emph{forcing conditions} and are regarded
@@ -1491,7 +1491,7 @@ further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P(\tau)$.\q
 
 The converse of Proposition~\ref{prop:ev-points} can only hold in the case that
 the formal space presented by the forcing notion has \emph{enough points}.
-A case in which the converse fails completely is in the situation of
+A case in which the converse emphatically fails is in the situation of
 Example~\ref{ex:notion-enum} when the set~$X$ is uncountable, for in this case
 there are no filters at all. Illuminating is also the case of forcing a
 \emph{generic sequence}~$\NN \to \NN$ (which is just
@@ -1575,7 +1575,7 @@ covering system attached to~$L$.\end{remark}
 
 % \begin{document}
 
-\subsection{The translation}
+\subsection{The translation}\label{sect:translation}
 
 Let~$L$ be a forcing notion. The purpose of this section is to describe, purely
 in terms of the base universe~$V$, when a bounded first-order statement holds
@@ -1737,17 +1737,63 @@ f(n) = x$.
 \end{enumerate}
 \end{example}
 
-\color{gray}
+\begin{example}For the forcing notion of Example~\ref{ex:notion-max}, the
+forcing extension contains a strong maximal ideal~$\nnn$ of~$\underline{A}$ in the following
+sense: Defining~``$x \in \nnn$'' to be an abbreviation for~``$\exists
+\aaa\?\underline{L}\_ G(\aaa) \wedge x \mathrel{\underline{\in}} \aaa$'',
+in the forcing extension we have that
+\begin{enumerate}
+\item ``$\nnn$ is an ideal'':
 
-- state first-order preservation and reflection theorem
+-- ``$\nnn$ contains the zero element'': $\underline{0} \in \nnn$ \\
+-- ``$\nnn$ is closed under addition'': $\forall x\?\underline{A}\_ \forall y\?\underline{A}\_ (x \in \nnn \wedge y \in
+\nnn) \Rightarrow x\mathop{\underline{+}}y \in \nnn$ \\
+-- ``$\nnn$ has the magnet property'': $\forall x\?\underline{A}\_ \forall
+r\?\underline{A}\_ x \in \nnn \Rightarrow rx \in \nnn$
 
-- Mention
-  Löwenheim--Skolem.
+\item ``$f$ is maximal in the strong sense'':
 
-- establish connection to dynamical algebra and also comment on
-  forcing a maximal ideal directly
+-- ``$\nnn$ is proper'': $\underline{1} \in \nnn \Rightarrow \underline{1} =
+\underline{0}$ \\
+-- $\forall x\?\underline{A}\_ x \in \nnn \vee (\exists u\?\underline{A}\_
+\exists v\?\underline{A}\_ \underline{1} = u \mathop{\underline{+}} vx \wedge u
+\in \nnn)$
+\end{enumerate}
+\end{example}
+
+\begin{theorem}\label{thm:backforth}Assume that~$L$ is inhabited and that every
+covering is inhabited. Let~$\varphi$ be a first-order formula not containing
+the unary relation symbol~$G$. Then the following statements are equivalent:
+\begin{enumerate}
+\item[(a)] $\varphi$ holds in~$V$.
+\item[(b)] $\varphi$ holds in~$V^\nabla$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}Routine induction employing Lemma~\ref{prop:cov-open}.
+\end{proof}
+
+Both directions of Theorem~\ref{thm:backforth} are central for putting the
+forcing extension to good use. By the direction~``(a)~$\Rightarrow$~(b)'',
+we may retain everything already known about the base universe when passing to
+the forcing extension---as long as the facts we would like to import can be
+phrased as first-order formulas. In the other direction, every result obtained
+in the forcing extension descends to the base universe---as long as the result
+can be phrased as a first-order formula and does not mention the generic
+filter. For classical set-theoretic forcing, this strategy is commented on for
+instance in~\cite[Theorem~2]{hamkins:multiverse}.
+
 
 \subsection{The connection to dynamical algebra}
+
+Having provided the required background on constructive forcing in
+Sections~\ref{sect:forcing-notions}--\ref{sect:translation}, we are now in the
+position to harvest the fruits of this machinery.
+
+Let~$P$ be an informal argument in commutative algebra making use of maximal
+ideals. Under which circumstances can we provide a constructive reading of~$P$?
+
+\textbf{xxx xxx xxx}
 
 \begin{remark}In addition to maximal ideals, minimal prime ideals are important
 ingredients for some reduction techniques in classical commutative algebra. For
@@ -1780,18 +1826,22 @@ maximal with respect to the old prime filters.
 \end{remark}
 
 
+\color{gray}
+
 The ideal~$\mmm$ obtained by applying the construction of Section~\ref{sect:constr} to
 the generic enumeration of~$A$ and the ideal~$\nnn$ obtained by directly forcing a
 maximal ideal serve similar purposes. Because they live in different universes,
 it is not meaningful to ask whether they are equal. However, we may ask whether
 they satisfy the same first-order statements. They do not:
 
-\begin{proposition}\label{prop:mmm-nnn}With the terminology of Proposition~\ref{prop:jac}, for
-every element~$x \in A$, \ldots \begin{enumerate}
-\item $(x \in \nnn)^\nabla$ if and only if~$x$ is contained in the Jacobson
-radical.
-\item $(x \in \mmm)^\nabla$ if and only if~$x$ is not apart from the Jacobson
-radical.
+\begin{proposition}\label{prop:mmm-nnn}With the terminology of
+Proposition~\ref{prop:jac}, an element~$x \in A$ is \ldots \begin{enumerate}
+\item[(a)] contained in the Jacobson radical if and only if~$x
+\mathrel{\underline{\in}} \nnn$ holds in the forcing extension containing the
+generic maximal ideal.
+\item[(b)] not apart from the Jacobson radical if and only if~$x
+\mathrel{\underline{\in}} \mmm$ holds in the forcing extension containing the
+generic enumeration.
 \end{enumerate}
 \end{proposition}
 
@@ -1811,102 +1861,88 @@ ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[]
 \models 1 \in \mmm$, a contradiction.
 \end{proof}
 
-\begin{proposition}Let~$P$ be a monotone predicate on~$X^\star$. Let~$\sigma
-\in X^\star$.
-\begin{enumerate}
-\item[\textnormal{(a)}] If~$P \mid \sigma$, then every surjection~$f : \NN
-\twoheadrightarrow X$
-extending~$\sigma$ has a finite prefix satisfying~$P$.
-\item[\textnormal{(b)}] The converse holds if~$X$ is countable and the law of excluded middle
-is available.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-Item~(a) follows by induction. In computational terms, we inspect a given
-witness of~$P \mid \sigma$ and descend into it as guided by a given
-surjection~$f : \NN \twoheadrightarrow X$.
-
-For the converse direction, let~$x_0,x_1,\ldots$ be an enumeration of~$X$ and
-assume that~$\neg(P \mid \sigma)$. Hence firstly~$\neg(P(\sigma))$; secondly there is an
-element~$x$ such that~$\neg(P \mid \sigma x)$; and lastly for every element~$a
-\in X$ there is an extension~$\tau \preceq \sigma$ with~$a \in \tau$
-and~$\neg(P \mid \tau)$. By the third property,
-there is an extension~$\tau_0 \preceq
-\sigma$ with~$x_0 \in \tau_0$ such that~$\neg(P \mid \tau_0)$. Continuing in
-this manner, we obtain further extensions~$\ldots \preceq \tau_2 \preceq \tau_1
-\preceq \tau_0$ with~$x_i \in \tau_i$.\footnote{We can avoid the axiom of
-dependent choice here by always picking the smallest possible extension
-according to the lexicographic order on~$X^\star$ transported from~$\NN$.}
-The predicate~$P$ holds for no~$\tau_i$ and, by monotonicity, also for no
-prefix of any~$\tau_i$.
-
-If~$X$ is infinite, then the gluing~$\bigcup_n \tau_n$ is a surjection~$\NN
-\twoheadrightarrow X$ without any finite prefix validating~$P$; a
-contradiction. In case that~$X$ is finite, the gluing~$\bigcup_n \tau_n$ will
-still have a finite domain. In that case, we appeal to the second property a
-countable number of times to conclude in a similar fashion.
-\end{proof}
-
-If~$X$ is not countable, then the condition that every surjection~$\NN
-\twoheadrightarrow X$ has a finite prefix satisfying some predicate~$P$ is
-vacuously true. As the following lemma shows, this is emphatically not so
-with~$P \mid []$, illustrating that~$P \mid []$ is more than an inductive
-stand-in for a quantification over completed infinite objects, namely
-surjections~$\NN \twoheadrightarrow X$. How much more exactly is discussed
-in~\cite{blechschmidt-oldenziel:multiverse}.
-
-\begin{lemma}Let~$\varphi$ be a truth value. Let~$P$ be the constant
-predicate~$\sigma \mapsto \varphi$. If~$X$ is inhabited, then
-\[ P \mid [] \quad\Longrightarrow\quad \varphi. \]
-\end{lemma}
-
-\begin{proof}We verify more generally that~$P \mid \sigma$ implies~$\varphi$.
-Computationally, we inspect a given witness of~$P \mid \sigma$ and descend into
-it according to the three generating cases:
-\begin{enumerate}
-\item If~$P(\sigma)$, then we conclude.
-\item
-If~$P \mid (\sigma x)$ for all~$x \in X$, then we descend to~$P \mid
-(\sigma x_0)$ where~$x_0$ is some fixed element of~$X$ (which exists by
-the assumption that~$X$ is inhabited).
-\item If~$P \mid \tau$ for all
-extensions~$\tau \preceq \sigma$ such that some specified element~$a$ appears
-in~$\tau$, then we descend to~$P \mid (\sigma a)$.
-\end{enumerate}
-\end{proof}
+\color{black}
 
 
-\subsubsection{Comparison with dynamical algebra}
+\subsection{Further connections}
 
-The dynamical approach~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about}
-is another technique for constructively reinterpreting,
-without countability assumptions, classical proofs involving maximal ideals.
-We sketch here how the dynamical approach is intimately connected with the
-technique of this section, even though it is cast in entirely different
-language.
-
-Suppose that a given classical proof appeals to the maximality condition ``$x \in \mmm$
-or~$1 \in \mmm + (x)$'' (``$x$ is zero modulo~$\mmm$ or invertible
-modulo~$\mmm$'') only for a finite number~$x_0,\ldots,x_{n-1}$ of ring elements
-fixed beforehand. In this case we can, even if no enumeration of all elements
-of~$A$ exists or is available, apply the construction in Section~\ref{sect:constr} to
-this finite enumeration and use the resulting ideal~$\mmm_n$ as a partial
-substitute for an intangible maximal ideal.
-
-The tools from pointfree topology
-driving Joyal and Tierney's metatheorem widen the applicability of this partial
-substitute to cases where the inspected ring elements are
-not fixed beforehand, by dynamically growing the partial enumeration as the
-proof runs its course. If required, a continuation-passing style transform as
-in Remark~\ref{rem:suslin} can upgrade the maximal ideal from only
-satisfying~``$1 \not\in \mmm + (x)$ implies~$x \in
-\mmm$'' to satisfying the stronger condition~``$x \in \mmm$ or~$1 \in \mmm
-+ (x)$''.
+\paragraph{Noetherian conditions} Over the last 30 years, there has been a
+gradual evolution of Noetherian conditions in the constructive algebra
+community. Building on early pioneering work of
+Tennenbaum~\cite{tennenbaum:hilbert}, Richman and Seidenberg proposed the
+ascending chain condition, referring to ascending sequences of finitely
+generated ideals~\cite{richman:noetherian-old,seidenberg:noether}. There is a
+variant of Hilbert's basis theorem for this flavor of Noetherian rings;
+however, its utility is limited because constructively, such ascending
+sequences can be rare---for a particularly sequence-poor ring,
+see~\cite[Example~2]{blass:induction}.
 %
-Unfolding the construction of~$\mmm$ and the proof of Joyal
-and Tierney's metatheorem, we arrive at the dynamical method.
+The ascending tree condition~\cite{richman:noetherian} is an attempt to fix
+this deficiency. Knowing that a ring satisfies this stronger condition gives much more
+information than the ascending chain condition, and a version of Hilbert's
+basis theorem shows that there is still an ample supply of important rings
+which satisfy this condition. There is a further condition which in many cases
+of interest is even strong, a wellfoundedness attributed to
+Martin-Löf~\cite{jacobsson-lofwall:standard}.
 
+Common to all these conditions is that for their corresponding version of
+Hilbert's basis theorem, membership in finitely generated ideals needs to be
+decidable, the ring needs to be coherent, or both. Is there a Noetherian flavor
+which does not require either of these assumptions?
+
+There is; the inductive condition used by Coquand, Lombardi and
+Persson~\cite{coquand-persson:groebner,coquand-lombardi:krull} fits the bill.
+Appreciating the obstacles which the proofs of Hilbert's basis theorem for the
+earlier flavors of Noetherianity had to overcome, the clean proof for the
+inductive condition~\cite[Corollary~16]{coquand-persson:groebner} has an almost magical
+quality to it.
+
+Forcing technology allows us to recognize that with this condition, we have
+actually come full circle---back to the venerable ascending chain condition:
+
+\begin{theorem}A ring is inductively Noetherian if and only if a very
+particular ascending sequence of finitely generated ideals stalls, namely
+\emph{the generic one}.
+\end{theorem}
+
+\begin{proof}See the forthcoming
+paper~\cite{blechschmidt-oldenziel:multiverse}.\end{proof}
+
+
+\paragraph{The mystery of nongeometric sequents} Every forcing extension is
+specifically tailored to support a generic filter of the corresponding forcing
+notion. Hence it may come as a surprise that, despite not being designed in that way,
+generic filters tend to have more, and indeed rather peculiar, properties
+than would be expected just by virtue of being a filter. For instance:
+\begin{enumerate}
+\item The generic surjection~$f$ is not only everywhere-defined,
+single-valued and surjective as expected, but also has the property that it is
+\emph{not~not} the case that every desired finite pattern occurs among its
+values: In the forcing extension it holds that for every finite list~$\sigma =
+[x_1,\ldots,x_k]$, it is \emph{not~not} the case that there is a number~$n \in
+\mathbb{N}$ such that the values~$f(n), f(n+1), \ldots, f(n+k)$ agree
+with~$\sigma$.
+
+\item Localizing a ring at its \emph{generic prime filter} not only
+yields a local ring, as expected when localizing at a prime filter, but in fact
+a ring which is almost a field in the sense that nonunits are nilpotent.
+\end{enumerate}
+
+This phenomenon is the \emph{mystery of nongeometric sequents}. The
+survey~\cite[Section~3]{blechschmidt:generalized-spaces} presents a range of
+applications of these unexpected properties, while the
+paper~\cite{blechschmidt:nullstellensatz} attempts to explain their origin.
+
+\color{gray}
+
+- Mention
+  Löwenheim--Skolem.
+
+- conservativity
+
+- finish connection to dynamical algebra
+
+- state monad
 
 \color{black}
 
