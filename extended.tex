@@ -1667,15 +1667,25 @@ then~$\sigma \forces \varphi$.
 \end{lemma}
 
 \begin{proof}Routine induction on the structure of the formula~$\varphi$; see,
-for instance,~\cite{xxx}. The fundamental properties of the eventually
-monad~$\nabla$ required for the verification are: xxx.\end{proof}
+for instance,~\cite[p.~98]{streicher:ctcl}. The fundamental properties of the eventually
+monad~$\nabla$ required for the verification are the ``nucleus
+axioms'' (``local operator
+axioms''~\cite[Section~14.5]{goldblatt:topoi},~\cite{goldblatt:modality}):
+\begin{enumerate}
+\item $P(\sigma) \Rightarrow (\nabla\sigma\_P(\sigma))$
+\item $(\nabla\sigma\_\nabla\sigma\_P(\sigma)) \Rightarrow
+(\nabla\sigma\_P(\sigma))$
+\item $(\nabla\sigma\_P(\sigma)\wedge Q(\sigma)) \Leftrightarrow
+(\nabla\sigma\_P(\sigma)) \wedge (\nabla\sigma\_Q(\sigma))$ \qedhere
+\end{enumerate}
+\end{proof}
 
 \begin{theorem}\label{thm:kj-sound}The interpretation is sound with respect to
 intuitionistic first-order logic: If a formula~$\varphi$ is intuitionistically
 provable, then~$\varphi$ holds in~$V^\nabla$.\end{theorem}
 
 \begin{proof}Routine induction on the structure of intuitionistic derivations,
-see~\cite{xxx}.\end{proof}
+see~\cite[Sections~6.7,~6.8]{borceux:handbook3}.\end{proof}
 
 It is by Theorem~\ref{thm:kj-sound} that we may ``reason in the forcing
 extension'': If we have established that some statement~$\alpha$ holds
