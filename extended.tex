@@ -26,7 +26,7 @@
 \newtheorem{conjecture}[definition]{Conjecture}
 
 \newcommand{\Incbare}{\mathsf{Inc}}
-\newcommand{\Inc}[1]{\operatorname{\Incbare}#1}
+\newcommand{\Inc}[1]{\operatorname{\Incbare}\,#1}
 \newcommand{\?}{\,{:}\,}
 \newcommand{\seq}[1]{\mathrel{\vdash\!\!\!_{#1}}}
 \newcommand{\aaa}{\mathfrak{a}}
@@ -2045,7 +2045,7 @@ an inconsistency predicate~$O$. Let~$x_0,x_1,\ldots$ be an enumeration of~$X$.
 Let~$A_0 \subseteq X$ be an arbitrary subset. Let~``$\neg\varphi$''
 mean~``$\varphi \Rightarrow \Inc{A_0}$''. Without appealing to any form of choice,
 we recursively define
-\[ A_{n+1} \defeq A_n \cup \bigl\{ x_n \,|\, \neg \Inc{A_n\cup\{x_n\}} \bigr\} \]
+\[ A_{n+1} \defeq A_n \cup \bigl\{ x_n \,|\, \neg \Inc{(A_n\cup\{x_n\})} \bigr\} \]
 and set~$A \defeq \bigcup_{n \in \NN} A_n$.
 \end{construction}
 
@@ -2056,16 +2056,16 @@ Construction~\ref{constr:inc}.)
 \item[(b)] For every number~$n$, the following are equivalent: \\
 (1) $x_n \in A_{n+1}$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg \Inc{A\cup\{x_n\}}$. \quad
-(4) $\neg \Inc{A_n \cup \{x_n\}}$.
+(3) $\neg \Inc{(A\cup\{x_n\})}$. \quad
+(4) $\neg \Inc{(A_n \cup \{x_n\})}$.
 \end{enumerate}\end{lemma}
 
 \begin{proof}For claim~(a), we verify by induction on~$n \in \NN$ that~$\neg
 \Inc{A_n}$. The result then follows because~$O$ splits the directed join~$\bigcup_n A_n$.
 
 The case~$n = 0$ is trivial. For the induction step~$n \to n+1$,
-assume~$\Inc{A_{n+1}}$. Since~$A_{n+1} \subseteq A_n \cup \{x_n\}$, we have~$\Inc{A_n
-\cup \{ x_n \}}$ by monotonicity. Hence~$A_{n+1} = A_n \cup \{ x_n \,|\, \Inc{A_0}
+assume~$\Inc{A_{n+1}}$. Since~$A_{n+1} \subseteq A_n \cup \{x_n\}$, we
+have~$\Inc{(A_n \cup \{ x_n \})}$ by monotonicity. Hence~$A_{n+1} = A_n \cup \{ x_n \,|\, \Inc{A_0}
 \}$.\footnote{If the principle of explosion for~$\Inc{A_0}$ was available, then
 this identity would entail~$A_{n+1} = A_n$ and thus enable a quick conclusion
 of the proof.} This identity can be rewritten to render its directed nature
@@ -2076,7 +2076,7 @@ induction hypothesis~$\neg \Inc{A_n}$) or we obtain~$\Inc{A_0}$ directly.
 
 For claim~(b), it is clear that~$(3) \Rightarrow (4) \Rightarrow (1) \Rightarrow
 (2)$. For~$(2) \Rightarrow (3)$, let~$x_n \in A$.
-If~$\Inc{A\cup\{x_n\}}$, then~$\Inc{A}$ because~$A\cup\{x_n\}=A$ and hence~$\Inc{A_0}$
+If~$\Inc{(A\cup\{x_n\})}$, then~$\Inc{A}$ because~$A\cup\{x_n\}=A$ and hence~$\Inc{A_0}$
 by part~(a).
 \end{proof}
 
@@ -2088,7 +2088,7 @@ equiconsistent extension.\end{theorem}
 Construction~\ref{constr:inc} is an extension of the desired kind. More
 precisely, we verify that~$A$ is maximal in that for every subset~$B \subseteq X$,
 \[ A \subseteq B \quad\wedge\quad \neg \Inc{B} \quad\Longrightarrow\quad A = B. \]
-Let~$x \in B$. Then~$\neg \Inc{A \cup \{ x \}}$, as~$\Inc{A \cup \{x\}}$
+Let~$x \in B$. Then~$\neg \Inc{(A \cup \{ x \})}$, as~$\Inc{(A \cup \{x\})}$
 would imply~$\Inc{B}$ by monotonicity. Hence~$x \in A$ by
 Lemma~\ref{lemma:omnibus-inc}(b).
 \end{proof}
@@ -2131,7 +2131,7 @@ an inconsistency predicate~$O$. Let~$X$ be an image of~$I$, writing~$X = \{ x_n
 \,|\, n \in I \}$. Let~``$\neg\varphi$'' mean~``$\varphi \Rightarrow
 \Inc{\emptyset}$''. Without appealing to any form of choice, we define by
 transfinite recursion
-\[ A_n \defeq A_{<n} \cup \bigl\{ x_n \,|\, \neg \Inc{A_{<n}\cup\{x_n\}} \bigr\}, \]
+\[ A_n \defeq A_{<n} \cup \bigl\{ x_n \,|\, \neg \Inc{(A_{<n}\cup\{x_n\})} \bigr\}, \]
 where~$A_{<n} \defeq \bigcup_{k < n} A_k$, and set~$A \defeq \bigcup_{n \in I} A_n$.
 \end{construction}
 
@@ -2142,8 +2142,8 @@ Construction~\ref{constr:inc-wf}.)
 \item[(b)] For every index~$n \in I$, the following are equivalent: \\
 (1) $x_n \in A_n$. \quad
 (2) $x_n \in A$. \quad
-(3) $\neg \Inc{A\cup\{x_n\}}$. \quad
-(4) $\neg \Inc{A_{<n} \cup \{x_n\}}$.
+(3) $\neg \Inc{(A\cup\{x_n\})}$. \quad
+(4) $\neg \Inc{(A_{<n} \cup \{x_n\})}$.
 \end{enumerate}\end{lemma}
 
 \begin{proof}The proof of Lemma~\ref{lemma:omnibus-inc} carries over almost
@@ -2152,8 +2152,8 @@ that~$\neg \Inc{A_n}$ for every index~$n \in I$. This verification now proceeds 
 transfinite induction.
 
 Assuming that~$\neg \Inc{A_k}$ for all~$k < n$, we verify that~$\neg \Inc{A_n}$. So
-assume~$\Inc{A_n}$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$\Inc{A_{<n}
-\cup \{x_n\}}$ by monotonicity. Thus~$A_n = A_{<n} \cup
+assume~$\Inc{A_n}$. Since~$A_n \subseteq A_{<n} \cup \{x_n\}$, we have~$\Inc{(A_{<n}
+\cup \{x_n\})}$ by monotonicity. Thus~$A_n = A_{<n} \cup
 \{x_n\,|\,\Inc{\emptyset}\}$ and hence
 \[ A_n \subseteq \bigcup\,\bigl(\{ \emptyset \} \cup \{ A_k \,|\, k < n \} \cup
 \{ X \,|\, \Inc{\emptyset} \}\bigr). \]
@@ -2177,11 +2177,6 @@ Then~$X$ contains a maximal consistent subset.\end{theorem}
 
 \appendix
 
-
-cite?
-https://mileti.math.grinnell.edu/research/ideals.pdf
-https://homepages.ecs.vuw.ac.nz/~downey/ideals_talk.ps
-https://mathoverflow.net/a/229105/31233
 
 
 
