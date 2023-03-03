@@ -1339,6 +1339,22 @@ equipped with covering systems to \emph{sites}, categories equipped with
 Grothendieck coverages.
 \end{example}
 
+\begin{example}\label{ex:notion-entrel}Let~$({\vdash})$ be a finitary
+multi-conclusion entailment relation on a set~$S$, as for instance studied
+in~\cite{rinaldi-wessel:cut}. We equip the set~$L \defeq P_\omega(S)$ of
+finitely enumerable (Kuratowski-finite) subsets of~$S$ with the following
+ordering: $\mathcal{A} \leq \mathcal{B}$ iff~$\mathcal{A} \vdash b$ for every
+element~$b \in \mathcal{B}$. For each pair~$(\mathcal{A},\mathcal{B})$ such
+that~$\mathcal{A} \vdash \mathcal{B}$, we declare that the set~$\{ \mathcal{A}
+\cup \{ b \} \,|\, b \in \mathcal{B} \}$ should be a covering of~$\mathcal{A}$.
+
+For this forcing notion, there is a canonical one-to-one correspondence between
+the filters of~$L$ and the ideals of the entailment relation: If~$F \subseteq
+L$ is a filter, then~$\bigcup F$ is an ideal. If~$\nu \subseteq S$ is an ideal,
+then~$\{ \mathcal{A} \in P_\omega(S) \,|\, \mathcal{A} \subseteq \nu \}$ is a
+filter.
+\end{example}
+
 \begin{example}\label{ex:notion-scott}Let~$(P,{\leq})$ be a complete lattice and let~$\Incbare$
 be a Scott-open predicate on~$P$ as in~\cite{wessel-schuster:radical}. Then the
 opposite lattice of~$P$ becomes a forcing notion with coverings given by
