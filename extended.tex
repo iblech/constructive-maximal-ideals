@@ -552,14 +552,40 @@ version of the construction in the quotient ring~$A/\aaa$ (which is again
 countable) and taking the inverse image of the resulting ideal along the
 canonical projection~$A \to A/\aaa$.\end{example}
 
-\begin{example}Assume that~$A$ is a field. Let~$f \in A[X]$ be a nonconstant monic
+\begin{example}Assume that~$A$ is a residue field. Let~$f \in A[X]$ be a nonconstant monic
 polynomial. Since~$f$ is monic, it is not invertible; thus
 Example~\ref{ex:maximal-above} shows that there is a maximal ideal~$\mmm$
-above~$(f)$. Hence~$A[X]/\mmm$ is a field in which~$f$ has a zero, namely the equivalence class of~$X$.
+above~$(f)$. Hence~$A[X]/\mmm$ is a residue field in which~$f$ has a zero, namely the equivalence class of~$X$.
 
 Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$. No
 assumption regarding decidability of reducibility has to be made, but in return
-the resulting field is only a residue field.\end{example}
+the resulting field is only a residue field. Alternatively, a splitting field
+of~$f$ can be obtained in a single step as the quotient of the universal
+splitting algebra of~$f$ by a maximal ideal.
+
+Using either of these constructions, we can obtain an algebraic closure of~$A$:
+Let~$f_0,f_1,\ldots$ be an enumeration of all monic polynomials over~$A$;
+successively use Kronecker or universal splitting algebra steps; and take the
+direct limit to obtain a residue field~$K_0$. Over this field, all the
+polynomials~$f_i$ split into linear factors. If~$g$ is a polynomial over~$K_0$,
+it will \emph{not~not} have a zero in~$K_0$,\footnote{There is a splitting
+field~$K_0'$ of~$g$ over~$K_0$ in which~$g$ has a zero~$\alpha$. Since the
+coefficients of~$g$ are all algebraic over~$A$, by a standard
+lemma~\cite[Corollary~VI.1.5]{mines-richman-ruitenburg:constructive-algebra} also~$\alpha$ is a root of a
+monic polynomial~$f_i$ over~$A$. This polynomial already splits into linear
+factors over~$K_0$, and if~$K_0'$ was an integral domain in that at least one
+factor of a vanishing product is already zero, one of these roots would
+coincide with~$\alpha$. Hence, by injectivity of the canonical map~$K_0 \to
+K_0'$, the polynomial~$g$ would already have a zero in~$K_0$. However,
+constructively, we cannot suppose the integral domain condition. Constructively
+it is only \emph{not~not} true that~$\alpha$ is one of the zeros of~$f_i$.}
+so classically~$K_0$ is the desired algebraic closure. Constructively, this can
+fail, but by repeating this construction with an enumeration of all monic
+polynomials over~$K_0$, we can obtain a field~$K_1$; then~$K_2$; and so on. The
+direct limit~$K_\omega$ of these fields is the desired algebraic
+closure---if~$g$ is a monic polynomial over~$K_\omega$, its coefficients will
+already by elements of some~$K_n$ so that~$g$ will have a zero in~$K_{n+1}$.
+\end{example}
 
 
 \subsection{Recovering the original construction}
