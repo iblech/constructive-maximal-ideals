@@ -1224,11 +1224,11 @@ community~\cite{paykin-krishnaswami-zdancewic:event,cave-ferreira-panangaden-pie
 
 
 \subsection{Forcing notions}\label{sect:forcing-notions} The particular flavor of forcing is determined
-by its \emph{notion of forcing}. This is a poset~$(L,{\preceq})$ equipped with a
+by its \emph{notion of forcing}. This is a poset~$(L,{\preccurlyeq})$ equipped with a
 \emph{covering system} (Definition~\ref{defn:covering-system} below). The
 elements of~$L$ are called \emph{forcing conditions} and are regarded
 as partial approximations to (perhaps fictitious) ideal objects. The
-relation~$\tau \preceq \sigma$ expresses that~$\tau$ is a
+relation~$\tau \preccurlyeq \sigma$ expresses that~$\tau$ is a
 refinement of~$\sigma$, that is that~$\tau$ contains more information
 than~$\sigma$ and hence restricts the fictitious ideal objects
 approximated by~$\tau$ more strongly than~$\sigma$ does, just as~$[3.14, 3.15]$ is a smaller
@@ -1237,26 +1237,26 @@ interval than~$[3.1, 3.2]$.
 The associated covering system specifies which kinds of refinements
 we are prepared to make. In the following definition, the
 expression~${\downarrow}\sigma$ denotes the set~$\{ \tau \in L \,|\, \tau
-\preceq \sigma \}$ of all refinements of~$\sigma$ and the
+\preccurlyeq \sigma \}$ of all refinements of~$\sigma$ and the
 expression~${\downarrow}R$ denotes the downward closure of a subset~$R \subseteq L$, that is the
-set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preceq \sigma \} =
+set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preccurlyeq \sigma \} =
 \bigcup_{\sigma \in R} {\downarrow}\sigma$.
 
 \begin{definition}[{\cite[p.~24]{joyal-tierney:grothendieck}}]\label{defn:covering-system}A \emph{covering system} on a
 poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}\sigma)$
 of \emph{coverings} for each element~$\sigma \in L$ subject only to the
 following stability condition:
-If~$\tau \preceq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
+If~$\tau \preccurlyeq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
 covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}R$.
 \end{definition}
 
 \begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
 is a subset~$F \subseteq L$ such that
 \begin{enumerate}
-\item $F$ is upward-closed (``closed under coarser elements''): if~$\tau \preceq \sigma$ and if~$\tau \in F$,
+\item $F$ is upward-closed (``closed under coarser elements''): if~$\tau \preccurlyeq \sigma$ and if~$\tau \in F$,
 then~$\sigma \in F$;
 \item $F$ is downward-directed: $F$ is inhabited, and if~$\alpha,\beta \in F$,
-then there is a common refinement~$\sigma \preceq \alpha,\beta$ such
+then there is a common refinement~$\sigma \preccurlyeq \alpha,\beta$ such
 that~$\sigma \in F$; and
 \item $F$ splits the covering system: if~$\sigma \in F$ and~$R \in
 \Cov(\sigma)$, then~$\tau \in F$ for some~$\tau \in R$.
@@ -1272,7 +1272,7 @@ the extended universe is called the \emph{generic filter}.
 of the elements of a set~$X$, let~$L \defeq X^*$ be the set of finite lists
 of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
-for~$i=0,\ldots,n-1$, and declare~$\tau \preceq \sigma$ iff~$\sigma$ is a prefix
+for~$i=0,\ldots,n-1$, and declare~$\tau \preccurlyeq \sigma$ iff~$\sigma$ is a prefix
 of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
 one coded by~$\sigma$.
 
@@ -1349,7 +1349,7 @@ filter if and only if the law of excluded middle holds.
 geometric) propositional theory~\cite[Definition~D1.1.3]{johnstone:elephant},
 such as the theory of prime ideals of a given ring, and let~$L$ be its
 \emph{Lindenbaum algebra}, the set of formulas in the language of~$\TT$ modulo
-provable equivalence, endowed with the ordering where~$[\varphi] \preceq
+provable equivalence, endowed with the ordering where~$[\varphi] \preccurlyeq
 [\psi]$ if and only if~$\varphi \vdash \psi$ modulo~$\TT$. In the coherent
 case, we decree
 \[ \Cov([\varphi]) \defeq \bigl\{ \{ [\psi_1],\ldots,[\psi_n] \} \,\big|\,
@@ -1379,7 +1379,7 @@ Grothendieck coverages.
 multi-conclusion entailment relation on a set~$S$, as for instance studied
 in~\cite{rinaldi-wessel:cut}. We equip the set~$L \defeq P_\omega(S)$ of
 finitely enumerable (Kuratowski-finite) subsets of~$S$ with the following
-ordering: $\mathcal{A} \preceq \mathcal{B}$ iff~$\mathcal{A} \vdash b$ for every
+ordering: $\mathcal{A} \preccurlyeq \mathcal{B}$ iff~$\mathcal{A} \vdash b$ for every
 element~$b \in \mathcal{B}$. For each pair~$(\mathcal{A},\mathcal{B})$ such
 that~$\mathcal{A} \vdash \mathcal{B}$, we declare that the set~$\{ \mathcal{A}
 \cup \{ b \} \,|\, b \in \mathcal{B} \}$ should be a covering of~$\mathcal{A}$.
@@ -1432,7 +1432,7 @@ of all ideals of~$A$ and~$\Inc{\aaa}$ denotes~$1 \in \aaa$.
 does without an explicit specification of coverings because implicitly the
 \emph{double negation topology} is used:
 \[ \Cov(\sigma) \defeq \{ M \in P({\downarrow}\sigma) \,|\,
-  \forall \tau \preceq \sigma\_ \neg\neg \exists \nu \preceq \tau\_ \nu \in M
+  \forall \tau \preccurlyeq \sigma\_ \neg\neg \exists \nu \preccurlyeq \tau\_ \nu \in M
   \}. \]
 Up to the double negation which disappears in a classical metatheory, sets~$M$ as displayed are called
 \emph{dense} (in~${\downarrow}\sigma$) in the literature on classical set-theoretic forcing, and
@@ -1441,7 +1441,7 @@ called \emph{generic filters}, in line (but more restrictive) than our
 terminology for arbitrary forcing notions.
 
 If the poset~$L$ of forcing conditions is \emph{atomless} (that is, for every
-condition~$\sigma \in L$ there are conditions~$\alpha,\beta \preceq \sigma$
+condition~$\sigma \in L$ there are conditions~$\alpha,\beta \preccurlyeq \sigma$
 without a common refinement), as in commonly the case in classical
 set-theoretic forcing~\cite[Lemma~1.33]{schilhan:bsc}, then no such generic filter exists in~$V$.
 In contrast, coarser covering systems on atomless posets may allow
@@ -1468,7 +1468,7 @@ defined by~$\Cov(\sigma) \defeq \{ M \in P(L) \,|\, \sigma = \bigvee M \}$.
 
 
 \subsection{The eventually monad} Let~$L$ be a forcing notion. A
-predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preceq \sigma$
+predicate~$P$ on~$L$ is called \emph{monotone} iff~$\tau \preccurlyeq \sigma$
 implies~$P\sigma \Rightarrow P\tau$. Such predicates express positive
 observations which are stable under refinement of approximations. For
 instance, in the case of the forcing notion of Example~\ref{ex:notion-enum},
@@ -1500,7 +1500,7 @@ $(\forall \tau \in R\_ Q\tau) \Rightarrow Q\sigma$,
 then~$P\sigma \Rightarrow Q\sigma$ for every element~$\sigma \in L$.}
 
 \begin{lemma}The relaxation of~$P$ is again monotone, that is~$P \mid \sigma
-\Rightarrow P \mid \tau$ if~$\tau \preceq \sigma$.\end{lemma}
+\Rightarrow P \mid \tau$ if~$\tau \preccurlyeq \sigma$.\end{lemma}
 
 \begin{proof}By induction on the given witness of~$P \mid \sigma$:
 \begin{enumerate}
@@ -1510,7 +1510,7 @@ monotonicity of~$P$.
 of~$\sigma$, then by the stability condition
 ofDefinition~\ref{defn:covering-system} there is a covering~$S \in \Cov(\tau)$
 such that~$S \subseteq {\downarrow}R$. Hence for every element~$\tau' \in S$,
-there is an element~$\sigma' \in R$ such that~$\tau' \preceq \sigma'$. By the
+there is an element~$\sigma' \in R$ such that~$\tau' \preccurlyeq \sigma'$. By the
 induction hypothesis, we have~$P \mid \tau'$ for all such elements~$\tau'$, and
 hence~$P \mid \tau$. \qedhere
 \end{enumerate}
@@ -1529,7 +1529,7 @@ base universe to satisfy the same first-order statements.
 
 \begin{proposition}\label{prop:ev-points}Let~$L$ be a forcing notion. Let~$P$
 be a monotone predicate on~$L$. If~$P \mid \sigma$, then every filter~$F$ which
-contains~$\sigma$ also contains a refinement~$\tau \preceq \sigma$
+contains~$\sigma$ also contains a refinement~$\tau \preccurlyeq \sigma$
 with~$P\tau$.
 \end{proposition}
 
@@ -1539,8 +1539,8 @@ a given filter~$F$:
 \item If~$P\sigma$, we conclude with setting~$\tau \defeq \sigma$.
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
 of~$\sigma$, then by the splitting property the filter~$F$ contains a refinement~$\tau_0
-\preceq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
-further refinement~$\tau \preceq \tau_0$ contained in~$F$ such that~$P\tau$.\qedhere
+\preccurlyeq \sigma$ with~$\tau_0 \in R$. By the induction hypothesis, there is a
+further refinement~$\tau \preccurlyeq \tau_0$ contained in~$F$ such that~$P\tau$.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -1558,7 +1558,7 @@ bar induction.
 We think of~``$P \mid \sigma$'' as an inductive paraphrasing, not directly referring to
 filters and indeed even being nontrivial in case there are no filters at all in the base
 universe, of the statement that every filter containing~$\sigma$ also contains
-a refinement~$\tau \preceq \sigma$ with~$P\tau$. While the latter statement
+a refinement~$\tau \preccurlyeq \sigma$ with~$P\tau$. While the latter statement
 refers to filters---ideal, completed objects---the former has a more finitary
 character.
 
@@ -1664,10 +1664,10 @@ is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
   \> \defeqv $\nabla\sigma\_ R(\llbracket s_1 \rrbracket,\ldots,\llbracket s_n \rrbracket)$. \\[0.3em]
 
   \> $\sigma \forces G\tau$
-  \> \defeqv $\nabla\sigma\_ \sigma \preceq \llbracket\tau\rrbracket$. \\[0.3em]
+  \> \defeqv $\nabla\sigma\_ \sigma \preccurlyeq \llbracket\tau\rrbracket$. \\[0.3em]
 
   \> $\sigma \forces \varphi \Rightarrow \psi$
-  \> \defeqv $\forall \tau \preceq \sigma\_ (\tau \forces \varphi) \Rightarrow
+  \> \defeqv $\forall \tau \preccurlyeq \sigma\_ (\tau \forces \varphi) \Rightarrow
   (\tau \forces \psi)$. \\[0.3em]
 
   \> $\sigma \forces \top$ \> \defeqv $\top$. \\[0.3em]
@@ -1676,7 +1676,7 @@ is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
   \> \defeqv $(\sigma \forces \varphi) \wedge (\sigma \forces \psi)$. \\[0.3em]
 
   \> $\sigma \forces \forall x\?\underline{X}\_ \varphi$
-  \> \defeqv $\forall \tau \preceq \sigma\_ \forall x_0 \in X\_ \tau \forces
+  \> \defeqv $\forall \tau \preccurlyeq \sigma\_ \forall x_0 \in X\_ \tau \forces
   \varphi[\underline{x_0}/x]$. \\[0.3em]
 
   \> $\sigma \forces \bot$ \> \defeqv $\nabla\sigma\_ \bot$ \\[0.3em]
@@ -1712,7 +1712,7 @@ specializes to precisely the double negation translation.
 \begin{lemma}\label{lemma:kj-basics}For every first-order formula~$\varphi$,
 the interpretation is \ldots
 \begin{enumerate}
-\item[(a)] monotone: If~$\sigma \forces \varphi$ and if~$\tau \preceq \varphi$,
+\item[(a)] monotone: If~$\sigma \forces \varphi$ and if~$\tau \preccurlyeq \varphi$,
 then also~$\tau \forces \varphi$.
 \item[(b)] local: If~$\nabla\sigma\_ \sigma \forces \varphi$,
 then~$\sigma \forces \varphi$.
@@ -1778,15 +1778,15 @@ of~$\underline{L}$, namely~$G$, in the precise sense that the following
 statements hold in~$V^\nabla$:
 \begin{enumerate}
 \item[(1)] $\forall \sigma \? \underline{L}\_ \forall \tau \? \underline{L}\_
-\bigl(\tau \mathrel{\underline{\preceq}} \sigma \wedge G\sigma\bigr)
+\bigl(\tau \mathrel{\underline{\preccurlyeq}} \sigma \wedge G\sigma\bigr)
 \Rightarrow G\tau$.
 \item[(2a)] $\exists \sigma \? \underline{L}\_ G\sigma$.
 \item[(2b)] $\forall \alpha \? \underline{L}\_
 \forall \beta \? \underline{L}\_
 (G\alpha \wedge G\beta) \Rightarrow
 \exists \sigma \? \underline{L}\_
-\sigma \mathrel{\underline{\preceq}} \alpha \wedge
-\sigma \mathrel{\underline{\preceq}} \beta \wedge
+\sigma \mathrel{\underline{\preccurlyeq}} \alpha \wedge
+\sigma \mathrel{\underline{\preccurlyeq}} \beta \wedge
 G\sigma$.
 \item[(3)] $\forall \sigma \? \underline{L}\_
 \forall R \? \underline{P(L)}\_
