@@ -754,13 +754,17 @@ Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$
 assumption regarding decidability of reducibility has to be made, but in return
 the resulting field is only a residue field. Alternatively, a splitting field
 of~$f$ can be obtained in a single step as the quotient of the universal
-splitting algebra of~$f$ by a maximal ideal.
+splitting
+algebra~(\cite[Section~III.4]{lombardi-quitte:constructive-algebra},~\cite[Section~2.1]{pohst-zassenhaus:aant},
+\cite{richman:splitting}) of~$f$ by a maximal ideal.
 
 Using either of these constructions, we can obtain an algebraic closure of~$A$:
 Let~$f_0,f_1,\ldots$ be an enumeration of all nonconstant monic polynomials over~$A$;
 successively apply Kronecker or universal splitting algebra steps; and take the
 direct limit to obtain a residue field~$K_0$. Over this field, all the
-polynomials~$f_i$ split into linear factors. If~$g$ is a nonconstant monic polynomial over~$K_0$,
+polynomials with coefficients in~$A$ split into linear factors; but~$K_0$
+acquires new polynomials which are not present over~$A$.
+If~$g$ is a nonconstant monic polynomial over~$K_0$,
 it will \emph{not~not} have a zero in~$K_0$,\footnote{There is a splitting
 field~$K_0'$ of~$g$ over~$K_0$ in which~$g$ has a zero~$\alpha$. Since the
 coefficients of~$g$ are all algebraic over~$A$, by a standard
@@ -771,12 +775,18 @@ factor of a vanishing product is already zero, one of these roots would
 coincide with~$\alpha$. Hence, by injectivity of the canonical map~$K_0 \to
 K_0'$, the polynomial~$g$ would already have a zero in~$K_0$. However,
 constructively, we cannot suppose the integral domain condition. Constructively
-it is only \emph{not~not} true that~$\alpha$ is one of the zeros of~$f_i$.}
-so classically~$K_0$ is the desired algebraic closure.
+it is only \emph{not~not} true that~$\alpha$ is one of the zeros of~$f_i$.
+This issue is not visible in the account of
+Mines, Richman and Ruitenburg~\cite[Theorem~VI.3.5]{mines-richman-ruitenburg:constructive-algebra},
+as they work over discrete fields, an assumption we do not make.} so
+classically~$K_0$ is the desired algebraic closure.
 
-Constructively, this can
-fail, but by repeating this construction with an enumeration of all nonconstant monic
-polynomials over~$K_0$, we can obtain a field~$K_1$; then~$K_2$; and so on. The
+This closure construction, now fairly standard, is due to
+Gilmer~\cite{gilmer:algebraic-closure,richman:splitting,conrad:algebraic-closure}.
+Constructively however, it can fail that~$K_0$ is algebraically closed. In this
+case the older approach from before Gilmer's innovation can be applied:
+We repeat this construction with an enumeration of all nonconstant monic
+polynomials over~$K_0$, to obtain a field~$K_1$; then~$K_2$; and so on. The
 direct limit~$K_\omega$ of these fields is the desired algebraic
 closure---if~$g$ is a nonconstant monic polynomial over~$K_\omega$, its coefficients will
 already by elements of some~$K_n$ so that~$g$ will have a zero in~$K_{n+1}$.
@@ -2350,7 +2360,7 @@ sequentially from then on.
 
 Let~$I$ be a well-ordering, that is a set equipped with a relation~$({<})$ such
 that constructions by transfinite recursion and proofs by induction are
-possible~\cite{XXX}. Further assume that~$I$ itself and that for every~$n \in
+possible. Further assume that~$I$ itself and that for every~$n \in
 I$ the set~$\{ k \in I \,|\, k < n \}$ is conditionally directed: For every two
 elements of the set, an upper bound is also contained in the set. This
 requirement is for instance met in case that~$({<})$ is a linear order.
