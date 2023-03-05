@@ -145,7 +145,7 @@ In this generality, the resulting
 maximal ideal has an elusive quality to it, but useful properties and positive information can still be
 extracted. We recover the original construction under certain
 decidability assumptions (Proposition~\ref{prop:with-test}). To further
-elucidate the essential aspects of the construction, Appendix~\ref{sect:inc-wf}
+elucidate the essential aspects of the construction, Section~\ref{sect:inc-wf}
 contains a streamlined account in the setting of \emph{abstract inconsistency
 predicates}.
 
@@ -344,7 +344,7 @@ proof appeals to this property, we tentatively refine the current
 approximation from~$\aaa$ to~$\aaa + (x)$, pretending that the first alternative
 holds, and resume the proof. When the proof reaches the conclusion~$1 \in
 \mmm$, we have learnt the positive information that~$1 \in \aaa + (x)$.
-Armed with this information, we reset the current approximation back to~$\aaa$
+Equipped with this information, we reset the current approximation back to~$\aaa$
 and again follow the classical proof, now pretending that the second
 alternative holds. When the proof reaches the conclusion~$1 \in \mmm$ a second
 time, we have learnt that~$1 \in \aaa$. In this way we fold up branches of the
@@ -362,7 +362,7 @@ identity~$1 = 0$?
 We answer these questions in Section~\ref{sect:dynalg} by connecting the
 dynamical method with the iterative construction of an actual maximal ideal of
 Section~\ref{sect:constr}. More precisely:
-\begin{quote}\it The dynamical method is equivalent to
+\begin{quote}\it The dynamical approach to maximal ideals is equivalent to
 \begin{enumerate}
 \item[(1)] the iterative construction of a maximal ideal,
 \item[(2)] applied to the generic enumeration.
@@ -370,7 +370,7 @@ Section~\ref{sect:constr}. More precisely:
 %trick as in Barr's theorem.
 \end{enumerate}
 \end{quote}
-In this way we \emph{reify dynamical algebra}.
+In this way we reify the dynamical approach to maximal ideals.
 
 
 \paragraph{Acknowledgments}
@@ -382,7 +382,7 @@ authors.} Important steps towards this paper were made
 during the Dagstuhl Seminar 21472 ``Geometric Logic, Constructivisation, and
 Automated Theorem Proving'' in November 2021. This paper would not have come to
 existence without the authors' numerous discussions with Daniel Misseleck-Wessel, and
-greatly benefited from astute comments of Karim Becher, Nicolas Daans, Kathrin Gimmi, Matthias Hutzler,
+greatly benefited from astute comments of Adrian Antz, Karim Becher, Nicolas Daans, Kathrin Gimmi, Matthias Hutzler,
 Tadeusz Litak, Christian Sattler,
 Noah Schweber, Lukas Stoll and the three anonymous reviewers of the abridged
 precursor text to this
@@ -775,7 +775,7 @@ it is only \emph{not~not} true that~$\alpha$ is one of the zeros of~$f_i$.}
 so classically~$K_0$ is the desired algebraic closure.
 
 Constructively, this can
-fail, but by repeating this construction with an enumeration of all monic
+fail, but by repeating this construction with an enumeration of all nonconstant monic
 polynomials over~$K_0$, we can obtain a field~$K_1$; then~$K_2$; and so on. The
 direct limit~$K_\omega$ of these fields is the desired algebraic
 closure---if~$g$ is a nonconstant monic polynomial over~$K_\omega$, its coefficients will
@@ -786,6 +786,67 @@ closure construction can be generalized from countable residue fields to
 arbitrary residue fields, delivering sheaf models of algebraic closures. We
 leave a detailed comparison to the sheaf models of Mannaa and
 Coquand~\cite{mannaa-coquand:alg-closure} as further work.
+
+
+\subsection{Computational content?}
+
+``Non-informative'', judged Berardi and Valentini who also studied the
+iterative maximal ideal construction~\cite[Section~4.2]{berardi-valentini:krivine}.
+``Membership to [the maximal ideal] is a negated predicate. [\ldots\!] We
+proved no more than the maximal ideal~$M$ exists, and that we can use it in
+constructive reasoning. From the statement~$x \in M$ we will get no witness.''
+Negativity is our Lemma~\ref{lemma:omnibus}(c). ``A bad joke'', suggested
+another expert on constructive algebra.
+
+Indeed, no computation at all is required for carrying out the iterative
+maximal ideal construction; the construction is purely formal and membership to
+the resulting ideal is in general not decidable.
+That said, we
+argue that there is still computational value in the construction.
+
+Firstly, that realizers for statements~``$x \in \mmm$'' are non-informative is only
+true in case negation is defined as implication to~$\bot$, whereas we have
+defined as implication to~$1 = 0$. While~$\bot$ does not have any realizers at
+all, depending on the ring, the statement~``$1 = 0$'' might well admit
+meaningful realizers. For instance, a ring of the
+form~$B[f^{-1}]$ is trivial if and only if~$f$ is nilpotent, and the
+ring~$\ZZ/(X)$ where~$X$ is the subsingleton set~$\{ 1 \,|\, \varphi \}
+\subseteq \ZZ$ associated to a truth value~$\varphi$ is trivial if and only
+if~$\varphi$ holds.
+
+Secondly and more fundamentally, there is computational value in the
+construction in that it enables us to write and structure proofs in the style
+of classical mathematics, maintaining the fiction that somehow a maximal ideal
+is oracularly partitioned the ring elements into those which are zero
+modulo~$\mmm$ and those which are invertible modulo~$\mmm$; while in fact, no
+such partition has been computed and all the actual computational work is
+carried out by the proofs themselves. We illustrate this point with several
+case studies in Section~\ref{sect:krull}.
+
+As further spelled out in Section~\ref{sect:dynalg}, the construction is
+closely related to the dynamical approach to maximal ideals. The central
+premise of that approach is that we may blithely assume that a given element~$x
+\in A$ is zero modulo the maximal ideal if we are also prepared to backtrack
+and continue computing in case this assumption later turns out to be
+inconsistent and~$x$ is actually invertible modulo the maximal ideal.
+
+This idea is precisely codified by the iterative maximal ideal construction in
+that we have
+\begin{equation}
+  \label{eq:char-membership}
+  \tag{$\dagger$}
+  x \in \mmm \quad\Longleftrightarrow\quad \neg(1 \in \mmm + (x))
+\end{equation}
+by Lemma~\ref{lemma:omnibus}(c): The elements of~$\mmm$ are exactly those ring
+elements for which there is a way to transform the contrary assumption~$1 \in
+\mmm + (x)$ to the conclusion~$1 = 0$.
+
+The equivalence~(\ref{eq:char-membership}) expresses the essence of the maximal
+ideal construction---only that it cannot serve as a definition because of its
+evident circularity. The construction resolves this circularity by
+stratification along a given enumeration. Section~\ref{sect:wlog} explains how
+set-theoretic forcing facilitates a second resolution which does not require an
+enumeration.
 
 
 \section{On the intersection of all prime ideals}
@@ -829,7 +890,7 @@ the desired~$x$-prime ideal.
 (radical and $\neg\neg$-stable) prime ideal~$\ppp \subseteq A$ such that~$x \not\in \ppp$.
 \end{corollary}
 
-\begin{proof}Because~$x$ is not nilpotent, the notion of an~$x$-prime ideal and
+\begin{proof}Because~$x$ is not nilpotent, the notions of an~$x$-prime ideal and
 an ordinary prime ideal coincide. Hence the claim follows from
 Lemma~\ref{lemma:x-prime}.\end{proof}
 
@@ -1478,7 +1539,7 @@ is among the terms of~$\sigma$.
 For a monotone predicate~$P$, we introduce a derived predicate denoted~``$P
 \mid \sigma$'' (pronounced~``$P$ bars~$\sigma$'') expressing that no matter how an approximation~$\sigma$ evolves
 to a better approximation~$\tau$, eventually~$P\tau$ will hold. Similar to
-Coquand and Persson's approach to well-quasi-orders~\cite[Definition~6]{coquand-persson:groebner} and
+Coquand and Persson's approach to well quasi-orders~\cite[Definition~6]{coquand-persson:groebner} and
 Coquand and Lombardi's approach to Noetherian
 rings~\cite{coquand-lombardi:krull,coquand:invariant}, we define this predicate
 in a direct inductive fashion, by the following generating clauses:
