@@ -124,7 +124,7 @@ skipping those which would render it improper:
   \end{cases}
 \end{aligned}\end{equation}
 A maximal ideal is then obtained in the limit as the union of the intermediate
-stages~$\mmm_n$. For instance, Krull in his 1929 Annals contribution~\cite[Hilfs\-satz]{krull:ohne} and books on constructive
+stages~$\mmm_n$. For instance, Krull in his 1929 \emph{Annalen} contribution~\cite[Hilfs\-satz]{krull:ohne} and books on constructive
 algebra~\cite[Lemma~VI.3.2]{mines-richman-ruitenburg:constructive-algebra},~\cite[comment after Theorem~VII.5.2]{lombardi-quitte:constructive-algebra} proceed in this fashion.
 A similar
 construction concocts Henkin models for the purpose of proving
@@ -748,13 +748,13 @@ Lasker--Noether rings~\cite[Theorem~E]{perdry:noetherian}.
 \subsection{An application: Construction of algebraic closures}
 
 Assume that~$A$ is a residue field. Let~$f \in A[X]$ be a nonconstant monic
-polynomial. Since~$f$ is monic, it is not invertible; thus
+polynomial. Since~$f$ is nonconstant monic, it is not invertible; thus
 Example~\ref{ex:maximal-above} shows that there is a maximal ideal~$\mmm$
 above~$(f)$. Hence~$A[X]/\mmm$ is a residue field in which~$f$ has a zero, namely the equivalence class of~$X$.
 
 Iterating this \emph{Kronecker construction}, we obtain a splitting field of~$f$. No
 assumption regarding decidability of reducibility has to be made, but in return
-the resulting field is only a residue field. Alternatively, a splitting field
+the resulting field is only a residue field. Alternatively, a splitting residue field
 of~$f$ can be obtained in a single step as the quotient of the universal
 splitting
 algebra~(\cite[Section~III.4]{lombardi-quitte:constructive-algebra},~\cite[Section~2.1]{pohst-zassenhaus:aant},
@@ -791,7 +791,7 @@ We repeat this construction with an enumeration of all nonconstant monic
 polynomials over~$K_0$, to obtain a field~$K_1$; then~$K_2$; and so on. The
 direct limit~$K_\omega$ of these fields is the desired algebraic
 closure---if~$g$ is a nonconstant monic polynomial over~$K_\omega$, its coefficients will
-already by elements of some~$K_n$ so that~$g$ will have a zero in~$K_{n+1}$.
+already be elements of some~$K_n$ so that~$g$ will have a zero in~$K_{n+1}$.
 
 Using the technique reviewed in Section~\ref{sect:wlog}, the scope of this
 closure construction can be generalized from countable residue fields to
@@ -802,8 +802,8 @@ Coquand~\cite{mannaa-coquand:alg-closure} as further work.
 
 \subsection{Computational content?}
 
-``Non-informative'', judged Berardi and Valentini who also studied the
-iterative maximal ideal construction~\cite[Section~4.2]{berardi-valentini:krivine}.
+``Non-informative'', judged Berardi and Valentini who also studied the iterative maximal ideal
+construction~\cite[Section~4.2]{berardi-valentini:krivine}. They continue:
 ``Membership to [the maximal ideal] is a negated predicate. [\ldots\!] We
 proved no more than the maximal ideal~$M$ exists, and that we can use it in
 constructive reasoning. From the statement~$x \in M$ we will get no witness.''
@@ -829,7 +829,7 @@ if~$\varphi$ holds.
 Secondly and more fundamentally, there is computational value in the
 construction in that it enables us to write and structure proofs in the style
 of classical mathematics, maintaining the fiction that somehow a maximal ideal
-is oracularly partitioned the ring elements into those which are zero
+has oracularly partitioned the ring elements into those which are zero
 modulo~$\mmm$ and those which are invertible modulo~$\mmm$; while in fact, no
 such partition has been computed and all the actual computational work is
 carried out by the proofs themselves. We illustrate this point with several
@@ -843,7 +843,7 @@ and continue computing in case this assumption later turns out to be
 inconsistent and~$x$ is actually invertible modulo the maximal ideal.
 
 This idea is precisely codified by the iterative maximal ideal construction in
-that we have
+that we have the residue field property
 \begin{equation}
   \label{eq:char-membership}
   \tag{$\dagger$}
@@ -1353,7 +1353,7 @@ For each list~$\sigma \in L$, we decree that its coverings are the set
 $\{ \sigma y \,|\, y \in X \}$
 and, for each element~$a \in X$, the set
 $\{ \sigma \sigma' \,|\, \sigma' \in L, a \in \sigma \sigma'
-\}$. (By~$\sigma y$, we mean the enlarged list with~$r$ as an
+\}$. (By~$\sigma y$, we mean the enlarged list with~$y$ as an
 added element at the end. By~$\sigma \sigma'$, we mean the concatenation
 of the lists~$\sigma$ and~$\sigma'$. We write~$a \in \nu$ if and only if the
 list~$\nu$ has~$a$ among its terms.)
@@ -1448,8 +1448,11 @@ equipped with covering systems to \emph{sites}, categories equipped with
 Grothendieck coverages.
 \end{example}
 
+% XXX only a preorder?
 \begin{example}\label{ex:notion-entrel}Let~$({\vdash})$ be a finitary
-multi-conclusion entailment relation~\cite{lorenzen:investigations,neuwirth:investigations,cederquist-coquand:entdistr,scott:com,rin:edde:full,rinaldi-wessel:cut} on a set~$S$.
+multi-conclusion entailment
+relation~\cite{lorenzen:investigations,neuwirth:investigations,cederquist-coquand:entdistr,scott:com,rin:edde:full,rinaldi-wessel:cut}
+or a geometric entailment relation~(\cite[Section~3]{schuster-wessel:krull},~\cite{wessel:points}) on a set~$S$.
 We equip the set~$L \defeq P_\omega(S)$ of
 finitely enumerable (Kuratowski-finite) subsets of~$S$ with the following
 ordering: $\mathcal{A} \preccurlyeq \mathcal{B}$ iff~$\mathcal{A} \vdash b$ for every
@@ -1462,6 +1465,9 @@ the filters of~$L$ and the ideals of the entailment relation: If~$F \subseteq
 L$ is a filter, then~$\bigcup F$ is an ideal. If~$\nu \subseteq S$ is an ideal,
 then~$\{ \mathcal{A} \in P_\omega(S) \,|\, \mathcal{A} \subseteq \nu \}$ is a
 filter.
+
+Depending on the entailment relation, this class of forcing notions specializes
+XXX
 \end{example}
 
 \begin{example}\label{ex:notion-scott}Let~$(P,{\leq})$ be a complete lattice and let~$\Incbare$
@@ -2091,14 +2097,14 @@ generic enumeration.
 entailment relations~\cite[Corollary~2]{schuster-wessel:krull}. One proves by
 induction that if~$\nabla\aaa\_ x \in \aaa$, then~$x \in \mathrm{Jac}(\aaa)$.
 
-For the ``if'' direction of the second claim, arguing in the forcing extension,
+For the ``only if'' direction of the second claim, arguing in the forcing extension,
 we assume (as we may) for the sake of contradiction that~$1 \in \mmm + (x)$.
-Then there is some element~$y$ such that~$1 - ay$ is an element of~$\mmm$ and
+Then there is an element~$y \in A$ such that~$1 - xy$ is an element of~$\mmm$ and
 hence is not invertible. This is a contradiction to~$x$ not being apart from
 the Jacobson radical.
 
-For the ``only if'' direction, let~$u \in A$ be arbitrary and assume that~$1 -
-ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[]
+For the ``if'' direction, let~$u \in A$ be arbitrary and assume that~$1 -
+ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[\,]
 \models x \in \mmm$ and hence also~$[1-ux] \models x \in \mmm$. Thus~$[1-ux]
 \models 1 \in \mmm$, a contradiction.
 \end{proof}
@@ -2171,7 +2177,8 @@ quality to it.
 Forcing technology allows us to recognize that with this condition, we have
 actually come full circle---back to the venerable ascending chain condition:
 
-\begin{theorem}A ring is inductively Noetherian if and only if a very
+\begin{theorem}A ring is inductively
+Noetherian~\cite{coquand-persson:groebner,coquand-lombardi:krull,coquand:invariant} if and only if a very
 particular ascending sequence of finitely generated ideals stalls, namely
 \emph{the generic one}.
 \end{theorem}
@@ -2496,21 +2503,15 @@ of~$A[X]$.\end{proof}
 we have~$M = I$, and
 
 FUTURE:
-* compare Noetherian (Banaschweski, Erné, Johnstone, Mulvey, ...)
 * check van der Waerden's book (where he sticks to countable rings)
-* cite prime, maximal, ...
 * compare with situation in reverse mathematics
-* compare with other forcing models of the maximal ideal
-* include results of discussion with Henry
+* cite: Hatzikiriakou, K. (1991). Minimal prime ideals and arithmetic comprehension .
+  The Journal of Symbolic Logic, 56(01), 67–70. doi:10.2307/2274904 
 
 THANKS
 audiences where work has been presented:
 Schlehdorf, CiE, Padova, ItaCa Fest, Paris
 
-
-IDEA FOR NOETHERIAN:
-m_{n+1} = m_n + (x | m_n + (x) is proper, x ∉ m_n, and x is smallest with this property)
-stabilizes, should be maximal ideal.
 
 
 ----------------------- REVIEW 1 ---------------------
