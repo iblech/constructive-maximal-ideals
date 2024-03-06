@@ -86,7 +86,7 @@
   celebrated double-negation translation. This connection allows us to give formal a priori criteria
   elucidating the scope of the dynamical method.
   Along the way we do a case study for proofs in algebra with minimal logic,
-  and generalize the construction to arbitrary inconsistency predicates. An Agda
+  and generalize the construction to arbitrary inconsistency predicates. A partial Agda
   formalization is available at an accompanying repository.\footnote{See
   \href{https://github.com/iblech/constructive-maximal-ideals/}{\texttt{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}.}
   This text is a revised and extended version
@@ -312,7 +312,7 @@ ideal are true even if no actual maximal ideal can be constructed.
 \subsection*{Connection with dynamical algebra}
 
 In Section~\ref{sect:dynalg} we turn to the general toolbox of dynamical
-algebra~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its
+algebra~\cite{coquand-lombardi-roy:dynamicalmethod},~\cite[Section~XV.6]{lombardi-quitte:constructive-algebra},~\cite{yengui:constructive},~\cite{duval:about},~\cite{neuwirth:lorenzen}. Since its
 independent inventions by Dominique Duval and Paul
 Lorenzen, this toolbox has been widely
 successful in extracting computational content from classical proofs
@@ -614,6 +614,7 @@ coincides with the construction of the maximal ideal~$\mmm$.
 
 
 \subsection{A more economical description using generators}
+\label{sect:more-economical}
 
 There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
@@ -706,8 +707,8 @@ without a properness test, by setting
   \mmm'_0 &\defeq \{ 0 \} \\
   \mmm'_{n+1} &\defeq \mmm'_n + (\{ x_k \,|\,
     k \in I_n \wedge (\forall \ell \in I_n\_ k \leq \ell) \}), \\
-  &\qquad\qquad\text{where $I_n \defeq \{ k \in \NN \,|\, 1 \not\in \mmm'_n +
-  (x_k) \wedge x_k \not\in \mmm'_n \}$.}
+  &\qquad\qquad\text{where $I_n \defeq \{ k \in \NN \,|\, x_k \not\in \mmm'_n
+  \wedge 1 \not\in \mmm'_n + (x_k) \}$.}
 \end{align*}
 The modified sequence~$\mmm'_0 \subseteq \mmm'_1 \subseteq \cdots$ stalls only
 when it stabilizes. However, even with a properness test, by speeding up we lose
@@ -950,7 +951,7 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
 % demonstration. We are not actually using these proofs in our development, we
 % are just referencing them.
 \begin{quote}\small
-  \textbf{Proof of (a).} Simple induction if~$A$ is
+  \textbf{Proof of (a).} Simple induction over the formal degree of~$f$ if~$A$ is
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
   contained in all prime ideals and are thereby
@@ -1166,7 +1167,7 @@ Heyting arithmetic, however, does not support this case distinction. The
 formalization of the construction in~\textsc{ha} is only unlocked by the following
 direct characterization.
 
-\begin{lemma}\label{lemma:uniform-char}(In the situation of Lemma~\ref{lemma:via-generators}.)
+\begin{lemma}\label{lemma:uniform-char}(In the setting of Section~\ref{sect:more-economical}.)
 For every finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
 \defeq (v_0x_0,\ldots,v_{n-1}x_{n-1},x_n)$. Then:
 \begin{enumerate}
@@ -1313,7 +1314,8 @@ expression~${\downarrow}\sigma$ denotes the set~$\{ \tau \in L \,|\, \tau
 \preccurlyeq \sigma \}$ of all refinements of~$\sigma$ and the
 expression~${\downarrow}R$ denotes the downward closure of a subset~$R \subseteq L$, that is the
 set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preccurlyeq \sigma \} =
-\bigcup_{\sigma \in R} {\downarrow}\sigma$.
+\bigcup_{\sigma \in R} {\downarrow}\sigma$. For a set~$M$, we denote its
+powerset (or powerclass) by~$P(M)$.
 
 \begin{definition}[{\cite[p.~24]{joyal-tierney:grothendieck}}]\label{defn:covering-system}A \emph{covering system} on a
 poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}\sigma)$
@@ -1596,7 +1598,7 @@ then~$P\sigma \Rightarrow Q\sigma$ for every element~$\sigma \in L$.}
 monotonicity of~$P$.
 \item If~$P \mid \sigma'$ for all~$\sigma' \in R$, where~$R$ is a covering
 of~$\sigma$, then by the stability condition
-ofDefinition~\ref{defn:covering-system} there is a covering~$S \in \Cov(\tau)$
+of Definition~\ref{defn:covering-system} there is a covering~$S \in \Cov(\tau)$
 such that~$S \subseteq {\downarrow}R$. Hence for every element~$\tau' \in S$,
 there is an element~$\sigma' \in R$ such that~$\tau' \preccurlyeq \sigma'$. By the
 induction hypothesis, we have~$P \mid \tau'$ for all such elements~$\tau'$, and
@@ -1867,8 +1869,8 @@ of~$\underline{L}$, namely~$G$, in the precise sense that the following
 statements hold in~$V^\nabla$:
 \begin{enumerate}
 \item[(1)] $\forall \sigma \? \underline{L}\_ \forall \tau \? \underline{L}\_
-\bigl(\tau \mathrel{\underline{\preccurlyeq}} \sigma \wedge G\sigma\bigr)
-\Rightarrow G\tau$.
+\bigl(\tau \mathrel{\underline{\preccurlyeq}} \sigma \wedge G\tau\bigr)
+\Rightarrow G\sigma$.
 \item[(2a)] $\exists \sigma \? \underline{L}\_ G\sigma$.
 \item[(2b)] $\forall \alpha \? \underline{L}\_
 \forall \beta \? \underline{L}\_
@@ -1956,7 +1958,7 @@ the unary relation symbol~$G$. Then the following statements are equivalent:
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}Routine induction employing Lemma~\ref{prop:cov-open}.
+\begin{proof}Routine induction on the structure of~$\varphi$ employing Lemma~\ref{prop:cov-open}.
 \end{proof}
 
 Both directions of Theorem~\ref{thm:backforth} are central for putting the
@@ -2093,7 +2095,8 @@ it is not meaningful to ask whether they are equal. However, we may ask whether
 they satisfy the same first-order statements. They do not:
 
 \begin{proposition}\label{prop:mmm-nnn}With the terminology of
-Proposition~\ref{prop:jac}, an element~$x \in A$ is \ldots \begin{enumerate}
+Proposition~\ref{prop:jac}, Example~\ref{ex:gen-enum-max} and
+Example~\ref{ex:gen-max}, an element~$x \in A$ is \ldots \begin{enumerate}
 \item[(a)] contained in the Jacobson radical if and only if~$x
 \mathrel{\underline{\in}} \nnn$ holds in the forcing extension containing the
 generic maximal ideal.
@@ -2148,7 +2151,6 @@ of subsets: In the forcing extension, the ring~$A$ can catch new prime filters
 which did not exist in the base universe; the prime filter~$\qqq$ will only be
 maximal with respect to the old prime filters.
 \end{remark}
-
 
 
 \subsection{Further connections}
