@@ -3,8 +3,10 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb,amsmath,mathtools,proof,xcolor,amsthm,stmaryrd}
+\usepackage{amssymb,amsmath,mathtools,proof,amsthm,stmaryrd}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{fontawesome5}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -41,6 +43,11 @@
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\forces}{\vDash}
 \renewcommand{\_}{\mathpunct{.}\,}
+
+% lifted from https://arxiv.org/abs/2301.10696
+\newcommand{\formalized}{{\color{NavyBlue!75!White}{\raisebox{-0.5pt}{\scalebox{0.8}{\faCog}}}}}
+\newcommand{\flinkurl}[1]{\href{#1}{\formalized}}
+\newcommand{\flink}[1]{\flinkurl{https://iblech.github.io/constructive-maximal-ideals/index.html\##1}}
 
 \pubyear{0000}
 \volume{0}
@@ -416,6 +423,9 @@ generation of $(M)$ by the following rules:\par
 \noindent Here we adhere to the paradigm of generalized inductive definitions
 \cite{aczel-rathjen:notes,aczel-rathjen:cstdraft,rathjen:genind,aczel:ind}.
 
+Throughout the online version of this paper, the symbol~``\formalized{}'' is a
+clickable link to the corresponding machine-checked statement.
+
 
 \section{An iterative construction of maximal ideals}
 \label{sect:constr}
@@ -428,7 +438,7 @@ ideals of~$A$ are detachable). Up to Corollary~\ref{cor:is-prime-max}(a) below
 we follow~\cite{berardi-valentini:krivine}.
 
 We study the following recursive construction of ideals~$\mmm_0, \mmm_1,
-\ldots$ of~$A$:
+\ldots$ of~$A$~(\flink{§1.Construction-1}):
 \begin{align*}
   \mmm_0 &\defeq \{0\}, \\
   \mmm_{n+1} &\defeq \mmm_n + (\{ x_n \,|\, 1 \not\in \mmm_n + (x_n) \}).
@@ -452,7 +462,7 @@ positive results.
 The ideal~$(M_n)$ is given by
 $(M_n) = \{ a x_n \,|\, (a = 0) \vee (1 \not\in \mmm_n + (x_n)) \}$.
 
-\begin{lemma}\label{lemma:omnibus}
+\begin{lemma}[\flink{§1.Lemma-1-1}]\label{lemma:omnibus}
 \begin{enumerate}
 \item[\textnormal{(a)}] The subset~$\mmm$ is an ideal.
 \item[\textnormal{(b)}] The ideal~$\mmm$ is \emph{proper} in the sense that~$1 \not\in \mmm$.
@@ -484,10 +494,10 @@ assume~$1 \in \mmm + (x_n)$. Since~$\mmm + (x_n) \subseteq \mmm$,
 we have~$1 \in \mmm$. Hence~$1 = 0$ by properness of~$\mmm$.\qedhere
 \end{enumerate}\end{proof}
 
-\begin{corollary}\label{cor:is-prime-max}
+\begin{corollary}[\flink{§1.Corollary-1-2}]\label{cor:is-prime-max}
 \begin{enumerate}
 \item[\textnormal{(a)}] The ideal~$\mmm$ is \emph{maximal} in the sense that it is proper and that for
-all elements~$x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.
+all elements $x \in A$, if $1 \not\in \mmm + (x)$, then~$x \in \mmm$.
 \item[\textnormal{(b)}] The ideal~$\mmm$ is \emph{prime} in the
 sense that it is proper and that for
 all elements~$x,y \in A$, if~$xy \in \mmm$ and~$x \not\in \mmm$, then~$y \in
@@ -618,7 +628,7 @@ coincides with the construction of the maximal ideal~$\mmm$.
 
 There is an equivalent description of the
 maximal ideal~$\mmm$ which uses sets~$G_n$ of generators as proxies for the
-intermediate ideals~$\mmm_n$:
+intermediate ideals~$\mmm_n$~(\flink{§1.Construction-1}):
 \begin{align*}
   G_0 &\defeq \emptyset \\
   G_{n+1} &\defeq G_n \cup \{ x_n \,|\, 1 \not\in (G_n \cup \{ x_n \}) \}
@@ -627,7 +637,7 @@ An induction establishes the relation~$(G_n) = \mmm_n$; setting~$G \defeq
 \bigcup_{n\in\NN} G_n$, there is the following analogue of
 Lemma~\ref{lemma:omnibus}(c).
 
-\begin{lemma}\label{lemma:via-generators}For every number~$n \in \NN$, the following are equivalent:
+\begin{lemma}[\flink{§1.Lemma-1-1}]\label{lemma:via-generators}For every number~$n \in \NN$, the following are equivalent:
 \begin{enumerate}
 \item[(1)] $x_n \in G_{n+1}$.
 \item[(2)] $x_n \in G$.
@@ -1320,7 +1330,7 @@ set~$\{ \tau \in L \,|\, \exists \sigma \in R\_ \tau \preccurlyeq \sigma \} =
 \bigcup_{\sigma \in R} {\downarrow}\sigma$. For a set~$M$, we denote its
 powerset (or powerclass) by~$P(M)$.
 
-\begin{definition}[{\cite[p.~24]{joyal-tierney:grothendieck}}]\label{defn:covering-system}A \emph{covering system} on a
+\begin{definition}[{\cite[p.~24]{joyal-tierney:grothendieck}}, \flink{§4.§4-1.Definition-4-1}]\label{defn:covering-system}A \emph{covering system} on a
 poset~$L$ consists of a set~$\Cov(\sigma) \subseteq P({\downarrow}\sigma)$
 of \emph{coverings} for each element~$\sigma \in L$ subject only to the
 following stability condition:
@@ -1328,7 +1338,8 @@ If~$\tau \preccurlyeq \sigma$ and~$R \in \Cov(\sigma)$, there should be a
 covering~$S \in \Cov(\tau)$ such that~$S \subseteq {\downarrow}R$.
 \end{definition}
 
-\begin{definition}A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
+\begin{definition}[\flink{§4.§4-1.Definition-4-2}]
+A \emph{filter} of a forcing notion~$(L,\mathrm{Cov})$
 is a subset~$F \subseteq L$ such that
 \begin{enumerate}
 \item $F$ is upward-closed (``closed under coarser elements''): if~$\tau \preccurlyeq \sigma$ and if~$\tau \in F$,
@@ -1346,7 +1357,7 @@ purpose of a forcing notion is to give rise to a forcing extension of the
 universe in which a filter can always be found. The canonical filter living in
 the extended universe is called the \emph{generic filter}.
 
-\begin{example}\label{ex:notion-enum}To force the existence of an enumeration
+\begin{example}[\flink{§4.§4-1.Example-4-3}]\label{ex:notion-enum}To force the existence of an enumeration
 of the elements of a (perhaps uncountable) set~$X$, let~$L \defeq X^*$ be the set of finite lists
 of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
@@ -1574,7 +1585,7 @@ to a better approximation~$\tau$, eventually~$P\tau$ will hold. Similar to
 Coquand and Persson's approach to well quasi-orders~\cite[Definition~6]{coquand-persson:groebner} and
 Coquand and Lombardi's approach to Noetherian
 rings~\cite{coquand-lombardi:krull,coquand:invariant}, we define this predicate
-in a direct inductive fashion, by the following generating clauses:
+in a direct inductive fashion, by the following generating clauses~(\flink{§4.§4-2.Definition-Ev}):
 \begin{enumerate}
 \item If~$P\sigma$, then~$P \mid \sigma$.
 \item If~$P \mid \tau$ for all~$\tau \in R$, where~$R$ is some covering
@@ -1592,7 +1603,7 @@ $(\forall \tau \in R\_ Q\tau) \Rightarrow Q\sigma$,
 \end{enumerate}
 then~$P\sigma \Rightarrow Q\sigma$ for every element~$\sigma \in L$.}
 
-\begin{lemma}The relaxation of~$P$ is again monotone, that is~$P \mid \sigma
+\begin{lemma}[\flink{§4.§4-2.Lemma-4-10}]The relaxation of~$P$ is again monotone, that is~$P \mid \sigma
 \Rightarrow P \mid \tau$ if~$\tau \preccurlyeq \sigma$.\end{lemma}
 
 \begin{proof}By induction on the given witness of~$P \mid \sigma$:
@@ -1620,7 +1631,7 @@ The following two basic results on ``escaping the monad'' shed light on the
 meaning of~$P \mid \sigma$ and are crucial for the forcing extension and the
 base universe to satisfy the same first-order statements.
 
-\begin{proposition}\label{prop:ev-points}Let~$L$ be a forcing notion. Let~$P$
+\begin{proposition}[\flink{§4.§4-2.Proposition-4-11}]\label{prop:ev-points}Let~$L$ be a forcing notion. Let~$P$
 be a monotone predicate on~$L$. If~$P \mid \sigma$, then every filter~$F$ which
 contains~$\sigma$ also contains a refinement~$\tau \preccurlyeq \sigma$
 with~$P\tau$.
@@ -1655,7 +1666,7 @@ a refinement~$\tau \preccurlyeq \sigma$ with~$P\tau$. While the latter statement
 refers to filters---ideal, completed objects---the former has a more finitary
 character.
 
-\begin{lemma}[{\cite[Proposition~V.3.2]{joyal-tierney:grothendieck}}]\label{prop:cov-open}
+\begin{lemma}[{\cite[Proposition~V.3.2]{joyal-tierney:grothendieck}}, \flink{§4.§4-2.Proposition-4-12}]\label{prop:cov-open}
 Let~$L$ be a forcing notion such that every covering is inhabited. Let~$P$ be a
 constant predicate on~$L$. Then~$P \mid \sigma$ implies~$P\sigma$.
 \end{lemma}
@@ -1665,7 +1676,7 @@ of~$P \mid \sigma$ and descend into it, using the assumption that every
 covering is inhabited in order to pick out branches.
 \end{proof}
 
-\begin{example}In the situation of Example~\ref{ex:notion-enum}, let the
+\begin{example}[\flink{§4.Example-4-13}]In the situation of Example~\ref{ex:notion-enum}, let the
 set~$X$ be inhabited by an element~$x_0$. Then the criterion of
 Proposition~\ref{prop:cov-open} is satisfied: Coverings of the first kind are
 inhabited by~$\sigma x_0$ and coverings of the second kind are inhabited
@@ -1726,7 +1737,7 @@ covering system attached to~$L$.\end{remark}
 Let~$L$ be a forcing notion. The purpose of this section is to describe, purely
 in terms of the base universe~$V$, when a bounded first-order statement holds
 in the forcing extension~$V^\nabla$ generated by~$L$. We consider statements
-over the (large) first-order signature~$\Sigma$ which has
+over the (large) first-order signature~$\Sigma$ which has~(\flink{§4.§4-3.Definition-Language})
 \begin{enumerate}
 \item one sort~$\underline{X}$ for each set~$X$ in the base universe,
 \item one~$n$-ary function symbol~$\underline{f} : \underline{X_1} \times
@@ -1745,7 +1756,7 @@ instance~$\llbracket\underline{f}(\underline{x})\rrbracket = f(x)$.
 Recursively in the structure of a formula~$\varphi$ over this signature, and
 similar to Kripke or Beth semantics, we define what it means that~``$\varphi$
 is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
-\forces \varphi$'':
+\forces \varphi$''~(\flink{§4.§4-3.Definition-Semantics}):
 \newcommand{\defeqv}{\quad\text{iff}\quad}
 \begin{tabbing}
   \qquad \= $\sigma \forces \underline{R}(\underline{s_1},\ldots,\underline{s_n})$ \= \defeqv $s = t$. \= \kill
@@ -1803,7 +1814,7 @@ Example~\ref{ex:notion-negneg}, the translation described here indeed
 specializes to precisely the double negation translation.
 % XXX: cite Chuangjie!
 
-\begin{lemma}\label{lemma:kj-basics}For every first-order formula~$\varphi$,
+\begin{lemma}[\flink{§4.§4-3.Lemma-4-17}]\label{lemma:kj-basics}For every first-order formula~$\varphi$,
 the interpretation is \ldots
 \begin{enumerate}
 \item[(a)] monotone: If~$\sigma \forces \varphi$ and if~$\tau \preccurlyeq \varphi$,
@@ -1952,7 +1963,7 @@ in the forcing extension we have that
 \end{enumerate}
 \end{example}
 
-\begin{theorem}\label{thm:backforth}Assume that~$L$ is inhabited and that every
+\begin{theorem}[\flink{§4.§4-3.Theorem-4-22}]\label{thm:backforth}Assume that~$L$ is inhabited and that every
 covering is inhabited. Let~$\varphi$ be a first-order formula not containing
 the unary relation symbol~$G$. Then the following statements are equivalent:
 \begin{enumerate}
@@ -2038,7 +2049,7 @@ from the forcing notion of Example~\ref{ex:notion-enum}, so that~$V^\nabla$
 contains the generic enumeration of the elements of~$A$. Since~$A$ is countable
 in~$V^\nabla$, the iterative maximal ideal construction of
 Section~\ref{sect:constr} applies there, resulting in a maximal ideal~$\mmm$ of~$A$
-(or more precisely,~$\underline{A}$) in~$V^\nabla$. Interpreting~$P$
+(or more precisely,~$\underline{A}$) in~$V^\nabla$~(\flink{§4.§4-4}). Interpreting~$P$
 in~$V^\nabla$, with the unary relation symbol~$M$ interpreted as membership
 in~$\mmm$, we conclude that the proven claim holds in~$V^\nabla$. By
 Theorem~\ref{thm:backforth}, it also holds in~$V$.\end{proof}
