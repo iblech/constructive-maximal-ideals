@@ -53,25 +53,25 @@ private
 
   module _ where
     module Q = IsPreorder (P.isPreorder (isPreorder {0ℓ} {X}))
-  
+
     ≼-refl : {xs : List X} → xs ≼ xs
     ≼-refl = Q.refl
-  
+
     ≼-trans : {xs ys zs : List X} → xs ≼ ys → ys ≼ zs → xs ≼ zs
     ≼-trans p q = Q.trans q p
-  
+
   data Cov : List X → Set where
     hit : {xs : List X} → (x : X) → Cov xs
-  
+
   _◁_ : {xs : List X} → List X → Cov xs → Set
   _◁_ {xs} as (hit x) = as ≼ xs × x ⋿ as
-  
+
   ◁⇒≼ : {xs ys : List X} {R : Cov xs} → ys ◁ R → ys ≼ xs
   ◁⇒≼ {xs} {ys} {hit x} = proj₁
-  
+
   stable : {xs ys : List X} → ys ≼ xs → (R : Cov xs) → Σ[ S ∈ Cov ys ] ({a : List X} → a ◁ S → Σ[ b ∈ List X ] (a ≼ b × b ◁ R))
-  stable ys≼xs (hit x) = hit x , λ {as} (as≼ys , x∈as) → as , ≼-refl , ≼-trans as≼ys ys≼xs , x∈as 
- 
+  stable ys≼xs (hit x) = hit x , λ {as} (as≼ys , x∈as) → as , ≼-refl , ≼-trans as≼ys ys≼xs , x∈as
+
 L… : ForcingNotion
 L… = record { L = List X ; _≼_ = _≼_ ; ≼-refl = ≼-refl ; ≼-trans = ≼-trans ; Cov = Cov; _◁_ = _◁_; ◁⇒≼ = ◁⇒≼ ; stable = stable }
 
@@ -84,7 +84,7 @@ Enum-monotonic {xs} {ys} n x ys≼xs p with ≼-splitting ys≼xs
 ... | zs , q = subst (λ ws → lookupMaybe ws n ≡ just x) (sym q) (lookup-monotone n x xs zs p)
 
 Enum-singlevalued : {{xs : List X}} (n : Nat.ℕ) (a b : X) → Enum n a → Enum n b → a ≡ b
-Enum-singlevalued {{xs}} n a b p q = lookup-singlevalued xs n a b p q  
+Enum-singlevalued {{xs}} n a b p q = lookup-singlevalued xs n a b p q
 
 open import Forcing.Monad L…
 

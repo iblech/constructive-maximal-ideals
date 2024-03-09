@@ -21,7 +21,7 @@ record Filter (L… : ForcingNotion) : Set₁ where
   open ForcingNotion L…
 
   field
-    F : Pred L 0ℓ
+    F                  : Pred L 0ℓ
     upward-closed      : {x y : L} → y ≼ x → F y → F x
     downward-directed₁ : Σ[ x ∈ L ] F x
     downward-directed₂ : {a b : L} → F a → F b → Σ[ x ∈ L ] x ≼ a × x ≼ b × F x

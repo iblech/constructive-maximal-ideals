@@ -38,7 +38,6 @@ data Language : Set₁ where
   base : Language
   with-generic-filter : Language
 
-
 infixr 1 _∨_
 infixr 2 _∧_
 
@@ -52,6 +51,17 @@ data Formula (Γ : Cxt) : Fragment → Language → Set₁ where
   EX   : {frag : Fragment} {lang : Language} {ty : Ty} → Formula (ty ∷ Γ) frag lang → Formula Γ frag lang
   FA   : {frag : Fragment} {lang : Language} {ty : Ty} → Formula (ty ∷ Γ) frag lang → Formula Γ first-order lang
   G    : {frag : Fragment} → Term Γ L → Formula Γ frag with-generic-filter
+
+1ˢᵗ : {Γ : Cxt} {frag : Fragment} {lang : Language} → Formula Γ frag lang → Formula Γ first-order lang
+1ˢᵗ (Rel₂ R s t) = Rel₂ R s t
+1ˢᵗ top          = top
+1ˢᵗ bot          = top
+1ˢᵗ (φ ∨ ψ)      = 1ˢᵗ φ ∨ 1ˢᵗ ψ
+1ˢᵗ (φ ∧ ψ)      = 1ˢᵗ φ ∧ 1ˢᵗ ψ
+1ˢᵗ (φ ⇒ ψ)      = 1ˢᵗ φ ⇒ 1ˢᵗ ψ
+1ˢᵗ (EX φ)       = EX (1ˢᵗ φ)
+1ˢᵗ (FA φ)       = FA (1ˢᵗ φ)
+1ˢᵗ (G t)        = G t
 
 eval : {Γ : Cxt} {ty : Ty} → Env Γ → Term Γ ty → ty
 eval env (var v) = Data.List.Relation.Unary.All.lookup env v
@@ -88,7 +98,7 @@ exec∇ {{x}} env bot     = ∇ ⊥
 exec∇ {{x}} env (φ ∨ ψ) = ∇ (λ {{x}} → exec∇ {{x}} env φ ⊎ exec∇ {{x}} env ψ)
 exec∇ {{x}} env (φ ∧ ψ) = exec∇ env φ × exec∇ env ψ
 exec∇ {{x}} env (φ ⇒ ψ) = {{y : L}} {{y≼x : y ≼ x}} → exec∇ {{y}} env φ → exec∇ {{y}} env ψ
-exec∇ {{x}} env (EX φ)  = ∇ (λ {{x}} → Σ[ u ∈ _ ] exec∇ {{x}} (u ∷ env) φ) 
+exec∇ {{x}} env (EX φ)  = ∇ (λ {{x}} → Σ[ u ∈ _ ] exec∇ {{x}} (u ∷ env) φ)
 exec∇ {{x}} env (FA φ)  = {{y : L}} {{y≼x : y ≼ x}} (u : _) → exec∇ {{y}} (u ∷ env) φ
 exec∇ {{x}} env (G t)   = ∇ (λ {{y}} → y ≼ eval env t)
 
@@ -145,15 +155,14 @@ var₁ = var (there (here refl))
 var₂ : {Γ : Cxt} {ty ty' ty'' : Ty} → Term (ty ∷ ty' ∷ ty'' ∷ Γ) ty''
 var₂ = var (there (there (here refl)))
 
-1ˢᵗ : {Γ : Cxt} {lang : Language} → Formula Γ first-order lang → Formula Γ first-order lang
-1ˢᵗ φ = φ
-
+{-
 filter-condition : Formula [] first-order with-generic-filter
 filter-condition
   = FA (FA (Rel₂ _≼_ var₀ var₁ ⇒ (1ˢᵗ (G var₀) ⇒ G var₁)))
   ∧ EX (G var₀)
   ∧ FA (FA (G var₀ ⇒ (1ˢᵗ (G var₁) ⇒ (EX (Rel₂ _≼_ var₀ var₁ ∧ Rel₂ _≼_ var₀ var₂ ∧ G var₀)))))
   ∧ FA (1ˢᵗ (G (app (lit proj₁) var₀)) ⇒ EX (G var₀ ∧ Rel₂ (λ (x , R) a → _◁_ {x} a R) var₁ var₀))
+-}
 
 {-
 lemma-gen-filter₂ₐ : {{x : L}} → exec∇ [] filter-condition
@@ -187,6 +196,26 @@ lemma-exec-coherent₂ env (φ ∨ ψ)      p = fmap (λ {{y}} → [ (λ q → i
 lemma-exec-coherent₂ env (φ ∧ ψ)      p = lemma-exec-coherent₂ env φ (fmap proj₁ p) , lemma-exec-coherent₂ env ψ (fmap proj₂ p)
 lemma-exec-coherent₂ env (EX φ)       p = p ⟫= λ {{y}} (u , q) → fmap {{y}} (u ,_) (now (lemma-exec-coherent₂ {{y}} (u ∷ env) φ (now q)))
 lemma-exec-coherent₂ env (G x)        p = p
+
+lemma-exec-coherent₁'
+  : {{x : L}} {Γ : Cxt}
+  → (env : Env Γ) (φ : Formula Γ coherent base)
+  → execP env φ → exec env φ
+lemma-exec-coherent₁' env (Rel₂ R s t) p = p
+lemma-exec-coherent₁' env top          p = p
+lemma-exec-coherent₁' env (φ ∨ ψ)      p = Data.Sum.map (lemma-exec-coherent₁' env φ) (lemma-exec-coherent₁' env ψ) p
+lemma-exec-coherent₁' env (φ ∧ ψ)      p = Data.Product.map (lemma-exec-coherent₁' env φ) (lemma-exec-coherent₁' env ψ) p
+lemma-exec-coherent₁' env (EX φ)       p = proj₁ p , lemma-exec-coherent₁' (proj₁ p ∷ env) φ (proj₂ p)
+
+lemma-exec-coherent₂'
+  : {{x : L}} {Γ : Cxt}
+  → (env : Env Γ) (φ : Formula Γ coherent base)
+  → exec env φ → execP env φ
+lemma-exec-coherent₂' env (Rel₂ R s t) p = p
+lemma-exec-coherent₂' env top          p = p
+lemma-exec-coherent₂' env (φ ∨ ψ)      p = Data.Sum.map (lemma-exec-coherent₂' env φ) (lemma-exec-coherent₂' env ψ) p
+lemma-exec-coherent₂' env (φ ∧ ψ)      p = Data.Product.map (lemma-exec-coherent₂' env φ) (lemma-exec-coherent₂' env ψ) p
+lemma-exec-coherent₂' env (EX φ)       p = proj₁ p , lemma-exec-coherent₂' (proj₁ p ∷ env) φ (proj₂ p)
 
 module 1ˢᵗ-Order-Equivalence
   (all-coverings-inhabited : {x : L} (R : Cov x) → Relation.Unary.Satisfiable (_◁ R)) where
@@ -222,3 +251,20 @@ module 1ˢᵗ-Order-Equivalence
   thm₂ {{x}} env (φ ⇒ ψ)      p = λ q → thm₂ {{x}} env ψ (p {{x}} {{≼-refl}} (thm₁ {{x}} env φ q))
   thm₂ {{x}} env (EX φ)       p = escape (fmap (λ {{y}} (u , q) → u , thm₂ {{y}} (u ∷ env) φ q) p)
   thm₂ {{x}} env (FA φ)       p = λ u → thm₂ (u ∷ env) φ (p {{x}} {{≼-refl}} u)
+
+{-
+module Equivalence-for-coherent-formulas
+  (top : L)
+  (top-coverings-inhabited : (R : Cov top) → Relation.Unary.Satisfiable (_◁ R)) where
+
+  FA… : {Γ : Cxt} {frag : Fragment} {lang : Language} → Formula Γ frag lang → Formula [] first-order lang
+  FA… {[]}     φ = 1ˢᵗ φ
+  FA… {ty ∷ Γ} φ = FA… (FA φ)
+
+  thm₁
+    : {Γ : Cxt}
+    → (φ ψ : Formula Γ coherent base)
+    → exec [] (FA… (φ ⇒ ψ)) → exec∇ {{top}} [] (FA… (φ ⇒ ψ))
+  thm₁ {[]}     φ ψ p {{y}} {{y≼top}} q = {!!}
+  thm₁ {ty ∷ Γ} φ ψ p = {!!}
+-}

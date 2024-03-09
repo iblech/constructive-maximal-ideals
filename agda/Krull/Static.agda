@@ -66,7 +66,7 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
   𝔪-is-ideal : ⟨ 𝔪 ⟩ ⊆ 𝔪
   𝔪-is-ideal {x} p with Enum-surjective x
   ... | n , r = 3⇒2 (λ q → ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (inj₁ s) → Base s ; (inj₂ s) → Eq (≡⇒≈ (Enum-singlevalued r s)) p }) q))) r
-  
+
   𝔪-is-maximal
     : (x : R)
     → ¬ 1# ∈ ⟨ 𝔪 ∪ ｛ x ｝ ⟩
