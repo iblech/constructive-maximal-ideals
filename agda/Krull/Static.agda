@@ -10,13 +10,13 @@ open import Algebra.Bundles
 import Data.Nat as Nat
 import Data.Nat.Properties
 open import Relation.Unary hiding (∅)
-open import Relation.Binary.PropositionalEquality
+import Relation.Binary.PropositionalEquality as PE
 
 module Krull.Static
   (R… : CommutativeRing 0ℓ 0ℓ)
   (open CommutativeRing R… renaming (Carrier to R))
   (Enum : Nat.ℕ → Pred R 0ℓ)
-  (Enum-singlevalued : {n : Nat.ℕ} {x y : R} → Enum n x → Enum n y → x ≡ y) where
+  (Enum-singlevalued : {n : Nat.ℕ} {x y : R} → Enum n x → Enum n y → x PE.≡ y) where
 
 open import Krull.Base (R…)
 
@@ -33,7 +33,7 @@ G-increasing p = go (Data.Nat.Properties.≤⇒≤′ p)
 
 all-stages-proper : (n : Nat.ℕ) → ¬ 1# ∈ ⟨ G n ⟩
 all-stages-proper Nat.zero    p = ⟨∅⟩-trivial p
-all-stages-proper (Nat.suc n) p with ⟨⟩-union p
+all-stages-proper (Nat.suc n) p with ⟨⟩-union₀ p
 ... | inj₁ q = all-stages-proper n q
 ... | inj₂ (x , In q f) = f (⟨⟩-monotone (map₂ λ { (In r s) → Enum-singlevalued q r} ) p)
 
@@ -51,7 +51,7 @@ all-stages-proper (Nat.suc n) p with ⟨⟩-union p
 3⇒4 {n} = contraposition λ p → ⟨⟩-monotone (λ { (inj₁ q) → inj₁ (n , q) ; (inj₂ q) → inj₂ q }) {1#} p
 
 4⇒1 : {n : Nat.ℕ} → ¬ 1# ∈ ⟨ G n ∪ Enum n ⟩ → Enum n ⊆ G (Nat.suc n)
-4⇒1 p q = inj₂ (In q (contraposition (⟨⟩-monotone (map₂ λ { Relation.Binary.PropositionalEquality.refl → q }) {1#}) p))
+4⇒1 p q = inj₂ (In q (contraposition (⟨⟩-monotone (map₂ λ { PE.refl → q }) {1#}) p))
 
 1⇒2 : {n : Nat.ℕ} → Enum n ⊆ G (Nat.suc n) → Enum n ⊆ 𝔪
 1⇒2 {n} p q = Nat.suc n , p q
@@ -73,3 +73,16 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     → x ∈ 𝔪
   𝔪-is-maximal x p with Enum-surjective x
   ... | n , r = 3⇒2 (contraposition (⟨⟩-monotone (map₂ λ s → Enum-singlevalued r s) {1#}) p) r
+
+  -- The following example is the (2×1)-case of the general statement that
+  -- matrices with more rows that columns can only be surjective if 1 ≈ 0.
+  example : (a b u v : R) → u * a ≈ 1# → u * b ≈ 0# → v * a ≈ 0# → v * b ≈ 1# → ⊥
+  example a b u v ua1 ub0 va0 vb1 = case-a-zero (𝔪-is-maximal a case-a-inv)
+    where
+    -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
+    case-a-inv : 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
+    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (w , eq , inj₁ p) → Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base p)) ; (w , eq , inj₂ PE.refl) → Eq (trans (trans (sym (zeroˡ b)) (trans (*-congʳ (sym va0)) (trans (*-assoc v w b) (trans (*-congˡ (*-comm w b)) (sym (*-assoc v b w)))))) (≡⇒≈ (PE.sym eq))) Zero }) (Eq (trans (*-identityʳ (v * b)) vb1) (⟨⟩-mult (v * b) p))))
+
+    -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
+    case-a-zero : a ∈ 𝔪 → ⊥
+    case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))

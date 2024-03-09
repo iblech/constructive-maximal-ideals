@@ -5,10 +5,16 @@ open import Algebra.Bundles
 open import Relation.Unary hiding (∅)
 open import Data.Sum
 open import Data.Product
+open import Function.Base
 import Data.Nat as Nat
 import Data.Nat.Properties
 import Relation.Binary.PropositionalEquality as PE
 import Relation.Binary.Reasoning.Setoid
+open import Data.List hiding (sum)
+open import Data.List.Properties hiding (sum-++)
+open import Data.List.Relation.Unary.All
+open import Data.List.Relation.Unary.All.Properties
+import Data.List.Relation.Binary.Pointwise as PW
 
 module Krull.Base (R… : CommutativeRing 0ℓ 0ℓ) where
 
@@ -72,18 +78,18 @@ data ⟨_⟩ (M : Pred R 0ℓ) : Pred R 0ℓ where
   0#     ∎
 ⟨∅⟩-trivial (Eq q p) = trans (sym q) (⟨∅⟩-trivial p)
 
-⟨⟩-union : {M N : Pred R 0ℓ} {a : R} → a ∈ ⟨ M ∪ N ⟩ → a ∈ ⟨ M ⟩ ⊎ Satisfiable N
-⟨⟩-union (Base (inj₁ x)) = inj₁ (Base x)
-⟨⟩-union (Base (inj₂ p)) = inj₂ (_ , p)
-⟨⟩-union Zero = inj₁ Zero
-⟨⟩-union (Sum p q) with ⟨⟩-union p with ⟨⟩-union q
+⟨⟩-union₀ : {M N : Pred R 0ℓ} {a : R} → a ∈ ⟨ M ∪ N ⟩ → a ∈ ⟨ M ⟩ ⊎ Satisfiable N
+⟨⟩-union₀ (Base (inj₁ x)) = inj₁ (Base x)
+⟨⟩-union₀ (Base (inj₂ p)) = inj₂ (_ , p)
+⟨⟩-union₀ Zero = inj₁ Zero
+⟨⟩-union₀ (Sum p q) with ⟨⟩-union₀ p with ⟨⟩-union₀ q
 ... | inj₁ x | inj₁ x₁ = inj₁ (Sum x x₁)
 ... | inj₁ x | inj₂ y = inj₂ y
 ... | inj₂ y | q' = inj₂ y
-⟨⟩-union (Magnet p) with ⟨⟩-union p
+⟨⟩-union₀ (Magnet p) with ⟨⟩-union₀ p
 ... | inj₁ x = inj₁ (Magnet x)
 ... | inj₂ y = inj₂ y
-⟨⟩-union (Eq x p) with ⟨⟩-union p
+⟨⟩-union₀ (Eq x p) with ⟨⟩-union₀ p
 ... | inj₁ x₁ = inj₁ (Eq x x₁)
 ... | inj₂ y = inj₂ y
 
@@ -98,5 +104,77 @@ module _ (G : Nat.ℕ → Pred R 0ℓ) (increasing : {n m : Nat.ℕ} → n Nat.�
   ⟨⟩-compact (Eq x p) with ⟨⟩-compact p
   ... | n , p' = n , Eq x p'
 
+image : {X Y : Set} (f : X → Y) (R : Pred X 0ℓ) → Pred Y 0ℓ
+image f R y = Σ[ x ∈ _ ] y PE.≡ f x × x ∈ R
+
+⟨⟩-mult : {M : Pred R 0ℓ} {a : R} (r : R) → a ∈ ⟨ M ⟩ → r * a ∈ ⟨ image (r *_) M ⟩
+⟨⟩-mult r (Base p)       = Base (_ , PE.refl , p)
+⟨⟩-mult r Zero           = Eq (sym (zeroʳ r)) Zero
+⟨⟩-mult r (Sum e f)      = Eq (sym (distribˡ r _ _)) (Sum (⟨⟩-mult r e) (⟨⟩-mult r f))
+⟨⟩-mult {a = a} r (Magnet {z} {w} e) = Eq (trans (sym (*-assoc z r w)) (trans (*-congʳ (*-comm z r)) (*-assoc r z w))) (Magnet {_} {z} (⟨⟩-mult r e))
+⟨⟩-mult r (Eq p e)       = Eq (*-congˡ p) (⟨⟩-mult r e)
+
 ≡⇒≈ : {a b : R} → a PE.≡ b → a ≈ b
 ≡⇒≈ PE.refl = refl
+
+
+-- None of the following functions and results are used in the rest of this
+-- project, but they seemed to be a worthwhile addition for future developments.
+
+sum : List R → R
+sum []       = 0#
+sum (a ∷ as) = a + sum as
+
+sum-++ : (xs ys : List R) → sum (xs ++ ys) ≈ sum xs + sum ys
+sum-++ []       ys = sym (+-identityˡ (sum ys))
+sum-++ (x ∷ xs) ys = trans (+-congˡ (sum-++ xs ys)) (sym (+-assoc x (sum xs) (sum ys)))
+
+sum-*ˡ : (a : R) (xs : List R) → sum (Data.List.map (a *_) xs) ≈ a * sum xs
+sum-*ˡ a []       = sym (zeroʳ a)
+sum-*ˡ a (x ∷ xs) = trans (+-congˡ (sum-*ˡ a xs)) (sym (distribˡ a x (sum xs)))
+
+sum-*ʳ : (a : R) (xs : List R) → sum (Data.List.map (_* a) xs) ≈ sum xs * a
+sum-*ʳ a []       = sym (zeroˡ a)
+sum-*ʳ a (x ∷ xs) = trans (+-congˡ (sum-*ʳ a xs)) (sym (distribʳ a x (sum xs)))
+
+zipped : List (R × R) → List R
+zipped = Data.List.map (λ (a , b) → a * b)
+
+weighted-sum : List (R × R) → R
+weighted-sum ps = sum (zipped ps)
+
+zipped-* : (r : R) (ps : List (R × R)) → PW.Pointwise _≈_ (zipped (Data.List.map (λ (a , b) → r * a , b) ps)) (Data.List.map (r *_) (zipped ps))
+zipped-* r []             = PW.[]
+zipped-* r ((a , b) ∷ ps) = *-assoc r a b PW.∷ zipped-* r ps
+
+sum-pointwise : (xs ys : List R) → PW.Pointwise _≈_ xs ys → sum xs ≈ sum ys
+sum-pointwise []       []       PW.[]        = refl
+sum-pointwise (x ∷ xs) (y ∷ ys) (x≈y PW.∷ k) = +-cong x≈y (sum-pointwise xs ys k)
+
+⟨⟩-canon : {M : Pred R 0ℓ} {a : R} → a ∈ ⟨ M ⟩ → Σ[ ps ∈ List (R × R) ] weighted-sum ps ≈ a × All (M ∘ proj₂) ps
+⟨⟩-canon {a = a} (Base p) = (1# , a) ∷ [] , trans (+-identityʳ (1# * a)) (*-identityˡ a) , (p ∷ [])
+⟨⟩-canon Zero = [] , (refl , [])
+⟨⟩-canon (Sum e f) with ⟨⟩-canon e | ⟨⟩-canon f
+... | ps , eq , ms | ps' , eq' , ms' = ps ++ ps' , trans (≡⇒≈ (PE.cong sum (map-++ (uncurry _*_) ps ps'))) (trans (sum-++ (zipped ps) (zipped ps')) (+-cong eq eq')) , ++⁺ ms ms'
+⟨⟩-canon (Magnet {r} e) with ⟨⟩-canon e
+... | ps , eq , ms = Data.List.map (λ (a , b) → r * a , b) ps , trans (sum-pointwise _ _ (zipped-* r ps)) (trans (sum-*ˡ r (zipped ps)) (*-congˡ eq)) , map⁺ ms
+⟨⟩-canon (Eq p e) with ⟨⟩-canon e
+... | ps , eq , ms = ps , trans eq p , ms
+
+⟨⟩-canon-reverse : {M : Pred R 0ℓ} (ps : List (R × R)) → All (M ∘ proj₂) ps → weighted-sum ps ∈ ⟨ M ⟩
+⟨⟩-canon-reverse []             qs       = Zero
+⟨⟩-canon-reverse ((a , b) ∷ ps) (q ∷ qs) = Sum (Magnet (Base q)) (⟨⟩-canon-reverse ps qs)
+
+module _ {M N : Pred R 0ℓ} where
+  private
+    go : (ps : List (R × R)) → All ((M ∪ N) ∘ proj₂) ps → Σ[ x ∈ R ] Σ[ y ∈ R ] weighted-sum ps ≈ x + y × x ∈ ⟨ M ⟩ × y ∈ ⟨ N ⟩
+    go []             []            = 0# , 0# , sym (+-identityˡ 0#) , Zero , Zero
+    go ((a , b) ∷ ps) (inj₁ q ∷ ms) with go ps ms
+    ... | x , y , eq , e , f = a * b + x , y , trans (+-congˡ eq) (sym (+-assoc (a * b) x y)) , Sum (Magnet (Base q)) e , f
+    go ((a , b) ∷ ps) (inj₂ q ∷ ms) with go ps ms
+    ... | x , y , eq , e , f = x , a * b + y , trans (+-congˡ eq) (trans (+-comm (a * b) (x + y)) (trans (+-assoc x y (a * b)) (+-congˡ (+-comm y (a * b))))) , e , Sum (Magnet (Base q)) f
+
+  ⟨⟩-union : {a : R} → a ∈ ⟨ M ∪ N ⟩ → Σ[ x ∈ R ] Σ[ y ∈ R ] a ≈ x + y × x ∈ ⟨ M ⟩ × y ∈ ⟨ N ⟩
+  ⟨⟩-union e with ⟨⟩-canon e
+  ... | ps , eq , ms with go ps ms
+  ... | x , y , eq' , e , f = x , y , trans (sym eq) eq' , e , f

@@ -1,11 +1,11 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --cubical-compatible --safe #-}
 
 module index where
 
 open import Level
 open import Algebra.Bundles
 open import Relation.Unary hiding (∅)
-open import Data.Nat as Nat
+import Data.Nat as Nat
 open import Relation.Binary.PropositionalEquality
 open import Data.Product
 open import Data.List
@@ -17,20 +17,20 @@ import Forcing.Monad.Conservative
 import Forcing.Levy
 import Forcing.Semantics
 import Krull.Base
+import Krull.FreeRing
 import Krull.Static
 import Krull.Dynamic
 
-{- §1. An iterative construction of maximal ideals -}
-module §1 where
-  postulate
-    R… : CommutativeRing 0ℓ 0ℓ
-  
-  open CommutativeRing R… renaming (Carrier to R)
 
-  postulate
-    Enum : Nat.ℕ → Pred R 0ℓ
-    Enum-singlevalued : {n : Nat.ℕ} {x y : R} → Enum n x → Enum n y → x ≡ y
-    Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x
+{- §1. An iterative construction of maximal ideals -}
+module §1
+  (R… : CommutativeRing 0ℓ 0ℓ)
+  (Enum : Nat.ℕ → Pred (CommutativeRing.Carrier R…) 0ℓ)
+  (Enum-singlevalued : ∀ {n} {x y} → Enum n x → Enum n y → x ≡ y)
+  (Enum-surjective : (x : CommutativeRing.Carrier R…) → Σ[ n ∈ Nat.ℕ ] Enum n x)
+  where
+
+  open CommutativeRing R… renaming (Carrier to R)
 
   open Krull.Base R…
   open Krull.Static R… Enum Enum-singlevalued
@@ -55,6 +55,11 @@ module §1 where
 
   Corollary-1-2 : (x : R) → ¬ 1# ∈ ⟨ 𝔪 ∪ ｛ x ｝ ⟩ → x ∈ 𝔪
   Corollary-1-2 = 𝔪-is-maximal Enum-surjective
+
+
+{- §2. On the intersection of all prime ideals -}
+module §2 where
+  Proposition-2-6 = Krull.Static.example
 
 
 {- §4. Expanding the scope to general rings -}
@@ -105,3 +110,21 @@ module §4 where
     module Theorem-4-22 = 1ˢᵗ-Order-Equivalence
 
   module §4-4 = Krull.Dynamic
+
+  module TestCase where
+    open Krull.FreeRing
+
+    data Var : Set where
+      a b c d u v : Var
+
+    infix 4 _~_
+    data _~_ : Term Var → Term Var → Set where
+      ua1 : var u * var a ~ 1#
+      ub0 : var u * var b ~ 0#
+      va0 : var v * var a ~ 0#
+      vb1 : var v * var b ~ 1#
+
+    R… = ℤ[ Var ]/ _~_
+    open Krull.Dynamic R…
+
+    1≈0 = example (var a) (var b) (var u) (var v) (eq ua1) (eq ub0) (eq va0) (eq vb1)
