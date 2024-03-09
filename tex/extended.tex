@@ -170,7 +170,7 @@ than columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
 Then~$1 = 0$ in~$A$.
 \smallskip
 
-\emph{Proof.} Assume for the sake of a contradiction that~$1 \neq 0$ in~$A$.
+\textbf{Proof.} Assume for the sake of a contradiction that~$1 \neq 0$ in~$A$.
 Then, by the axiom of choice, there exists a maximal ideal~$\mmm$. The quotient
 ring~$k \defeq A/\mmm$ is a field and the induced linear map~$k^m \to k^n$ is
 still surjective. Hence we have a contradiction to basic linear algebra over fields.
@@ -1182,11 +1182,11 @@ formalization of the construction in~\textsc{ha} is only unlocked by the followi
 direct characterization.
 
 \begin{lemma}\label{lemma:uniform-char}(In the setting of Section~\ref{sect:more-economical}.)
-For every finite binary sequence~$v = [v_0,\ldots,v_{n-1}]$, set~$\aaa_v
-\defeq (v_0x_0,\ldots,v_{n-1}x_{n-1},x_n)$. Then:
+For every finite binary sequence~$v = v_0 \ldots v_{n-1}$, let~$\aaa_v$ be the
+ideal~$(v_0x_0,\ldots,v_{n-1}x_{n-1},x_n)$. Then:
 \begin{enumerate}
-\item[(a)] For every such sequence~$v = [v_0,\ldots,v_{n-1}]$, if
-$\bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})$,
+\item[(a)] For every such sequence~$v = v_0 \ldots v_{n-1}$, if
+$\bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{v_0 \ldots v_{i-1}})$,
 then~$\aaa_v = (G_n) + (x_n)$.
 In particular, in this case~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \item[(b)] For every natural number~$n \in \NN$,
@@ -1194,7 +1194,7 @@ In particular, in this case~$x_n \in G$ if and only if~$1 \not\in \aaa_v$.
 \[ x_n \in G \quad\Longleftrightarrow\quad \neg
   \exists v \in \{0,1\}^n\_
     1 \in \aaa_v \wedge
-      \bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]}). \]
+      \bigwedge_{i=0}^{n-1} (v_i = 1 \Leftrightarrow 1 \not\in \aaa_{v_0 \ldots v_{i-1}}). \]
 \end{enumerate}
 \end{lemma}
 
@@ -1210,7 +1210,7 @@ $\neg\alpha \Longleftrightarrow \neg(\alpha \wedge (\varphi \vee \neg\varphi))$:
     \Leftrightarrow x_i \in G)\Bigr) \\
   & \Longleftrightarrow \neg\exists v \in \{0,1\}^n\_
     \Bigl(1 \in \aaa_v \ \wedge\ \bigwedge_{i=0}^{n-1} (v_i = 1
-    \Leftrightarrow 1 \not\in \aaa_{[v_0,\ldots,v_{i-1}]})\Bigr)
+    \Leftrightarrow 1 \not\in \aaa_{v_0 \ldots v_{i-1}})\Bigr)
 \end{align*}
 \end{proof}
 
@@ -1312,7 +1312,7 @@ community~\cite{paykin-krishnaswami-zdancewic:event,cave-ferreira-panangaden-pie
 
 
 \subsection{Forcing notions}\label{sect:forcing-notions} The particular flavor of forcing is determined
-by its \emph{notion of forcing}. This is a poset~$(L,{\preccurlyeq})$ equipped with a
+by its \emph{notion of forcing}. This is a preorder~$(L,{\preccurlyeq})$ equipped with a
 \emph{covering system} (Definition~\ref{defn:covering-system} below). The
 elements of~$L$ are called \emph{forcing conditions} and are regarded
 as partial approximations to (perhaps fictitious) ideal objects. The
@@ -1360,7 +1360,7 @@ the extended universe is called the \emph{generic filter}.
 
 \begin{example}[\flink{§4.§4-1.Example-4-3}]\label{ex:notion-enum}To force the existence of an enumeration
 of the elements of a (perhaps uncountable) set~$X$, let~$L \defeq X^*$ be the set of finite lists
-of elements of~$X$. We picture a list~$[x_0,\ldots,x_{n-1}]$ as code for the
+of elements of~$X$. We picture a list~$x_0\ldots x_{n-1}]$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
 for~$i=0,\ldots,n-1$, and declare~$\tau \preccurlyeq \sigma$ iff~$\sigma$ is a prefix
 of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
@@ -2073,7 +2073,7 @@ Theorem~\ref{thm:dynalg-formal} is not the only way to reify the dynamical
 approach to maximal ideals. Instead of employing the forcing extension
 containing the generic enumeration, we can also employ the forcing extension
 of Example~\ref{ex:notion-max} containing a generic maximal ideal in the strong
-sense. Since for this forcing notion the assumption for going back and
+sense. Since for this alternative forcing notion the assumption for going back and
 forth---Theorem~\ref{thm:backforth}---is not satisfied, its scope is
 restricted:
 
@@ -2228,7 +2228,7 @@ than would be expected just by virtue of being a filter. For instance:
 single-valued and surjective as expected, but also has the property that it is
 \emph{not~not} the case that every desired finite pattern occurs among its
 values: In the forcing extension it holds that for every finite list~$\sigma =
-[x_1,\ldots,x_k]$, it is \emph{not~not} the case that there is a number~$n \in
+x_1 \ldots x_k$, it is \emph{not~not} the case that there is a number~$n \in
 \mathbb{N}$ such that the values~$f(n), f(n+1), \ldots, f(n+k)$ agree
 with~$\sigma$.
 
@@ -2475,86 +2475,9 @@ Then~$X$ contains a maximal consistent subset.\end{theorem}
 
 
 
-
-The remainder of this section is devoted to spelling out
-Theorem~\ref{thm:elim-countability-assumption-informal}. We choose a
-topos-theoretic presentation instead of a set-theoretic one because it is more
-amenable to syntactic unwindings. The main reference is Joyal and
-Tierney's 1984 monograph~\cite{joyal-tierney:grothendieck}; for surveys of the
-required background on pointfree topology and topos theory, we refer
-to~\cite{blechschmidt:generalized-spaces,johnstone:art,johnstone:point,vickers:continuity,vickers:locales-toposes,belanger-marquis:pointless,johnstone:baby-elephant}.
-
-\begin{thm}[Joyal--Tierney~\cite{joyal-tierney:grothendieck}]\label{thm:locale-enum}
-For every inhabited set~$X$, there is a certain locale which is
-\begin{enumerate}
-\item overt,
-\item positive, and such that
-\item its constant sheaf~$\underline{X}$ is countable.
-\end{enumerate}
-\end{thm}
-
-\begin{proof}The locale with these properties is the \emph{classifying locale
-of enumerations of~$X$}. This locale has as basic opens the finite
-nonempty lists~$[x_0,\ldots,x_n]$, pictured as ``the open of those surjections~$f : \NN \to
-X$ such that~$f(i) = x_i$ for~$i = 0,\ldots,n$'', and as generating coverings
-\begin{align*}
-  [x_0,\ldots,x_n] &= \bigvee_{y \in X} [x_0,\ldots,x_n,y]
-  && \text{(for every~$x_0,\ldots,x_n \in X$),} \\
-  [x_0,\ldots,x_n] &= \bigvee_{\substack{m \geq 0 \\ x_{n+1},\ldots,x_{n+m} \in
-  X \\ x \in \{ x_0,\ldots,x_{n+m} \}}} [x_0,\ldots,x_{n+m}]
-  && \text{(for every~$x_0,\ldots,x_n,x \in X$)}. \\
-\end{align*}
-It is overt because all of these generating coverings are inhabited, and it is
-positive (meaning that the canonical map to the one-point locale is surjective)
-because there is at least one basic open since~$X$ is inhabited. Details are
-provided by Joyal and Tierney~\cite[pp.~36f.]{joyal-tierney:grothendieck}.
-\end{proof}
-
-\begin{thm}\label{thm:elim-countability-assumption-formal}Every intuitionistic
-proof of a first-order statement in the language of rings, from arbitrary
-first-order assumptions and also the assumption that the ring is countable, can
-be mechanically transformed to a proof of the same kind without the
-countability assumption.\end{thm}
-
-\begin{proof}Let~$p$ be a given such proof. The transformed proof proceeds as
-follows. Let~$A$ be an arbitrary ring.
-By Theorem~\ref{thm:locale-enum},
-there is an open surjective geometric morphism~$f$ from a certain
-topos~$\mathcal{E}$ to the
-topos of sets such that~$f^*(A)$ is countable.
-
-Assume that~$A$ satisfies all of the
-first-order assumptions of~$p$. Since~$f$ is open, the pullback~$f^*(A)$
-inherits these assumptions.
-Since~$f^*(A)$ is countable from the point of view
-of~$\mathcal{E}$ and since~$\mathcal{E}$ supports intuitionistic reasoning, the
-proof~$p$ is applicable to~$f^*(A)$. Hence the conclusion of~$p$ holds
-for~$f^*(A)$. Since~$f$ is open and surjective, the conclusion descends to~$A$.
-\end{proof}
-
-\begin{proposition}\label{prop:nilp-coefficients}Let~$f \in A[X]$ be a polynomial with at least one coefficient
-which is not nilpotent. Then~$f$ is not nilpotent in~$A[X]$.
-\end{proposition}
-
-\begin{proof}By Corollary~\ref{cor:nilp-prime}, there is a prime ideal
-$\ppp \subseteq A$ not containing one of the coefficients of~$f$. Hence~$f$ is
-not zero over~$A/\ppp$. Since~$\ppp$ is a prime ideal, the quotient
-ring~$A/\ppp$ is an integral domain (in the sense that if~$xy = 0$ and~$x \neq
-0$, then~$y = 0$), and since~$\ppp$ is double negation stable, the quotient ring~$(A/\ppp)[X]$ is as well. Thus~$f$ is not nilpotent
-as an element of~$(A/\ppp)[X]$ and a fortiori not nilpotent as an element
-of~$A[X]$.\end{proof}
-
-\item for every set~$M \subseteq I$ which is \emph{progressive} or
-\emph{hereditary} in the sense that
-\[ \forall n \in I\_
-  (\forall m \in I\_ m < n \Rightarrow m \in M) \Longrightarrow n \in M, \]
-we have~$M = I$, and
-
 FUTURE:
 * check van der Waerden's book (where he sticks to countable rings)
 * compare with situation in reverse mathematics
-* cite: Hatzikiriakou, K. (1991). Minimal prime ideals and arithmetic comprehension .
-  The Journal of Symbolic Logic, 56(01), 67–70. doi:10.2307/2274904 
 
 THANKS
 audiences where work has been presented:
