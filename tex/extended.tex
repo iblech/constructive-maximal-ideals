@@ -1052,7 +1052,7 @@ The two test cases presented in Proposition~\ref{prop:test-cases} only concern
 prime ideals. In contrast, the following example crucially rests on the
 maximality of the ideal~$\mmm$.
 
-\begin{proposition}\label{prop:surj-matrix}Let~$M \in A^{n \times m}$ be a matrix with more rows than
+\begin{proposition}[\flink{§2.Proposition-2-6}]\label{prop:surj-matrix}Let~$M \in A^{n \times m}$ be a matrix with more rows than
 columns. Assume that the induced linear map~$A^m \to A^n$ is surjective.
 Then~$1 = 0$.
 \end{proposition}
@@ -1071,6 +1071,11 @@ But the vector $(1,0,\ldots,0)\in A^n$ still
 belongs to the range of $M=0$, hence~$1=0$ by~$n > 0$.
 \end{proof}
 
+After removing the countability assumption by the technique of
+Section~\ref{sect:wlog}, we display an unrolled version of this proof of
+Proposition~\ref{prop:surj-matrix} on
+page~\pageref{proof:surj-matrix-explicit}.
+
 A more significant case study is Suslin's lemma, the fundamental and originally
 non-constructive ingredient in his second solution of Serre's
 problem~\cite{suslin:structure}. The classical proof, concisely recalled in
@@ -1083,6 +1088,10 @@ with the technique variously known as \emph{Friedman's trick}, \emph{nontrivial
 exit continuation} or \emph{baby version of Barr's theorem} in order to yield a
 constructive
 proof~\cite{friedman:trick,murthy:classical-proofs,barr:without-points,blechschmidt:generalized-spaces}.
+We have chosen to not undertake a formalization of this approach; but we
+nevertheless believe that, after removing the countability assumption using the
+technique of Section~\ref{sect:wlog} and unwinding all auxiliary definitions,
+we recover Yengui's proof.
 
 
 \section{Formalization in weaker foundations}
@@ -2068,6 +2077,42 @@ how to reread proofs involving maximal ideals, the former is an actual maximal
 ideal (living in a forcing extension). Unwinding all definitions, the central
 idea of the dynamical approach is recovered as the computational content of the
 proof of Lemma~\ref{lemma:omnibus}(b).
+
+For instance, Theorem~\ref{thm:dynalg-formal} can be followed in order to generalize
+the test case analyzed in Proposition~\ref{prop:surj-matrix} from countable
+rings to arbitrary rings. We formalized this approach in
+Agda~(\flink{§4.TestCase}); unwinding the forcing machinery,
+we roughly obtain the following proof:
+\begin{quotation}\small\label{proof:surj-matrix-explicit}
+\textbf{Proof.} We show, by induction on the number of rows and the number of
+formal zero entries: For every matrix~$M$ over a ring~$A$, if~$M$ has more rows
+than columns and if the induced linear map~$A^m \to A^n$ is surjective, then~$1
+= 0$ in~$A$.
+
+Let a matrix~$M$ with more rows than columns over a ring~$A$ be given. If all
+entries of~$M$ are known to be zero (formal zeros), then~$1 = 0$ in~$A$ because
+the vector~$(1,0,\ldots,0)$ still belongs to the range of~$M = 0$.
+
+Else let~$a_{ij}$ be the first entry not known to be zero. It becomes a formal
+zero over the quotient ring~$A/(a_{ij})$. Since the matrix~$M$ is still
+surjective over the quotient, the induction hypothesis (applied to the quotient
+ring) implies~$1 = 0$ in~$A/(a_{ij})$. Hence~$a_{ij}$ is invertible in~$A$.
+
+By elementary row and column operations, the matrix can be transformed to a
+matrix of the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
+M'\end{smallmatrix}\right)$, where the induced linear map of the submatrix~$M'$ is again
+surjective. Hence~$1 = 0$ by the induction hypothesis (applied to~$A$).
+\end{quotation}
+Notably, this unrolled proof is not the same as the determinant-based proofs of
+Richman~\cite[Theorem~1]{richman:trivial-rings} or
+Lombardi--Quitté~\cite[Proposition~II-5.2]{lombardi-quitte:constructive-algebra}.
+Instead, it is more in spirit of the proofs
+of~\cite[Theorems~2--4]{richman:trivial-rings} or
+of~\cite{blechschmidt:generic-freeness}, but using auxiliary computations over
+quotient rings instead of localized rings. This feature is to be
+expected---localized rings typically appear when unwinding proofs which make
+use of the generic localization~\cite[Section~3]{blechschmidt:generalized-spaces}
+as opposed to proofs making use of the generic enumeration.
 
 Theorem~\ref{thm:dynalg-formal} is not the only way to reify the dynamical
 approach to maximal ideals. Instead of employing the forcing extension
