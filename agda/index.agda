@@ -120,7 +120,9 @@ module §4 where
 
     Lemma-4-17 = weaken
 
-    module Theorem-4-22 = 1ˢᵗ-Order-Equivalence
+    module Theorem-4-22 = 1ˢᵗOrderEquivalence
+
+    module Theorem-4-23 = CoherentEquivalence
 
   module §4-4 = Krull.Dynamical
 

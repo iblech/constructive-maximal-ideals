@@ -216,7 +216,7 @@ lemma-exec-coherent₂' env (φ ∨ ψ)      p = Data.Sum.map (lemma-exec-cohere
 lemma-exec-coherent₂' env (φ ∧ ψ)      p = Data.Product.map (lemma-exec-coherent₂' env φ) (lemma-exec-coherent₂' env ψ) p
 lemma-exec-coherent₂' env (EX φ)       p = proj₁ p , lemma-exec-coherent₂' (proj₁ p ∷ env) φ (proj₂ p)
 
-module 1ˢᵗ-Order-Equivalence
+module 1ˢᵗOrderEquivalence
   (all-coverings-inhabited : {x : L} (R : Cov x) → Relation.Unary.Satisfiable (_◁ R)) where
 
   open import Forcing.Monad.Conservative L… all-coverings-inhabited
@@ -251,19 +251,34 @@ module 1ˢᵗ-Order-Equivalence
   thm₂ {{x}} env (EX φ)       p = escape (fmap (λ {{y}} (u , q) → u , thm₂ {{y}} (u ∷ env) φ q) p)
   thm₂ {{x}} env (FA φ)       p = λ u → thm₂ (u ∷ env) φ (p {{x}} {{≼-refl}} u)
 
-{-
-module Equivalence-for-coherent-formulas
+module CoherentEquivalence
   (top : L)
-  (top-coverings-inhabited : (R : Cov top) → Relation.Unary.Satisfiable (_◁ R)) where
-
-  FA… : {Γ : Cxt} {frag : Fragment} {lang : Language} → Formula Γ frag lang → Formula [] first-order lang
-  FA… {[]}     φ = 1ˢᵗ φ
-  FA… {ty ∷ Γ} φ = FA… (FA φ)
+  (escape : {P : Set} → ∇ {{top}} P → P) where
 
   thm₁
-    : {Γ : Cxt}
+    : {{x : L}}
+    → {Γ : Cxt}
+    → (env : Env Γ)
     → (φ ψ : Formula Γ coherent base)
-    → exec [] (FA… (φ ⇒ ψ)) → exec∇ {{top}} [] (FA… (φ ⇒ ψ))
-  thm₁ {[]}     φ ψ p {{y}} {{y≼top}} q = {!!}
-  thm₁ {ty ∷ Γ} φ ψ p = {!!}
--}
+    → exec env (φ ⇒ ψ) → exec∇ {{x}} env (φ ⇒ ψ)
+  thm₁ env φ ψ p {{y}} {{y≼x}} q = lemma-exec-coherent₂ {{y}} env ψ (fmap {{y}} (λ {{z}} → lemma-exec-coherent₂' {{z}} env ψ) (fmap {{y}} p (fmap {{y}} (λ {{z}} → lemma-exec-coherent₁' {{z}} env φ) (lemma-exec-coherent₁ {{y}} env φ q))))
+
+  thm₁⁺
+    : {ty : Ty}
+    → (φ ψ : Formula (ty ∷ []) coherent base)
+    → exec [] (FA (φ ⇒ ψ)) → exec∇ {{top}} [] (FA (φ ⇒ ψ))
+  thm₁⁺ φ ψ p {{y}} {{y≼top}} = λ u {{z}} {{z≼y}} → thm₁ {{y}} (u ∷ []) φ ψ (p u) {{z}} {{z≼y}}
+
+  thm₂
+    : {Γ : Cxt}
+    → (env : Env Γ)
+    → (φ ψ : Formula Γ coherent base)
+    → exec∇ {{top}} env (φ ⇒ ψ) → exec env (φ ⇒ ψ)
+  thm₂ env φ ψ p q =
+    escape (fmap {{top}} (lemma-exec-coherent₁' env ψ) (lemma-exec-coherent₁ {{top}} env ψ (p {{top}} {{≼-refl}} (lemma-exec-coherent₂ {{top}} env φ (now (lemma-exec-coherent₂' {{top}} env φ q))))))
+
+  thm₂⁺
+    : {ty : Ty}
+    → (φ ψ : Formula (ty ∷ []) coherent base)
+    → exec∇ {{top}} [] (FA (φ ⇒ ψ)) → exec [] (FA (φ ⇒ ψ))
+  thm₂⁺ φ ψ p = λ u q → thm₂ (u ∷ []) φ ψ (p {{top}} {{≼-refl}} u) q
