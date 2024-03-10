@@ -1119,6 +1119,9 @@ nevertheless believe that, after removing the countability assumption using the
 technique of Section~\ref{sect:wlog} and unwinding all auxiliary definitions,
 we recover Yengui's proof.
 
+Although not the focus of this text, we have also analyzed classical proofs
+making use of minimal prime ideals; see Remark~\ref{remark:minimal-prime-ideals} below.
+
 
 \section{Formalization in weaker foundations}
 \label{sect:arithmetization}
@@ -2209,7 +2212,7 @@ ux$ is not invertible. Then~$[1-ux] \models 1-ux \in \mmm$. By assumption,~$[\,]
 \models 1 \in \mmm$, a contradiction.
 \end{proof}
 
-\begin{remark}In addition to maximal ideals, minimal prime ideals are important
+\begin{remark}\label{remark:minimal-prime-ideals}In addition to maximal ideals, minimal prime ideals are important
 ingredients for some reduction techniques in classical commutative algebra. For
 instance, the stalk of a reduced ring at a minimal prime ideal enjoys the good
 property of being a field. Can the iterative construction of Section~\ref{sect:constr} be adapted to
@@ -2240,7 +2243,29 @@ maximal with respect to the old prime filters.
 
 That said, if we relax the primality condition in a classically equivalent way, a
 different iterative procedure can be used to construct a maximal prime filter;
-see Example~\ref{ex:inc-ring2} below.
+see Example~\ref{ex:inc-ring2} below. With this construction, we can aspire to
+decrypt classical proofs in commutative algebra employing minimal prime ideals.
+Indeed, in this way we reify the dynamical approach to minimal prime
+ideals~\cite[Section~XV.7]{lombardi-quitte:constructive-algebra}.
+For instance, the classical proofs of the analog of
+Proposition~\ref{prop:surj-matrix} for injective linear maps and of McCoy's
+theorem (for every injective linear map~$A^m \to A^n$, the ideal of
+its~$m$-minors is regular) reproduced
+in~\cite[Section~3.5]{blechschmidt:generalized-spaces} can be interpreted in
+this framework. Unwinding the resulting constructive proof for the analog of
+Proposition~\ref{prop:surj-matrix}, we recover Richman's
+proof~\cite[Theorem~2]{richman:trivial-rings}; unwinding the resulting
+constructive proof of McCoy's theorem, we recover the proof reproduced
+at~\cite[p.~174]{blechschmidt:generalized-spaces} (but not the Cramer-style
+proofs of~\cite{blocki:mccoy},
+\cite[Theorem~5.22]{lombardi-quitte:constructive-algebra} or
+\cite[Exercise~5.23A(3)]{lam:exercises}).
+
+A substantially different approach to constructivizing minimal prime ideals,
+directly forcing the existence of the generic maximal prime filter instead of
+iteratively constructing one after forcing the existence of the generic
+enumeration, has been explored by Coquand and
+Lombardi~\cite[Section~6]{coquand-lombardi:logical}.
 \end{remark}
 
 
