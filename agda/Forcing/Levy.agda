@@ -1,7 +1,5 @@
 {-# OPTIONS --cubical-compatible --safe #-}
 
-open import Forcing.Base
-
 module Forcing.Levy (X : Set) where
 
 import Data.Nat as Nat
@@ -18,6 +16,10 @@ import Data.List.Relation.Binary.Prefix.Homogeneous.Properties as P
 open import Relation.Binary.Structures using (IsPreorder)
 open import Level
 open import Data.List.Relation.Unary.Any.Properties
+
+open import Forcing.Base
+import Forcing.Monad
+import Forcing.Monad.Conservative
 
 private
   lookupMaybe : List X → Nat.ℕ → Maybe X
@@ -86,9 +88,9 @@ Enum-monotonic {xs} {ys} n x ys≼xs p with ≼-splitting ys≼xs
 Enum-singlevalued : {{xs : List X}} (n : Nat.ℕ) (a b : X) → Enum n a → Enum n b → a ≡ b
 Enum-singlevalued {{xs}} n a b p q = lookup-singlevalued xs n a b p q
 
-open import Forcing.Monad L…
+open Forcing.Monad L…
 
 Enum-surjective : {{xs : List X}} (a : X) → ∇ {{xs}} (λ {{xs}} → Σ[ n ∈ Nat.ℕ ] Enum {{xs}} n a)
 Enum-surjective a = later (hit a) λ (ys≼xs , a∈ys) → now (toℕ (index a∈ys) , lookup-succeeds _ a a∈ys)
 
-open import Forcing.Monad.Conservative L… (λ { {xs} (hit a) → xs ∷ʳ a , _++ᵖ_ ≼-refl (a ∷ []) , ⋿-last xs a }) public
+open Forcing.Monad.Conservative L… (λ { {xs} (hit a) → xs ∷ʳ a , _++ᵖ_ ≼-refl (a ∷ []) , ⋿-last xs a }) public

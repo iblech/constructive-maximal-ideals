@@ -22,26 +22,27 @@ private
   module _ {X : Set} {Eq : Rel (Term X) 0ℓ} where
     infix 4 _≈_
     data _≈_ : Term X → Term X → Set where
-      base  : {x y : Term X} → Eq x y → x ≈ y
-      refl  : {x : Term X}     → x ≈ x
-      sym   : {x y : Term X}   → x ≈ y → y ≈ x
-      trans : {x y z : Term X} → x ≈ y → y ≈ z → x ≈ z
-      +-cong  : {a b x y : Term X} → a ≈ b → x ≈ y → a + x ≈ b + y
-      +-assoc : (x y z : Term X) → (x + y) + z ≈ x + (y + z)
+      base        : {x y : Term X} → Eq x y → x ≈ y
+      refl        : {x : Term X}     → x ≈ x
+      sym         : {x y : Term X}   → x ≈ y → y ≈ x
+      trans       : {x y z : Term X} → x ≈ y → y ≈ z → x ≈ z
+      +-cong      : {a b x y : Term X} → a ≈ b → x ≈ y → a + x ≈ b + y
+      +-assoc     : (x y z : Term X) → (x + y) + z ≈ x + (y + z)
       +-identityˡ : (x : Term X) → 0# + x ≈ x
       +-identityʳ : (x : Term X) → x + 0# ≈ x
-      -‿inverseˡ : (x : Term X) → (- x) + x ≈ 0#
-      -‿inverseʳ : (x : Term X) → x + (- x) ≈ 0#
-      -‿-cong : {x y : Term X} → x ≈ y → - x ≈ - y
-      +-comm : (x y : Term X) → x + y ≈ y + x
-      *-cong : {a b x y : Term X} → a ≈ b → x ≈ y → a * x ≈ b * y
-      *-assoc : (x y z : Term X) → (x * y) * z ≈ x * (y * z)
+      -‿inverseˡ  : (x : Term X) → (- x) + x ≈ 0#
+      -‿inverseʳ  : (x : Term X) → x + (- x) ≈ 0#
+      -‿-cong     : {x y : Term X} → x ≈ y → - x ≈ - y
+      +-comm      : (x y : Term X) → x + y ≈ y + x
+      *-cong      : {a b x y : Term X} → a ≈ b → x ≈ y → a * x ≈ b * y
+      *-assoc     : (x y z : Term X) → (x * y) * z ≈ x * (y * z)
       *-identityˡ : (x : Term X) → 1# * x ≈ x
       *-identityʳ : (x : Term X) → x * 1# ≈ x
-      distribˡ : (x y z : Term X) → x * (y + z) ≈ (x * y) + (x * z)
-      distribʳ : (x y z : Term X) → (y + z) * x ≈ (y * x) + (z * x)
-      *-comm : (x y : Term X) → x * y ≈ y * x
+      distribˡ    : (x y z : Term X) → x * (y + z) ≈ (x * y) + (x * z)
+      distribʳ    : (x y z : Term X) → (y + z) * x ≈ (y * x) + (z * x)
+      *-comm      : (x y : Term X) → x * y ≈ y * x
 
+-- ℤ[ X ]/ I is the free ring on the generators X modulo the equations imposed by I.
 ℤ[_]/_ : (X : Set) → Rel (Term X) 0ℓ → CommutativeRing 0ℓ 0ℓ
 ℤ[ X ]/ I = record
   { Carrier = Term X

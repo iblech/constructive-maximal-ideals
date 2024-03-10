@@ -1,10 +1,23 @@
+{-
+
+  This file is the entry point to the partial formalization of the paper
+  "Reifying dynamical algebra: maximal ideals in countable rings, constructively"
+  by Ingo Blechschmidt and Peter Schuster.
+
+  Although the paper has the usual truncated existence in mind, this
+  formalization explores using untruncated sigma types.
+
+  It has been tested with Agda 2.6.4.1 and standard-library 2.0.
+
+-}
+
 {-# OPTIONS --cubical-compatible --safe #-}
 
 module index where
 
 open import Level
 open import Algebra.Bundles
-open import Relation.Unary hiding (∅)
+open import Relation.Unary
 import Data.Nat as Nat
 open import Relation.Binary.PropositionalEquality
 open import Data.Product

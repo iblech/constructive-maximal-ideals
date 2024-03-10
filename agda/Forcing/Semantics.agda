@@ -14,7 +14,6 @@ open import Data.Product
 import Relation.Unary
 
 open import Forcing.Monad (L…)
-
 open ForcingNotion L…
 
 Ty : Set₁
