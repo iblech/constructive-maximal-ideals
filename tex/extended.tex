@@ -304,7 +304,15 @@ set theoretic techniques''~\cite{roitman:uses} by providing an instance in
 constructive algebra, and hope to make forcing more accessible.
 
 Summarizing, our approach strengthens the view of maximal ideals as convenient
-fictions~\cite[Section~1]{schuster-wessel:krull}. Maximal ideals can carry out
+fictions~\cite[Section~1]{schuster-wessel:krull}, in line with a famous motto
+of Poincaré~\cite{poincare:logique}:
+\begin{quote}
+\emph{Never lose sight of the fact that every proposition concerning infinity
+must be the translation, the precise statement of propositions concerning the
+finite.}
+\end{quote}
+
+Maximal ideals can carry out
 their work by any of the following possibilities:
 \begin{enumerate}
 \item[(1)] For countable (or well-founded) rings, no help is required.
@@ -549,7 +557,24 @@ sum is invertible then one of the summands is.
 
 \begin{example}If we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
 ideal~$\mmm$ coincides with the ideal~$(2)$. If the enumeration starts with a
-prime~$p$, the ideal~$\mmm$ coincides with~$(p)$.\end{example}
+prime~$p$, the ideal~$\mmm$ coincides with~$(p)$. More generally, if~$A$
+is a countable Bézout ring and the enumeration starts with an irreducible
+element~$p$, then~$\mmm$ coincides with~$(p)$.
+% Trivially, we have (p) ⊆ m.
+% Let x ∈ m. Write (x,p) = (d). Then d ∈ m.
+% As d | p, we have d ~ 1 or d ~ p. In the first case 1 ∈ m, hence 1 = 0.
+% In the second case, x ∈ (p).
+\end{example}
+
+\begin{example}Let~$A = \ZZ/\aaa$, where~$\aaa = (\{6\} \cup \{2\,|\,P\} \cup
+\{3\,|\,Q\})$ and~$P$ and~$Q$ are incompatible propositions, be enumerated
+by~$0,1,5,2,3,4$. Then~$\mmm = \{0\} \cup \{2\,|\,\neg Q\} \cup \{4\,|\,\neg Q\}
+\cup \{3\,|\,\neg\neg Q\wedge\neg P\}$. It is instructive to check, with this
+description, that the maximality condition of
+Corollary~\ref{cor:is-prime-max}(a) is satisfied. As is to be expected, the
+construction of~$\mmm$ neither discloses nor requires information about the
+status of~$P$ and~$Q$.
+\end{example}
 
 \begin{example}If~$A$ is a local ring with group of units~$A^\times$, then~$\mmm = A \setminus A^\times$.\end{example}
 
