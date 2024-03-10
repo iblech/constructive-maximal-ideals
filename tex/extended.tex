@@ -2398,7 +2398,7 @@ inconsistency predicate.\end{example}
 
 \begin{example}\label{ex:inc-ring2}Let~$A$ be a ring. For any subset~$M
 \subseteq A$, let~$\Inc{M}$ state that the multiplicative set generated
-by~$M$ contains~$0$, that is that some product~$m_1 \ldots m_n$ of elements
+by~$M$ contains~$0$, that is that some (perhaps empty) product~$m_1 \ldots m_n$ of elements
 of~$M$ (with repetitions allowed) is zero. Then~$\Incbare$ is an inconsistency
 predicate.\end{example}
 
@@ -2413,7 +2413,7 @@ entails~$\alpha$ in (minimal, intuitionistic or classical) first-order logic. Th
 predicate.\end{example}
 
 \begin{remark}The inconsistency predicates of
-Examples~\ref{ex:inc-ring},~\ref{ex:inc-module} and~\ref{ex:inc-formulas} are
+Examples~\ref{ex:inc-ring},~\ref{ex:inc-ring2},~\ref{ex:inc-module} and~\ref{ex:inc-formulas} are
 all induced by \emph{algebraic closure operators} as reviewed
 in~\cite[Example~1]{wessel-schuster:radical}.\end{remark}
 
@@ -2476,32 +2476,47 @@ would imply~$\Inc{B}$ by monotonicity. Hence~$x \in A$ by
 Lemma~\ref{lemma:omnibus-inc}(b).
 \end{proof}
 
-Theorem~\ref{thm:max-inc-countable} has a number of corollaries, such as:
+A consequence of the maximality property is that if an inconsistency predicate
+is induced by an algebraic closure operator, the maximal equiconsistent
+extensions provided by Theorem~\ref{thm:max-inc-countable} are automatically
+closed under the given operator. For instance, maximal equiconsistent
+extensions with respect to the inconsistency predicate of Example~\ref{ex:inc-ring}
+are automatically ideals and extensions with respect to the predicate of
+Example~\ref{ex:inc-formulas} are automatically deductively closed.
+
+Extending the empty subset by Theorem~\ref{thm:max-inc-countable} has a number of corollaries, such as:
 \begin{enumerate}
 \item[(1)] Every countable ring has a maximal ideal (Example~\ref{ex:inc-ring}).
 \item[(2)] Every countable ring has a maximal multiplicatively closed
 subset not containing zero (Example~\ref{ex:inc-ring2}). Such a subset~$S$ is
-multiplicatively saturated and a prime filter in the weak sense that~$x + y \in
+multiplicatively saturated (closed under divisors) and a prime filter in the weak sense that~$x + y \in
 S$ and~$x \not\in S$ implies~$y \in S$ (where negation means implication to~$1
 = 0$ as in Section~\ref{sect:constr}). The ring of fractions~$A[S^{-1}]$ has
 the property that elements which are not nilpotent are invertible. In the case
-that~$A$ is reduced, the ring of fractions is a field in the sense that nonzero
-elements are invertible. The complement of~$S$ is a (certain weak kind) of a
+that~$A$ is reduced, this ring of fractions is a field in the sense that nonzero
+elements are invertible. The complement of~$S$ is a (certain weak kind of) a
 minimal prime ideal; in classical reverse mathematics, this iterative
 construction of a minimal prime ideal is due to
 Hatzikiriakou~\cite[Lemma~3.1]{hatzikiriakou:minimal}.
 \item[(3)] Every finitely generated module
 over a countable ring has a maximal proper submodule
 (Example~\ref{ex:inc-module}).
-\item[(4)] Every set of sentences over a countable signature can be completed to a
-maximal equiconsistent set (Example~\ref{ex:inc-formulas});
-this result is a central ingredient in constructive proofs of
-Gödel's completeness theorem~\cite{krivine:completeness,herbelin-ilik:henkin,forster-kirst-wehr:completeness}.
-\item[(5)] Every countable vector space over a residue field has a maximal linearly
+\item[(4)] Every countable vector space over a residue field has a maximal linearly
 independent set (using the inconsistency predicate and the notion of linear
 independence of~\cite[Section~6]{wessel-schuster:radical}). Such a set is
 anonymously spanning in that every vector is \emph{not~not} contained in its
 span. In this sense countable vector spaces ``almost'' have a basis.
+\end{enumerate}
+By extending a given subset instead of the empty one, all these results also
+admit relative versions. For instance, every submodule~$U$ of a finitely generated
+module over a countable ring can be extended to a maximal submodule~$U'$ such
+that~$U' = M \Rightarrow U = M$. Some corollaries of Theorem~\ref{thm:max-inc-countable}
+are usually only stated in their relative form:
+\begin{enumerate}
+\item[(5)] Every set of sentences over a countable signature can be completed to a
+maximal equiconsistent set (Example~\ref{ex:inc-formulas});
+this result is a central ingredient in constructive proofs of
+Gödel's completeness theorem~\cite{krivine:completeness,herbelin-ilik:henkin,forster-kirst-wehr:completeness}.
 \end{enumerate}
 
 
