@@ -12,7 +12,7 @@ import Data.Nat.Properties
 open import Relation.Unary hiding (∅)
 import Relation.Binary.PropositionalEquality as PE
 
-module Krull.Dynamic (R… : CommutativeRing 0ℓ 0ℓ) where
+module Krull.Dynamical (R… : CommutativeRing 0ℓ 0ℓ) where
 
 open CommutativeRing R… renaming (Carrier to R)
 

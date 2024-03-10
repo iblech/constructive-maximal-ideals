@@ -32,7 +32,7 @@ import Forcing.Semantics
 import Krull.Base
 import Krull.FreeRing
 import Krull.Static
-import Krull.Dynamic
+import Krull.Dynamical
 
 
 {- §1. An iterative construction of maximal ideals -}
@@ -122,7 +122,7 @@ module §4 where
 
     module Theorem-4-22 = 1ˢᵗ-Order-Equivalence
 
-  module §4-4 = Krull.Dynamic
+  module §4-4 = Krull.Dynamical
 
   module TestCase where
     open Krull.FreeRing
@@ -138,6 +138,6 @@ module §4 where
       vb1 : var v * var b ~ 1#
 
     R… = ℤ[ Var ]/ _~_
-    open Krull.Dynamic R…
+    open Krull.Dynamical R…
 
     1≈0 = example (var a) (var b) (var u) (var v) (eq ua1) (eq ub0) (eq va0) (eq vb1)

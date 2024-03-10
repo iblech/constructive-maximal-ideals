@@ -1,3 +1,15 @@
+{-
+
+  This module provides the Lévy forcing notion for collapsing any given set X to
+  be countable.
+
+  More precisely, the forcing notion presented here gives rise to a generic
+  *partial* surjection ℕ ⇀ X. True Lévy forcing wouldn't be much more difficult
+  to implement, but we don't need it for the application in Krull.Dynamical
+  and hence it seems prudent to use the more economical forcing notion.
+
+-}
+
 {-# OPTIONS --cubical-compatible --safe #-}
 
 module Forcing.Levy (X : Set) where
