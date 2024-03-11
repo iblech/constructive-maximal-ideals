@@ -95,7 +95,7 @@
   Along the way we do a case study for proofs in algebra with minimal logic,
   and generalize the construction to arbitrary inconsistency predicates. A partial Agda
   formalization is available at an accompanying repository.\footnote{See
-  \href{https://github.com/iblech/constructive-maximal-ideals/}{\texttt{https:/$\!$/github.com/iblech/constructive-maximal-ideals/}.}
+  \href{https://github.com/iblech/constructive-maximal-ideals/}{\textnormal{https://github.com/iblech/constructive-maximal-ideals/}\!.}
   This text is a revised and extended version
   of the conference paper~\cite{blechschmidt-schuster:constructive-maximal-ideals}. The conference paper only
   briefly sketched the connection with dynamical algebra; did not compare this
@@ -173,7 +173,8 @@ Then~$1 = 0$ in~$A$.
 \textbf{Proof.} Assume for the sake of a contradiction that~$1 \neq 0$ in~$A$.
 Then, by the axiom of choice, there exists a maximal ideal~$\mmm$. The quotient
 ring~$k \defeq A/\mmm$ is a field and the induced linear map~$k^m \to k^n$ is
-still surjective. Hence we have a contradiction to basic linear algebra over fields.
+still surjective. Hence we have a contradiction to basic linear algebra over
+fields.\hfill\qed
 \end{quote}
 This proof is short, elegant, a prototypical examplar of a common reduction
 technique in commutative algebra---and wholly unconstructive. Is there also a
@@ -556,7 +557,7 @@ ensure, for instance, that kernels of matrices are finite dimensional and that b
 are diagonalizable.}
 Each of the latter is in fact a \emph{Heyting field},
 a residue field which also is a \emph{local ring}: if a finite
-sum is invertible then one of the summands is.
+sum is invertible then one of the summands~is.
 
 \begin{example}If we enumerate~$\ZZ$ by~$0,1,-1,2,-2,\ldots$, the
 ideal~$\mmm$ coincides with the ideal~$(2)$. If the enumeration starts with a
@@ -896,7 +897,6 @@ that we have the residue field property
 by Lemma~\ref{lemma:omnibus}(c): The elements of~$\mmm$ are exactly those ring
 elements for which there is a way to transform the contrary assumption~$1 \in
 \mmm + (x)$ to the conclusion~$1 = 0$.
-
 The equivalence~(\ref{eq:char-membership}) expresses the essence of the maximal
 ideal construction---only that it cannot serve as a definition because of its
 evident circularity. The construction resolves this circularity by
@@ -998,13 +998,13 @@ These facts have abstract classical proofs employing Krull's lemma as follows.
   reduced; the general case reduces to this one: For every prime ideal~$\ppp$,
   the coefficients of~$f$ vanish over the reduced ring~$A/\ppp$. Hence they are
   contained in all prime ideals and are thereby
-  nilpotent.\medskip
+  nilpotent.\hfill\qed\medskip
 
   \textbf{Proof of (b).} Simple induction if~$A$ is an
   integral domain; the general case reduces to this one: For every prime
   ideal~$\ppp$, the nonconstant coefficients of~$f$ vanish over the integral
   domain~$A/\ppp$. Hence they are contained in all prime ideals
-  and are thereby nilpotent.
+  and are thereby nilpotent.\hfill\qed
 \end{quote}
 
 Both statements admit direct computational proofs which do not
@@ -2131,10 +2131,10 @@ zero over the quotient ring~$A/(a_{ij})$. Since the matrix~$M$ is still
 surjective over the quotient, the induction hypothesis (applied to the quotient
 ring) implies~$1 = 0$ in~$A/(a_{ij})$. Hence~$a_{ij}$ is invertible in~$A$.
 
-By elementary row and column operations, the matrix can be transformed to a
-matrix of the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
+By elementary row and column operations, the matrix can be transformed to
+the form~$\left(\begin{smallmatrix}1 & 0 \\ 0 &
 M'\end{smallmatrix}\right)$, where the induced linear map of the submatrix~$M'$ is again
-surjective. Hence~$1 = 0$ by the induction hypothesis (applied to~$A$).
+surjective. Hence~$1 = 0$ by the induction hypothesis (applied to~$A$).\hfill\qed
 \end{quotation}
 Notably, this unrolled proof is not the same as the determinant-based proofs of
 Richman~\cite[Theorem~1]{richman:trivial-rings} or
@@ -2376,8 +2376,8 @@ context of directed-complete lattices as monotone predicates which split
 directed joins~\cite{schuster-wessel:jacincpred}. For our purposes, the level of generality displayed in the
 following definition is sufficient.
 
-\begin{definition}Let~$X$ be a set. An \emph{inconsistency predicate} on the
-powerset~$P(X)$ is a predicate~$\Incbare$ on~$P(X)$ which
+\begin{definition}Let~$X$ be a set. An \emph{inconsistency predicate} on~$X$
+is a predicate~$\Incbare$ on~$P(X)$ which
 \begin{enumerate}
 \item is monotone: if~$U \subseteq V$ and~$\Inc{U}$, then~$\Inc{V}$, and
 \item splits directed joins: if~$\mathcal{U} \subseteq P(X)$ is a directed subset
