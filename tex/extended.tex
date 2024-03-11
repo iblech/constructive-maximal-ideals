@@ -2415,10 +2415,12 @@ signature. Let~$\alpha \in X$ be a fixed sentence. Let~$\Inc{M}$ state that~$M$
 entails~$\alpha$ in (minimal, intuitionistic or classical) first-order logic. Then~$\Incbare$ is an inconsistency
 predicate.\end{example}
 
-\begin{remark}The inconsistency predicates of
+\begin{remark}\label{rem:inc-by-closure}The inconsistency predicates of
 Examples~\ref{ex:inc-ring},~\ref{ex:inc-ring2},~\ref{ex:inc-module} and~\ref{ex:inc-formulas} are
 all induced by \emph{algebraic closure operators} as reviewed
-in~\cite[Example~1]{wessel-schuster:radical}.\end{remark}
+in~\cite[Example~1]{wessel-schuster:radical}; in these cases, $\Inc{U}$
+is actually defined in terms of the closure of the subset~$U$.
+\end{remark}
 
 
 \subsection{Maximal consistent extensions}
@@ -2467,25 +2469,28 @@ by part~(a).
 \end{proof}
 
 \begin{theorem}\label{thm:max-inc-countable}Let~$X$ be a countable set equipped
-with an inconsistency predicate. Then every subset of~$X$ has a maximal
-equiconsistent extension.\end{theorem}
-
-\begin{proof}We verify that for every subset~$A_0 \subseteq X$, the set~$A$ of
-Construction~\ref{constr:inc} is an extension of the desired kind. More
-precisely, we verify that~$A$ is maximal in that for every subset~$B \subseteq X$,
+with an inconsistency predicate. Then every subset~$A_0$ of~$X$
+has an extension~$A \supseteq A_0$ which is \emph{maximal equiconsistent} in
+that for every subset~$B$ of~$X$:
 \[ A \subseteq B \quad\wedge\quad \neg \Inc{B} \quad\Longrightarrow\quad A = B. \]
+\end{theorem}
+
+\begin{proof}
+We verify that~$A$ as in Construction~\ref{constr:inc} is as desired.
 Let~$x \in B$. Then~$\neg \Inc{(A \cup \{ x \})}$, as~$\Inc{(A \cup \{x\})}$
 would imply~$\Inc{B}$ by monotonicity. Hence~$x \in A$ by
 Lemma~\ref{lemma:omnibus-inc}(b).
 \end{proof}
 
-A consequence of the maximality property is that if an inconsistency predicate
-is induced by an algebraic closure operator, the maximal equiconsistent
-extensions provided by Theorem~\ref{thm:max-inc-countable} are automatically
-closed under the given operator. For instance, maximal equiconsistent
+\begin{remark}If an inconsistency predicate is induced by an algebraic
+closure operator (Remark~\ref{rem:inc-by-closure}), then every subset is
+equiconsistent with its closure; whence the maximal equiconsistent extensions
+provided by Theorem~\ref{thm:max-inc-countable} are automatically closed under
+the given operator. For instance, maximal equiconsistent
 extensions with respect to the inconsistency predicate of Example~\ref{ex:inc-ring}
 are automatically ideals and extensions with respect to the predicate of
 Example~\ref{ex:inc-formulas} are automatically deductively closed.
+\end{remark}
 
 Extending the empty subset by Theorem~\ref{thm:max-inc-countable} has a number of corollaries, such as:
 \begin{enumerate}
