@@ -110,7 +110,13 @@ module §4 where
     Proposition-4-12 all-coverings-inhabited = escape
       where open Forcing.Monad.Conservative L… all-coverings-inhabited
 
-  Example-4-13 = Forcing.Levy.escape
+  module Example-4-13 (X : Set) where
+    open Forcing.Levy X
+    open ForcingNotion L…
+    open Forcing.Monad L…
+
+    lemma : {x : L} {P : Set} → ∇ {{x}} P → P
+    lemma = escape
 
   module §4-3 (L… : ForcingNotion) where
     open Forcing.Semantics L…
