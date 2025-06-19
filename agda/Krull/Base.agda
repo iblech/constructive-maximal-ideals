@@ -20,6 +20,7 @@ module Krull.Base (R… : CommutativeRing 0ℓ 0ℓ) where
 
 open CommutativeRing R… renaming (Carrier to R)
 open Relation.Binary.Reasoning.Setoid setoid
+open import Algebra.Definitions.RawSemiring (Algebra.Bundles.Semiring.rawSemiring semiring) using (_^_)
 
 ⊥ : Set
 ⊥ = 1# ≈ 0#
@@ -116,6 +117,16 @@ image f R y = Σ[ x ∈ _ ] y PE.≡ f x × x ∈ R
 
 ≡⇒≈ : {a b : R} → a PE.≡ b → a ≈ b
 ≡⇒≈ PE.refl = refl
+
+-- The following two definitions are only required for the generic
+-- prime ideal, not for the maximal ideal construction described in
+-- the paper.
+√ : Pred R 0ℓ → Pred R 0ℓ
+√ M x = Σ[ n ∈ Nat.ℕ ] x ^ n ∈ M
+
+^-* : (x : R) (n m : Nat.ℕ) → x ^ n * x ^ m ≈ x ^ (n Nat.+ m)
+^-* x Nat.zero    m = *-identityˡ (x ^ m)
+^-* x (Nat.suc n) m = trans (*-assoc x (x ^ n) (x ^ m)) (*-congˡ (^-* x n m))
 
 
 -- None of the following functions and results are used in the rest of this

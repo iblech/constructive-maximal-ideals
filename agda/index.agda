@@ -7,7 +7,10 @@
   Although the paper has the usual truncated existence in mind, this
   formalization explores using untruncated sigma types.
 
-  It has been tested with Agda 2.6.4.1 and standard-library 2.0.
+  It has been tested with
+  - Agda 2.6.4.1 and standard-library 2.0,   and
+  - Agda 2.7.0   and standard-library 2.1.1, and
+  - Agda 2.7.0.1 and standard-library 2.1.1.
 
 -}
 
@@ -28,6 +31,7 @@ import Forcing.Base
 import Forcing.Monad
 import Forcing.Monad.Conservative
 import Forcing.Levy
+import Forcing.Prime
 import Forcing.Semantics
 import Krull.Base
 import Krull.FreeRing
@@ -131,6 +135,8 @@ module §4 where
     module Theorem-4-23 = CoherentEquivalence
 
   module §4-4 = Krull.Dynamical
+
+  Version-of-Proposition-4-26 = Forcing.Prime.corollary
 
   module TestCase where
     open Krull.FreeRing
