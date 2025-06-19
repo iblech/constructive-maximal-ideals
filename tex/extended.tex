@@ -972,7 +972,7 @@ An essential part of constructive algebra is to devise tools to import
 proofs from classical commutative algebra into the constructive
 setting.\footnote{Forms of Zorn's Lemma similar to Krull's Lemma
 feature prominently in algebra; to wit, in ordered algebra there are the
-Artin--Schreier theorem for fields, Levi's theorem for Abelian groups and
+Artin--Schreier theorem for fields, Levi's theorem for abelian groups and
 Ribenboim's extension to modules. Dynamical algebra aside, to which we will
 come back later, these statements have recently gained attention from the angle
 of proof theory at large; see, for example,
@@ -1401,7 +1401,7 @@ the extended universe is called the \emph{generic filter}.
 
 \begin{example}[\flink{§4.§4-1.Example-4-3}]\label{ex:notion-enum}To force the existence of an enumeration
 of the elements of a (perhaps uncountable) set~$X$, let~$L \defeq X^*$ be the set of finite lists
-of elements of~$X$. We picture a list~$x_0\ldots x_{n-1}]$ as code for the
+of elements of~$X$. We picture a list~$x_0\ldots x_{n-1}$ as code for the
 partial enumeration~$f : \NN \rightharpoonup X$ given by~$f(i) = x_i$
 for~$i=0,\ldots,n-1$, and declare~$\tau \preccurlyeq \sigma$ iff~$\sigma$ is a prefix
 of~$\tau$, expressing that the partial enumeration coded by~$\tau$ refines the
@@ -1825,7 +1825,7 @@ is forced by a condition~$\sigma \in L$'', symbolically denoted as~``$\sigma
   \> \defeqv $\forall \tau \preccurlyeq \sigma\_ \forall x_0 \in X\_ \tau \forces
   \varphi[\underline{x_0}/x]$. \\[0.3em]
 
-  \> $\sigma \forces \bot$ \> \defeqv $\nabla\sigma\_ \bot$ \\[0.3em]
+  \> $\sigma \forces \bot$ \> \defeqv $\nabla\sigma\_ \bot$. \\[0.3em]
 
   \> $\sigma \forces \varphi \vee \psi$
   \> \defeqv $\nabla\sigma\_ (\sigma \forces \varphi) \vee (\sigma \forces \psi)$. \\[0.3em]
@@ -2326,10 +2326,10 @@ generic filters tend to have more, and indeed rather peculiar, properties
 than would be expected just by virtue of being a filter. For instance:
 \begin{enumerate}
 \item The generic surjection~$f$ is not only everywhere-defined,
-single-valued and surjective as expected, but also has the property that it is
-\emph{not~not} the case that every desired finite pattern occurs among its
+single-valued and surjective as expected, but also has the property that, up to double negation, it is
+the case that every desired finite pattern occurs among its
 values: In the forcing extension it holds that for every finite list~$\sigma =
-x_1 \ldots x_k$, it is \emph{not~not} the case that there is a number~$n \in
+x_0 \ldots x_{k-1}$, it is \emph{not~not} the case that there is a number~$n \in
 \mathbb{N}$ such that the values~$f(n), f(n+1), \ldots, f(n+k)$ agree
 with~$\sigma$.
 
