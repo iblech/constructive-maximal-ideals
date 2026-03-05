@@ -6,11 +6,13 @@ open import Data.Product
 import Data.Nat as Nat
 import Data.Nat.Properties
 import Data.Fin as Fin
+open import Relation.Unary hiding (∅)
 
 module Krull.LinearAlgebra (R… : CommutativeRing 0ℓ 0ℓ) where
 
 open CommutativeRing R… renaming (Carrier to R)
 open import Krull.Base (R…)
+import Krull.QuotientRing as QR
 
 Matrix : Set → Nat.ℕ → Nat.ℕ → Set
 Matrix A n m = Fin.Fin n → Fin.Fin m → A
@@ -279,3 +281,38 @@ module WithFieldCondition
     surj-with-invertible-entry m<n M i j s Mij-inv N MN≡I
       with reduce-surjective M i j s Mij-inv N MN≡I
     ... | N' , N'-inv = surj-matrix m<n (reduce-matrix M i j s) N' N'-inv
+
+module WithMaximalIdeal
+  (I : Pred R 0ℓ)
+  (I-maximal : (x : R) → ¬ 1# ∈ ⟨ I ∪ ｛ x ｝ ⟩ → x ∈ I)
+  where
+
+  open QR R… I public
+
+  -- A maximal ideal gives a field: non-invertible elements are zero.
+  R/M-is-field : (x : R) → ((s : R) → ¬ (x * s) ≈/M 1#) → x ≈/M 0#
+  R/M-is-field x not-inv = Sum (Base x∈I) (⟨M⟩-neg Zero)
+    where
+    derive-⊥ : 1# ∈ ⟨ I ∪ ｛ x ｝ ⟩ → ⊥
+    derive-⊥ one∈I∪x with ideal-decompose x one∈I∪x
+    ... | u , s , one≈u+sx , u∈⟨I⟩ = not-inv s (Eq (sym xs-1≈-u) (⟨M⟩-neg u∈⟨I⟩))
+      where
+      -- u + (x * s - 1) ≈ (u + s * x) - 1 ≈ 1 - 1 ≈ 0
+      sum≈0 : u + (x * s - 1#) ≈ 0#
+      sum≈0 =
+        trans (+-congˡ (+-congʳ (*-comm x s)))
+        (trans (sym (+-assoc u (s * x) (- 1#)))
+        (trans (+-congʳ (sym one≈u+sx))
+               (-‿inverseʳ 1#)))
+
+      -- x * s - 1 ≈ - u  (from sum≈0 by uniqueness of inverses)
+      xs-1≈-u : x * s - 1# ≈ - u
+      xs-1≈-u =
+        trans (sym (+-identityˡ (x * s - 1#)))
+        (trans (+-congʳ (sym (-‿inverseˡ u)))
+        (trans (+-assoc (- u) u (x * s - 1#))
+        (trans (+-congˡ sum≈0)
+               (+-identityʳ (- u)))))
+
+    x∈I : x ∈ I
+    x∈I = I-maximal x derive-⊥

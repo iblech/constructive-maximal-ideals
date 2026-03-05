@@ -47,6 +47,9 @@ all-stages-proper (Nat.suc n) p with ⟨⟩-union₀ p
 ⟨𝔪⟩-proper p with ⟨⟩-compact G G-increasing p
 ... | n , q = all-stages-proper n q
 
+open import Krull.QuotientRing (R…) (𝔪)
+  renaming (R/M to R/𝔪 ; _≈/M_ to _≈/𝔪_)
+
 3⇒4 : {n : Nat.ℕ} → ¬ 1# ∈ ⟨ 𝔪 ∪ Enum n ⟩ → ¬ 1# ∈ ⟨ G n ∪ Enum n ⟩
 3⇒4 {n} = contraposition λ p → ⟨⟩-monotone (λ { (inj₁ q) → inj₁ (n , q) ; (inj₂ q) → inj₂ q }) {1#} p
 
@@ -90,5 +93,8 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
   postulate
     -- Non-invertible elements are zero (field condition).
     field-condition : (x : R) → (∀ s → ¬ x * s ≈ 1#) → x ≈ 0#
+
+    -- The quotient R/𝔪 is a field (non-invertible elements are zero).
+    R/𝔪-is-field : (x : R) → ((s : R) → ¬ (x * s) ≈/𝔪 1#) → x ≈/𝔪 0#
 
   open WithFieldCondition field-condition public

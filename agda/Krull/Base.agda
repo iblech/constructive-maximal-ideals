@@ -189,3 +189,13 @@ module _ {M N : Pred R 0ℓ} where
   ⟨⟩-union e with ⟨⟩-canon e
   ... | ps , eq , ms with go ps ms
   ... | x , y , eq' , e , f = x , y , trans (sym eq) eq' , e , f
+
+module _ (I : Pred R 0ℓ) (x : R) where
+  ideal-decompose : {a : R} → a ∈ ⟨ I ∪ ｛ x ｝ ⟩ → Σ[ u ∈ R ] Σ[ s ∈ R ] (a ≈ u + s * x) × u ∈ ⟨ I ⟩
+  ideal-decompose (Base (inj₁ i)) = _ , 0# , trans (sym (+-identityʳ _)) (+-congˡ (sym (zeroˡ x))) , Base i
+  ideal-decompose (Base (inj₂ PE.refl)) = 0# , 1# , (trans (sym (+-identityˡ x)) (+-congˡ (sym (*-identityˡ x)))) , Zero
+  ideal-decompose Zero = 0# , 0# , trans (sym (+-identityˡ 0#)) (+-congˡ (sym (zeroˡ x))) , Zero
+  ideal-decompose (Sum p q) = {!!}
+  ideal-decompose (Magnet p) = {!!}
+  ideal-decompose (Eq eq q) with ideal-decompose q
+  ... | u , s , eq' , m = u , s , trans (sym eq) eq' , m
