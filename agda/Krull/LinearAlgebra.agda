@@ -98,7 +98,7 @@ finSum-sub f g = trans (finSum-add f (λ j → - g j)) (+-congˡ (finSum-neg g))
 δ-punchIn-inj (Fin.suc i)   (Fin.suc p) Fin.zero    = refl
 δ-punchIn-inj (Fin.suc i)   (Fin.suc p) (Fin.suc q) = δ-punchIn-inj i p q
 
--- (1) The matrix obtained by eliminating column j using the invertible entry M i j
+-- The matrix obtained by eliminating column j using the invertible entry M i j
 -- (with inverse s) via row operations, then deleting row i and column j.
 reduce-matrix : {n m : Nat.ℕ}
   → Matrix R (Nat.suc n) (Nat.suc m)
@@ -108,7 +108,7 @@ reduce-matrix : {n m : Nat.ℕ}
 reduce-matrix M i j s i' j' =
   M (Fin.punchIn i i') (Fin.punchIn j j') - M (Fin.punchIn i i') j * s * M i (Fin.punchIn j j')
 
--- (2) Submatrix of N obtained by deleting row j and column i.
+-- Submatrix of N obtained by deleting row j and column i.
 -- This is the candidate right inverse for reduce-matrix M i j s.
 reduce-inverse : {n m : Nat.ℕ}
   → Matrix R (Nat.suc m) (Nat.suc n)
@@ -116,22 +116,7 @@ reduce-inverse : {n m : Nat.ℕ}
   → Matrix R m n
 reduce-inverse N i j p' q' = N (Fin.punchIn j p') (Fin.punchIn i q')
 
-sub-distribʳ : (a b c : R) → (a - b) * c ≈ a * c - b * c
-sub-distribʳ a b c =
-  trans (distribʳ c a (- b))
-        (+-congˡ (trans (*-congʳ (sym (neg-one-times b)))
-                 (trans (*-assoc (- 1#) b c)
-                        (neg-one-times (b * c)))))
-
-+-cancelˡ-to-sub : (a b c : R) → a ≈ b + c → c ≈ a - b
-+-cancelˡ-to-sub a b c h =
-  trans (sym (+-identityˡ c))
-  (trans (+-congʳ (sym (-‿inverseˡ b)))
-  (trans (+-assoc (- b) b c)
-  (trans (+-congˡ (sym h))
-         (+-comm (- b) a))))
-
--- (2') reduce-inverse N i j is a right inverse of reduce-matrix M i j s,
+-- reduce-inverse N i j is a right inverse of reduce-matrix M i j s,
 -- provided N is a right inverse of M and M i j * s ≈ 1#.
 reduce-inverse-correct : {n m : Nat.ℕ}
   → (M : Matrix R (Nat.suc n) (Nat.suc m))
@@ -199,7 +184,7 @@ reduce-surjective : {n m : Nat.ℕ}
 reduce-surjective M i j s h N inv =
   reduce-inverse N i j , reduce-inverse-correct M i j s h N inv
 
--- (3) A surjective matrix with zero columns and at least one row is absurd.
+-- A surjective matrix with zero columns and at least one row is absurd.
 zero-columns : {n : Nat.ℕ}
   → (M : Matrix R (Nat.suc n) Nat.zero)
   → (N : Matrix R Nat.zero (Nat.suc n))
@@ -207,7 +192,7 @@ zero-columns : {n : Nat.ℕ}
   → ⊥
 zero-columns M N MN≡I = sym (MN≡I Fin.zero Fin.zero)
 
--- (3') A surjective matrix with at least one row consisting only of zeros is absurd.
+-- A surjective matrix with at least one row consisting only of zeros is absurd.
 surj-zero-matrix : {n m : Nat.ℕ}
   → (M : Matrix R (Nat.suc n) m)
   → (∀ i j → M i j ≈ 0#)
@@ -236,7 +221,7 @@ surj-zero-first-row M M-zero-row N MN≡I =
 module WithFieldCondition
   (field-condition : (x : R) → (∀ s → ¬ x * s ≈ 1#) → x ≈ 0#) where
 
-  -- (5) Any surjective matrix with more rows than columns is absurd.
+  -- Any surjective matrix with more rows than columns is absurd.
   surj-matrix
     : {n m : Nat.ℕ} → m Nat.< n
     → (M : Matrix R n m)
@@ -274,14 +259,8 @@ module WithMaximalIdeal
         (trans (+-congʳ (sym one≈u+sx))
                (-‿inverseʳ 1#)))
 
-      -- x * s - 1 ≈ - u  (from sum≈0 by uniqueness of inverses)
       xs-1≈-u : x * s - 1# ≈ - u
-      xs-1≈-u =
-        trans (sym (+-identityˡ (x * s - 1#)))
-        (trans (+-congʳ (sym (-‿inverseˡ u)))
-        (trans (+-assoc (- u) u (x * s - 1#))
-        (trans (+-congˡ sum≈0)
-               (+-identityʳ (- u)))))
+      xs-1≈-u = inverse-unique u (x * s - 1#) sum≈0
 
     x∈I : x ∈ I
     x∈I = I-maximal x derive-⊥

@@ -266,3 +266,18 @@ neg-distribʳ-* a b = begin
   ((- 1#) * a) * b  ≈⟨ *-assoc (- 1#) a b ⟩
   (- 1#) * (a * b)  ≈⟨ neg-one-times (a * b) ⟩
   - (a * b)         ∎
+
+sub-distribʳ : (a b c : R) → (a - b) * c ≈ a * c - b * c
+sub-distribʳ a b c =
+  trans (distribʳ c a (- b))
+        (+-congˡ (trans (*-congʳ (sym (neg-one-times b)))
+                 (trans (*-assoc (- 1#) b c)
+                        (neg-one-times (b * c)))))
+
++-cancelˡ-to-sub : (a b c : R) → a ≈ b + c → c ≈ a - b
++-cancelˡ-to-sub a b c h =
+  trans (sym (+-identityˡ c))
+  (trans (+-congʳ (sym (-‿inverseˡ b)))
+  (trans (+-assoc (- b) b c)
+  (trans (+-congˡ (sym h))
+         (+-comm (- b) a))))
