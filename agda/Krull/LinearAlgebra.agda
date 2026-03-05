@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch #-}
+{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch --safe #-}
 
 open import Level
 open import Algebra.Bundles
@@ -21,6 +21,11 @@ Matrix A n m = Fin.Fin n → Fin.Fin m → A
 finSum : {n : Nat.ℕ} → (Fin.Fin n → R) → R
 finSum {Nat.zero}  _ = 0#
 finSum {Nat.suc n} f = f Fin.zero + finSum (λ x → f (Fin.suc x))
+
+finSum-extensional : {n : Nat.ℕ} → (f g : Fin.Fin n → R) → ((i : Fin.Fin n) → f i ≈ g i) → finSum f ≈ finSum g
+finSum-extensional {Nat.zero} f g p = refl
+finSum-extensional {Nat.suc n} f g p = +-cong (p Fin.zero) (finSum-extensional (λ x → f (Fin.suc x)) (λ x → g (Fin.suc x))
+                                                             (λ i → p (Fin.suc i)))
 
 -- Matrix product: (matprod M N) i k = Σ_j M i j * N j k
 matprod : {p q r : Nat.ℕ} → Matrix R p q → Matrix R q r → Matrix R p r
@@ -55,19 +60,6 @@ finSum-scale {Nat.zero}  c f = sym (zeroʳ c)
 finSum-scale {Nat.suc n} c f =
   trans (+-congˡ (finSum-scale c (λ j → f (Fin.suc j))))
         (sym (distribˡ c (f Fin.zero) (finSum (λ j → f (Fin.suc j)))))
-
-neg-one-times : (x : R) → (- 1#) * x ≈ - x
-neg-one-times x =
-  let step1 : (- 1#) * x + x ≈ 0#
-      step1 = trans (+-congˡ (sym (*-identityˡ x)))
-              (trans (sym (distribʳ x (- 1#) 1#))
-              (trans (*-congʳ (-‿inverseˡ 1#))
-                     (zeroˡ x)))
-  in trans (sym (+-identityʳ ((- 1#) * x)))
-     (trans (+-congˡ (sym (-‿inverseʳ x)))
-     (trans (sym (+-assoc ((- 1#) * x) x (- x)))
-     (trans (+-congʳ step1)
-            (+-identityˡ (- x)))))
 
 -- finSum over Fin (suc m) equals f(j) plus the sum over the complement of j
 finSum-punchIn : {m : Nat.ℕ} (j : Fin.Fin (Nat.suc m)) (f : Fin.Fin (Nat.suc m) → R)
@@ -138,14 +130,6 @@ sub-distribʳ a b c =
   (trans (+-assoc (- b) b c)
   (trans (+-congˡ (sym h))
          (+-comm (- b) a))))
-
-neg-distribʳ-* : (a b : R) → a * (- b) ≈ - (a * b)
-neg-distribʳ-* a b =
-  trans (*-congˡ (sym (neg-one-times b)))
-  (trans (sym (*-assoc a (- 1#) b))
-  (trans (*-congʳ (*-comm a (- 1#)))
-  (trans (*-assoc (- 1#) a b)
-         (neg-one-times (a * b)))))
 
 -- (2') reduce-inverse N i j is a right inverse of reduce-matrix M i j s,
 -- provided N is a right inverse of M and M i j * s ≈ 1#.
@@ -252,35 +236,20 @@ surj-zero-first-row M M-zero-row N MN≡I =
 module WithFieldCondition
   (field-condition : (x : R) → (∀ s → ¬ x * s ≈ 1#) → x ≈ 0#) where
 
-  {-# TERMINATING #-}
-  mutual
-    -- (5) Any surjective matrix with more rows than columns is absurd.
-    surj-matrix
-      : {n m : Nat.ℕ} → m Nat.< n
-      → (M : Matrix R n m)
-      → (N : Matrix R m n)
-      → (∀ p q → matprod M N p q ≈ δ p q)
-      → ⊥
-    surj-matrix {Nat.suc _} {Nat.zero}  _    M N MN≡I = zero-columns M N MN≡I
-    surj-matrix {Nat.suc _} {Nat.suc _} m<n M N MN≡I =
-      surj-zero-first-row M
-        (λ j → field-condition (M Fin.zero j)
-          (λ s h → surj-with-invertible-entry
-            (Data.Nat.Properties.≤-pred m<n) M Fin.zero j s h N MN≡I))
-        N MN≡I
-
-    -- (4) A surjective matrix with more rows than columns and an invertible entry is absurd.
-    surj-with-invertible-entry
-      : {n m : Nat.ℕ} → m Nat.< n
-      → (M : Matrix R (Nat.suc n) (Nat.suc m))
-      → (i : Fin.Fin (Nat.suc n)) (j : Fin.Fin (Nat.suc m))
-      → (s : R) → M i j * s ≈ 1#
-      → (N : Matrix R (Nat.suc m) (Nat.suc n))
-      → (∀ p q → matprod M N p q ≈ δ p q)
-      → ⊥
-    surj-with-invertible-entry m<n M i j s Mij-inv N MN≡I
-      with reduce-surjective M i j s Mij-inv N MN≡I
-    ... | N' , N'-inv = surj-matrix m<n (reduce-matrix M i j s) N' N'-inv
+  -- (5) Any surjective matrix with more rows than columns is absurd.
+  surj-matrix
+    : {n m : Nat.ℕ} → m Nat.< n
+    → (M : Matrix R n m)
+    → (N : Matrix R m n)
+    → (∀ p q → matprod M N p q ≈ δ p q)
+    → ⊥
+  surj-matrix {Nat.suc _} {Nat.zero}  _   M N MN≡I = zero-columns M N MN≡I
+  surj-matrix {Nat.suc _} {Nat.suc _} m<n M N MN≡I =
+    surj-zero-first-row M
+      (λ j → field-condition (M Fin.zero j)
+        (λ s h → let (N' , N'-inv) = reduce-surjective M Fin.zero j s h N MN≡I in
+          surj-matrix (Data.Nat.Properties.≤-pred m<n) (reduce-matrix M Fin.zero j s) N' N'-inv))
+      N MN≡I
 
 module WithMaximalIdeal
   (I : Pred R 0ℓ)
@@ -294,7 +263,7 @@ module WithMaximalIdeal
   R/M-is-field x not-inv = Sum (Base x∈I) (⟨M⟩-neg Zero)
     where
     derive-⊥ : 1# ∈ ⟨ I ∪ ｛ x ｝ ⟩ → ⊥
-    derive-⊥ one∈I∪x with ideal-decompose x one∈I∪x
+    derive-⊥ one∈I∪x with ideal-decompose I x one∈I∪x
     ... | u , s , one≈u+sx , u∈⟨I⟩ = not-inv s (Eq (sym xs-1≈-u) (⟨M⟩-neg u∈⟨I⟩))
       where
       -- u + (x * s - 1) ≈ (u + s * x) - 1 ≈ 1 - 1 ≈ 0

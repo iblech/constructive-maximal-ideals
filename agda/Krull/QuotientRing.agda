@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch #-}
+{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch --safe #-}
 
 open import Level
 open import Algebra.Bundles
@@ -19,55 +19,6 @@ open SetoidR setoid
 -- Quotient equality: x ≈/M y iff x - y ∈ ⟨ M ⟩
 _≈/M_ : Rel R 0ℓ
 x ≈/M y = (x - y) ∈ ⟨ M ⟩
-
--- Ring lemmas (private)
-private
-  neg-one-times : (x : R) → (- 1#) * x ≈ - x
-  neg-one-times x = begin
-    (- 1#) * x             ≈⟨ sym (+-identityʳ _) ⟩
-    (- 1#) * x + 0#        ≈⟨ +-congˡ (sym (-‿inverseʳ x)) ⟩
-    (- 1#) * x + (x - x)   ≈⟨ sym (+-assoc _ x (- x)) ⟩
-    ((- 1#) * x + x) - x   ≈⟨ +-congʳ (+-congˡ (sym (*-identityˡ x))) ⟩
-    ((- 1#) * x + 1# * x) - x ≈⟨ +-congʳ (sym (distribʳ x (- 1#) 1#)) ⟩
-    ((- 1#) + 1#) * x - x  ≈⟨ +-congʳ (*-congʳ (-‿inverseˡ 1#)) ⟩
-    0# * x - x             ≈⟨ +-congʳ (zeroˡ x) ⟩
-    0# - x                 ≈⟨ +-identityˡ (- x) ⟩
-    - x                    ∎
-
-  inverse-unique : (x y : R) → x + y ≈ 0# → y ≈ - x
-  inverse-unique x y h = begin
-    y              ≈⟨ sym (+-identityˡ y) ⟩
-    0# + y         ≈⟨ +-congʳ (sym (-‿inverseˡ x)) ⟩
-    (- x + x) + y  ≈⟨ +-assoc (- x) x y ⟩
-    - x + (x + y)  ≈⟨ +-congˡ h ⟩
-    - x + 0#       ≈⟨ +-identityʳ (- x) ⟩
-    - x            ∎
-
-  double-neg : (x : R) → - (- x) ≈ x
-  double-neg x = sym (inverse-unique (- x) x (-‿inverseˡ x))
-
-  neg-distrib-+ : (a b : R) → - (a + b) ≈ (- a) + (- b)
-  neg-distrib-+ a b = sym (inverse-unique (a + b) ((- a) + (- b)) lemma)
-    where
-    lemma : (a + b) + ((- a) + (- b)) ≈ 0#
-    lemma = begin
-      (a + b) + ((- a) + (- b))  ≈⟨ +-assoc a b ((- a) + (- b)) ⟩
-      a + (b + ((- a) + (- b)))  ≈⟨ +-congˡ (sym (+-assoc b (- a) (- b))) ⟩
-      a + ((b + (- a)) + (- b))  ≈⟨ +-congˡ (+-congʳ (+-comm b (- a))) ⟩
-      a + (((- a) + b) + (- b))  ≈⟨ +-congˡ (+-assoc (- a) b (- b)) ⟩
-      a + ((- a) + (b + (- b)))  ≈⟨ +-congˡ (+-congˡ (-‿inverseʳ b)) ⟩
-      a + ((- a) + 0#)          ≈⟨ +-congˡ (+-identityʳ (- a)) ⟩
-      a + (- a)                 ≈⟨ -‿inverseʳ a ⟩
-      0#                        ∎
-
-  neg-distribʳ-* : (a b : R) → a * (- b) ≈ - (a * b)
-  neg-distribʳ-* a b = begin
-    a * (- b)         ≈⟨ *-congˡ (sym (neg-one-times b)) ⟩
-    a * ((- 1#) * b)  ≈⟨ sym (*-assoc a (- 1#) b) ⟩
-    (a * (- 1#)) * b  ≈⟨ *-congʳ (*-comm a (- 1#)) ⟩
-    ((- 1#) * a) * b  ≈⟨ *-assoc (- 1#) a b ⟩
-    (- 1#) * (a * b)  ≈⟨ neg-one-times (a * b) ⟩
-    - (a * b)         ∎
 
 -- Ideal closure under negation
 ⟨M⟩-neg : {x : R} → x ∈ ⟨ M ⟩ → (- x) ∈ ⟨ M ⟩
@@ -149,8 +100,8 @@ embed {x} {y} h = Eq (sym (trans (+-congʳ h) (-‿inverseʳ y))) Zero
       a * d + (- (b * d)) ∎)
 
 -- The quotient ring
-R/M : CommutativeRing 0ℓ 0ℓ
-R/M = record
+R/M… : CommutativeRing 0ℓ 0ℓ
+R/M… = record
   { Carrier = R
   ; _≈_ = _≈/M_
   ; _+_ = _+_

@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible --safe -WnoUnsupportedIndexedMatch #-}
+{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch --safe #-}
 
 open import Level
 open import Algebra.Bundles
@@ -195,7 +195,74 @@ module _ (I : Pred R 0ℓ) (x : R) where
   ideal-decompose (Base (inj₁ i)) = _ , 0# , trans (sym (+-identityʳ _)) (+-congˡ (sym (zeroˡ x))) , Base i
   ideal-decompose (Base (inj₂ PE.refl)) = 0# , 1# , (trans (sym (+-identityˡ x)) (+-congˡ (sym (*-identityˡ x)))) , Zero
   ideal-decompose Zero = 0# , 0# , trans (sym (+-identityˡ 0#)) (+-congˡ (sym (zeroˡ x))) , Zero
-  ideal-decompose (Sum p q) = {!!}
-  ideal-decompose (Magnet p) = {!!}
+  ideal-decompose (Sum p q) with ideal-decompose p | ideal-decompose q
+  ... | u₁ , s₁ , eq₁ , m₁ | u₂ , s₂ , eq₂ , m₂ =
+    (u₁ + u₂) , (s₁ + s₂) , trans (+-cong eq₁ eq₂) eq , Sum m₁ m₂
+    where
+    eq =
+      begin
+        (u₁ + s₁ * x) + (u₂ + s₂ * x)
+      ≈⟨ +-assoc u₁ (s₁ * x) (u₂ + s₂ * x) ⟩
+        u₁ + (s₁ * x + (u₂ + s₂ * x))
+      ≈⟨ +-congˡ (sym (+-assoc (s₁ * x) u₂ (s₂ * x))) ⟩
+        u₁ + (((s₁ * x) + u₂) + (s₂ * x))
+      ≈⟨ +-congˡ (+-congʳ (+-comm _ _)) ⟩
+        u₁ + ((u₂ + (s₁ * x)) + (s₂ * x))
+      ≈⟨ +-congˡ (+-assoc u₂ (s₁ * x) (s₂ * x)) ⟩
+        u₁ + (u₂ + (s₁ * x + s₂ * x))
+      ≈⟨ +-congˡ (+-congˡ (sym (distribʳ x s₁ s₂))) ⟩
+        u₁ + (u₂ + ((s₁ + s₂) * x))
+      ≈⟨ sym (+-assoc u₁ u₂ ((s₁ + s₂) * x)) ⟩
+        (u₁ + u₂) + ((s₁ + s₂) * x)
+      ∎
+  ideal-decompose (Magnet {r} p) with ideal-decompose p
+  ... | u , s , eq , m = r * u , r * s , trans (*-congˡ eq) (trans (distribˡ r u (s * x)) (+-congˡ (sym (*-assoc r s x)))) , Magnet m
   ideal-decompose (Eq eq q) with ideal-decompose q
   ... | u , s , eq' , m = u , s , trans (sym eq) eq' , m
+
+neg-one-times : (x : R) → (- 1#) * x ≈ - x
+neg-one-times x = begin
+  (- 1#) * x             ≈⟨ sym (+-identityʳ _) ⟩
+  (- 1#) * x + 0#        ≈⟨ +-congˡ (sym (-‿inverseʳ x)) ⟩
+  (- 1#) * x + (x - x)   ≈⟨ sym (+-assoc _ x (- x)) ⟩
+  ((- 1#) * x + x) - x   ≈⟨ +-congʳ (+-congˡ (sym (*-identityˡ x))) ⟩
+  ((- 1#) * x + 1# * x) - x ≈⟨ +-congʳ (sym (distribʳ x (- 1#) 1#)) ⟩
+  ((- 1#) + 1#) * x - x  ≈⟨ +-congʳ (*-congʳ (-‿inverseˡ 1#)) ⟩
+  0# * x - x             ≈⟨ +-congʳ (zeroˡ x) ⟩
+  0# - x                 ≈⟨ +-identityˡ (- x) ⟩
+  - x                    ∎
+
+inverse-unique : (x y : R) → x + y ≈ 0# → y ≈ - x
+inverse-unique x y h = begin
+  y              ≈⟨ sym (+-identityˡ y) ⟩
+  0# + y         ≈⟨ +-congʳ (sym (-‿inverseˡ x)) ⟩
+  (- x + x) + y  ≈⟨ +-assoc (- x) x y ⟩
+  - x + (x + y)  ≈⟨ +-congˡ h ⟩
+  - x + 0#       ≈⟨ +-identityʳ (- x) ⟩
+  - x            ∎
+
+double-neg : (x : R) → - (- x) ≈ x
+double-neg x = sym (inverse-unique (- x) x (-‿inverseˡ x))
+
+neg-distrib-+ : (a b : R) → - (a + b) ≈ (- a) + (- b)
+neg-distrib-+ a b = sym (inverse-unique (a + b) ((- a) + (- b)) lemma)
+  where
+  lemma : (a + b) + ((- a) + (- b)) ≈ 0#
+  lemma = begin
+    (a + b) + ((- a) + (- b))  ≈⟨ +-assoc a b ((- a) + (- b)) ⟩
+    a + (b + ((- a) + (- b)))  ≈⟨ +-congˡ (sym (+-assoc b (- a) (- b))) ⟩
+    a + ((b + (- a)) + (- b))  ≈⟨ +-congˡ (+-congʳ (+-comm b (- a))) ⟩
+    a + (((- a) + b) + (- b))  ≈⟨ +-congˡ (+-assoc (- a) b (- b)) ⟩
+    a + ((- a) + (b + (- b)))  ≈⟨ +-congˡ (+-congˡ (-‿inverseʳ b)) ⟩
+    a + ((- a) + 0#)          ≈⟨ +-congˡ (+-identityʳ (- a)) ⟩
+    a + (- a)                 ≈⟨ -‿inverseʳ a ⟩
+    0#                        ∎
+
+neg-distribʳ-* : (a b : R) → a * (- b) ≈ - (a * b)
+neg-distribʳ-* a b = begin
+  a * (- b)         ≈⟨ *-congˡ (sym (neg-one-times b)) ⟩
+  a * ((- 1#) * b)  ≈⟨ sym (*-assoc a (- 1#) b) ⟩
+  (a * (- 1#)) * b  ≈⟨ *-congʳ (*-comm a (- 1#)) ⟩
+  ((- 1#) * a) * b  ≈⟨ *-assoc (- 1#) a b ⟩
+  (- 1#) * (a * b)  ≈⟨ neg-one-times (a * b) ⟩
+  - (a * b)         ∎
