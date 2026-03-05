@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible #-}
+{-# OPTIONS --cubical-compatible --safe -WnoUnsupportedIndexedMatch #-}
 
 open import Level
 open import Algebra.Bundles
