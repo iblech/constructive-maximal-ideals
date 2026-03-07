@@ -36,6 +36,8 @@ import Forcing.Semantics
 import Krull.Base
 import Krull.FreeRing
 import Krull.QuotientRing
+import Krull.WildRing
+import Krull.WildLinearAlgebra
 import Krull.LinearAlgebra
 import Krull.Static
 import Krull.Dynamical
@@ -80,7 +82,8 @@ module §1
 
 {- §2. On the intersection of all prime ideals -}
 module §2 where
-  Proposition-2-6 = Krull.Static.example
+  Proposition-2-6           = Krull.Static.example'
+  Proposition-2-6-baby-case = Krull.Static.example
 
 
 {- §4. Expanding the scope to general rings -}
@@ -143,6 +146,13 @@ module §4 where
   Version-of-Proposition-4-26 = Forcing.Prime.corollary
 
   module TestCase where
+    -- The (2x1) case
+    baby-case = Krull.Dynamical.example
+
+    -- The general case of matrices with more rows than columns
+    general-case = Krull.Dynamical.example'
+
+    -- The generic instance of the (2x1) case
     open Krull.FreeRing
 
     data Var : Set where

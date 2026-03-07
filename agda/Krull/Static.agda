@@ -19,7 +19,9 @@ module Krull.Static
   (Enum-singlevalued : {n : Nat.ℕ} {x y : R} → Enum n x → Enum n y → x PE.≡ y) where
 
 open import Krull.Base (R…)
+open import Relation.Binary.Reasoning.Setoid setoid
 import Krull.LinearAlgebra
+open Krull.LinearAlgebra R… using (example-case-a-inv-lemma; example-case-a-zero-lemma)
 import Krull.QuotientRing
 
 G : Nat.ℕ → Pred R 0ℓ
@@ -79,16 +81,12 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
   -- The following example is the (2×1)-case of the general statement that
   -- matrices with more rows that columns can only be surjective if 1 ≈ 0.
   example : (a b u v : R) → u * a ≈ 1# → u * b ≈ 0# → v * a ≈ 0# → v * b ≈ 1# → ⊥
-  example a b u v ua1 ub0 va0 vb1 = case-a-zero (𝔪-is-maximal a case-a-inv)
-    where
-    -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
-    case-a-inv : 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (w , eq , inj₁ p) → Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base p)) ; (w , eq , inj₂ PE.refl) → Eq (trans (trans (sym (zeroˡ b)) (trans (*-congʳ (sym va0)) (trans (*-assoc v w b) (trans (*-congˡ (*-comm w b)) (sym (*-assoc v b w)))))) (≡⇒≈ (PE.sym eq))) Zero }) (Eq (trans (*-identityʳ (v * b)) vb1) (⟨⟩-mult (v * b) p))))
+  example a b u v ua1 ub0 va0 vb1 =
+    example-case-a-zero-lemma 𝔪 ⟨𝔪⟩-proper a u ua1
+      (𝔪-is-maximal a (example-case-a-inv-lemma 𝔪 ⟨𝔪⟩-proper a b v va0 vb1))
 
-    -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
-    case-a-zero : a ∈ 𝔪 → ⊥
-    case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
-
+  open import Krull.WildRing
+  open import Krull.WildLinearAlgebra (forget R…)
   open Krull.LinearAlgebra R…
   open Krull.QuotientRing R… 𝔪
     renaming (R/M… to R/𝔪… ; _≈/M_ to _≈/𝔪_)
@@ -110,17 +108,8 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     → (N : Matrix R m n)
     → (∀ p q → matprod M N p q ≈ δ p q)
     → ⊥
-  example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (trans (sym (matprod-homo M N i j)) (trans (MN≡I i j) (δ-homo i j))))
+  -- example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (trans (sym (matprod-homo M N i j)) (trans (MN≡I i j) (δ-homo i j))))
+  example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (MN≡I i j))
     where
     import Krull.LinearAlgebra R/𝔪… as Q
     open Q.WithFieldCondition R/𝔪-is-field'
-    matprod-homo
-      : {p q r : Nat.ℕ} → (M : Matrix R p q) → (N : Matrix R q r) → (i : Fin.Fin p) → (k : Fin.Fin r)
-      → matprod M N i k ≈ Q.matprod M N i k
-    matprod-homo {q = Nat.zero} M N i k = refl
-    matprod-homo {q = Nat.suc q} M N i k = +-congˡ (matprod-homo (λ i j → M i (Fin.suc j)) (λ j k → N (Fin.suc j) k) i k)
-    δ-homo : {n : Nat.ℕ} (i j : Fin.Fin n) → δ i j ≈ Q.δ i j
-    δ-homo Fin.zero Fin.zero = refl
-    δ-homo Fin.zero (Fin.suc j) = refl
-    δ-homo (Fin.suc i) Fin.zero = refl
-    δ-homo (Fin.suc i) (Fin.suc j) = δ-homo i j

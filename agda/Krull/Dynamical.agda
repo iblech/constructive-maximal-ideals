@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --cubical-compatible -WnoUnsupportedIndexedMatch --safe #-}
 
 open import Level
 open import Algebra.Bundles
@@ -11,12 +11,19 @@ import Data.Nat as Nat
 import Data.Nat.Properties
 open import Relation.Unary hiding (∅)
 import Relation.Binary.PropositionalEquality as PE
+import Data.Fin as Fin
 
 module Krull.Dynamical (R… : CommutativeRing 0ℓ 0ℓ) where
 
 open CommutativeRing R… renaming (Carrier to R)
+open import Relation.Binary.Reasoning.Setoid setoid
 
 open import Krull.Base R…
+open import Krull.WildRing
+import Krull.LinearAlgebra as LA
+open LA R… using (example-case-a-inv-lemma; example-case-a-zero-lemma)
+import Krull.WildLinearAlgebra as WLA
+import Krull.QuotientRing as QR
 open import Forcing.Levy R
 open import Forcing.Base
 open ForcingNotion L…
@@ -95,12 +102,96 @@ all-stages-proper ⦃ σ ⦄ (Nat.suc n) p with ⟨⟩-union₀ p
 -- The following example is the (2×1)-case of the general statement that
 -- matrices with more rows that columns can only be surjective if 1 ≈ 0.
 example : (a b u v : R) → u * a ≈ 1# → u * b ≈ 0# → v * a ≈ 0# → v * b ≈ 1# → ⊥
-example a b u v ua1 ub0 va0 vb1 = escape {[]} (_⟫=_ {{[]}} (𝔪-is-maximal {{[]}} a case-a-inv) λ p → now (case-a-zero p))
-  where
-  -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
-  case-a-inv : {{σ : L}} → 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-  case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (w , eq , inj₁ p) → Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base p)) ; (w , eq , inj₂ PE.refl) → Eq (trans (trans (sym (zeroˡ b)) (trans (*-congʳ (sym va0)) (trans (*-assoc v w b) (trans (*-congˡ (*-comm w b)) (sym (*-assoc v b w)))))) (≡⇒≈ (PE.sym eq))) Zero }) (Eq (trans (*-identityʳ (v * b)) vb1) (⟨⟩-mult (v * b) p))))
+example a b u v ua1 ub0 va0 vb1 =
+  escape {[]} (_⟫=_ {{[]}}
+    (𝔪-is-maximal {{[]}} a (example-case-a-inv-lemma 𝔪 ⟨𝔪⟩-proper a b v va0 vb1))
+    λ p → now (example-case-a-zero-lemma 𝔪 ⟨𝔪⟩-proper a u ua1 p))
 
-  -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
-  case-a-zero : {{σ : L}} → a ∈ 𝔪 → ⊥
-  case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
+-- Open linear algebra for R
+open WLA (forget R…) public using (Matrix; matprod; δ; finSum; reduce-matrix; reduce-inverse)
+open LA R… public using (reduce-surjective; zero-columns; surj-zero-first-row)
+
+-- Quotient equality and ring, parametric in σ
+_≈/𝔪_ : {{σ : L}} → R → R → Set
+_≈/𝔪_ {{σ}} x y = (x - y) ∈ ⟨ 𝔪 {{σ}} ⟩
+
+R/𝔪… : {{σ : L}} → CommutativeRing 0ℓ 0ℓ
+R/𝔪… {{σ}} = QR.R/M… R… (𝔪 {{σ}})
+
+embed/𝔪 : {{σ : L}} → {x y : R} → x ≈ y → x ≈/𝔪 y
+embed/𝔪 {{σ}} = QR.embed R… (𝔪 {{σ}})
+
+⟨𝔪⟩-neg : {{σ : L}} → {x : R} → x ∈ ⟨ 𝔪 ⟩ → (- x) ∈ ⟨ 𝔪 ⟩
+⟨𝔪⟩-neg = QR.⟨M⟩-neg R… 𝔪
+
+-- Monotonicity: quotient equality propagates to stronger conditions
+≈/𝔪-monotone : {σ τ : L} {x y : R} → τ ≼ σ → _≈/𝔪_ {{σ}} x y → _≈/𝔪_ {{τ}} x y
+≈/𝔪-monotone τ≼σ p = ⟨⟩-monotone (𝔪-monotone τ≼σ) p
+
+⊥/𝔪→⊥ : {{σ : L}} → 1# ≈/𝔪 0# → ⊥
+⊥/𝔪→⊥ p = ⟨𝔪⟩-proper (Eq (trans (+-congˡ (sym (inverse-unique 0# 0# (+-identityˡ 0#)))) (+-identityʳ 1#)) p)
+
+-- Sequencing ∇ over Fin n
+fin-∇ : {{σ : L}} {m : Nat.ℕ} {P : Fin.Fin m → L → Set}
+  → (mono : ∀ j → Monotonic (P j))
+  → (f : (j : Fin.Fin m) → ∇ {{σ}} (λ {{τ}} → P j τ))
+  → ∇ {{σ}} (λ {{τ}} → ∀ j → P j τ)
+fin-∇ {m = Nat.zero} mono f = now λ ()
+fin-∇ {m = Nat.suc m} mono f =
+  f Fin.zero ⟫= λ {{τ}} {{τ≼σ}} p →
+  _⟫=_ {{τ}} (fin-∇ {{τ}} (λ j → mono (Fin.suc j)) (λ j → weaken-ev (mono (Fin.suc j)) τ≼σ (f (Fin.suc j))))
+  λ {{ν}} {{ν≼τ}} h → now λ { Fin.zero → mono Fin.zero ν≼τ p ; (Fin.suc j) → h j }
+
+module _ {{σ : L}} where
+  private
+    module LA/𝔪 = LA R/𝔪…
+
+-- Dynamical field condition: if, forall s, x*s never becomes ≈/𝔪 1 at any future stage,
+-- then eventually x ≈/𝔪 0.
+field-condition-∇ : {{σ : L}} → (x : R)
+  → ((s : R) → ∀ {{τ : L}} {{_ : τ ≼ σ}} → ¬ _≈/𝔪_ {{τ}} (x * s) 1#)
+  → ∇ {{σ}} (λ {{τ}} → _≈/𝔪_ {{τ}} x 0#)
+field-condition-∇ {{σ}} x not-inv = fmap (λ {{τ}} p → Sum (Base p) (⟨𝔪⟩-neg {{τ}} Zero)) (𝔪-is-maximal x λ {{τ}} → derive-⊥ {{τ}})
+  where
+  derive-⊥ : {{τ : L}} {{_ : τ ≼ σ}} → ¬ 1# ∈ ⟨ 𝔪 {{τ}} ∪ ｛ x ｝ ⟩
+  derive-⊥ {{τ}} p with ideal-decompose (𝔪 {{τ}}) x p
+  ... | u , s , eq , q = not-inv s {{τ}} (Eq (sym (inverse-unique u (x * s - 1#) sum≈0)) (⟨𝔪⟩-neg {{τ}} q))
+    where
+    sum≈0 : u + (x * s - 1#) ≈ 0#
+    sum≈0 = begin
+      u + (x * s - 1#)
+        ≈⟨ +-congˡ (+-congʳ (*-comm x s)) ⟩
+      u + (s * x - 1#)
+        ≈˘⟨ +-assoc u (s * x) (- 1#) ⟩
+      (u + s * x) - 1#
+        ≈˘⟨ +-congʳ eq ⟩
+      1# - 1#
+        ≈⟨ -‿inverseʳ 1# ⟩
+      0#
+        ∎
+
+-- The main inductive argument, lifted into ∇.
+surj-matrix-∇ : {{σ : L}} → {n m : Nat.ℕ} → m Nat.< n
+  → (M : Matrix R n m) → (N : Matrix R m n)
+  → (∀ p q → matprod M N p q ≈/𝔪 δ p q)
+  → ∇ {{σ}} (λ {{_}} → ⊥)
+surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.zero} _ M N MN≡I =
+  now (⊥/𝔪→⊥ (LA.zero-columns (R/𝔪… {{σ}}) M N MN≡I))
+surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.suc m} m<n M N MN≡I =
+  fin-∇ {{σ}}
+    (λ j τ≼σ p → ≈/𝔪-monotone τ≼σ p)
+    (λ j → field-condition-∇ {{σ}} (M Fin.zero j) λ s {{τ}} {{τ≼σ}} h →
+      let (N' , N'-inv) = LA.reduce-surjective (R/𝔪… {{τ}}) M Fin.zero j s h N (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))
+      in  escape (surj-matrix-∇ {{τ}} (Data.Nat.Properties.≤-pred m<n)
+                   (reduce-matrix M Fin.zero j s) N' N'-inv))
+  ⟫= λ {{τ}} {{τ≼σ}} all-zero →
+  now (⊥/𝔪→⊥ {{τ}} (LA.surj-zero-first-row (R/𝔪… {{τ}}) M all-zero N
+    (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))))
+
+example' : {n m : Nat.ℕ} → m Nat.< n
+  → (M : Matrix R n m) → (N : Matrix R m n)
+  → (∀ p q → matprod M N p q ≈ δ p q)
+  → ⊥
+example' m<n M N MN≡I = escape {[]}
+  (surj-matrix-∇ {{[]}} m<n M N
+    (λ p q → embed/𝔪 {{[]}} (MN≡I p q)))
