@@ -18,7 +18,9 @@ module Krull.Dynamical (R… : CommutativeRing 0ℓ 0ℓ) where
 open CommutativeRing R… renaming (Carrier to R)
 
 open import Krull.Base R…
+open import Krull.WildRing
 import Krull.LinearAlgebra as LA
+import Krull.WildLinearAlgebra as WLA
 import Krull.QuotientRing as QR
 open import Forcing.Levy R
 open import Forcing.Base
@@ -109,8 +111,8 @@ example a b u v ua1 ub0 va0 vb1 = escape {[]} (_⟫=_ {{[]}} (𝔪-is-maximal {{
   case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
 
 -- Open linear algebra for R
-open LA R… public using (Matrix; matprod; δ; finSum; reduce-matrix; reduce-inverse;
-  reduce-surjective; zero-columns; surj-zero-first-row)
+open WLA (forget R…) public using (Matrix; matprod; δ; finSum; reduce-matrix; reduce-inverse)
+open LA R… public using (reduce-surjective; zero-columns; surj-zero-first-row)
 
 -- Quotient equality and ring, parametric in σ
 _≈/𝔪_ : {{σ : L}} → R → R → Set
@@ -155,18 +157,6 @@ module _ {{σ : L}} where
   private
     module LA/𝔪 = LA R/𝔪…
 
-  matprod-homo
-    : {p q r : Nat.ℕ} → (M' : Matrix R p q) → (N' : Matrix R q r) → (i : Fin.Fin p) → (k : Fin.Fin r)
-    → matprod M' N' i k ≈ LA/𝔪.matprod M' N' i k
-  matprod-homo {q = Nat.zero} M' N' i k = refl
-  matprod-homo {q = Nat.suc q} M' N' i k = +-congˡ (matprod-homo (λ i j → M' i (Fin.suc j)) (λ j k → N' (Fin.suc j) k) i k)
-
-  δ-homo : {n : Nat.ℕ} (i j : Fin.Fin n) → δ i j ≈ LA/𝔪.δ i j
-  δ-homo Fin.zero Fin.zero = refl
-  δ-homo Fin.zero (Fin.suc j) = refl
-  δ-homo (Fin.suc i) Fin.zero = refl
-  δ-homo (Fin.suc i) (Fin.suc j) = δ-homo i j
-
 -- Dynamical field condition: if x*s is not ≈/𝔪 1 at any future stage for all s,
 -- then eventually x ≈/𝔪 0.
 field-condition-∇ : {{σ : L}} → (x : R)
@@ -192,35 +182,17 @@ surj-matrix-∇ : {{σ : L}} → {n m : Nat.ℕ} → m Nat.< n
   → (∀ p q → matprod M' N' p q ≈/𝔪 δ p q)
   → ∇ {{σ}} (λ {{_}} → ⊥)
 surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.zero} _ M' N' MN≡I =
-  now (⊥/𝔪→⊥ (LA.zero-columns (R/𝔪… {{σ}}) M' N'
-    (λ p q → QR.≈/M-trans R… 𝔪
-      (QR.embed R… 𝔪 (sym (matprod-homo M' N' p q)))
-      (QR.≈/M-trans R… 𝔪 (MN≡I p q) (QR.embed R… 𝔪 (δ-homo p q))))))
+  now (⊥/𝔪→⊥ (LA.zero-columns (R/𝔪… {{σ}}) M' N' MN≡I))
 surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.suc m} m<n M' N' MN≡I =
   fin-∇ {{σ}}
     (λ j τ≼σ p → ≈/𝔪-monotone τ≼σ p)
     (λ j → field-condition-∇ {{σ}} (M' Fin.zero j) λ s {{τ}} {{τ≼σ}} h →
-      let MN≡I-τ : ∀ p q → _≈/𝔪_ {{τ}} (matprod M' N' p q) (δ p q)
-          MN≡I-τ = λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q)
-          -- Convert to R/𝔪{{τ}} form for reduce-surjective
-          MN≡I-Q : ∀ p q → CommutativeRing._≈_ (R/𝔪… {{τ}}) (LA.matprod (R/𝔪… {{τ}}) M' N' p q) (LA.δ (R/𝔪… {{τ}}) p q)
-          MN≡I-Q = λ p q → QR.≈/M-trans R… (𝔪 {{τ}})
-            (QR.embed R… (𝔪 {{τ}}) (sym (matprod-homo {{τ}} M' N' p q)))
-            (QR.≈/M-trans R… (𝔪 {{τ}}) (MN≡I-τ p q) (QR.embed R… (𝔪 {{τ}}) (δ-homo {{τ}} p q)))
-          (N'' , N''-inv) = LA.reduce-surjective (R/𝔪… {{τ}}) M' Fin.zero j s h N' MN≡I-Q
-          -- Convert N''-inv back to matprod/δ from R
-          N''-inv-R : ∀ p q → _≈/𝔪_ {{τ}} (matprod (reduce-matrix M' Fin.zero j s) N'' p q) (δ p q)
-          N''-inv-R = λ p q → QR.≈/M-trans R… (𝔪 {{τ}})
-            (QR.embed R… (𝔪 {{τ}}) (matprod-homo {{τ}} (reduce-matrix M' Fin.zero j s) N'' p q))
-            (QR.≈/M-trans R… (𝔪 {{τ}}) (N''-inv p q) (QR.embed R… (𝔪 {{τ}}) (sym (δ-homo {{τ}} p q))))
+      let (N'' , N''-inv) = LA.reduce-surjective (R/𝔪… {{τ}}) M' Fin.zero j s h N' (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))
       in  escape (surj-matrix-∇ {{τ}} (Data.Nat.Properties.≤-pred m<n)
-                   (reduce-matrix M' Fin.zero j s) N'' N''-inv-R))
+                   (reduce-matrix M' Fin.zero j s) N'' N''-inv))
   ⟫= λ {{τ}} {{τ≼σ}} all-zero →
   now (⊥/𝔪→⊥ {{τ}} (LA.surj-zero-first-row (R/𝔪… {{τ}}) M' all-zero N'
-    (λ p q → QR.≈/M-trans R… (𝔪 {{τ}})
-      (QR.embed R… (𝔪 {{τ}}) (sym (matprod-homo {{τ}} M' N' p q)))
-      (QR.≈/M-trans R… (𝔪 {{τ}}) (≈/𝔪-monotone τ≼σ (MN≡I p q))
-        (QR.embed R… (𝔪 {{τ}}) (δ-homo {{τ}} p q))))))
+    (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))))
 
 example' : {n m : Nat.ℕ} → m Nat.< n
   → (M' : Matrix R n m) → (N' : Matrix R m n)

@@ -89,6 +89,8 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     case-a-zero : a ∈ 𝔪 → ⊥
     case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
 
+  open import Krull.WildRing
+  open import Krull.WildLinearAlgebra (forget R…)
   open Krull.LinearAlgebra R…
   open Krull.QuotientRing R… 𝔪
     renaming (R/M… to R/𝔪… ; _≈/M_ to _≈/𝔪_)
@@ -110,17 +112,8 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     → (N : Matrix R m n)
     → (∀ p q → matprod M N p q ≈ δ p q)
     → ⊥
-  example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (trans (sym (matprod-homo M N i j)) (trans (MN≡I i j) (δ-homo i j))))
+  -- example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (trans (sym (matprod-homo M N i j)) (trans (MN≡I i j) (δ-homo i j))))
+  example' m<n M N MN≡I = ⊥/𝔪→⊥ (surj-matrix m<n M N λ i j → embed (MN≡I i j))
     where
     import Krull.LinearAlgebra R/𝔪… as Q
     open Q.WithFieldCondition R/𝔪-is-field'
-    matprod-homo
-      : {p q r : Nat.ℕ} → (M : Matrix R p q) → (N : Matrix R q r) → (i : Fin.Fin p) → (k : Fin.Fin r)
-      → matprod M N i k ≈ Q.matprod M N i k
-    matprod-homo {q = Nat.zero} M N i k = refl
-    matprod-homo {q = Nat.suc q} M N i k = +-congˡ (matprod-homo (λ i j → M i (Fin.suc j)) (λ j k → N (Fin.suc j) k) i k)
-    δ-homo : {n : Nat.ℕ} (i j : Fin.Fin n) → δ i j ≈ Q.δ i j
-    δ-homo Fin.zero Fin.zero = refl
-    δ-homo Fin.zero (Fin.suc j) = refl
-    δ-homo (Fin.suc i) Fin.zero = refl
-    δ-homo (Fin.suc i) (Fin.suc j) = δ-homo i j
