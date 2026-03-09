@@ -21,7 +21,6 @@ module Krull.Base (R… : CommutativeRing 0ℓ 0ℓ) where
 open CommutativeRing R… renaming (Carrier to R)
 open Relation.Binary.Reasoning.Setoid setoid
 open import Algebra.Definitions.RawSemiring (Algebra.Bundles.Semiring.rawSemiring semiring) using (_^_)
-
 ⊥ : Set
 ⊥ = 1# ≈ 0#
 

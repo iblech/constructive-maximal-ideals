@@ -140,16 +140,11 @@ fin-∇ : {{σ : L}} {m : Nat.ℕ} {P : Fin.Fin m → L → Set}
   → (mono : ∀ j → Monotonic (P j))
   → (f : (j : Fin.Fin m) → ∇ {{σ}} (λ {{τ}} → P j τ))
   → ∇ {{σ}} (λ {{τ}} → ∀ j → P j τ)
-fin-∇ {m = Nat.zero}  mono f = now (λ ())
-fin-∇ {{σ}} {m = Nat.suc m} mono f =
-  f Fin.zero ⟫= λ {{τ₁}} {{τ₁≼σ}} p₀ →
-  _⟫=_ {{τ₁}}
-    (fin-∇ {{τ₁}} (λ j → mono (Fin.suc j))
-          (λ j → weaken-ev (mono (Fin.suc j)) τ₁≼σ (f (Fin.suc j))))
-    λ {{τ₂}} {{τ₂≼τ₁}} ps →
-  now λ { Fin.zero    → mono Fin.zero τ₂≼τ₁ p₀
-        ; (Fin.suc j) → ps j
-        }
+fin-∇ {m = Nat.zero} mono f = now λ ()
+fin-∇ {m = Nat.suc m} mono f =
+  f Fin.zero ⟫= λ {{τ}} {{τ≼σ}} p →
+  _⟫=_ {{τ}} (fin-∇ {{τ}} (λ j → mono (Fin.suc j)) (λ j → weaken-ev (mono (Fin.suc j)) τ≼σ (f (Fin.suc j))))
+  λ {{ν}} {{ν≼τ}} h → now λ { Fin.zero → mono Fin.zero ν≼τ p ; (Fin.suc j) → h j }
 
 -- matprod and δ are definitionally equal across quotient rings,
 -- but we need propositional witnesses to embed R-equalities into R/𝔪-equalities.
