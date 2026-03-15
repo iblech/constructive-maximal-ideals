@@ -16,6 +16,7 @@ import Data.Fin as Fin
 module Krull.Dynamical (R… : CommutativeRing 0ℓ 0ℓ) where
 
 open CommutativeRing R… renaming (Carrier to R)
+open import Relation.Binary.Reasoning.Setoid setoid
 
 open import Krull.Base R…
 open import Krull.WildRing
@@ -131,7 +132,6 @@ embed/𝔪 {{σ}} = QR.embed R… (𝔪 {{σ}})
 ≈/𝔪-monotone : {σ τ : L} {x y : R} → τ ≼ σ → _≈/𝔪_ {{σ}} x y → _≈/𝔪_ {{τ}} x y
 ≈/𝔪-monotone τ≼σ p = ⟨⟩-monotone (𝔪-monotone τ≼σ) p
 
--- Quotient-⊥ → Ring-⊥
 ⊥/𝔪→⊥ : {{σ : L}} → 1# ≈/𝔪 0# → ⊥
 ⊥/𝔪→⊥ p = ⟨𝔪⟩-proper (Eq (trans (+-congˡ (sym (inverse-unique 0# 0# (+-identityˡ 0#)))) (+-identityʳ 1#)) p)
 
@@ -146,13 +146,11 @@ fin-∇ {m = Nat.suc m} mono f =
   _⟫=_ {{τ}} (fin-∇ {{τ}} (λ j → mono (Fin.suc j)) (λ j → weaken-ev (mono (Fin.suc j)) τ≼σ (f (Fin.suc j))))
   λ {{ν}} {{ν≼τ}} h → now λ { Fin.zero → mono Fin.zero ν≼τ p ; (Fin.suc j) → h j }
 
--- matprod and δ are definitionally equal across quotient rings,
--- but we need propositional witnesses to embed R-equalities into R/𝔪-equalities.
 module _ {{σ : L}} where
   private
     module LA/𝔪 = LA R/𝔪…
 
--- Dynamical field condition: if x*s is not ≈/𝔪 1 at any future stage for all s,
+-- Dynamical field condition: if, forall s, x*s never becomes ≈/𝔪 1 at any future stage,
 -- then eventually x ≈/𝔪 0.
 field-condition-∇ : {{σ : L}} → (x : R)
   → ((s : R) → ∀ {{τ : L}} {{_ : τ ≼ σ}} → ¬ _≈/𝔪_ {{τ}} (x * s) 1#)
@@ -164,35 +162,40 @@ field-condition-∇ {{σ}} x not-inv = fmap (λ {{τ}} p → Sum (Base p) (⟨�
   ... | u , s , eq , q = not-inv s {{τ}} (Eq (sym (inverse-unique u (x * s - 1#) sum≈0)) (⟨𝔪⟩-neg {{τ}} q))
     where
     sum≈0 : u + (x * s - 1#) ≈ 0#
-    sum≈0 =
-      trans (+-congˡ (+-congʳ (*-comm x s)))
-      (trans (sym (+-assoc u (s * x) (- 1#)))
-      (trans (+-congʳ (sym eq))
-              (-‿inverseʳ 1#)))
+    sum≈0 = begin
+      u + (x * s - 1#)
+        ≈⟨ +-congˡ (+-congʳ (*-comm x s)) ⟩
+      u + (s * x - 1#)
+        ≈˘⟨ +-assoc u (s * x) (- 1#) ⟩
+      (u + s * x) - 1#
+        ≈˘⟨ +-congʳ eq ⟩
+      1# - 1#
+        ≈⟨ -‿inverseʳ 1# ⟩
+      0#
+        ∎
 
 -- The main inductive argument, lifted into ∇.
--- We use matprod/δ from R (not R/𝔪) to avoid definitional equality issues across σ.
 surj-matrix-∇ : {{σ : L}} → {n m : Nat.ℕ} → m Nat.< n
-  → (M' : Matrix R n m) → (N' : Matrix R m n)
-  → (∀ p q → matprod M' N' p q ≈/𝔪 δ p q)
+  → (M : Matrix R n m) → (N : Matrix R m n)
+  → (∀ p q → matprod M N p q ≈/𝔪 δ p q)
   → ∇ {{σ}} (λ {{_}} → ⊥)
-surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.zero} _ M' N' MN≡I =
-  now (⊥/𝔪→⊥ (LA.zero-columns (R/𝔪… {{σ}}) M' N' MN≡I))
-surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.suc m} m<n M' N' MN≡I =
+surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.zero} _ M N MN≡I =
+  now (⊥/𝔪→⊥ (LA.zero-columns (R/𝔪… {{σ}}) M N MN≡I))
+surj-matrix-∇ {{σ}} {Nat.suc _} {Nat.suc m} m<n M N MN≡I =
   fin-∇ {{σ}}
     (λ j τ≼σ p → ≈/𝔪-monotone τ≼σ p)
-    (λ j → field-condition-∇ {{σ}} (M' Fin.zero j) λ s {{τ}} {{τ≼σ}} h →
-      let (N'' , N''-inv) = LA.reduce-surjective (R/𝔪… {{τ}}) M' Fin.zero j s h N' (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))
+    (λ j → field-condition-∇ {{σ}} (M Fin.zero j) λ s {{τ}} {{τ≼σ}} h →
+      let (N' , N'-inv) = LA.reduce-surjective (R/𝔪… {{τ}}) M Fin.zero j s h N (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))
       in  escape (surj-matrix-∇ {{τ}} (Data.Nat.Properties.≤-pred m<n)
-                   (reduce-matrix M' Fin.zero j s) N'' N''-inv))
+                   (reduce-matrix M Fin.zero j s) N' N'-inv))
   ⟫= λ {{τ}} {{τ≼σ}} all-zero →
-  now (⊥/𝔪→⊥ {{τ}} (LA.surj-zero-first-row (R/𝔪… {{τ}}) M' all-zero N'
+  now (⊥/𝔪→⊥ {{τ}} (LA.surj-zero-first-row (R/𝔪… {{τ}}) M all-zero N
     (λ p q → ≈/𝔪-monotone τ≼σ (MN≡I p q))))
 
 example' : {n m : Nat.ℕ} → m Nat.< n
-  → (M' : Matrix R n m) → (N' : Matrix R m n)
-  → (∀ p q → matprod M' N' p q ≈ δ p q)
+  → (M : Matrix R n m) → (N : Matrix R m n)
+  → (∀ p q → matprod M N p q ≈ δ p q)
   → ⊥
-example' m<n M' N' MN≡I = escape {[]}
-  (surj-matrix-∇ {{[]}} m<n M' N'
+example' m<n M N MN≡I = escape {[]}
+  (surj-matrix-∇ {{[]}} m<n M N
     (λ p q → embed/𝔪 {{[]}} (MN≡I p q)))

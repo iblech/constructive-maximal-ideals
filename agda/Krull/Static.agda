@@ -84,7 +84,7 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     where
     -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
     case-a-inv : 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle step₁))
+    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle (Eq vb·1≈1 vb1*p)))
       where
       vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
       vb1*p = ⟨⟩-mult (v * b) p
@@ -94,9 +94,6 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
         (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
         v * b        ≈⟨ vb1 ⟩
         1#           ∎
-
-      step₁ : 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
-      step₁ = Eq vb·1≈1 vb1*p
 
       handle : image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⊆ ⟨ 𝔪 ⟩
       handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
