@@ -19,6 +19,7 @@ module Krull.Static
   (Enum-singlevalued : {n : Nat.ℕ} {x y : R} → Enum n x → Enum n y → x PE.≡ y) where
 
 open import Krull.Base (R…)
+open import Relation.Binary.Reasoning.Setoid setoid
 import Krull.LinearAlgebra
 import Krull.QuotientRing
 
@@ -83,7 +84,35 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
     where
     -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
     case-a-inv : 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (w , eq , inj₁ p) → Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base p)) ; (w , eq , inj₂ PE.refl) → Eq (trans (trans (sym (zeroˡ b)) (trans (*-congʳ (sym va0)) (trans (*-assoc v w b) (trans (*-congˡ (*-comm w b)) (sym (*-assoc v b w)))))) (≡⇒≈ (PE.sym eq))) Zero }) (Eq (trans (*-identityʳ (v * b)) vb1) (⟨⟩-mult (v * b) p))))
+    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle step₁))
+      where
+      vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
+      vb1*p = ⟨⟩-mult (v * b) p
+
+      vb·1≈1 : (v * b) * 1# ≈ 1#
+      vb·1≈1 = begin
+        (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
+        v * b        ≈⟨ vb1 ⟩
+        1#           ∎
+
+      step₁ : 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
+      step₁ = Eq vb·1≈1 vb1*p
+
+      handle : image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⊆ ⟨ 𝔪 ⟩
+      handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
+      handle (w , eq , inj₂ PE.refl) = Eq 0≈y Zero
+        where
+        0≈vb·w : 0# ≈ (v * b) * w
+        0≈vb·w = begin
+          0#          ≈˘⟨ zeroˡ b ⟩
+          0# * b      ≈˘⟨ *-congʳ va0 ⟩
+          (v * w) * b ≈⟨ *-assoc v w b ⟩
+          v * (w * b) ≈⟨ *-congˡ (*-comm w b) ⟩
+          v * (b * w) ≈˘⟨ *-assoc v b w ⟩
+          (v * b) * w ∎
+
+        0≈y : 0# ≈ _
+        0≈y = trans 0≈vb·w (≡⇒≈ (PE.sym eq))
 
     -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
     case-a-zero : a ∈ 𝔪 → ⊥

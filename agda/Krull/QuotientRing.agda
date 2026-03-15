@@ -37,9 +37,9 @@ embed {x} {y} h = Eq (sym (trans (+-congʳ h) (-‿inverseʳ y))) Zero
   where
   lemma : y - x ≈ - (x - y)
   lemma = begin
-    y - x                ≈⟨ +-congʳ (sym (double-neg y)) ⟩
+    y - x                ≈˘⟨ +-congʳ (double-neg y) ⟩
     - (- y) - x          ≈⟨ +-comm (- (- y)) (- x) ⟩
-    - x + (- (- y))      ≈⟨ sym (neg-distrib-+ x (- y)) ⟩
+    - x + (- (- y))      ≈˘⟨ neg-distrib-+ x (- y) ⟩
     - (x + (- y))        ∎
 
 ≈/M-trans : {x y z : R} → x ≈/M y → y ≈/M z → x ≈/M z
@@ -60,11 +60,11 @@ embed {x} {y} h = Eq (sym (trans (+-congʳ h) (-‿inverseʳ y))) Zero
   lemma : (a + c) - (b + d) ≈ (a - b) + (c - d)
   lemma = sym (begin
     (a - b) + (c - d)                ≈⟨ +-assoc a (- b) (c - d) ⟩
-    a + ((- b) + (c - d))            ≈⟨ +-congˡ (sym (+-assoc (- b) c (- d))) ⟩
+    a + ((- b) + (c - d))            ≈˘⟨ +-congˡ (+-assoc (- b) c (- d)) ⟩
     a + (((- b) + c) + (- d))        ≈⟨ +-congˡ (+-congʳ (+-comm (- b) c)) ⟩
     a + ((c + (- b)) + (- d))        ≈⟨ +-congˡ (+-assoc c (- b) (- d)) ⟩
-    a + (c + ((- b) + (- d)))        ≈⟨ sym (+-assoc a c ((- b) + (- d))) ⟩
-    (a + c) + ((- b) + (- d))        ≈⟨ +-congˡ (sym (neg-distrib-+ b d)) ⟩
+    a + (c + ((- b) + (- d)))        ≈˘⟨ +-assoc a c ((- b) + (- d)) ⟩
+    (a + c) + ((- b) + (- d))        ≈˘⟨ +-congˡ (neg-distrib-+ b d) ⟩
     (a + c) + (- (b + d))            ∎)
 
 -‿cong/M : {x y : R} → x ≈/M y → (- x) ≈/M (- y)
