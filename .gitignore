@@ -1,0 +1,8 @@
+*.agdai
+*.agda~
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*#
