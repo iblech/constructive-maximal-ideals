@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Krull.WildRing</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Symbol">{-#</a> <a id="5" class="Keyword">OPTIONS</a> <a id="13" class="Pragma">--cubical-compatible</a> <a id="34" class="Pragma">-WnoUnsupportedIndexedMatch</a> <a id="62" class="Pragma">--safe</a> <a id="69" class="Symbol">#-}</a>
+
+<a id="74" class="Comment">{-
+  A &quot;wild ring&quot; is a ring but without a specified equality (and hence without laws).
+
+  It is used in Krull.WildLinearAlgebra to define certain computations such as
+  matrix products which formally make sense even without equality.
+
+  This enables Agda to recognize that certain computations, when carried out in
+  a ring or one of its quotient rings, yield definitionally equal results.
+-}</a>
+
+<a id="469" class="Keyword">open</a> <a id="474" class="Keyword">import</a> <a id="481" href="Level.html" class="Module">Level</a>
+<a id="487" class="Keyword">open</a> <a id="492" class="Keyword">import</a> <a id="499" href="Algebra.Bundles.html" class="Module">Algebra.Bundles</a>
+
+<a id="516" class="Keyword">module</a> <a id="523" href="Krull.WildRing.html" class="Module">Krull.WildRing</a> <a id="538" class="Keyword">where</a>
+
+<a id="545" class="Keyword">record</a> <a id="WildRing"></a><a id="552" href="Krull.WildRing.html#552" class="Record">WildRing</a> <a id="561" class="Symbol">:</a> <a id="563" href="Agda.Primitive.html#388" class="Primitive">Set₁</a> <a id="568" class="Keyword">where</a>
+  <a id="576" class="Keyword">infix</a>  <a id="583" class="Number">8</a> <a id="585" href="Krull.WildRing.html#792" class="Field Operator">-_</a>
+  <a id="590" class="Keyword">infixl</a> <a id="597" class="Number">7</a> <a id="599" href="Krull.WildRing.html#750" class="Field Operator">_*_</a>
+  <a id="605" class="Keyword">infixl</a> <a id="612" class="Number">6</a> <a id="614" href="Krull.WildRing.html#708" class="Field Operator">_+_</a>
+  <a id="620" class="Keyword">infixl</a> <a id="627" class="Number">6</a> <a id="629" href="Krull.WildRing.html#823" class="Function Operator">_-_</a>
+
+  <a id="636" class="Keyword">field</a>
+    <a id="WildRing.Carrier"></a><a id="646" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="654" class="Symbol">:</a> <a id="656" href="Agda.Primitive.html#388" class="Primitive">Set</a>
+    <a id="WildRing.0#"></a><a id="664" href="Krull.WildRing.html#664" class="Field">0#</a>      <a id="672" class="Symbol">:</a> <a id="674" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+    <a id="WildRing.1#"></a><a id="686" href="Krull.WildRing.html#686" class="Field">1#</a>      <a id="694" class="Symbol">:</a> <a id="696" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+    <a id="WildRing._+_"></a><a id="708" href="Krull.WildRing.html#708" class="Field Operator">_+_</a>     <a id="716" class="Symbol">:</a> <a id="718" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="726" class="Symbol">→</a> <a id="728" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="736" class="Symbol">→</a> <a id="738" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+    <a id="WildRing._*_"></a><a id="750" href="Krull.WildRing.html#750" class="Field Operator">_*_</a>     <a id="758" class="Symbol">:</a> <a id="760" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="768" class="Symbol">→</a> <a id="770" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="778" class="Symbol">→</a> <a id="780" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+    <a id="WildRing.-_"></a><a id="792" href="Krull.WildRing.html#792" class="Field Operator">-_</a>      <a id="800" class="Symbol">:</a> <a id="802" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="810" class="Symbol">→</a> <a id="812" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+
+  <a id="WildRing._-_"></a><a id="823" href="Krull.WildRing.html#823" class="Function Operator">_-_</a> <a id="827" class="Symbol">:</a> <a id="829" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="837" class="Symbol">→</a> <a id="839" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="847" class="Symbol">→</a> <a id="849" href="Krull.WildRing.html#646" class="Field">Carrier</a>
+  <a id="859" href="Krull.WildRing.html#859" class="Bound">x</a> <a id="861" href="Krull.WildRing.html#823" class="Function Operator">-</a> <a id="863" href="Krull.WildRing.html#863" class="Bound">y</a> <a id="865" class="Symbol">=</a> <a id="867" href="Krull.WildRing.html#859" class="Bound">x</a> <a id="869" href="Krull.WildRing.html#708" class="Field Operator">+</a> <a id="871" class="Symbol">(</a><a id="872" href="Krull.WildRing.html#792" class="Field Operator">-</a> <a id="874" href="Krull.WildRing.html#863" class="Bound">y</a><a id="875" class="Symbol">)</a>
+
+<a id="forget"></a><a id="878" href="Krull.WildRing.html#878" class="Function">forget</a> <a id="885" class="Symbol">:</a> <a id="887" href="Algebra.Bundles.html#30337" class="Record">CommutativeRing</a> <a id="903" href="Level.html#521" class="Function">0ℓ</a> <a id="906" href="Level.html#521" class="Function">0ℓ</a> <a id="909" class="Symbol">→</a> <a id="911" href="Krull.WildRing.html#552" class="Record">WildRing</a>
+<a id="920" href="Krull.WildRing.html#878" class="Function">forget</a> <a id="927" href="Krull.WildRing.html#927" class="Bound">R…</a> <a id="930" class="Symbol">=</a> <a id="932" class="Keyword">let</a> <a id="936" class="Keyword">open</a> <a id="941" href="Algebra.Bundles.html#30337" class="Module">CommutativeRing</a> <a id="957" href="Krull.WildRing.html#927" class="Bound">R…</a> <a id="960" class="Keyword">in</a> <a id="963" class="Keyword">record</a>
+  <a id="972" class="Symbol">{</a> <a id="974" href="Krull.WildRing.html#646" class="Field">Carrier</a> <a id="982" class="Symbol">=</a> <a id="984" href="Algebra.Bundles.html#30454" class="Field">Carrier</a>
+  <a id="994" class="Symbol">;</a> <a id="996" href="Krull.WildRing.html#664" class="Field">0#</a>      <a id="1004" class="Symbol">=</a> <a id="1006" href="Algebra.Bundles.html#30630" class="Field">0#</a>
+  <a id="1011" class="Symbol">;</a> <a id="1013" href="Krull.WildRing.html#686" class="Field">1#</a>      <a id="1021" class="Symbol">=</a> <a id="1023" href="Algebra.Bundles.html#30662" class="Field">1#</a>
+  <a id="1028" class="Symbol">;</a> <a id="1030" href="Krull.WildRing.html#708" class="Field Operator">_+_</a>     <a id="1038" class="Symbol">=</a> <a id="1040" href="Algebra.Bundles.html#30522" class="Field Operator">_+_</a>
+  <a id="1046" class="Symbol">;</a> <a id="1048" href="Krull.WildRing.html#750" class="Field Operator">_*_</a>     <a id="1056" class="Symbol">=</a> <a id="1058" href="Algebra.Bundles.html#30558" class="Field Operator">_*_</a>
+  <a id="1064" class="Symbol">;</a> <a id="1066" href="Krull.WildRing.html#792" class="Field Operator">-_</a>      <a id="1074" class="Symbol">=</a> <a id="1076" href="Algebra.Bundles.html#30594" class="Field Operator">-_</a>
+  <a id="1081" class="Symbol">}</a>
+</pre></body></html>
