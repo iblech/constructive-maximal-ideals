@@ -21,6 +21,7 @@ module Krull.Static
 open import Krull.Base (R…)
 open import Relation.Binary.Reasoning.Setoid setoid
 import Krull.LinearAlgebra
+open Krull.LinearAlgebra R… using (example-case-a-inv-lemma; example-case-a-zero-lemma)
 import Krull.QuotientRing
 
 G : Nat.ℕ → Pred R 0ℓ
@@ -80,40 +81,9 @@ module _ (Enum-surjective : (x : R) → Σ[ n ∈ Nat.ℕ ] Enum n x) where
   -- The following example is the (2×1)-case of the general statement that
   -- matrices with more rows that columns can only be surjective if 1 ≈ 0.
   example : (a b u v : R) → u * a ≈ 1# → u * b ≈ 0# → v * a ≈ 0# → v * b ≈ 1# → ⊥
-  example a b u v ua1 ub0 va0 vb1 = case-a-zero (𝔪-is-maximal a case-a-inv)
-    where
-    -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
-    case-a-inv : 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-    case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle (Eq vb·1≈1 vb1*p)))
-      where
-      vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
-      vb1*p = ⟨⟩-mult (v * b) p
-
-      vb·1≈1 : (v * b) * 1# ≈ 1#
-      vb·1≈1 = begin
-        (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
-        v * b        ≈⟨ vb1 ⟩
-        1#           ∎
-
-      handle : image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⊆ ⟨ 𝔪 ⟩
-      handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
-      handle (w , eq , inj₂ PE.refl) = Eq 0≈y Zero
-        where
-        0≈vb·w : 0# ≈ (v * b) * w
-        0≈vb·w = begin
-          0#          ≈˘⟨ zeroˡ b ⟩
-          0# * b      ≈˘⟨ *-congʳ va0 ⟩
-          (v * w) * b ≈⟨ *-assoc v w b ⟩
-          v * (w * b) ≈⟨ *-congˡ (*-comm w b) ⟩
-          v * (b * w) ≈˘⟨ *-assoc v b w ⟩
-          (v * b) * w ∎
-
-        0≈y : 0# ≈ _
-        0≈y = trans 0≈vb·w (≡⇒≈ (PE.sym eq))
-
-    -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
-    case-a-zero : a ∈ 𝔪 → ⊥
-    case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
+  example a b u v ua1 ub0 va0 vb1 =
+    example-case-a-zero-lemma 𝔪 ⟨𝔪⟩-proper a u ua1
+      (𝔪-is-maximal a (example-case-a-inv-lemma 𝔪 ⟨𝔪⟩-proper a b v va0 vb1))
 
   open import Krull.WildRing
   open import Krull.WildLinearAlgebra (forget R…)

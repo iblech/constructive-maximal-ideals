@@ -3,10 +3,12 @@
 open import Level
 open import Algebra.Bundles
 open import Data.Product
+open import Data.Sum
 import Data.Nat as Nat
 import Data.Nat.Properties
 import Data.Fin as Fin
 open import Relation.Unary hiding (∅)
+import Relation.Binary.PropositionalEquality as PE
 
 open import Krull.WildRing
 
@@ -264,6 +266,49 @@ surj-zero-first-row M M-zero-row N MN≡I = begin
     ≈⟨ zeroˡ _ ⟩
   0#
     ∎
+
+-- Helper lemmas for the 2×1 example: given a proper ideal I and
+-- elements a, b, u, v with ua≈1, ub≈0, va≈0, vb≈1,
+-- we can show a is neither invertible mod I nor in I.
+
+-- If ⟨I⟩ is proper and v*a ≈ 0, v*b ≈ 1, then a is not invertible modulo I.
+example-case-a-inv-lemma : (I : Pred R 0ℓ) → ¬ 1# ∈ ⟨ I ⟩
+  → (a b v : R) → v * a ≈ 0# → v * b ≈ 1#
+  → ¬ 1# ∈ ⟨ I ∪ ｛ a ｝ ⟩
+example-case-a-inv-lemma I ⟨I⟩-proper a b v va0 vb1 p =
+  ⟨I⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle (Eq vb·1≈1 vb1*p)))
+  where
+  vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (I ∪ ｛ a ｝) ⟩
+  vb1*p = ⟨⟩-mult (v * b) p
+
+  vb·1≈1 : (v * b) * 1# ≈ 1#
+  vb·1≈1 = begin
+    (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
+    v * b        ≈⟨ vb1 ⟩
+    1#           ∎
+
+  handle : image ((v * b) *_) (I ∪ ｛ a ｝) ⊆ ⟨ I ⟩
+  handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
+  handle (w , eq , inj₂ PE.refl) = Eq 0≈y Zero
+    where
+    0≈vb·w : 0# ≈ (v * b) * w
+    0≈vb·w = begin
+      0#          ≈˘⟨ zeroˡ b ⟩
+      0# * b      ≈˘⟨ *-congʳ va0 ⟩
+      (v * w) * b ≈⟨ *-assoc v w b ⟩
+      v * (w * b) ≈⟨ *-congˡ (*-comm w b) ⟩
+      v * (b * w) ≈˘⟨ *-assoc v b w ⟩
+      (v * b) * w ∎
+
+    0≈y : 0# ≈ _
+    0≈y = trans 0≈vb·w (≡⇒≈ (PE.sym eq))
+
+-- If ⟨I⟩ is proper and u*a ≈ 1, then a ∉ I.
+example-case-a-zero-lemma : (I : Pred R 0ℓ) → ¬ 1# ∈ ⟨ I ⟩
+  → (a u : R) → u * a ≈ 1#
+  → a ∈ I → ⊥
+example-case-a-zero-lemma I ⟨I⟩-proper a u ua1 p =
+  ⟨I⟩-proper (Eq ua1 (Magnet (Base p)))
 
 module WithFieldCondition
   (field-condition : (x : R) → (∀ s → ¬ x * s ≈ 1#) → x ≈ 0#) where

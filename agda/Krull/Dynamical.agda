@@ -21,6 +21,7 @@ open import Relation.Binary.Reasoning.Setoid setoid
 open import Krull.Base R…
 open import Krull.WildRing
 import Krull.LinearAlgebra as LA
+open LA R… using (example-case-a-inv-lemma; example-case-a-zero-lemma)
 import Krull.WildLinearAlgebra as WLA
 import Krull.QuotientRing as QR
 open import Forcing.Levy R
@@ -101,40 +102,10 @@ all-stages-proper ⦃ σ ⦄ (Nat.suc n) p with ⟨⟩-union₀ p
 -- The following example is the (2×1)-case of the general statement that
 -- matrices with more rows that columns can only be surjective if 1 ≈ 0.
 example : (a b u v : R) → u * a ≈ 1# → u * b ≈ 0# → v * a ≈ 0# → v * b ≈ 1# → ⊥
-example a b u v ua1 ub0 va0 vb1 = escape {[]} (_⟫=_ {{[]}} (𝔪-is-maximal {{[]}} a case-a-inv) λ p → now (case-a-zero p))
-  where
-  -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
-  case-a-inv : {{σ : L}} → 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-  case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle (Eq vb·1≈1 vb1*p)))
-    where
-    vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
-    vb1*p = ⟨⟩-mult (v * b) p
-
-    vb·1≈1 : (v * b) * 1# ≈ 1#
-    vb·1≈1 = begin
-      (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
-      v * b        ≈⟨ vb1 ⟩
-      1#           ∎
-
-    handle : image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⊆ ⟨ 𝔪 ⟩
-    handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
-    handle (w , eq , inj₂ PE.refl) = Eq 0≈y Zero
-      where
-      0≈vb·w : 0# ≈ (v * b) * w
-      0≈vb·w = begin
-        0#          ≈˘⟨ zeroˡ b ⟩
-        0# * b      ≈˘⟨ *-congʳ va0 ⟩
-        (v * w) * b ≈⟨ *-assoc v w b ⟩
-        v * (w * b) ≈⟨ *-congˡ (*-comm w b) ⟩
-        v * (b * w) ≈˘⟨ *-assoc v b w ⟩
-        (v * b) * w ∎
-
-      0≈y : 0# ≈ _
-      0≈y = trans 0≈vb·w (≡⇒≈ (PE.sym eq))
-
-  -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
-  case-a-zero : {{σ : L}} → a ∈ 𝔪 → ⊥
-  case-a-zero p = ⟨𝔪⟩-proper (Eq ua1 (Magnet (Base p)))
+example a b u v ua1 ub0 va0 vb1 =
+  escape {[]} (_⟫=_ {{[]}}
+    (𝔪-is-maximal {{[]}} a (example-case-a-inv-lemma 𝔪 ⟨𝔪⟩-proper a b v va0 vb1))
+    λ p → now (example-case-a-zero-lemma 𝔪 ⟨𝔪⟩-proper a u ua1 p))
 
 -- Open linear algebra for R
 open WLA (forget R…) public using (Matrix; matprod; δ; finSum; reduce-matrix; reduce-inverse)
