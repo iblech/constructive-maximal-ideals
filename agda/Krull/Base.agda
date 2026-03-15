@@ -117,6 +117,19 @@ image f R y = Σ[ x ∈ _ ] y PE.≡ f x × x ∈ R
 ≡⇒≈ : {a b : R} → a PE.≡ b → a ≈ b
 ≡⇒≈ PE.refl = refl
 
+neg-one-times : (x : R) → (- 1#) * x ≈ - x
+neg-one-times x = begin
+  (- 1#) * x             ≈˘⟨ +-identityʳ _ ⟩
+  (- 1#) * x + 0#        ≈˘⟨ +-congˡ (-‿inverseʳ x) ⟩
+  (- 1#) * x + (x - x)   ≈˘⟨ +-assoc _ x (- x) ⟩
+  ((- 1#) * x + x) - x   ≈˘⟨ +-congʳ (+-congˡ (*-identityˡ x)) ⟩
+  ((- 1#) * x + 1# * x) - x ≈˘⟨ +-congʳ (distribʳ x (- 1#) 1#) ⟩
+  ((- 1#) + 1#) * x - x  ≈⟨ +-congʳ (*-congʳ (-‿inverseˡ 1#)) ⟩
+  0# * x - x             ≈⟨ +-congʳ (zeroˡ x) ⟩
+  0# - x                 ≈⟨ +-identityˡ (- x) ⟩
+  - x                    ∎
+
+
 -- The following two definitions are only required for the generic
 -- prime ideal, not for the maximal ideal construction described in
 -- the paper.
@@ -158,22 +171,10 @@ module _ (I : Pred R 0ℓ) (x : R) where
   ideal-decompose (Eq eq q) with ideal-decompose q
   ... | u , s , eq' , m = u , s , trans (sym eq) eq' , m
 
-neg-one-times : (x : R) → (- 1#) * x ≈ - x
-neg-one-times x = begin
-  (- 1#) * x             ≈˘⟨ +-identityʳ _ ⟩
-  (- 1#) * x + 0#        ≈⟨ +-congˡ (sym (-‿inverseʳ x)) ⟩
-  (- 1#) * x + (x - x)   ≈˘⟨ +-assoc _ x (- x) ⟩
-  ((- 1#) * x + x) - x   ≈⟨ +-congʳ (+-congˡ (sym (*-identityˡ x))) ⟩
-  ((- 1#) * x + 1# * x) - x ≈⟨ +-congʳ (sym (distribʳ x (- 1#) 1#)) ⟩
-  ((- 1#) + 1#) * x - x  ≈⟨ +-congʳ (*-congʳ (-‿inverseˡ 1#)) ⟩
-  0# * x - x             ≈⟨ +-congʳ (zeroˡ x) ⟩
-  0# - x                 ≈⟨ +-identityˡ (- x) ⟩
-  - x                    ∎
-
 inverse-unique : (x y : R) → x + y ≈ 0# → y ≈ - x
 inverse-unique x y h = begin
   y              ≈˘⟨ +-identityˡ y ⟩
-  0# + y         ≈⟨ +-congʳ (sym (-‿inverseˡ x)) ⟩
+  0# + y         ≈˘⟨ +-congʳ (-‿inverseˡ x) ⟩
   (- x + x) + y  ≈⟨ +-assoc (- x) x y ⟩
   - x + (x + y)  ≈⟨ +-congˡ h ⟩
   - x + 0#       ≈⟨ +-identityʳ (- x) ⟩
@@ -188,7 +189,7 @@ neg-distrib-+ a b = sym (inverse-unique (a + b) ((- a) + (- b)) lemma)
   lemma : (a + b) + ((- a) + (- b)) ≈ 0#
   lemma = begin
     (a + b) + ((- a) + (- b))  ≈⟨ +-assoc a b ((- a) + (- b)) ⟩
-    a + (b + ((- a) + (- b)))  ≈⟨ +-congˡ (sym (+-assoc b (- a) (- b))) ⟩
+    a + (b + ((- a) + (- b)))  ≈˘⟨ +-congˡ (+-assoc b (- a) (- b)) ⟩
     a + ((b + (- a)) + (- b))  ≈⟨ +-congˡ (+-congʳ (+-comm b (- a))) ⟩
     a + (((- a) + b) + (- b))  ≈⟨ +-congˡ (+-assoc (- a) b (- b)) ⟩
     a + ((- a) + (b + (- b)))  ≈⟨ +-congˡ (+-congˡ (-‿inverseʳ b)) ⟩
@@ -198,7 +199,7 @@ neg-distrib-+ a b = sym (inverse-unique (a + b) ((- a) + (- b)) lemma)
 
 neg-distribʳ-* : (a b : R) → a * (- b) ≈ - (a * b)
 neg-distribʳ-* a b = begin
-  a * (- b)         ≈⟨ *-congˡ (sym (neg-one-times b)) ⟩
+  a * (- b)         ≈˘⟨ *-congˡ (neg-one-times b) ⟩
   a * ((- 1#) * b)  ≈˘⟨ *-assoc a (- 1#) b ⟩
   (a * (- 1#)) * b  ≈⟨ *-congʳ (*-comm a (- 1#)) ⟩
   ((- 1#) * a) * b  ≈⟨ *-assoc (- 1#) a b ⟩
@@ -208,7 +209,7 @@ neg-distribʳ-* a b = begin
 sub-distribʳ : (a b c : R) → (a - b) * c ≈ a * c - b * c
 sub-distribʳ a b c = begin
   (a - b) * c              ≈⟨ distribʳ c a (- b) ⟩
-  a * c + (- b) * c        ≈⟨ +-congˡ (*-congʳ (sym (neg-one-times b))) ⟩
+  a * c + (- b) * c        ≈˘⟨ +-congˡ (*-congʳ (neg-one-times b)) ⟩
   a * c + (- 1# * b) * c   ≈⟨ +-congˡ (*-assoc (- 1#) b c) ⟩
   a * c + (- 1#) * (b * c) ≈⟨ +-congˡ (neg-one-times (b * c)) ⟩
   a * c - b * c        ∎
@@ -216,9 +217,9 @@ sub-distribʳ a b c = begin
 +-cancelˡ-to-sub : (a b c : R) → a ≈ b + c → c ≈ a - b
 +-cancelˡ-to-sub a b c h = begin
   c                ≈˘⟨ +-identityˡ c ⟩
-  0# + c           ≈⟨ +-congʳ (sym (-‿inverseˡ b)) ⟩
+  0# + c           ≈˘⟨ +-congʳ (-‿inverseˡ b) ⟩
   (- b + b) + c    ≈⟨ +-assoc (- b) b c ⟩
-  - b + (b + c)    ≈⟨ +-congˡ (sym h) ⟩
+  - b + (b + c)    ≈˘⟨ +-congˡ h ⟩
   - b + a          ≈⟨ +-comm (- b) a ⟩
   a - b            ∎
 
