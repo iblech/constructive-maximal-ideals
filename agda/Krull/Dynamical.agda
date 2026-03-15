@@ -105,7 +105,32 @@ example a b u v ua1 ub0 va0 vb1 = escape {[]} (_⟫=_ {{[]}} (𝔪-is-maximal {{
   where
   -- If 1 ∈ ⟨ 𝔪, a ⟩, then 1 = vb ∈ ⟨ vb 𝔪, vb a ⟩ = ⟨ vb 𝔪 ⟩ ⊆ 𝔪, hence ⊥.
   case-a-inv : {{σ : L}} → 1# ∈ ⟨ 𝔪 ∪ ｛ a ｝ ⟩ → ⊥
-  case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone (λ { (w , eq , inj₁ p) → Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base p)) ; (w , eq , inj₂ PE.refl) → Eq (trans (trans (sym (zeroˡ b)) (trans (*-congʳ (sym va0)) (trans (*-assoc v w b) (trans (*-congˡ (*-comm w b)) (sym (*-assoc v b w)))))) (≡⇒≈ (PE.sym eq))) Zero }) (Eq (trans (*-identityʳ (v * b)) vb1) (⟨⟩-mult (v * b) p))))
+  case-a-inv p = ⟨𝔪⟩-proper (⟨⟩-idempotent (⟨⟩-monotone handle (Eq vb·1≈1 vb1*p)))
+    where
+    vb1*p : (v * b) * 1# ∈ ⟨ image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⟩
+    vb1*p = ⟨⟩-mult (v * b) p
+
+    vb·1≈1 : (v * b) * 1# ≈ 1#
+    vb·1≈1 = begin
+      (v * b) * 1# ≈⟨ *-identityʳ (v * b) ⟩
+      v * b        ≈⟨ vb1 ⟩
+      1#           ∎
+
+    handle : image ((v * b) *_) (𝔪 ∪ ｛ a ｝) ⊆ ⟨ 𝔪 ⟩
+    handle (w , eq , inj₁ q) = Eq (≡⇒≈ (PE.sym eq)) (Magnet (Base q))
+    handle (w , eq , inj₂ PE.refl) = Eq 0≈y Zero
+      where
+      0≈vb·w : 0# ≈ (v * b) * w
+      0≈vb·w = begin
+        0#          ≈˘⟨ zeroˡ b ⟩
+        0# * b      ≈˘⟨ *-congʳ va0 ⟩
+        (v * w) * b ≈⟨ *-assoc v w b ⟩
+        v * (w * b) ≈⟨ *-congˡ (*-comm w b) ⟩
+        v * (b * w) ≈˘⟨ *-assoc v b w ⟩
+        (v * b) * w ∎
+
+      0≈y : 0# ≈ _
+      0≈y = trans 0≈vb·w (≡⇒≈ (PE.sym eq))
 
   -- If a ∈ 𝔪, then 1 = ua ∈ 𝔪.
   case-a-zero : {{σ : L}} → a ∈ 𝔪 → ⊥
