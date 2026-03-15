@@ -140,6 +140,22 @@ neg-one-times x = begin
 ^-* x Nat.zero    m = *-identityˡ (x ^ m)
 ^-* x (Nat.suc n) m = trans (*-assoc x (x ^ n) (x ^ m)) (*-congˡ (^-* x n m))
 
+-- The following definition of the Jacobson radical of an ideal is only required for Forcing.Maximal.
+Jac : Pred R 0ℓ → Pred R 0ℓ
+Jac M x = (u : R) → ∃[ v ] (1# - u * x) * v - 1# ∈ ⟨ M ⟩
+
+Jac-inflationary : (M : Pred R 0ℓ) → M ⊆ Jac M
+Jac-inflationary M {x} x∈M u = 1# , Eq (sym eq) (Eq (neg-one-times (u * x)) (Magnet {r = - 1#} (Magnet {r = u} (Base x∈M))))
+  where
+  eq : (1# - u * x) * 1# - 1# ≈ - (u * x)
+  eq = begin
+    (1# - u * x) * 1# - 1#  ≈⟨ +-congʳ (*-identityʳ _) ⟩
+    (1# - u * x) - 1#       ≈⟨ +-assoc 1# (- (u * x)) (- 1#) ⟩
+    1# + (- (u * x) + - 1#) ≈⟨ +-congˡ (+-comm _ _) ⟩
+    1# + (- 1# + - (u * x)) ≈˘⟨ +-assoc 1# (- 1#) _ ⟩
+    (1# + - 1#) + - (u * x) ≈⟨ +-congʳ (-‿inverseʳ 1#) ⟩
+    0# + - (u * x)          ≈⟨ +-identityˡ _ ⟩
+    - (u * x)               ∎
 
 module _ (I : Pred R 0ℓ) (x : R) where
   ideal-decompose : {a : R} → a ∈ ⟨ I ∪ ｛ x ｝ ⟩ → Σ[ u ∈ R ] Σ[ s ∈ R ] (a ≈ u + s * x) × u ∈ ⟨ I ⟩
