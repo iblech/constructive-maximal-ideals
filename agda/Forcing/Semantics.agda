@@ -1,4 +1,4 @@
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --cubical-compatible --safe -WnoUnsupportedIndexedMatch #-}
 open import Forcing.Base
 
 module Forcing.Semantics (L… : ForcingNotion) where
