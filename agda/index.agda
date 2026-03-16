@@ -8,9 +8,9 @@
   formalization explores using untruncated sigma types.
 
   It has been tested with
-  - Agda 2.6.4.1 and standard-library 2.0,   and
-  - Agda 2.7.0   and standard-library 2.1.1, and
+  - Agda 2.6.4.3 and standard-library 2.0,   and
   - Agda 2.7.0.1 and standard-library 2.1.1, and
+  - Agda 2.7.0.1 and standard-library 2.2,   and
   - Agda 2.8.0   and standard-library 2.3.
 
 -}
